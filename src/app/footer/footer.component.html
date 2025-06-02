@@ -1,0 +1,136 @@
+<!-- footer.component.html -->
+<footer class="site-footer">
+  <!-- Main Footer Content -->
+  <div class="container">
+    <div class="row">
+      <!-- Company Info Section -->
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <div class="footer-section">
+          <div class="footer-logo mb-3">
+            <h3 class="logo-text">RealEstate Pro</h3>
+            <p class="logo-tagline">Your Dream Home Awaits</p>
+          </div>
+          <div class="contact-info">
+            <div class="contact-item">
+              <i class="contact-icon">📍</i>
+              <span>123 Business Avenue, Downtown District</span>
+            </div>
+            <div class="contact-item">
+              <i class="contact-icon">📞</i>
+              <span>+20 1141107855</span>
+            </div>
+            <div class="contact-item">
+              <i class="contact-icon">✉️</i>
+              <span>info&#64;realestatepro.com</span>
+            </div>
+            <!-- Social Media Links -->
+          <div class="social-links">
+            <h6 class="social-title">Follow Us</h6>
+            <div class="social-icons">
+              <a href="#" class="social-link facebook" aria-label="Facebook">
+                <span class="social-icon">📘</span>
+              </a>
+              <a href="#" class="social-link twitter" aria-label="Twitter">
+                <span class="social-icon">🐦</span>
+              </a>
+              <a href="#" class="social-link instagram" aria-label="Instagram">
+                <span class="social-icon">📷</span>
+              </a>
+              <a href="#" class="social-link linkedin" aria-label="LinkedIn">
+                <span class="social-icon">💼</span>
+              </a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Links Section -->
+      <div class="col-lg-2 col-md-6 col-sm-6 mb-4">
+        <div class="footer-section">
+          <h5 class="footer-title">Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">FAQ</a></li>
+            <li><a href="#" class="footer-link">Live Chat</a></li>
+            <li><a href="#" class="footer-link">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Services Section -->
+      <div class="col-lg-2 col-md-6 col-sm-6 mb-4">
+        <div class="footer-section">
+          <h5 class="footer-title">Services</h5>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Property Management</a></li>
+            <li><a href="#" class="footer-link">Home Inspection</a></li>
+            <li><a href="#" class="footer-link">Legal Services</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Support Section -->
+      <div class="col-lg-2 col-md-6 col-sm-6 mb-4">
+        <div class="footer-section">
+          <h5 class="footer-title">Support</h5>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Help Center</a></li>
+            <li><a href="#" class="footer-link">Terms of Service</a></li>
+            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Newsletter Section -->
+      <div class="col-lg-2 col-md-6 col-sm-12 mb-4">
+        <div class="footer-section">
+          <h5 class="footer-title">Stay Updated</h5>
+          <p class="newsletter-description">
+            Subscribe to get the latest property listings and market updates.
+          </p>
+          <form class="newsletter-form" >
+            <div class="input-group">
+              <input 
+                type="email" 
+                class="newsletter-input" 
+                placeholder="Your email address"
+                name="email"
+                required>
+              <button type="submit" class="newsletter-btn">
+                Subscribe
+              </button>
+            </div>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Footer -->
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 col-sm-12 text-center text-md-start">
+          <p class="copyright-text">
+            © {{ currentYear }} RealEstate Pro. All rights reserved. 
+            <span class="separator">|</span>
+            Built with excellence for your real estate needs.
+          </p>
+        </div>
+        <div class="col-md-6 col-sm-12 text-center text-md-end">
+          <div class="footer-badges">
+            <span class="badge-item">SSL Secured</span>
+            <span class="badge-item">Licensed & Insured</span>
+            <span class="badge-item">BBB Accredited</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" (click)="scrollToTop()" [class.show]="showBackToTop">
+    <span class="back-to-top-icon">↑</span>
+  </button>
+</footer>
