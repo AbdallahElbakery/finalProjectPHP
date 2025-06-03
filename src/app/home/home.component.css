@@ -1,0 +1,387 @@
+.hero {
+    background: url('https://realestics.temptics.com/assets/img/banner-slide-1.jpg') no-repeat center center/cover;
+    height: 70vh;
+    color: white;
+    position: relative;
+    font-family: "Lora", serif;
+    margin-bottom: 10%;
+}
+
+.header-title {
+    font-size: 60px;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgb(0, 9, 41) 0%, rgba(0, 9, 41, 0.5) 100%);
+}
+
+.search-filter {
+    height: 50px;
+    border: 2px solid #1E40AF;
+    color: #3B82F6;
+}
+
+.location-filter::placeholder {
+    color: #3B82F6;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    top: 35%;
+    text-align: center;
+}
+
+.search-box {
+    background: #DBEAFE;
+    padding: 20px;
+    border-radius: 12px;
+    font-family: "Poppins", sans-serif !important;
+    height: auto;
+    margin-top: 120px !important;
+}
+
+.btn-search {
+    height: 50px;
+}
+
+
+
+/* features section */
+
+.features-section {
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Aldrich", sans-serif !important;
+    background-color: #3B82F6;
+
+}
+
+.features-section p {
+    font-family: "Poppins", sans-serif !important;
+
+}
+
+
+
+/* property section */
+.custom-blue {
+    background-color: #3B82F6;
+    color: white;
+}
+
+.custom-dark-blue {
+    background-color: #1E40AF;
+    color: white;
+}
+
+.highlight-text {
+    background: linear-gradient(135deg, #3B82F6, #1E40AF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.property-card {
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.property-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.property-image {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.for-rent-badge,
+.for-sale-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 5px 15px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.for-rent-badge {
+    background-color: #3B82F6;
+    color: white;
+}
+
+.for-sale-badge {
+    background-color: #1E40AF;
+    color: white;
+}
+
+.property-details {
+    padding: 20px;
+}
+
+.property-title {
+    font-family: 'Lora', serif;
+    color: #3B82F6;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.property-location {
+    color: #3B82F6;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.property-date {
+    color: #6c757d;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+}
+
+.property-description {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.property-features {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+
+
+.property-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1E40AF;
+    font-family: 'Lora', serif;
+
+}
+
+.property-actions {
+    display: flex;
+    gap: 10px;
+    float: right;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.action-btn:hover {
+    color: #3B82F6;
+}
+
+.section-container {
+    border-radius: 15px;
+    padding: 30px;
+}
+
+/* city section */
+
+
+.custom-blue {
+    background-color: #3B82F6;
+}
+
+.city-card {
+    border: 3px solid #3B82F6;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.city-card:hover {
+    background-color: #1E40AF !important;
+    cursor: pointer;
+    color: #DBEAFE !important;
+}
+
+.city-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px dashed #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.carousel-control-prev,
+.carousel-control-next {
+    color: #1E40AF;
+    font-size: 1rem;
+    width: 60px;
+}
+
+.highlight-text {
+    background: linear-gradient(135deg, #3B82F6, #1E40AF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: "Aldrich", sans-serif !important;
+
+}
+
+
+/* advertise section */
+.title {
+    font-family: 'Lora', serif;
+
+}
+
+.home-owner-section {
+    font-family: 'Poppins', sans-serif;
+
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.6), rgba(30, 64, 175, 0.7)),
+        url('https://img.freepik.com/free-photo/businessman-talking-phone_53876-101862.jpg?uid=R49292327&ga=GA1.1.1058118807.1744544781&semt=ais_items_boosted&w=740') center/cover;
+    border-radius: 20px;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-owner-overlay {
+    width: 100%;
+    padding: 60px 40px;
+}
+
+.email-input {
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    flex: 1;
+    min-width: 250px;
+}
+
+.email-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+    border-color: transparent;
+}
+
+.get-listed-btn {
+    background-color: #1E40AF;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.get-listed-btn:hover {
+    background-color: #1e3a8a;
+}
+
+.email-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+
+
+
+/* partners section  */
+
+.brand-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+    margin-bottom: 80px;
+}
+
+.brand-card:hover {
+    transform: translateY(-5px);
+    cursor: pointer;
+}
+
+.brand-card img {
+    max-width: 280px !important;
+    max-height: 80px;
+    object-fit: contain;
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: #3B82F6;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    margin-top: 30px !important;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.carousel-indicators .active {
+    background-color: #1E40AF;
+    opacity: 1;
+}
+
+.daily-deal-text {
+    color: #3B82F6;
+    border-bottom: 2px solid #3B82F6;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .email-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .email-input {
+        min-width: unset;
+        margin-bottom: 15px;
+    }
+}
+
+@media (min-width: 768px) {
+    .search-box {
+        margin-top: 150px;
+    }
+}
+
+@media (min-width: 992px) {
+    .search-box {
+        margin-top: 200px;
+    }
+}
