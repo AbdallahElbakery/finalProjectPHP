@@ -1,0 +1,69 @@
+ <div class="property-card" (click)="viewPropertyDetails(property.id)">
+      <!-- Property Image -->
+      <div class="property-image">
+        <img [src]="property.image" [alt]="property.title" class="property-img">
+        <div class="property-badge">{{ property.type }}</div>
+        <div class="property-date">
+          <i class="fas fa-calendar"></i>
+          {{ property.date | date:'MMM dd' }}
+        </div>
+      </div>
+
+      <!-- Property Info -->
+      <div class="property-info">
+        <!-- Location -->
+        <div class="property-location">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>{{ property.location }}</span>
+        </div>
+        
+        <!-- Title -->
+        <h3 class="property-title">{{ property.title }}</h3>
+        
+        <!-- Price -->
+        <div class="property-price">${{ formatPrice(property.price) }}</div>
+        
+        <!-- Description -->
+        <p class="property-description">
+          {{ truncateDescription(property.description) }}
+          @if (property.description.length > 120) {
+            <span class="read-more">more...</span>
+          }
+        </p>
+
+        <!-- Property Features -->
+        <div class="property-features">
+          <div class="feature-item">
+            <i class="fas fa-bed"></i>
+            <span>{{ property.bedrooms }} Beds</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-bath"></i>
+            <span>{{ property.bathrooms }} Baths</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-ruler-combined"></i>
+            <span>{{ property.area }} m²</span>
+          </div>
+        </div>
+
+        <!-- Seller Info -->
+        <div class="seller-info">
+          <img [src]="property.seller.image" [alt]="property.seller.name" class="seller-avatar">
+          <div class="seller-details">
+            <span class="seller-name">{{ property.seller.name }}</span>
+            <span class="seller-company">{{ property.seller.company }}</span>
+          </div>
+          <div class="seller-rating">
+            <i class="fas fa-star"></i>
+            <span>{{ property.seller.rating }}</span>
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <button class="more-details-btn" (click)="viewPropertyDetails(property.id); $event.stopPropagation()">
+          <i class="fas fa-eye"></i>
+          View Details
+        </button>
+      </div>
+    </div>
