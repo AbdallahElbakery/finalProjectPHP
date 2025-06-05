@@ -7,6 +7,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { UserSellerProfileComponent } from './components/user-seller-profile/user-seller-profile.component';
 import { RegistersellerComponent } from './components/registerseller/registerseller.component';
 import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
