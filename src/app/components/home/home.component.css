@@ -362,26 +362,126 @@
     display: inline-block;
 }
 
-@media (max-width: 768px) {
-    .email-form {
-        flex-direction: column;
-        align-items: stretch;
+@media (min-width: 350px) {
+    .features-section {
+        margin-top: 310px !important;
+        padding-top: 100px !important;
+        height: 800px;
     }
 
-    .email-input {
-        min-width: unset;
-        margin-bottom: 15px;
+    .section-container {
+        padding: 0 !important;
+    }
+}
+
+@media (max-width: 550px) {
+    .search-box {
+        margin-top: 80px !important;
+    }
+
+    .header-title {
+        font-size: 35px;
+    }
+
+    .features-section {
+        margin-top: 260px;
+        height: 800px;
+    }
+
+    .carousel-elements {
+        gap: 15px !important;
+        width: 75%;
+        margin-left: 13%;
+    }
+
+    .carousel-elements-1 {
+        display: none;
+    }
+
+    .carousel-btns {
+        display: none;
+    }
+
+    .navbar-brand img {
+        width: 35px !important;
+        height: 35px !important;
+
+    }
+
+    .section-container {
+        padding: 0 !important;
     }
 }
 
 @media (min-width: 768px) {
     .search-box {
+        margin-top: 110px !important;
+    }
+
+    .features-section {
         margin-top: 150px;
+        margin-left: 2%;
+        margin-right: 2%;
+        border-radius: 12px;
+    }
+
+    .section-container {
+        padding: 0 !important;
+    }
+}
+
+@media (max-width: 750px) {
+    .search-box {
+        margin-top: 80px !important;
+    }
+
+    .header-title {
+        font-size: 45px !important;
+    }
+
+    .features-section {
+        margin-top: 250px;
+        height: 800px;
+        margin-left: 2%;
+        margin-right: 2%;
+        border-radius: 15px;
+    }
+
+    .carousel-elements {
+        gap: 15px !important;
+        width: 100%;
+        margin-left: 0%;
+    }
+
+    .carousel-elements-1 {
+        display: none;
+    }
+
+    .carousel-btns {
+        display: none;
+    }
+
+    .section-container {
+        padding: 0 !important;
+    }
+}
+
+
+
+@media (min-width: 768px) {
+    .search-box {
+        margin-top: 110px;
+    }
+        .section-container {
+        padding: 0 !important;
     }
 }
 
 @media (min-width: 992px) {
     .search-box {
-        margin-top: 200px;
+        margin-top: 250px;
+    }
+        .section-container {
+        padding: 0 !important;
     }
 }

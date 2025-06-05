@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-
 import { PropertiesComponent } from './components/properties/properties.component';
 import { PropertyDetailsComponent } from './components/property-details/property-details.component';
 import { SellerProfileComponent } from './components/seller-profile/seller-profile.component';
