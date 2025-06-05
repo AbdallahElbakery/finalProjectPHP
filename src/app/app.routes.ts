@@ -5,6 +5,8 @@ import { SellerProfileComponent } from './components/seller-profile/seller-profi
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { UserSellerProfileComponent } from './components/user-seller-profile/user-seller-profile.component';
 import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 
 
@@ -15,10 +17,10 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent, title: 'Home' },
     { path: 'properties', component: PropertiesComponent, title: 'Properties' },
     { path: 'property-details', component: PropertyDetailsComponent, title: 'property-details' },
-    { path: 'seller-profile' , component: SellerProfileComponent},
-    { path: 'edit-profile' , component: EditProfileComponent},
-    { path: 'user-seller-profile' , component: UserSellerProfileComponent},
-    
+    { path: 'seller-profile', component: SellerProfileComponent },
+    { path: 'edit-profile', component: EditProfileComponent },
+    { path: 'user-seller-profile', component: UserSellerProfileComponent },
+
 
 ];
 
