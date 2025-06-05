@@ -5,12 +5,12 @@ import { PropertyDetailsComponent } from './components/property-details/property
 import { SellerProfileComponent } from './components/seller-profile/seller-profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { UserSellerProfileComponent } from './components/user-seller-profile/user-seller-profile.component';
-import { RegistersellerComponent } from './components/registerseller/registerseller.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'registration', component: RegistersellerComponent },
+    { path: 'registration', component: RegistrationComponent },
     { path: 'login', component: LoginComponent },
     { path: 'home', component: HomeComponent, title: 'Home' },
     { path: 'properties', component: PropertiesComponent, title: 'Properties' },

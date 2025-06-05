@@ -3,9 +3,10 @@ import { RegistersellerComponent } from "../registerseller/registerseller.compon
 import { RegistercustomerComponent } from "../registercustomer/registercustomer.component";
 
 
+
 @Component({
   selector: 'app-registration',
-  imports: [RegistersellerComponent, RegistercustomerComponent],
+  imports: [RegistersellerComponent, RegistercustomerComponent ],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.css'
 })
