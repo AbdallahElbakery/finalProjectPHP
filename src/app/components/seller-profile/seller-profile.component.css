@@ -1,0 +1,179 @@
+/* seller-profile.component.css */
+
+:root {
+  --primary: #1e40af;
+  --primary-light: #3b82f6;
+  --bg-soft: #eff6ff;
+  --bg-lighter: #dbeafe;
+  --white: #ffffff;
+  --dark: #2C3E50;
+
+  --font-lora: 'Lora', serif;
+  --font-aldrich: 'Aldrich', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+  --font-main: var(--font-poppins);
+
+  --radius: 0.75rem;
+  --padding: 1rem;
+  --transition: all 0.3s ease-in-out;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-soft);
+  color: var(--dark);
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+
+/* Header */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.profile-header h2 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.profile-header p {
+  color: gray;
+  margin-top: 0.25rem;
+}
+
+.edit-btn {
+  background: none;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.edit-btn:hover {
+  background-color: var(--primary-light);
+  color: white;
+}
+
+/* Chat Button */
+.chat-btn {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: bold;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.chat-btn:hover {
+  background-color: var(--primary-light);
+}
+
+/* About Me */
+.about-box {
+  background-color: var(--bg-lighter);
+  padding: var(--padding);
+  border-radius: var(--radius);
+  line-height: 1.6;
+}
+
+/* Services */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.service-box {
+  background-color: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.service-box i {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+/* Properties */
+.properties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.property-card {
+  background-color: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.property-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.property-card .card-body {
+  padding: 1rem;
+}
+
+.property-card h5 {
+  margin: 0 0 0.25rem;
+}
+
+.property-card .price {
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.features-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.features-row span {
+  flex: 1;
+  text-align: center;
+}
+
+/* Reviews */
+.review-box {
+  background-color: var(--white);
+  padding: 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.review-rating {
+  color: #facc15;
+}
