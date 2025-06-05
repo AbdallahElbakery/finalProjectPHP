@@ -1,0 +1,45 @@
+@if (type === '') {
+<section class="registration-section" id="register">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="section-title">Get Started Today</h2>
+        <p class="section-subtitle">Choose your role and join thousands of satisfied customers and successful sellers in our platform</p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="registration-cards">
+          <!-- Customer Registration Card -->
+          <div class="registration-card">
+            <div class="card-icon">
+              <i class="fas fa-home"></i>
+            </div>
+            <h3 class="card-title">Customer</h3>
+            <p class="card-description">Find your perfect home with access to thousands of verified properties</p>
+            <button class="register-btn" (click)="setUserType('customer')">
+                Register as Customer
+            </button>
+          </div>
+
+          <!-- Seller Registration Card -->
+          <div class="registration-card">
+            <div class="card-icon">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <h3 class="card-title">Seller</h3>
+            <p class="card-description">List your properties and reach thousands of potential buyers </p>
+            <button class="register-btn" (click)="setUserType('seller')">
+                Register as Seller
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+}@else if (type === 'customer'){
+    <app-registercustomer></app-registercustomer>
+}@else if (type === 'seller'){
+    <app-registerseller></app-registerseller>
+}

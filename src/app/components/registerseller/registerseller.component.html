@@ -1,0 +1,206 @@
+<section class="register-form-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-xl-7">
+        
+        <!-- Header Section -->
+        <div class="register-header text-center mb-5">
+          <div class="register-icon mx-auto mb-4">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h1 class="register-title">Seller Registration</h1>
+          <p class="register-subtitle">Join our platform and start showcasing your properties to thousands of potential buyers</p>
+        </div>
+
+        <!-- Registration Form -->
+        <div class="register-form-card">
+          <form class="register-form" novalidate>
+            
+            <!-- Personal Information Section -->
+            <div class="form-section">
+              <h3 class="section-header">
+                <i class="fas fa-user me-2"></i>
+                Personal Information
+              </h3>
+              
+              <div class="row g-3">
+                <!-- Name Field -->
+                <div class="col-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control custom-input" id="name" placeholder="Full Name" required>
+                    <label for="name">Full Name *</label>
+                  </div>
+                  <!-- <div class="invalid-feedback">Please provide a valid name.</div> -->
+                </div>
+
+                <!-- Email Field -->
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="email" class="form-control custom-input" id="email" placeholder="Email Address" required>
+                    <label for="email">Email Address *</label>
+                  </div>
+                  <!-- <div class="invalid-feedback">Please provide a valid email address.</div> -->
+                </div>
+
+                <!-- Phone Field -->
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="tel" class="form-control custom-input" id="phone" placeholder="Phone Number" required>
+                    <label for="phone">Phone Number *</label>
+                  </div>
+                  <!-- <div class="invalid-feedback">Please provide a valid phone number.</div> -->
+                </div>
+
+                <!-- Password Field -->
+                <div class="col-12">
+                  <div class="form-floating position-relative">
+                    <input type="password" class="form-control custom-input" id="password" placeholder="Password" required>
+                    <label for="password">Password *</label>
+                    <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                  <!-- <div class="invalid-feedback">Password must be at least 8 characters long.</div> -->
+                </div>
+
+                <!-- Address Field -->
+                <div class="col-12">
+                  <div class="form-floating">
+                    <textarea class="form-control custom-textarea" id="address" placeholder="Address" style="height: 100px" required></textarea>
+                    <label for="address">Address *</label>
+                  </div>
+                  <!-- <div class="invalid-feedback">Please provide your address.</div> -->
+                </div>
+
+                <!-- Hidden Role Field -->
+                <input type="hidden" id="role" value="seller">
+              </div>
+            </div>
+
+            <!-- Business Information Section -->
+            <div class="form-section">
+              <h3 class="section-header">
+                <i class="fas fa-building me-2"></i>
+                Business Information
+              </h3>
+              
+              <div class="row g-3">
+                <!-- Company Name Field -->
+                <div class="col-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control custom-input" id="company_name" placeholder="Company Name" required>
+                    <label for="company_name">Company Name *</label>
+                  </div>
+                  <!-- <div class="invalid-feedback">Please provide your company name.</div> -->
+                </div>
+
+                <!-- Service Areas Field -->
+                <div class="col-12">
+                  <div class="form-floating">
+                    <select class="form-select custom-select" id="service_areas" required>
+                      <option value="" disabled selected>Choose Service Areas</option>
+                      <option value="cairo">Cairo</option>
+                      <option value="giza">Giza</option>
+                      <option value="alexandria">Alexandria</option>
+                      <option value="luxor">Luxor</option>
+                      <option value="aswan">Aswan</option>
+                      <option value="hurghada">Hurghada</option>
+                      <option value="sharm-el-sheikh">Sharm El Sheikh</option>
+                      <option value="nationwide">Nationwide</option>
+                    </select>
+                  </div>
+                  <!-- <div class="invalid-feedback">Please select your service areas.</div> -->
+                </div>
+
+                <!-- About Field -->
+                <div class="col-12">
+                  <div class="form-floating">
+                    <textarea class="form-control custom-textarea" id="about" placeholder="About Your Business" style="height: 120px" required></textarea>
+                    <label for="about">About Your Business *</label>
+                  </div>
+                  <!-- <div class="invalid-feedback">Please tell us about your business.</div> -->
+                  <div class="form-text">Describe your experience, specialties, and what makes your service unique.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Documents & Media Section -->
+            <div class="form-section">
+              <h3 class="section-header">
+                <i class="fas fa-folder-open me-2"></i>
+                Documents & Media
+              </h3>
+              
+              <div class="row g-3">
+                <!-- Logo Upload -->
+                <div class="col-md-6">
+                  <div class="upload-container">
+                    <label class="upload-label" for="logo">
+                      <i class="fas fa-image"></i>
+                      <span class="upload-text">Company Logo</span>
+                      <span class="upload-hint">PNG, JPG up to 2MB</span>
+                    </label>
+                    <input type="file" class="form-control upload-input" id="logo" accept="image/*">
+                    <div class="upload-preview" id="logo-preview"></div>
+                  </div>
+                </div>
+
+                <!-- Personal Photo Upload -->
+                <div class="col-md-6">
+                  <div class="upload-container">
+                    <label class="upload-label" for="photo">
+                      <i class="fas fa-user-circle"></i>
+                      <span class="upload-text">Personal Photo</span>
+                      <span class="upload-hint">PNG, JPG up to 2MB</span>
+                    </label>
+                    <input type="file" class="form-control upload-input" id="photo" accept="image/*" required>
+                    <div class="upload-preview" id="photo-preview"></div>
+                  </div>
+                  <!-- <div class="invalid-feedback">Please upload your photo.</div> -->
+                </div>
+
+                <!-- Personal ID Upload -->
+                <div class="col-12">
+                  <div class="upload-container">
+                    <label class="upload-label" for="personal_id_image">
+                      <i class="fas fa-id-card"></i>
+                      <span class="upload-text">Personal ID Document</span>
+                      <span class="upload-hint">PNG, JPG, PDF up to 5MB</span>
+                    </label>
+                    <input type="file" class="form-control upload-input" id="personal_id_image" accept="image/*,.pdf" required>
+                    <div class="upload-preview" id="id-preview"></div>
+                  </div>
+                  <!-- <div class="invalid-feedback">Please upload your personal ID document.</div> -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Terms & Submit Section -->
+            <div class="form-section">
+              <div class="form-check custom-checkbox mb-4">
+                <input class="form-check-input" type="checkbox" id="terms" required>
+                <label class="form-check-label" for="terms">
+                  I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a> *
+                </label>
+                <!-- <div class="invalid-feedback">You must agree to the terms and conditions.</div> -->
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn register-submit-btn w-100">
+                <i class="fas fa-user-plus me-2"></i>
+                Create Seller Account
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Login Link -->
+        <div class="text-center mt-4">
+          <p class="login-link">Already have an account? <a href="/login" class="link-primary">Sign In</a></p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

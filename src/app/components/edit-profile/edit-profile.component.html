@@ -1,0 +1,97 @@
+<main class="edit-profile-page">
+  <div class="profile-card">
+    <h2 class="profile-title">Edit profile</h2>
+
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="edit-form">
+      <!-- قسم الصور (بروفايل + لوجو) -->
+      <div class="images-section">
+        <!-- صورة البروفايل -->
+        <div class="avatar-upload">
+          <div class="avatar-preview">
+            <img [src]="profileForm.value.image || 'assets/images/default-avatar.jpg'" alt="Profile picture">
+          </div>
+          <div class="avatar-edit">
+            <input type="file" id="imageUpload" (change)="onFileChange($event)" accept=".png, .jpg, .jpeg">
+            <label for="imageUpload" class="upload-btn">
+              <i class="fas fa-camera"></i> Profile Image
+            </label>
+          </div>
+        </div>
+       </div>
+
+      <!-- حقول النموذج -->
+      <div class="form-grid">
+        <!-- الاسم -->
+        <div class="input-group">
+          <label for="fullName">Full Name</label>
+          <input 
+            type="text" 
+            id="fullName" 
+            formControlName="name" 
+            placeholder="Enter your full name"
+            [ngClass]="{'invalid': profileForm.get('name')?.invalid && profileForm.get('name')?.touched}">
+          <span class="error-msg" *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched">
+            This field is required
+          </span>
+        </div>
+
+        <!-- اسم الشركة -->
+        <div class="input-group">
+          <label for="companyName">Company Name</label>
+          <input 
+            type="text" 
+            id="companyName" 
+            formControlName="companyName" 
+            placeholder="Your company name"
+            [ngClass]="{'invalid': profileForm.get('companyName')?.invalid && profileForm.get('companyName')?.touched}">
+          <span class="error-msg" *ngIf="profileForm.get('companyName')?.invalid && profileForm.get('companyName')?.touched">
+            Company name is required
+          </span>
+        </div>
+
+        <!-- الوظيفة -->
+        <div class="input-group">
+          <label for="jobTitle">Job Title</label>
+          <input 
+            type="text" 
+            id="jobTitle" 
+            formControlName="title" 
+            placeholder="Example: Real estate broker"
+            [ngClass]="{'invalid': profileForm.get('title')?.invalid && profileForm.get('title')?.touched}">
+          <span class="error-msg" *ngIf="profileForm.get('title')?.invalid && profileForm.get('title')?.touched">
+            This field is required
+          </span>
+        </div>
+
+        <!-- أماكن العمل -->
+        <div class="input-group">
+          <label for="locations">Workplaces</label>
+          <div class="custom-select">
+            <select 
+              multiple 
+              id="locations" 
+              formControlName="locations"
+              [class.invalid]="profileForm.get('locations')?.invalid && profileForm.get('locations')?.touched">
+              <option value="Cairo">Cairo</option>
+              <option value="Giza">Giza</option>
+              <option value="Alexandria">Alexandria</option>
+            </select>
+            <div class="selected-items">
+              <span *ngFor="let loc of profileForm.get('locations')?.value" class="selected-tag">
+                {{loc}} <i class="fas fa-times" (click)="removeLocation(loc)"></i>
+              </span>
+            </div>
+          </div>
+          <span class="hint">Press Ctrl to select multiple locations</span>
+        </div>
+      </div>
+
+      <!-- الأزرار -->
+      <div class="form-actions">
+        <button type="submit" class="save-btn" [disabled]="!profileForm.valid">
+          <i class="fas fa-save"></i> Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</main>
