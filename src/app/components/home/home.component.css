@@ -415,7 +415,12 @@
 
 @media (min-width: 768px) {
     .search-box {
-        margin-top: 110px !important;
+        margin-top: 150px !important;
+    }
+
+    .features-section {
+        margin-top: 150px !important;
+        height: 400px;
     }
 
     .features-section {
@@ -462,26 +467,6 @@
     }
 
     .section-container {
-        padding: 0 !important;
-    }
-}
-
-
-
-@media (min-width: 768px) {
-    .search-box {
-        margin-top: 110px;
-    }
-        .section-container {
-        padding: 0 !important;
-    }
-}
-
-@media (min-width: 992px) {
-    .search-box {
-        margin-top: 250px;
-    }
-        .section-container {
         padding: 0 !important;
     }
 }
