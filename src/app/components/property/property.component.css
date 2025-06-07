@@ -1,0 +1,136 @@
+.custom-blue {
+    background-color: #3B82F6;
+    color: white;
+}
+
+.custom-dark-blue {
+    background-color: #1E40AF;
+    color: white;
+}
+
+.highlight-text {
+    background: linear-gradient(135deg, #3B82F6, #1E40AF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.property-card {
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.property-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.property-image {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.for-rent-badge,
+.for-sale-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 5px 15px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.for-rent-badge {
+    background-color: #3B82F6;
+    color: white;
+}
+
+.for-sale-badge {
+    background-color: #1E40AF;
+    color: white;
+}
+
+.property-details {
+    padding: 20px;
+}
+
+.property-title {
+    font-family: 'Lora', serif;
+    color: #3B82F6;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.property-location {
+    color: #3B82F6;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.property-date {
+    color: #6c757d;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+}
+
+.property-description {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.property-features {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+
+
+.property-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1E40AF;
+    font-family: 'Lora', serif;
+
+}
+
+.property-actions {
+    display: flex;
+    gap: 10px;
+    float: right;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.action-btn:hover {
+    color: #3B82F6;
+}
+
+.section-container {
+    border-radius: 15px;
+    padding: 30px;
+}
