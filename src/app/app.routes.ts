@@ -7,8 +7,6 @@ import { UserSellerProfileComponent } from './components/user-seller-profile/use
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { CreatePropertyComponent } from './components/create-property/create-property.component';
-import { MyPropertiesComponent } from './components/my-properties/my-properties.component';
 
 
 
@@ -31,7 +29,6 @@ export const routes: Routes = [
     { path: 'edit-profile', component: EditProfileComponent },
     { path: 'user-seller-profile', component: UserSellerProfileComponent },
 
->>>>>>> 9544d4ba1cb1c4e75e0424e9722fd6f43487326d
 
 ];
 

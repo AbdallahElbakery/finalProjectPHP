@@ -21,6 +21,9 @@ throw new Error('Method not implemented.');
     this.router.navigate(['/edit-profile']);
   }
 
+    listBookings() {
+    this.router.navigate(['/seller-bookings']);
+  }
 openAddReviewModal() {
 throw new Error('Method not implemented.');
 }
