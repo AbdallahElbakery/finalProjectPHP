@@ -108,150 +108,8 @@
                 <span class="highlight-text">Popular Properties.</span>
             </h1>
         </div>
-
-        <div class="row g-4">
-            <div class="col-lg-4 col-md-6">
-                <div class="property-card">
-                    <div class="position-relative">
-                        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=250&fit=crop"
-                            alt="Modern House" class="property-image">
-                        <div class="for-rent-badge">For Rent</div>
-                    </div>
-                    <div class="property-details">
-                        <h5 class="property-title fs-4">Ruposibangia de Parlosia.</h5>
-                        <p class="property-location">
-                            <i class="fas fa-map-marker-alt me-1"></i>
-                            Golden Square - New Cairo
-                        </p>
-                        <p class="property-date">25 Nov 2025</p>
-                        <p class="property-description">
-                            A peaceful and upscale community, inspired by the beauty of flowing silver streams.
-                        </p>
-                        <div class="property-features">
-                            <span class="feature-item">
-                                <i class="fas fa-bed"></i>
-                                <span>3</span>
-                            </span>
-                            <span class="feature-item">
-                                <i class="fas fa-bath"></i>
-                                <span>2</span>
-                            </span>
-                            <span class="feature-item">
-                                <i class="fas fa-expand-arrows-alt"></i>
-                                <span>5</span>
-                            </span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="property-price">Price: $6521k</span>
-                            <div class="property-actions">
-                                <button class="action-btn">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <button class="action-btn">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="property-card">
-                    <div class="position-relative">
-                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=250&fit=crop"
-                            alt="Modern Apartment" class="property-image">
-                        <div class="for-sale-badge">For Sale</div>
-                    </div>
-                    <div class="property-details">
-                        <h5 class="property-title fs-4">Ruposibangia de Parlosia.</h5>
-                        <p class="property-location">
-                            <i class="fas fa-map-marker-alt me-1"></i>
-                            Golden Square - New Cairo
-                        </p>
-                        <p class="property-date">25 Nov 2025</p>
-                        <p class="property-description">
-                            A peaceful and upscale community, inspired by the beauty of flowing silver streams.
-                        </p>
-                        <div class="property-features">
-                            <span class="feature-item">
-                                <i class="fas fa-bed"></i>
-                                <span>4</span>
-                            </span>
-                            <span class="feature-item">
-                                <i class="fas fa-bath"></i>
-                                <span>3</span>
-                            </span>
-                            <span class="feature-item">
-                                <i class="fas fa-expand-arrows-alt"></i>
-                                <span>6</span>
-                            </span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="property-price">Price: $8521k</span>
-                            <div class="property-actions">
-                                <button class="action-btn">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <button class="action-btn">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-lg-4 col-md-6">
-                <div class="property-card">
-                    <div class="position-relative">
-                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=250&fit=crop"
-                            alt="Luxury Villa" class="property-image">
-                        <div class="for-rent-badge">For Rent</div>
-                    </div>
-                    <div class="property-details">
-                        <h5 class="property-title fs-4">Ruposibangia de Parlosia.</h5>
-                        <p class="property-location">
-                            <i class="fas fa-map-marker-alt me-1"></i>
-                            Golden Square - New Cairo
-                        </p>
-                        <p class="property-date">25 Nov 2025</p>
-                        <p class="property-description">
-                            A peaceful and upscale community, inspired by the beauty of flowing silver streams.
-                        </p>
-                        <div class="property-features">
-                            <span class="feature-item">
-                                <i class="fas fa-bed"></i>
-                                <span>5</span>
-                            </span>
-                            <span class="feature-item">
-                                <i class="fas fa-bath"></i>
-                                <span>4</span>
-                            </span>
-                            <span class="feature-item">
-                                <i class="fas fa-expand-arrows-alt"></i>
-                                <span>8</span>
-                            </span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="property-price">Price: $6521k</span>
-                            <div class="property-actions">
-                                <button class="action-btn">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <button class="action-btn">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
+            <app-property></app-property>
     </div>
 </div>
 
@@ -271,7 +129,7 @@
     <div id="citiesCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <div class="row justify-content-center align-items-center">
+                <div class="row justify-content-center align-items-center carousel-elements">
                     <div class="col-md-3">
                         <div class="city-card bg-white text-center p-4 h-100">
                             <img src="https://images.unsplash.com/photo-1546436836-07a91091f160?w=300&h=300&fit=crop&crop=face"
@@ -298,7 +156,7 @@
                 </div>
             </div>
 
-            <div class="carousel-item">
+            <div class="carousel-item carousel-elements-1 ">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-md-3">
                         <div class="city-card bg-white text-center p-4 h-100">
@@ -327,11 +185,13 @@
             </div>
         </div>
 
-        <button class="carousel-control-prev" type="button" data-bs-target="#citiesCarousel" data-bs-slide="prev">
+        <button class="carousel-control-prev carousel-btns" type="button" data-bs-target="#citiesCarousel"
+            data-bs-slide="prev">
             <i class="fa-solid fa-circle-arrow-left fs-2"></i>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#citiesCarousel" data-bs-slide="next">
+        <button class="carousel-control-next carousel-btns" type="button" data-bs-target="#citiesCarousel"
+            data-bs-slide="next">
             <i class="fa-solid fa-circle-arrow-right fs-2"></i>
             <span class="visually-hidden">Next</span>
         </button>
@@ -389,22 +249,26 @@
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">
                         <div class="brand-card">
-                            <img src="https://image.shutterstock.com/image-vector/real-estate-gold-circle-round-260nw-2390100985.jpg" alt="Mustela">
+                            <img src="https://image.shutterstock.com/image-vector/real-estate-gold-circle-round-260nw-2390100985.jpg"
+                                alt="Mustela">
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">
                         <div class="brand-card">
-                            <img src="https://image.shutterstock.com/image-vector/creative-abstract-letter-m-real-260nw-2241863779.jpg" alt="PAYOT">
+                            <img src="https://image.shutterstock.com/image-vector/creative-abstract-letter-m-real-260nw-2241863779.jpg"
+                                alt="PAYOT">
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">
                         <div class="brand-card">
-                            <img src="https://image.shutterstock.com/image-vector/creative-abstract-letter-m-real-260nw-2241863779.jpg" alt="Priorin">
+                            <img src="https://image.shutterstock.com/image-vector/creative-abstract-letter-m-real-260nw-2241863779.jpg"
+                                alt="Priorin">
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">
                         <div class="brand-card">
-                            <img src="https://image.shutterstock.com/image-vector/real-estate-modern-logo-design-260nw-2545049463.jpg"alt="Brand 6">
+                            <img src="https://image.shutterstock.com/image-vector/real-estate-modern-logo-design-260nw-2545049463.jpg"
+                                alt="Brand 6">
                         </div>
                     </div>
                 </div>
@@ -414,7 +278,8 @@
                 <div class="row justify-content-center g-3">
                     <div class="col-6 col-md-4 col-lg-2">
                         <div class="brand-card">
-                            <img src="https://image.shutterstock.com/image-vector/real-estate-modern-logo-design-260nw-2545049463.jpg"alt="Brand 6">
+                            <img src="https://image.shutterstock.com/image-vector/real-estate-modern-logo-design-260nw-2545049463.jpg"
+                                alt="Brand 6">
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-lg-2">

@@ -256,7 +256,6 @@
   }
 }
 
-/* Better spacing for desktop */
 @media (min-width: 1400px) {
   .container {
     max-width: 1320px;
@@ -267,7 +266,6 @@
   }
 }
 
-/* Mobile Menu Styles */
 @media (max-width: 991.98px) {
   .navbar-toggler {
     display: flex;
@@ -317,15 +315,14 @@
   }
 }
 
-/* Responsive Typography */
 @media (max-width: 768px) {
   .navbar-brand {
     font-size: 1.5rem;
   }
 
   .logo-icon {
-    width: 35px;
-    height: 35px;
+    width: 20px;
+    height: 20px;
     font-size: 1rem;
   }
 }
