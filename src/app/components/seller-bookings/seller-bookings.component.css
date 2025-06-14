@@ -59,6 +59,10 @@
     align-items: center;
 }
 
+.status {
+    max-width: 110px !important;
+}
+
 .status-confirmed {
     background-color: #d4edda;
     color: #155724;
@@ -103,8 +107,9 @@
 }
 
 .container-custom {
-    max-width: 900px;
-    margin: 150px auto !important;
+    max-width: 80%;
+    align-items: center;
+    margin-top: 150px !important;
     padding: 30px 15px;
 }
 
