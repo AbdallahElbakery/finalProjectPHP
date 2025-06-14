@@ -7,6 +7,7 @@ import { UserSellerProfileComponent } from './components/user-seller-profile/use
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { SellerBookingsComponent } from './components/seller-bookings/seller-bookings.component';
 
 
 
@@ -20,7 +21,6 @@ export const routes: Routes = [
     { path: 'seller-profile', component: SellerProfileComponent },
     { path: 'edit-profile', component: EditProfileComponent },
     { path: 'user-seller-profile', component: UserSellerProfileComponent },
-
-
+    { path: 'seller-bookings', component: SellerBookingsComponent },
 ];
 
