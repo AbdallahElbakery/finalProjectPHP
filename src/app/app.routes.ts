@@ -7,6 +7,8 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { UserSellerProfileComponent } from './components/user-seller-profile/user-seller-profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { CreatePropertyComponent } from './components/create-property/create-property.component';
+import { MyPropertiesComponent } from './components/my-properties/my-properties.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -18,6 +20,8 @@ export const routes: Routes = [
     { path: 'seller-profile' , component: SellerProfileComponent},
     { path: 'edit-profile' , component: EditProfileComponent},
     { path: 'user-seller-profile' , component: UserSellerProfileComponent},
+    { path: 'create-property',component: CreatePropertyComponent },
+    { path: 'my-properties' , component: MyPropertiesComponent},
     
 
 ];

@@ -1,0 +1,71 @@
+<main class="edit-profile-page">
+  <div class="profile-card">
+    <h2 class="profile-title">Add New Property</h2>
+
+    <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="edit-form">
+
+      <!-- Property Image Upload -->
+      <div class="avatar-upload">
+        <div class="avatar-preview">
+          <img [src]="propertyForm.value.image || 'assets/images/default-property.jpg'" alt="Property Image">
+        </div>
+        <div class="avatar-edit">
+          <input type="file" id="imageUpload" (change)="onFileChange($event)" accept=".png,.jpg,.jpeg">
+          <label for="imageUpload" class="upload-btn">
+            <i class="fas fa-camera"></i> Upload Image
+          </label>
+        </div>
+      </div>
+
+      <!-- Form Fields -->
+      <div class="form-grid">
+        <div class="input-group">
+          <label>Property Name</label>
+          <input type="text" formControlName="title" placeholder="Enter property name..." required>
+        </div>
+
+        <div class="input-group">
+          <label>City</label>
+          <select formControlName="city">
+            <option value="">Select City</option>
+            <option value="Cairo">Cairo</option>
+            <option value="Giza">Giza</option>
+            <option value="Alexandria">Alexandria</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label>Description</label>
+          <textarea formControlName="description" rows="3" placeholder="Enter property description..."></textarea>
+        </div>
+
+        <div class="input-group">
+          <label>Price (EGP)</label>
+          <input type="number" formControlName="price">
+        </div>
+
+        <div class="input-group">
+          <label>Number of Bedrooms</label>
+          <input type="number" formControlName="bedrooms">
+        </div>
+
+        <div class="input-group">
+          <label>Number of Bathrooms</label>
+          <input type="number" formControlName="bathrooms">
+        </div>
+
+        <div class="input-group">
+          <label>Area (m²)</label>
+          <input type="number" formControlName="area">
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-actions">
+        <button type="submit" class="save-btn" [disabled]="!propertyForm.valid">
+          <i class="fas fa-plus"></i> Add Property
+        </button>
+      </div>
+    </form>
+  </div>
+</main>
