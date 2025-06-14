@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-properties',
@@ -32,7 +33,7 @@ export class MyPropertiesComponent implements OnInit {
     }
   ];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -40,6 +41,9 @@ export class MyPropertiesComponent implements OnInit {
     console.log('Edit', id);
     // navigate or open form
   }
+   goToEditProperty(id: number) {
+  this.router.navigate(['/create-property'], { queryParams: { id } });
+}
 
   deleteProperty(id: number) {
     if (confirm('Are you sure you want to delete this property?')) {

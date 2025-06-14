@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class CreatePropertyComponent implements OnInit {
   propertyForm!: FormGroup;
+  route: any;
 
   constructor(private fb: FormBuilder) {}
 
@@ -23,6 +24,18 @@ export class CreatePropertyComponent implements OnInit {
       area: ['', Validators.required],
       image: ['']
     });
+
+    this.route.queryParams.subscribe((params: { [x: string]: any; }) => {
+    const id = params['id'];
+    if (id) {
+      // هنا مؤقتًا نجيب العقار من local أو mock data
+      const mock = JSON.parse(localStorage.getItem('myProperties') || '[]');
+      const property = mock.find((p: any) => p.id == id);
+      if (property) {
+        this.propertyForm.patchValue(property);
+      }
+    }
+  });
   }
 
   onFileChange(event: any) {
