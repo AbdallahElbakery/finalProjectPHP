@@ -6,6 +6,27 @@
     transition: all 0.3s ease;
 }
 
+.image-prop {
+    max-width: 160px;
+}
+
+.date-prop {
+    max-width: 170px;
+}
+
+.price-prop {
+    max-width: 160px;
+    background-color: #e0edfd;
+    border-radius: 8px;
+    border: none;
+    padding: 4px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+}
+
 .booking-card:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
