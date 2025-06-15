@@ -28,6 +28,7 @@ export const routes: Routes = [
     { path: 'my-properties' , component: MyPropertiesComponent},
     { path: 'seller-bookings', component: SellerBookingsComponent},
     { path: 'property', component: PropertyComponent},
+    { path: 'user-bookings', component: UserBookingsComponent, title: 'Bookings'},
 
 ];
 
