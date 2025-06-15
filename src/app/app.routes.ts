@@ -11,6 +11,7 @@ import { CreatePropertyComponent } from './components/create-property/create-pro
 import { MyPropertiesComponent } from './components/my-properties/my-properties.component';
 import { SellerBookingsComponent } from './components/seller-bookings/seller-bookings.component';
 import { PropertyComponent } from './components/property/property.component';
+import { UserBookingsComponent } from './components/user-bookings/user-bookings.component';
 
 
 
