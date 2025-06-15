@@ -107,31 +107,16 @@
 
 
   <!-- Properties Section -->
-  <div class="mb-5">
-    <h4 class="mb-3"> Features Properties</h4>
-    <div class="properties-grid">
-      <div class="property-card" *ngFor="let property of properties">
-        <img [src]="property.image" alt="Property Image">
-        <div class="card-body p-3  ">
-          <h5>{{ property.title }}</h5>
-          <p class="text-muted">{{ property.city }}</p>
-          <p class="price">${{ property.price }}</p>
-
-          <div class="features-row">
-            <span>🛏️ {{ property.bedrooms }} Beds</span>
-            <span>🛁 {{ property.bathrooms }} Baths</span>
-            <span>📏 {{ property.area }} m²</span>
-          </div>
-
-          <div class="property-actions">
-            <button class="btn btn-primary">
-              <i class="fas fa-comments me-2"></i> View Details
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+ <div class="properties-grid">
+              @for (property of properties; track property.id) {
+                <app-property-card 
+                  [property]="property" 
+                > 
+                </app-property-card>
+              }
+              
+            </div>
+             
 
 
   <div class="mb-5">

@@ -1,21 +1,16 @@
 /* seller-profile.component.css */
 
-:root {
-  --primary: #1e40af;
-  --primary-light: #3b82f6;
-  --bg-soft: #eff6ff;
+:host {
+  --primary-color: #1e40af;
+  --hover-color: #3b82f6;
+  --bg-light: #eff6ff;
   --bg-lighter: #dbeafe;
-  --white: #ffffff;
-  --dark: #2C3E50;
-
-  --font-lora: 'Lora', serif;
-  --font-aldrich: 'Aldrich', sans-serif;
-  --font-poppins: 'Poppins', sans-serif;
-  --font-main: var(--font-poppins);
-
-  --radius: 0.75rem;
+  --text-color: #2C3E50;
+  --border-radius: 0.75rem;
   --padding: 1rem;
-  --transition: all 0.3s ease-in-out;
+  --transition: 0.3s ease-in-out;
+  --shadow: 0 4px 16px rgba(30, 64, 175, 0.1);
+  --shadow-hover: 0 8px 32px rgba(30, 64, 175, 0.15);
 }
 
 body {

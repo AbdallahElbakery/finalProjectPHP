@@ -1,0 +1,26 @@
+<main class="my-properties-page">
+  <h2 class="section-title">My Properties</h2>
+  <div class="properties-grid">
+    <div class="property-card" *ngFor="let property of properties">
+      <img [src]="property.image" alt="property" class="property-img" />
+      <div class="property-info">
+        <h3 class="property-title">{{ property.title }}</h3>
+        <p class="property-city"><i class="fas fa-location-dot"></i> {{ property.city }}</p>
+        <p class="property-price">{{ property.price }} EGP</p>
+        <div class="property-features">
+          <span><i class="fas fa-bed"></i> {{ property.bedrooms }}</span>
+          <span><i class="fas fa-bath"></i> {{ property.bathrooms }}</span>
+          <span><i class="fas fa-ruler-combined"></i> {{ property.area }} m²</span>
+        </div>
+        <div class="property-actions">
+          <button class="edit-btn" (click)="goToEditProperty(property.id)">
+           <i class="fas fa-edit"></i> Edit
+          </button>
+          <button class="delete-btn" (click)="deleteProperty(property.id)">
+            <i class="fas fa-trash"></i> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
