@@ -7,15 +7,52 @@
         <p class="page-subtitle">Discover the perfect home from our extensive collection of premium properties</p>
         
         <!-- Main Search Bar -->
-        <div class="search-container">
-          <div class="search-box">
-            <i class="fas fa-search search-icon"></i>
-            <input 
-              type="text" 
-              class="search-input" 
-              placeholder="Search by location, property type, or keywords..."
-            >
-          </div>
+        <div class="container  search-box ">
+            <form class="row g-2 justify-content-center">
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0 search-filter focus-ring">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </span>
+                        <input type="text" class="form-control border-start-0 search-filter location-filter"
+                            placeholder="Location">
+                    </div>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <select class="form-select search-filter ">
+                        <option selected>Type</option>
+                        <option>Apartment</option>
+                        <option>Villa</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select search-filter">
+                        <option selected>Price</option>
+                        <option>$500 - $1000</option>
+                        <option>$1000 - $5000</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select search-filter">
+                        <option selected>Beds</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3+</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select search-filter">
+                        <option selected>Baths</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3+</option>
+                    </select>
+                </div>
+                <div class="col-md-12 text-center mt-3 ">
+                    <button type="submit" class="btn btn-primary px-5 w-75 btn-search fs-5 "
+                        style="cursor: pointer;">Search</button>
+                </div>
+            </form>
         </div>
         
         <!-- Quick Stats -->
