@@ -50,6 +50,10 @@
     font-size: 0.85rem;
 }
 
+.status {
+    max-width: 120px !important;
+}
+
 .status-badge {
     padding: 6px 12px;
     border-radius: 20px;
@@ -103,9 +107,13 @@
 }
 
 .container-custom {
-    max-width: 900px;
+    max-width: 1300px;
     margin: 150px auto !important;
     padding: 30px 15px;
+}
+
+.prop-title {
+    max-width: 290px;
 }
 
 .header-section {
