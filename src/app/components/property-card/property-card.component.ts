@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-property-card',
@@ -10,6 +10,9 @@ import { RouterModule } from '@angular/router';
 })
 export class PropertyCardComponent {
   @Input() property: any;
+
+  constructor(private router: Router) {}
+
 
   formatPrice(price: number): string {
     return new Intl.NumberFormat('en-US', {
@@ -25,6 +28,7 @@ export class PropertyCardComponent {
   }
 
   viewPropertyDetails(propertyId: number) {
-    console.log('View property details for ID:', propertyId);
+    this.router.navigate(['/user-bookings']);
   }
+
 }
