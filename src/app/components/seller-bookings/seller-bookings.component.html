@@ -2,7 +2,7 @@
     <div class="header-section d-flex justify-content-between align-items-center">
         <div>
             <h4 class="mb-1">Property Bookings</h4>
-            <p class="results-count mb-0">18 filtered results for: Properties booked today</p>
+            <p class="results-count mb-0">{{ properties.length }} filtered results for: Properties booked today</p>
         </div>
         <!-- <select class="sort-dropdown">
             <option>Sort by</option>
@@ -12,65 +12,71 @@
             <option>Status</option>
         </select> -->
     </div>
+    <div>
 
-    <div class="card booking-card ">
-        <div class="card-body">
-            <div class="row align-items-center">
-                <div class=" col-md-2 image-prop">
-                    <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
-                        alt="Luxury Villa" class="property-img">
-                </div>
-                <div class="col-md-3 prop-title">
-                    <div class="mb-2 ">
-                        <h5 class="property-title">Luxury Villa Downtown</h5>
-                        <p class="property-address">
-                            <i class="fas fa-map-marker-alt me-1"></i>
-                            Cairo
-                        </p>
-
+        <div class="card booking-card"
+            *ngFor="let property of properties |paginate:{currentPage:currentPage,itemsPerPage:itemsPerPage}">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class=" col-md-2 image-prop">
+                        <img [src]="property.image" alt="Luxury Villa" class="property-img">
                     </div>
-                </div>
-                <div class="d-flex align-items-center col-md-2">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-                        alt="John Smith" class="seller-avatar me-3">
-                    <div>
-                        <div class="seller-name">Hafiz Daragy</div>
-                        <div class="seller-details">Real Estate Agent</div>
-                        <div class="contact-info">
-                            <i class="fas fa-phone me-1"></i>010594033988
+                    <div class="col-md-3 prop-title">
+                        <div class="mb-2 ">
+                            <h5 class="property-title">{{property.title}}</h5>
+                            <p class="property-address">
+                                <i class="fas fa-map-marker-alt me-1"></i>
+                                {{property.location}}
+                            </p>
+
                         </div>
                     </div>
-                </div>
-                <div class="col-md-2 date-prop">
-                    <span class="booking-date">
-                        <i class="fas fa-calendar me-1"></i>June 14, 2025
-                    </span>
-                </div>
-                <div class="col-md-2 price-prop">
-                    <span class="property-price">
-                        <i class="fas fa-dollar-sign me-1"></i>$2,500/month
-                    </span>
-                </div>
-                <div class="col-md-2 status">
-                    <div class="col-md-2 status">
-                        <span class="status-badge status-confirmed">
-                            <i class="fas fa-check-circle me-1"></i>Confirmed
+                    <div class="d-flex align-items-center col-md-2">
+                        <img [src]="property.seller.image" alt="John Smith" class="seller-avatar me-3">
+                        <div>
+                            <div class="seller-name">{{property.seller.name}}</div>
+                            <div class="seller-details">{{property.seller.company}}</div>
+                            <div class="contact-info">
+                                <i class="fas fa-phone me-1"></i>010594033988
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 date-prop">
+                        <span class="booking-date">
+                            <i class="fas fa-calendar me-1"></i>{{property.date}}
                         </span>
                     </div>
-                </div>
-                <div class="col-md-2 text-end">
-                    <button class="btn btn-sm edit-btn me-2">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="btn btn-sm delete-btn">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                    <div class="col-md-2 price-prop">
+                        <span class="property-price">
+                            <i class="fas fa-dollar-sign me-1"></i>${{property.price}}/month
+                        </span>
+                    </div>
+                    <div class="col-md-2 status">
+                        <div class="col-md-2 status">
+                            <span class="status-badge status-confirmed">
+                                <i class="fas fa-check-circle me-1"></i>Confirmed
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 text-end">
+                        <button class="btn btn-sm edit-btn me-2">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm delete-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+        <pagination-controls
+            class="align-content-center align-items-center justify-content-center mt-3 pagination-label"
+            (pageChange)="currentPage=$event"></pagination-controls>
     </div>
 
-    <div class="card booking-card">
+    <!-- <div class="card booking-card">
         <div class="card-body">
             <div class="row align-items-center">
                 <div class="col-md-2 image-prop">
@@ -236,4 +242,4 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->

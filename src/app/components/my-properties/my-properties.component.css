@@ -2,6 +2,11 @@
   padding: 8rem;
   background: var(--color-bg-soft);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10%;
+  
 }
 
 .properties-grid {
@@ -13,7 +18,7 @@
 .property-card {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   transition: 0.3s;
 }

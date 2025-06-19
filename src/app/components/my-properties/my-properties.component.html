@@ -1,7 +1,8 @@
-<main class="my-properties-page">
-  <h2 class="section-title">My Properties</h2>
+<main class="my-properties-page align-middle">
+  <h2 class="section-title mb-5">My Properties</h2>
   <div class="properties-grid">
-    <div class="property-card" *ngFor="let property of properties">
+    <div class="property-card"
+      *ngFor="let property of properties|paginate:{currentPage:currentPage, itemsPerPage:itemsPerPage}">
       <img [src]="property.image" alt="property" class="property-img" />
       <div class="property-info">
         <h3 class="property-title">{{ property.title }}</h3>
@@ -14,7 +15,7 @@
         </div>
         <div class="property-actions">
           <button class="edit-btn" (click)="goToEditProperty(property.id)">
-           <i class="fas fa-edit"></i> Edit
+            <i class="fas fa-edit"></i> Edit
           </button>
           <button class="delete-btn" (click)="deleteProperty(property.id)">
             <i class="fas fa-trash"></i> Delete
@@ -23,4 +24,8 @@
       </div>
     </div>
   </div>
+
+  <pagination-controls
+    class="d-flex align-content-center align-items-center justify-content-center mt-3 pagination-label"
+    (pageChange)="currentPage = $event"></pagination-controls>
 </main>

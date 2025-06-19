@@ -1,15 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-my-properties',
   templateUrl: './my-properties.component.html',
-  imports: [CommonModule],
+  imports: [CommonModule,NgxPaginationModule],
   styleUrls: ['./my-properties.component.css']
 })
 export class MyPropertiesComponent implements OnInit {
 
+  currentPage = 1;
+  itemsPerPage = 6;
   properties = [
     {
       id: 1,

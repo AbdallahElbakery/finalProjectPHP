@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PropertyCardComponent } from '../property-card/property-card.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-properties',
   standalone: true,
-  imports: [CommonModule, PropertyCardComponent],
+  imports: [CommonModule, PropertyCardComponent, NgxPaginationModule],
   templateUrl: './properties.component.html',
   styleUrls: ['./properties.component.css']
 })
 export class PropertiesComponent {
+  currentPage = 1;
+  itemsPerPage = 6;
   properties = [
     {
       id: 1,
@@ -148,6 +151,76 @@ export class PropertiesComponent {
       },
       gallery: [],
       attributes: {}
+    },
+    {
+      id: 6,
+      title: 'Cozy Duplex in Heliopolis',
+      price: 380000,
+      location: 'Heliopolis, Cairo',
+      city: 'Cairo',
+      type: 'Duplex',
+      bedrooms: 3,
+      bathrooms: 2,
+      area: 140,
+      image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400',
+      description: 'Charming duplex in historic Heliopolis with classic architecture and modern updates. Perfect blend of traditional and contemporary living.',
+      date: '2024-01-03',
+      seller: {
+        id: 6,
+        name: 'Nour Hassan',
+        company: 'Heritage Properties',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/7/70/Dubai_Future_Forum_2024_-_Sara_Sabry.jpg',
+        rating: 4.5
+      },
+      gallery: [],
+      attributes: {}
+    },
+    {
+      id: 6,
+      title: 'Cozy Duplex in Heliopolis',
+      price: 380000,
+      location: 'Heliopolis, Cairo',
+      city: 'Cairo',
+      type: 'Duplex',
+      bedrooms: 3,
+      bathrooms: 2,
+      area: 140,
+      image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400',
+      description: 'Charming duplex in historic Heliopolis with classic architecture and modern updates. Perfect blend of traditional and contemporary living.',
+      date: '2024-01-03',
+      seller: {
+        id: 6,
+        name: 'Nour Hassan',
+        company: 'Heritage Properties',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/7/70/Dubai_Future_Forum_2024_-_Sara_Sabry.jpg',
+        rating: 4.5
+      },
+      gallery: [],
+      attributes: {}
+    },
+    {
+      id: 2,
+      title: 'Seaside Villa with Pool',
+      price: 850000,
+      location: 'Marina, Alexandria',
+      city: 'Alexandria',
+      type: 'Villa',
+      bedrooms: 4,
+      bathrooms: 3,
+      area: 250,
+      image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400',
+      description: 'Stunning beachfront villa with private pool and direct sea access.',
+      date: '2024-01-12',
+      seller: {
+        id: 2,
+        name: 'Sara Mohamed',
+        company: 'Coastal Properties',
+        image: 'https://static.wikia.nocookie.net/disneychannel/images/3/3d/Sara_Paxton.jpg/revision/latest?cb=20231221160242',
+        rating: 4.9
+      },
+      gallery: [],
+      attributes: {}
     }
   ];
+
 }
