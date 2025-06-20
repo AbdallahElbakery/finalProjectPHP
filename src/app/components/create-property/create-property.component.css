@@ -1,8 +1,9 @@
 /* التنسيق العام */
+
 .edit-profile-page {
   display: flex;
   justify-content: center;
-  padding: 3.5rem;
+  padding: 8rem;
   background-color: #f8f9fa;
   min-height: 100vh;
 }
@@ -47,7 +48,7 @@
 }
 
 .upload-btn {
-  background: #3498db;
+  background: #1e40af;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 5px;
@@ -59,7 +60,7 @@
 }
 
 .upload-btn:hover {
-  background: #2980b9;
+  background:  #3b82f6;
 }
 
 #imageUpload {
@@ -148,7 +149,7 @@ input:focus, select:focus {
 }
 
 .save-btn {
-  background: #2ecc71;
+  background: #1e40af;
   color: white;
   border: none;
   padding: 0.75rem 2rem;
@@ -162,7 +163,7 @@ input:focus, select:focus {
 }
 
 .save-btn:hover {
-  background: #27ae60;
+  background:  #3b82f6;
 }
 
 .save-btn:disabled {

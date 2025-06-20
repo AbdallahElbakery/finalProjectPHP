@@ -29,12 +29,18 @@
       </div>
 
       <!-- الأزرار -->
-      <div class="d-flex flex-column gap-2">
-        <button class="btn btn-outline-primary" (click)="goToEditProfile()">Edit Profile</button>
+      <div class="dropdown">
+  <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Profile Actions
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="btn btn-outline-primary dropdown-item" (click)="goToEditProfile()">Edit Profile</a></li>
+    <li><a class="btn btn-outline-primary dropdown-item" (click)="listProperty()">My Properties</a></li>
+    <li><a class="btn btn-outline-primary dropdown-item" (click)="listBookings()">My Bookings</a></li>
+    <li><a class="btn btn-outline-primary dropdown-item" (click)="addProperty()">Add Property</a></li>
+  </ul>
+</div>
 
-        <button class="btn btn-outline-primary">My Properties</button>
-        <button class="btn btn-outline-primary" (click)="listBookings()">My Bookings</button>
-      </div>
     </div>
   </div>
 

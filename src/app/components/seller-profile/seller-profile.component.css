@@ -515,4 +515,19 @@ body {
   .property-card {
     max-width: 100%;
   }
+
+  .dropdown-menu-btn {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+    z-index: 10;
+  }
+
+.dropdown-menu-btn:hover {
+  background:  #3b82f6;
+}
 }

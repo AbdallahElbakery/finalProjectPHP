@@ -31,12 +31,28 @@
             <option value="Cairo">Cairo</option>
             <option value="Giza">Giza</option>
             <option value="Alexandria">Alexandria</option>
+            <option value="Other">Other</option>
           </select>
         </div>
 
         <div class="input-group">
           <label>Description</label>
           <textarea formControlName="description" rows="3" placeholder="Enter property description..."></textarea>
+        </div>
+
+        <div class="input-group">
+          <label>Property Type</label>
+          <select formControlName="type">
+            <option value="" disabled >Select Type</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Villa">Villa</option>
+            <option value="Studio">Studio</option>
+            <option value="Townhouse">House</option>
+            <option value="Penthouse">Penthouse</option>
+            <option value="Duplex">Duplex</option>
+            <option value="Other">Other</option>
+          </select>
+         
         </div>
 
         <div class="input-group">

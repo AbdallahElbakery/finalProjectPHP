@@ -24,6 +24,13 @@ throw new Error('Method not implemented.');
     listBookings() {
     this.router.navigate(['/seller-bookings']);
   }
+    listProperty() {
+    this.router.navigate(['/my-properties']);
+  }
+    addProperty() {
+    this.router.navigate(['/create-property']);
+  }
+
 openAddReviewModal() {
 throw new Error('Method not implemented.');
 }
