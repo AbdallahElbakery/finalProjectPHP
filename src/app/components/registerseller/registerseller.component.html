@@ -14,7 +14,7 @@
 
         <!-- Registration Form -->
         <div class="register-form-card">
-          <form class="register-form" novalidate>
+          <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
             
             <!-- Personal Information Section -->
             <div class="form-section">
@@ -27,49 +27,101 @@
                 <!-- Name Field -->
                 <div class="col-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control custom-input" id="name" placeholder="Full Name" required>
+                    <input type="text" class="form-control custom-input" 
+                           id="name" placeholder="Full Name" formControlName="name"
+                           [class.is-invalid]="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
                     <label for="name">Full Name *</label>
                   </div>
-                  <!-- <div class="invalid-feedback">Please provide a valid name.</div> -->
+                  @if (registerForm.get('name')?.invalid && registerForm.get('name')?.touched) {
+                    <div class="invalid-feedback">
+                      @if (registerForm.get('name')?.errors?.['required']) {
+                        <div>Full name is required</div>
+                      }
+                      @if (registerForm.get('name')?.errors?.['pattern']) {
+                        <div>Name must consist of two parts with space between them (letters only)</div>
+                      }
+                    </div>
+                  }
                 </div>
 
                 <!-- Email Field -->
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="email" class="form-control custom-input" id="email" placeholder="Email Address" required>
+                    <input type="email" class="form-control custom-input" 
+                           id="email" placeholder="Email Address" formControlName="email"
+                           [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
                     <label for="email">Email Address *</label>
                   </div>
-                  <!-- <div class="invalid-feedback">Please provide a valid email address.</div> -->
+                  @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+                    <div class="invalid-feedback">
+                      @if (registerForm.get('email')?.errors?.['required']) {
+                        <div>Email is required</div>
+                      }
+                      @if (registerForm.get('email')?.errors?.['email']) {
+                        <div>Please enter a valid email address</div>
+                      }
+                    </div>
+                  }
                 </div>
 
                 <!-- Phone Field -->
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="tel" class="form-control custom-input" id="phone" placeholder="Phone Number" required>
+                    <input type="tel" class="form-control custom-input" 
+                           id="phone" placeholder="Phone Number" formControlName="phone"
+                           [class.is-invalid]="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched">
                     <label for="phone">Phone Number *</label>
                   </div>
-                  <!-- <div class="invalid-feedback">Please provide a valid phone number.</div> -->
+                  @if (registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched) {
+                    <div class="invalid-feedback">
+                      @if (registerForm.get('phone')?.errors?.['required']) {
+                        <div>Phone number is required</div>
+                      }
+                      @if (registerForm.get('phone')?.errors?.['pattern']) {
+                        <div>Phone must be 11 digits</div>
+                      }
+                    </div>
+                  }
                 </div>
 
                 <!-- Password Field -->
                 <div class="col-12">
                   <div class="form-floating position-relative">
-                    <input type="password" class="form-control custom-input" id="password" placeholder="Password" required>
+                    <input [type]="showPassword ? 'text' : 'password'" class="form-control custom-input" 
+                           id="password" placeholder="Password" formControlName="password"
+                           [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
                     <label for="password">Password *</label>
-                    <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                      <i class="fas fa-eye"></i>
+                    <button type="button" class="password-toggle" aria-label="Toggle password visibility"
+                            (click)="togglePasswordVisibility()">
+                      <i class="fas" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
                     </button>
                   </div>
-                  <!-- <div class="invalid-feedback">Password must be at least 8 characters long.</div> -->
+                  @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+                    <div class="invalid-feedback">
+                      @if (registerForm.get('password')?.errors?.['required']) {
+                        <div>Password is required</div>
+                      }
+                      @if (registerForm.get('password')?.errors?.['minlength']) {
+                        <div>Password must be at least 8 characters</div>
+                      }
+                      @if (registerForm.get('password')?.errors?.['pattern']) {
+                        <div>Password must contain letters, numbers, and special characters (!#&#64;$%&*)</div>
+                      }
+                    </div>
+                  }
                 </div>
 
                 <!-- Address Field -->
                 <div class="col-12">
                   <div class="form-floating">
-                    <textarea class="form-control custom-textarea" id="address" placeholder="Address" style="height: 100px" required></textarea>
+                    <textarea class="form-control custom-textarea" 
+                              id="address" placeholder="Address" style="height: 100px" formControlName="address"
+                              [class.is-invalid]="registerForm.get('address')?.invalid && registerForm.get('address')?.touched"></textarea>
                     <label for="address">Address *</label>
                   </div>
-                  <!-- <div class="invalid-feedback">Please provide your address.</div> -->
+                  @if (registerForm.get('address')?.invalid && registerForm.get('address')?.touched) {
+                    <div class="invalid-feedback">Address is required</div>
+                  }
                 </div>
 
                 <!-- Hidden Role Field -->
@@ -88,37 +140,52 @@
                 <!-- Company Name Field -->
                 <div class="col-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control custom-input" id="company_name" placeholder="Company Name" required>
+                    <input type="text" class="form-control custom-input" 
+                           id="company_name" placeholder="Company Name" formControlName="company_name"
+                           [class.is-invalid]="registerForm.get('company_name')?.invalid && registerForm.get('company_name')?.touched">
                     <label for="company_name">Company Name *</label>
                   </div>
-                  <!-- <div class="invalid-feedback">Please provide your company name.</div> -->
+                  @if (registerForm.get('company_name')?.invalid && registerForm.get('company_name')?.touched) {
+                    <div class="invalid-feedback">
+                      @if (registerForm.get('company_name')?.errors?.['required']) {
+                        <div>Company name is required</div>
+                      }
+                      @if (registerForm.get('company_name')?.errors?.['pattern']) {
+                        <div>Company name can only contain letters</div>
+                      }
+                    </div>
+                  }
                 </div>
 
                 <!-- Service Areas Field -->
                 <div class="col-12">
                   <div class="form-floating">
-                    <select class="form-select custom-select" id="service_areas" required>
-                      <option value="" disabled selected>Choose Service Areas</option>
-                      <option value="cairo">Cairo</option>
-                      <option value="giza">Giza</option>
-                      <option value="alexandria">Alexandria</option>
-                      <option value="luxor">Luxor</option>
-                      <option value="aswan">Aswan</option>
-                      <option value="hurghada">Hurghada</option>
-                      <option value="sharm-el-sheikh">Sharm El Sheikh</option>
-                      <option value="nationwide">Nationwide</option>
+                    <select class="form-select custom-select" 
+                            id="service_areas" formControlName="service_areas"
+                            [class.is-invalid]="registerForm.get('service_areas')?.invalid && registerForm.get('service_areas')?.touched" multiple>
+                      <option value="" disabled selected>Choose Service Areas*</option>
+                      @for (area of serviceAreas; track area.value) {
+                        <option [value]="area.value">{{area.label}}</option>
+                      }
                     </select>
+                    <!-- <label for="service_areas">Service Areas *</label> -->
                   </div>
-                  <!-- <div class="invalid-feedback">Please select your service areas.</div> -->
+                  @if (registerForm.get('service_areas')?.invalid && registerForm.get('service_areas')?.touched) {
+                    <div class="invalid-feedback">Please select your service areas</div>
+                  }
                 </div>
 
                 <!-- About Field -->
                 <div class="col-12">
                   <div class="form-floating">
-                    <textarea class="form-control custom-textarea" id="about" placeholder="About Your Business" style="height: 120px" required></textarea>
+                    <textarea class="form-control custom-textarea" 
+                              id="about" placeholder="About Your Business" style="height: 120px" formControlName="about"
+                              [class.is-invalid]="registerForm.get('about')?.invalid && registerForm.get('about')?.touched"></textarea>
                     <label for="about">About Your Business *</label>
                   </div>
-                  <!-- <div class="invalid-feedback">Please tell us about your business.</div> -->
+                  @if (registerForm.get('about')?.invalid && registerForm.get('about')?.touched) {
+                    <div class="invalid-feedback">Please tell us about your business</div>
+                  }
                   <div class="form-text">Describe your experience, specialties, and what makes your service unique.</div>
                 </div>
               </div>
@@ -140,7 +207,8 @@
                       <span class="upload-text">Company Logo</span>
                       <span class="upload-hint">PNG, JPG up to 2MB</span>
                     </label>
-                    <input type="file" class="form-control upload-input" id="logo" accept="image/*">
+                    <input type="file" class="form-control upload-input" 
+                           id="logo" accept="image/*" (change)="onFileChange($event, 'logo')">
                     <div class="upload-preview" id="logo-preview"></div>
                   </div>
                 </div>
@@ -153,10 +221,14 @@
                       <span class="upload-text">Personal Photo</span>
                       <span class="upload-hint">PNG, JPG up to 2MB</span>
                     </label>
-                    <input type="file" class="form-control upload-input" id="photo" accept="image/*" required>
+                    <input type="file" class="form-control upload-input" 
+                           id="photo" accept="image/*" required (change)="onFileChange($event, 'photo')"
+                           [class.is-invalid]="registerForm.get('photo')?.invalid && registerForm.get('photo')?.touched">
                     <div class="upload-preview" id="photo-preview"></div>
                   </div>
-                  <!-- <div class="invalid-feedback">Please upload your photo.</div> -->
+                  @if (registerForm.get('photo')?.invalid && registerForm.get('photo')?.touched) {
+                    <div class="invalid-feedback">Personal photo is required</div>
+                  }
                 </div>
 
                 <!-- Personal ID Upload -->
@@ -166,11 +238,15 @@
                       <i class="fas fa-id-card"></i>
                       <span class="upload-text">Personal ID Document</span>
                       <span class="upload-hint">PNG, JPG, PDF up to 5MB</span>
-                    </label>
-                    <input type="file" class="form-control upload-input" id="personal_id_image" accept="image/*,.pdf" required>
+                    <input type="file" class="form-control upload-input" 
+                           id="personal_id_image" accept="image/*,.pdf" required (change)="onFileChange($event, 'personal_id_image')"
+                           [class.is-invalid]="registerForm.get('personal_id_image')?.invalid && registerForm.get('personal_id_image')?.touched">
                     <div class="upload-preview" id="id-preview"></div>
+                    </label>
                   </div>
-                  <!-- <div class="invalid-feedback">Please upload your personal ID document.</div> -->
+                  @if (registerForm.get('personal_id_image')?.invalid && registerForm.get('personal_id_image')?.touched) {
+                    <div class="invalid-feedback">Personal ID document is required</div>
+                  }
                 </div>
               </div>
             </div>
@@ -178,11 +254,15 @@
             <!-- Terms & Submit Section -->
             <div class="form-section">
               <div class="form-check custom-checkbox mb-4">
-                <input class="form-check-input" type="checkbox" id="terms" required>
+                <input class="form-check-input" type="checkbox" 
+                       id="terms" formControlName="terms"
+                       [class.is-invalid]="registerForm.get('terms')?.invalid && registerForm.get('terms')?.touched">
                 <label class="form-check-label" for="terms">
                   I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a> *
                 </label>
-                <!-- <div class="invalid-feedback">You must agree to the terms and conditions.</div> -->
+                @if (registerForm.get('terms')?.invalid && registerForm.get('terms')?.touched) {
+                  <div class="invalid-feedback">You must agree to the terms and conditions</div>
+                }
               </div>
 
               <!-- Submit Button -->

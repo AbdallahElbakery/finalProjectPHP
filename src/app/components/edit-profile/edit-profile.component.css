@@ -1,29 +1,50 @@
-/* التنسيق العام */
+:host {
+  --primary-color: #1e40af;
+  --primary-light: #3b82f6;
+  --bg-light: #eff6ff;
+  --bg-lighter: #dbeafe;
+  --text-color: #2C3E50;
+  --border-radius: 0.75rem;
+  --padding: 1rem;
+  --transition: 0.3s ease-in-out;
+  --font-main: 'Poppins', sans-serif;
+  --font-title: 'Lora', serif;
+  --font-button: 'Aldrich', sans-serif;
+}
+
 .edit-profile-page {
   display: flex;
   justify-content: center;
   padding: 8rem;
-  background-color: #f8f9fa;
+  background-color: var(--bg-light);
   min-height: 100vh;
+  font-family: var(--font-main);
 }
 
 .profile-card {
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: var(--border-radius);
+  box-shadow: 0 20px 60px rgba(30, 64, 175, 0.1);
   padding: 2.5rem;
   width: 100%;
   max-width: 700px;
+  border: 2px solid transparent;
+  transition: var(--transition);
+}
+
+.profile-card:hover {
+  border-color: var(--primary-light);
 }
 
 .profile-title {
   text-align: center;
-  color: #2c3e50;
+  color: var(--text-color);
   margin-bottom: 2rem;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: var(--font-title);
+  font-size: 2rem;
 }
 
-/* تحميل الصورة */
 .avatar-upload {
   display: flex;
   flex-direction: column;
@@ -36,7 +57,7 @@
   height: 120px;
   border-radius: 50%;
   overflow: hidden;
-  border: 3px solid #e0e0e0;
+  border: 3px solid var(--bg-lighter);
   margin-bottom: 1rem;
 }
 
@@ -47,26 +68,44 @@
 }
 
 .upload-btn {
-  background: #1e40af;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
   color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  transition: all 0.3s;
+  transition: var(--transition);
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  font-family: var(--font-button);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
 }
 
-.upload-btn:hover {
-  background: #3b82f6;
+.upload-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: var(--transition);
+}
+
+.upload-btn:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 #imageUpload {
   display: none;
 }
 
-/* حقول النموذج */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -81,20 +120,22 @@
 
 label {
   font-weight: 500;
-  color: #34495e;
-}
-
-input, select {
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  color: var(--text-color);
   font-size: 1rem;
-  transition: all 0.3s;
 }
 
-input:focus, select:focus {
-  border-color: #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+input, select, textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+  font-family: var(--font-main);
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
   outline: none;
 }
 
@@ -112,7 +153,6 @@ input:focus, select:focus {
   color: #7f8c8d;
 }
 
-/* التحديد المتعدد */
 .custom-select {
   position: relative;
 }
@@ -125,7 +165,7 @@ input:focus, select:focus {
 }
 
 .selected-tag {
-  background: #3498db;
+  background: var(--primary-light);
   color: white;
   padding: 0.3rem 0.6rem;
   border-radius: 20px;
@@ -140,7 +180,6 @@ input:focus, select:focus {
   font-size: 0.7rem;
 }
 
-/* الأزرار */
 .form-actions {
   display: flex;
   justify-content: center;
@@ -148,21 +187,44 @@ input:focus, select:focus {
 }
 
 .save-btn {
-  background: #1e40af;
+  font-family: var(--font-button);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
   color: white;
   border: none;
   padding: 0.75rem 2rem;
-  border-radius: 6px;
+  border-radius: var(--border-radius);
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: var(--transition);
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.save-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: var(--transition);
+}
+
+.save-btn:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .save-btn:hover {
-  background: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(30, 64, 175, 0.3);
 }
 
 .save-btn:disabled {

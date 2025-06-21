@@ -22,28 +22,27 @@ throw new Error('Method not implemented.');
 
   ngOnInit() {
     this.initForm();
-  }
+  } 
 
   initForm() {
-    this.profileForm = this.fb.group({
-      name: ['', Validators.required],
-      title: ['', Validators.required],
-      companyName: ['', Validators.required],
-      image: ['https://example.com/profile.jpg'],
-      locations: [[], Validators.required]
-    });
-  }
+     this.profileForm = this.fb.group({
+    picture: [''],
+    companyName: ['', Validators.required],
+    servicesArea: [[], Validators.required],
+    about: ['', Validators.required],
+  });
+}
 
-  onFileChange(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.profileForm.patchValue({ image: reader.result });
-      };
-      reader.readAsDataURL(file);
-    }
+ onFileChange(event: any) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.profileForm.patchValue({ picture: reader.result });
+    };
+    reader.readAsDataURL(file);
   }
+}
 
   removeLocation(location: string) {
   const currentLocations = this.profileForm.get('locations')?.value;
