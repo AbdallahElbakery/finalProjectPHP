@@ -191,19 +191,6 @@
     float: right;
 }
 
-.action-btn {
-    background: none;
-    border: none;
-    color: #6c757d;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.action-btn:hover {
-    color: #3B82F6;
-}
-
 .section-container {
     border-radius: 15px;
     padding: 30px;
