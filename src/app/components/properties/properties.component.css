@@ -354,21 +354,8 @@
   color: var(--text-color);
 }
 
-.sort-options {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  color: var(--text-color);
-}
 
-.sort-select {
-  padding: 0.5rem;
-  border: 1px solid var(--bg-lighter);
-  border-radius: var(--border-radius);
-  background: white;
-  font-family: 'Poppins', sans-serif;
-}
+
 
 /* Properties Grid */
 .properties-grid {
