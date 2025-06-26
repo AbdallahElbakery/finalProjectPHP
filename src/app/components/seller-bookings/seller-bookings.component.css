@@ -1,3 +1,4 @@
+/* Original CSS with minimal responsive additions */
 .booking-card {
     border: none;
     border-radius: 12px;
@@ -84,10 +85,6 @@
     align-items: center;
 }
 
-.status {
-    max-width: 110px !important;
-}
-
 .status-confirmed {
     background-color: #d4edda;
     color: #155724;
@@ -132,12 +129,10 @@
 }
 
 .container-custom {
-
     max-width: 80%;
     align-items: center;
     margin-top: 150px !important;
     margin: 150px auto !important;
-
     padding: 30px 15px;
 }
 
@@ -181,4 +176,116 @@
     padding: 8px 12px;
     border-radius: 6px;
     border: 1px solid #e9ecef;
+}
+
+/* Minimal responsive additions */
+
+
+
+
+@media (max-width: 920px) and (min-width: 768px) {
+
+
+    .image-prop,
+    .prop-title,
+    .date-prop,
+    .price-prop,
+    .status {
+        max-width: 16.66% !important;
+        flex: 0 0 16.66% !important;
+    }
+
+    .col-md-2.text-end {
+        max-width: 16.66% !important;
+        flex: 0 0 16.66% !important;
+    }
+
+    .property-title,
+    .seller-name,
+    .seller-details {
+        font-size: 0.9rem;
+    }
+
+    .property-img {
+        width: 80px;
+        height: 60px;
+    }
+
+    .booking-date,
+    .property-price {
+        font-size: 0.8rem;
+    }
+}
+
+@media (min-width: 350px) and (max-width: 768px) {
+    .price-prop {
+        width: 85% !important;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .booking-card .row {
+        flex-direction: column;
+    }
+
+    .image-prop,
+    .prop-title,
+    .date-prop,
+    .price-prop,
+    .status,
+    .col-md-2,
+    .col-md-3,
+    .col-md-2.text-end {
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+        margin-bottom: 10px;
+    }
+
+    .property-img {
+        width: 100%;
+        height: auto;
+    }
+
+    .property-title {
+        font-size: 1rem;
+    }
+
+    .booking-date,
+    .property-price {
+        justify-content: flex-start;
+    }
+
+    .col-md-2.text-end {
+        text-align: start !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1820px) {
+    .edit-delte-btns {
+        margin-left: 50px;
+        margin-top: 10px;
+        width: 100px !important;
+    }
+
+    .prop-title {
+        width: 180px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1580px) {
+    .edit-delte-btns {
+        margin-left: 15px;
+        margin-top: 10px;
+        width: 100px !important;
+    }
+
+    .prop-title {
+        width: 130px !important;
+    }
+
+    .property-title {
+
+        font-size: 15px !important;
+    }
 }

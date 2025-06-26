@@ -349,6 +349,8 @@
     display: inline-block;
 }
 
+
+
 @media (min-width: 350px) {
     .features-section {
         margin-top: 310px !important;
@@ -356,8 +358,34 @@
         height: 800px;
     }
 
+    .header-title {
+        font-size: 35px !important;
+    }
+
     .section-container {
         padding: 0 !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .header-title {
+        font-size: 24px;
+    }
+
+    .header-title {
+        font-size: 35px !important;
+    }
+
+    .search-box {
+        margin-top: 40px !important;
+    }
+
+    .btn-search {
+        width: 100% !important;
+    }
+
+    .img-icons {
+        height: 70px !important;
     }
 }
 
@@ -367,7 +395,7 @@
     }
 
     .header-title {
-        font-size: 35px;
+        font-size: 55px;
     }
 
     .features-section {
@@ -400,6 +428,47 @@
     }
 }
 
+@media (max-width: 576px) {
+    .hero {
+        height: 40vh;
+    }
+
+    .header-title {
+        font-size: 20px;
+    }
+
+    .search-box {
+        margin-top: 60px !important;
+        padding: 15px;
+    }
+
+    .display-3 {
+        font-size: 2.5rem;
+    }
+
+    .display-5 {
+        font-size: 2rem;
+    }
+
+    .home-owner-overlay {
+        padding: 40px 20px;
+    }
+
+    .home-owner-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .email-form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .email-input {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
 @media (min-width: 768px) {
     .search-box {
         margin-top: 150px !important;
@@ -408,6 +477,10 @@
     .features-section {
         margin-top: 150px !important;
         height: 400px;
+    }
+
+    .header-title {
+        font-size: 60px !important;
     }
 
     .features-section {
@@ -422,13 +495,41 @@
     }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 768px) {
+    .hero {
+        height: 45vh;
+    }
+
+
     .search-box {
         margin-top: 80px !important;
     }
 
-    .header-title {
-        font-size: 45px !important;
+    .search-filter {
+        height: 45px;
+    }
+
+    .btn-search {
+        height: 45px;
+        font-size: 16px !important;
+    }
+
+    .city-card {
+        margin-bottom: 20px;
+    }
+
+    .brand-card {
+        height: 100px;
+        margin-bottom: 40px;
+    }
+
+    .brand-card img {
+        max-width: 200px !important;
+        max-height: 60px;
+    }
+
+    .search-box {
+        margin-top: 80px !important;
     }
 
     .features-section {
@@ -458,130 +559,41 @@
     }
 }
 
-/* إضافة تحسينات للاستجابة */
-@media (max-width: 1399.98px) {
-  .hero {
-    height: 60vh;
-  }
-  .header-title {
-    font-size: 50px;
-  }
+@media (max-width: 992px) {
+    .hero {
+        height: 50vh;
+    }
+
+
+
+    .features-section {
+        height: auto !important;
+        padding: 60px 0 !important;
+    }
+
+    .features-section .col-md-4 {
+        margin-bottom: 30px;
+    }
 }
 
-@media (max-width: 1199.98px) {
-  .hero {
-    height: 55vh;
-  }
-  .search-box {
-    margin-top: 100px !important;
-  }
+@media (max-width: 1200px) {
+    .hero {
+        height: 55vh;
+    }
+
+
+
+    .search-box {
+        margin-top: 100px !important;
+    }
 }
 
-@media (max-width: 991.98px) {
-  .hero {
-    height: 50vh;
-  }
-  .header-title {
-    font-size: 40px;
-  }
-  .features-section {
-    height: auto !important;
-    padding: 60px 0 !important;
-  }
-  .features-section .col-md-4 {
-    margin-bottom: 30px;
-  }
-}
+@media (max-width: 1400px) {
+    .hero {
+        height: 60vh;
+    }
 
-@media (max-width: 767.98px) {
-  .hero {
-    height: 45vh;
-  }
-  .header-title {
-    font-size: 32px;
-  }
-  .search-box {
-    margin-top: 80px !important;
-  }
-  .search-filter {
-    height: 45px;
-  }
-  .btn-search {
-    height: 45px;
-    font-size: 16px !important;
-  }
-  
-  /* تعديلات قسم المدن */
-  .city-card {
-    margin-bottom: 20px;
-  }
-  
-  /* تعديلات قسم الشركاء */
-  .brand-card {
-    height: 100px;
-    margin-bottom: 40px;
-  }
-  .brand-card img {
-    max-width: 200px !important;
-    max-height: 60px;
-  }
-}
-
-@media (max-width: 575.98px) {
-  .hero {
-    height: 40vh;
-  }
-  .header-title {
-    font-size: 28px;
-  }
-  .search-box {
-    margin-top: 60px !important;
-    padding: 15px;
-  }
-  
-  /* تعديلات النصوص */
-  .display-3 {
-    font-size: 2.5rem;
-  }
-  .display-5 {
-    font-size: 2rem;
-  }
-  
-  /* تعديلات قسم الإعلان */
-  .home-owner-overlay {
-    padding: 40px 20px;
-  }
-  .home-owner-section h2 {
-    font-size: 1.8rem;
-  }
-  
-  /* تعديلات الفورم */
-  .email-form {
-    flex-direction: column;
-    align-items: center;
-  }
-  .email-input {
-    width: 100%;
-    min-width: auto;
-  }
-}
-
-/* تحسينات إضافية للهواتف الصغيرة */
-@media (max-width: 400px) {
-  .header-title {
-    font-size: 24px;
-  }
-  .search-box {
-    margin-top: 40px !important;
-  }
-  
-  /* تعديلات الأزرار */
-  .btn-search {
-    width: 100% !important;
-  }
-  
-  /* تعديلات الأيقونات */
-  .img-icons {
-    height: 70px !important;
-  }
+    .header-title {
+        font-size: 50px;
+    }
 }
