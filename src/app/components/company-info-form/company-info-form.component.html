@@ -1,0 +1,82 @@
+<main class="profile-form-section">
+  <div class="profile-card">
+    <h2 class="profile-title">Business Information</h2>
+
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="edit-form">
+      <!-- صورة البروفايل -->
+      <div class="avatar-upload">
+        <div class="avatar-preview">
+          <img [src]="profileForm.value.picture || 'assets/images/default-avatar.jpg'" alt="Profile picture">
+        </div>
+        <div class="avatar-edit">
+          <input type="file" id="imageUpload" (change)="onFileChange($event)" accept=".png, .jpg, .jpeg">
+          <label for="imageUpload" class="upload-btn">
+            <i class="fas fa-camera"></i> Upload Picture
+          </label>
+        </div>
+      </div>
+
+      <!-- اسم الشركة -->
+      <div class="input-group">
+        <label for="companyName">Company Name</label>
+        <input 
+          type="text" 
+          id="companyName" 
+          formControlName="companyName" 
+          placeholder="Enter company name"
+          [ngClass]="{'invalid': profileForm.get('companyName')?.invalid && profileForm.get('companyName')?.touched}">
+        <span class="error-msg" *ngIf="profileForm.get('companyName')?.invalid && profileForm.get('companyName')?.touched">
+          Company name is required
+        </span>
+      </div>
+<hr>
+      <!-- مناطق الخدمة (locations) -->
+      <div class="simple-multi-select">
+
+  <!-- قائمة الخيارات -->
+  <!-- زر فتح القائمة -->
+<div class="select-box" (click)="showDropdown = !showDropdown">
+  {{selectedOptions.length > 0 ? selectedOptions.join(', ') : 'Services Area...'}}
+  <span class="arrow">🔽</span>
+</div>
+
+<!-- قائمة الخيارات -->
+<div class="dropdown" *ngIf="showDropdown">
+  <div *ngFor="let option of options"
+       class="option"
+       [class.selected]="isSelected(option)"
+       (click)="toggleSelection(option)">
+    <input type="checkbox" [checked]="isSelected(option)" readonly>
+    {{option}}
+  </div>
+</div>
+
+<!-- ربط فعلي بالقيمة المختارة -->
+<input type="hidden" formControlName="locations">
+
+</div>
+<hr>
+
+      <!-- نبذة عن النشاط -->
+      <div class="input-group">
+        <label for="about">About</label>
+        <textarea 
+          id="about" 
+          rows="4" 
+          formControlName="about" 
+          placeholder="Tell us about your business"
+          [ngClass]="{'invalid': profileForm.get('about')?.invalid && profileForm.get('about')?.touched}"></textarea>
+        <span class="error-msg" *ngIf="profileForm.get('about')?.invalid && profileForm.get('about')?.touched">
+          This field is required
+        </span>
+      </div>
+
+      <!-- زر الحفظ -->
+      <div class="form-actions">
+        <button type="submit" class="save-btn" [disabled]="!profileForm.valid">
+          <i class="fas fa-save"></i> Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</main>

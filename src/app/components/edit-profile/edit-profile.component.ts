@@ -2,60 +2,30 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CompanyInfoFormComponent } from "../company-info-form/company-info-form.component";
+import { AccountInfoFormComponent } from "../account-info-form/account-info-form.component";
+import { ChangePasswordFormComponent } from "../change-password-form/change-password-form.component";
 
 @Component({
   selector: 'app-edit-profile',
-  imports: [ReactiveFormsModule , CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, CompanyInfoFormComponent, AccountInfoFormComponent, ChangePasswordFormComponent],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.css'
 })
+
 export class EditProfileComponent implements OnInit {
-goBack() {
-throw new Error('Method not implemented.');
-}
-  profileForm: any;
+  activeTab: 'company' | 'account' | 'password' = 'company';
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {
-    this.initForm();
-  }
-
-  initForm() {
-    this.profileForm = this.fb.group({
-      name: ['', Validators.required],
-      title: ['', Validators.required],
-      companyName: ['', Validators.required],
-      image: ['https://example.com/profile.jpg'],
-      locations: [[], Validators.required]
-    });
-  }
-
-  onFileChange(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.profileForm.patchValue({ image: reader.result });
-      };
-      reader.readAsDataURL(file);
+  ngOnInit(): void {
+    const tab = this.route.snapshot.queryParamMap.get('tab');
+    if (tab === 'account' || tab === 'password' || tab === 'company') {
+      this.activeTab = tab;
     }
   }
 
-  removeLocation(location: string) {
-  const currentLocations = this.profileForm.get('locations')?.value;
-  const updatedLocations = currentLocations.filter((loc: string) => loc !== location);
-  this.profileForm.get('locations')?.setValue(updatedLocations);
-}
-
-  onSubmit() {
-    if (this.profileForm.valid) {
-      console.log('تم الحفظ:', this.profileForm.value);
-      // هنا أرسل البيانات لخادم API
-      this.router.navigate(['/']); // العودة للصفحة الرئيسية بعد الحفظ
-    }
+  setTab(tab: 'company' | 'account' | 'password') {
+    this.activeTab = tab;
   }
 }

@@ -3,7 +3,6 @@
     <h2 class="profile-title">Add New Property</h2>
 
     <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="edit-form">
-
       <!-- Property Image Upload -->
       <div class="avatar-upload">
         <div class="avatar-preview">
@@ -19,66 +18,101 @@
 
       <!-- Form Fields -->
       <div class="form-grid">
+        <!-- Name -->
         <div class="input-group">
           <label>Property Name</label>
-          <input type="text" formControlName="title" placeholder="Enter property name..." required>
+          <input type="text" formControlName="name" placeholder="Enter property name..." 
+                 [class.invalid]="isFieldInvalid('name')">
+          @if (isFieldInvalid('name')) {
+            <div class="error-msg">{{ getErrorMessage('name') }}</div>
+          }
         </div>
 
+        <!-- Description -->
+        <div class="input-group">
+          <label>Description</label>
+          <textarea formControlName="description" rows="3" placeholder="Enter property description..."
+                   [class.invalid]="isFieldInvalid('description')"></textarea>
+          @if (isFieldInvalid('description')) {
+            <div class="error-msg">{{ getErrorMessage('description') }}</div>
+          }
+        </div>
+
+        <!-- Price -->
+        <div class="input-group">
+          <label>Price (EGP)</label>
+          <input type="number" formControlName="price" placeholder="Enter price"
+                 [class.invalid]="isFieldInvalid('price')">
+          @if (isFieldInvalid('price')) {
+            <div class="error-msg">{{ getErrorMessage('price') }}</div>
+          }
+          <div class="hint">Minimum price: 1,000 EGP</div>
+        </div>
+
+        <!-- City -->
         <div class="input-group">
           <label>City</label>
-          <select formControlName="city">
+          <select formControlName="city" [class.invalid]="isFieldInvalid('city')">
             <option value="">Select City</option>
             <option value="Cairo">Cairo</option>
             <option value="Giza">Giza</option>
             <option value="Alexandria">Alexandria</option>
             <option value="Other">Other</option>
           </select>
+          @if (isFieldInvalid('city')) {
+            <div class="error-msg">{{ getErrorMessage('city') }}</div>
+          }
         </div>
 
+        <!-- Address -->
         <div class="input-group">
-          <label>Description</label>
-          <textarea formControlName="description" rows="3" placeholder="Enter property description..."></textarea>
+          <label>Address</label>
+          <input type="text" formControlName="address" placeholder="Street, building, etc."
+                 [class.invalid]="isFieldInvalid('address')">
+          @if (isFieldInvalid('address')) {
+            <div class="error-msg">{{ getErrorMessage('address') }}</div>
+          }
         </div>
 
+        <!-- Purpose -->
         <div class="input-group">
-          <label>Property Type</label>
-          <select formControlName="type">
-            <option value="" disabled >Select Type</option>
-            <option value="Apartment">Apartment</option>
-            <option value="Villa">Villa</option>
-            <option value="Studio">Studio</option>
-            <option value="Townhouse">House</option>
-            <option value="Penthouse">Penthouse</option>
-            <option value="Duplex">Duplex</option>
-            <option value="Other">Other</option>
+          <label>Purpose</label>
+          <select formControlName="purpose" [class.invalid]="isFieldInvalid('purpose')">
+            <option value="">Select Purpose</option>
+            <option value="sale">For Sale</option>
+            <option value="rent">For Rent</option>
           </select>
-         
+          @if (isFieldInvalid('purpose')) {
+            <div class="error-msg">{{ getErrorMessage('purpose') }}</div>
+          }
         </div>
 
-        <div class="input-group">
-          <label>Price (EGP)</label>
-          <input type="number" formControlName="price">
-        </div>
-
-        <div class="input-group">
-          <label>Number of Bedrooms</label>
-          <input type="number" formControlName="bedrooms">
-        </div>
-
-        <div class="input-group">
-          <label>Number of Bathrooms</label>
-          <input type="number" formControlName="bathrooms">
-        </div>
-
+        <!-- Area -->
         <div class="input-group">
           <label>Area (m²)</label>
-          <input type="number" formControlName="area">
+          <input type="number" formControlName="area" placeholder="Enter area in m²"
+                 [class.invalid]="isFieldInvalid('area')">
+          @if (isFieldInvalid('area')) {
+            <div class="error-msg">{{ getErrorMessage('area') }}</div>
+          }
+          <div class="hint">Minimum area: 20 m²</div>
+        </div>
+
+        <!-- Bedrooms -->
+        <div class="input-group">
+          <label>Bedrooms</label>
+          <input type="number" formControlName="bedrooms" placeholder="Number of bedrooms"
+                 [class.invalid]="isFieldInvalid('bedrooms')">
+          @if (isFieldInvalid('bedrooms')) {
+            <div class="error-msg">{{ getErrorMessage('bedrooms') }}</div>
+          }
+          <!-- <div class="hint">Between 1 and 20 bedrooms</div> -->
         </div>
       </div>
 
       <!-- Submit Button -->
       <div class="form-actions">
-        <button type="submit" class="save-btn" [disabled]="!propertyForm.valid">
+        <button type="submit" class="save-btn">
           <i class="fas fa-plus"></i> Add Property
         </button>
       </div>
