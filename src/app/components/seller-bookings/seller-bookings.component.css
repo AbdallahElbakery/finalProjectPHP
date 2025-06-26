@@ -5,6 +5,8 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+
 }
 
 .image-prop {
@@ -138,10 +140,17 @@
 
 .prop-title {
     max-width: 290px;
+    font-family: 'Lora', serif;
 }
 
 .header-section {
     margin-bottom: 30px;
+    font-family: 'Lora', serif;
+}
+
+.small-title {
+    font-family: 'Poppins', sans-serif;
+
 }
 
 .results-count {

@@ -1,0 +1,23 @@
+.page {
+    margin-top: 85px !important;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.card-header h5 {
+    font-weight: 600;
+    font-family: 'Lora', serif;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.btn-light {
+    border: none;
+    background-color: transparent;
+}
+
+.btn{
+    font-family: 'Aldrich', sans-serif !important;
+}

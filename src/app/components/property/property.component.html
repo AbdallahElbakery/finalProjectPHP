@@ -1,13 +1,25 @@
-
 <div class="row g-4">
-    
+
     @for(property of properties; track property.id){
 
     <div class="col-lg-4 col-md-6">
         <div class="property-card">
             <div class="position-relative">
                 <img [src]="property.image" alt="Modern House" class="property-image">
-                <div class="for-rent-badge">For {{property.status}}</div>
+
+                <div class="for-rent-badge " [ngClass]="property.status =='rent' ? 'bg-info' : 'bg-primary'">For
+                    {{property.status}}</div>
+                <!-- <div class="for-rent-badge "
+                    [ngStyle]="{'background-color': property.status =='rent' ? 'brown' : 'green'}">For
+                    {{property.status}}</div> -->
+
+
+                <!-- @if(property.status=="rent"){
+                <div class="for-rent-badge bg-info">For {{property.status}}</div>
+                }
+                @else{
+                <div class="for-rent-badge bg-primary">For {{property.status}}</div>
+                } -->
             </div>
             <div class="property-details">
                 <h5 class="property-title fs-4"> {{property.title}} </h5>
@@ -26,6 +38,10 @@
                         <i class="fas fa-bath"></i>
                         <span>2</span>
                     </span>
+                    <div class="feature-item">
+                        <i class="fas fa-ruler-combined"></i>
+                        <span>{{ property.area }} m²</span>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="property-price">

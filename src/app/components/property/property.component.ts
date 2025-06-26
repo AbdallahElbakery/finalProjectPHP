@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Property } from '../../types/property';
 import { PropertyServiceService } from '../../services/property-service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-property',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './property.component.html',
   styleUrl: './property.component.css'
 })
