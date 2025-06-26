@@ -10,7 +10,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavComponent, FooterComponent, HomeComponent, CommonModule, NgxPaginationModule],
+  imports: [RouterOutlet, NavComponent, FooterComponent, CommonModule, NgxPaginationModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
