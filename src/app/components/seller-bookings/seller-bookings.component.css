@@ -1,4 +1,8 @@
 /* Modern Two-Row Booking Card Design */
+.container-custom {
+    margin-top: 150px !important;
+}
+
 .booking-card {
     border: none;
     border-radius: 16px;
@@ -132,7 +136,7 @@
 }
 
 .booking-date {
-    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    background: linear-gradient(135deg, #0f397c 0%, #051c5a 100%);
     color: white;
     padding: 12px 16px;
     border-radius: 12px;
@@ -174,14 +178,14 @@
 }
 
 .offered-price {
-    background: linear-gradient(135deg, #1E40AF 0%);
+    background: linear-gradient(135deg, #76cdf0 0%, #00b7ffbd 100%);
     color: white;
     padding: 5px 7px;
     border-radius: 10px;
     font-weight: 600;
     font-size: 0.85rem;
     text-align: center;
-    box-shadow: 0 2px 6px #4955fc;
+    box-shadow: 0 2px 6px #014796bd;
     display: flex;
     align-items: center;
     justify-content: center;
