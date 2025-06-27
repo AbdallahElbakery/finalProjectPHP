@@ -13,6 +13,7 @@ import { SellerBookingsComponent } from './components/seller-bookings/seller-boo
 import { PropertyComponent } from './components/property/property.component';
 import { UserBookingsComponent } from './components/user-bookings/user-bookings.component';
 import {SchedulePropVisitComponent} from './components/schedule-prop-visit/schedule-prop-visit.component'
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 export const routes: Routes = [
@@ -30,6 +31,7 @@ export const routes: Routes = [
     { path: 'seller-bookings', component: SellerBookingsComponent},
     { path: 'property', component: PropertyComponent},
     { path: 'user-bookings', component: UserBookingsComponent, title: 'Bookings'},
-    {path:"sechedule-visit",component:SchedulePropVisitComponent}
+    { path: "sechedule-visit",component:SchedulePropVisitComponent},
+    { path: 'user-profile' , component: UserProfileComponent}
 ];
 

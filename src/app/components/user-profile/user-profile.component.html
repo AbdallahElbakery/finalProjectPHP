@@ -1,0 +1,51 @@
+<div class="main-container">
+  <!-- Header -->
+  <div class="page-header">
+    <h1>My Profile</h1>
+  </div>
+
+<main class="user-profile">
+  <div class="profile-card">
+    <div class="profile-image">
+      <img [src]="user.image" alt="Profile Picture">
+    </div>
+
+    <h2 class="profile-name">{{ user.name }}</h2>
+
+    <div class="profile-info">
+      <p><i class="fas fa-envelope"></i> {{ user.email }}</p>
+      <p><i class="fas fa-phone"></i> {{ user.phone }}</p>
+      <p><i class="fas fa-map-marker-alt"></i> {{ user.address }}</p>
+    </div>
+  </div>
+</main>
+
+
+  <!-- Tabs -->
+  <div class="tabs mb-4 text-center">
+    <button class="btn-custom-secondary me-2"
+            [class.btn-custom-primary]="activeTab === 'bookings'"
+            (click)="setTab('bookings')">
+      📅 My Bookings
+    </button>
+
+    <button class="btn-custom-secondary me-2 "
+            [class.btn-custom-primary]="activeTab === 'settings'"
+            (click)="setTab('settings')">
+      ⚙️ Account Settings
+    </button>
+
+    <button class="btn-custom-secondary"
+            [class.btn-custom-primary]="activeTab === 'password'"
+            (click)="setTab('password')">
+      🔒 Change Password
+    </button>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tab-content">
+    <app-user-bookings *ngIf="activeTab === 'bookings'"></app-user-bookings>
+    <app-account-info-form *ngIf="activeTab === 'settings'"></app-account-info-form>
+    <app-change-password-form *ngIf="activeTab === 'password'"></app-change-password-form>
+  </div>
+</div>
