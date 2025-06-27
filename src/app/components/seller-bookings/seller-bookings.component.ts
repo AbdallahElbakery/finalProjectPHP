@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Property } from '../../interfaces/property';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { findIndex } from 'rxjs';
 
 @Component({
   selector: 'app-seller-bookings',
@@ -315,4 +316,8 @@ export class SellerBookingsComponent {
       }
     },
   ]
+
+  reject(id: number) {
+    this.properties = this.properties.filter(p => p.id !== id)
+  }
 }
