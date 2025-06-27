@@ -231,3 +231,22 @@ input:focus, select:focus, textarea:focus {
   background: #95a5a6;
   cursor: not-allowed;
 }
+/* Centered Form Wrapper for account-info and change-password */
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1rem;
+  min-height: 100vh;
+  background-color: #eff6ff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.form-card {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 600px;
+}
