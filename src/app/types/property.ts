@@ -8,6 +8,7 @@ export interface Property {
   city: string
   type: string
   status: string
+  purpose: string
   bedrooms: number
   bathrooms: number
   area: number

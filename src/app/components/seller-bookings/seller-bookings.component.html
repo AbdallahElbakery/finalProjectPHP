@@ -8,79 +8,120 @@
     </div>
 
     <div>
-        <!-- Property Card 1 -->
         <div class="card booking-card"
-            *ngFor="let property of properties |paginate:{currentPage:currentPage,itemsPerPage:itemsPerPage}">
+            *ngFor="let property of properties | paginate:{currentPage:currentPage,itemsPerPage:itemsPerPage}">
             <div class="card-body">
-                <div class="row align-items-center">
-                    <div class=" col-md-2 image-prop">
-                        <img [src]="property.image" alt="Luxury Villa" class="property-img">
-                    </div>
-                    <div class="col-md-3 prop-title">
-                        <div class="mb-2 ">
-                            <h5 class="property-title">{{property.title}}</h5>
-                            <p class="property-address">
-                                <i class="fas fa-map-marker-alt me-1"></i>
-                                {{property.location}}
-                            </p>
-
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center col-md-2">
-                        <img [src]="property.seller.image" alt="John Smith" class="seller-avatar me-3">
-                        <div>
-                            <div class="seller-name">{{property.seller.name}}</div>
-                            <div class="seller-details">{{property.seller.company}}</div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-2 date-prop">
-                        <span class="booking-date">
-                            <i class="fas fa-calendar me-1"></i>{{property.date}}
-                        </span>
-                    </div>
-                    <div class="col-md-2 price-prop">
-                        <span class="property-price">
-                            <i class="fas fa-dollar-sign me-1"></i>${{property.price}}/month
-                        </span>
-                    </div>
-                    <div class="col-md-2 status">
-                        <div class="col-md-2 status">
-                            <span class="status-badge status-confirmed">
-                                <i class="fas fa-check-circle me-1"></i>Confirmed
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-2 text-end ">
-                        <!-- Large screens -->
-                        <div class="d-none d-md-block edit-delte-btns">
-                            <button class="btn btn-sm edit-btn me-2">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-sm delete-btn">
-                                <i class="fas fa-trash"></i>
-                            </button>
+                <!-- Details Row -->
+                <div class="details-row">
+                    <div class="row align-items-center">
+                        <!-- Property Image -->
+                        <div class="col-md-2">
+                            <div class="image-container">
+                                <img [src]="property.image" alt="Property Image" class="property-img">
+                            </div>
                         </div>
 
-                        <!-- Small screens -->
-                        <div class="dropdown-edit-delete d-block d-sm-block d-md-none">
-                            <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <button class="dropdown-item text-secondary">
-                                        <i class="fas fa-edit me-1"></i> Edit
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="dropdown-item text-danger">
-                                        <i class="fas fa-trash me-1"></i> Delete
-                                    </button>
-                                </li>
-                            </ul>
+                        <!-- Property Details -->
+                        <div class="col-md-3">
+                            <div class="property-details">
+                                <h5 class="property-title text-truncate">{{property.title}}</h5>
+                                <p class="property-address">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span class="text-truncate">{{property.location}}</span>
+                                </p>
+                            </div>
                         </div>
+
+                        <!-- Seller Information -->
+                        <div class="col-md-2">
+                            <div class="seller-section">
+                                <img [src]="property.seller.image" alt="Seller Avatar" class="seller-avatar">
+                                <div class="seller-info">
+                                    <div class="seller-name text-truncate">{{property.seller.name}}</div>
+                                    <div class="seller-company text-truncate">{{property.seller.company}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Booking Date -->
+                        <div class="col-md-2">
+                            <div class="date-section">
+                                <div class="booking-date">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>{{property.date}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Price Information -->
+                        <div class="col-md-2">
+                            <div class="price-section">
+                                <div class="original-price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <div>
+                                        <span class="price-label">Original</span><br>
+                                        <strong>${{property.price}}/mo</strong>
+                                    </div>
+                                </div>
+                                <div class="offered-price">
+                                    <i class="fas fa-tag"></i>
+                                    <div>
+                                        <span class="price-label">Offered</span><br>
+                                        <strong>$100000,545/mo</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Actions Row -->
+                <div class="actions-row">
+
+                    <div class="action-buttons">
+                        <!-- Status -->
+                        @if(property.status=="pending"){
+                        <div class="col-md-2 ">
+                            <div class="status-section">
+                                <span class="status-badge bg-warning text-white">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Pending</span>
+                                </span>
+                            </div>
+                        </div>
+                        }@else if(property.status=="confirmed"){
+                        <div class="col-md-2 ">
+                            <div class="status-section">
+                                <span class="status-badge bg-success text-white">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Confirmed</span>
+                                </span>
+                            </div>
+                        </div>
+                        }@else {
+                        <div class="col-md-2 ">
+                            <div class="status-section">
+                                <span class="status-badge bg-danger text-white">
+                                    <i class="fa-solid fa-circle-xmark fs-6"></i>
+                                    <span>Canecled</span>
+                                </span>
+                            </div>
+                        </div>
+                        }
+                        <button class="btn action-btn accept-btn" type="button">
+                            <i class="fas fa-check"></i>
+                            <span>Accept</span>
+                        </button>
+                        <button class="btn action-btn reject-btn" type="button">
+                            <i class="fas fa-times"></i>
+                            <span>Reject</span>
+                        </button>
+                        <button class="btn action-btn chat-btn" type="button">
+                            <i class="fas fa-comment"></i>
+                            <span>Chat</span>
+                        </button>
                     </div>
                 </div>
             </div>

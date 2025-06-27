@@ -7,18 +7,18 @@
             <div class="position-relative">
                 <img [src]="property.image" alt="Modern House" class="property-image">
 
-                <div class="for-rent-badge " [ngClass]="property.status =='rent' ? 'bg-info' : 'bg-primary'">For
-                    {{property.status}}</div>
+                <div class="for-rent-badge " [ngClass]="property.purpose =='rent' ? 'bg-info' : 'bg-primary'">For
+                    {{property.purpose}}</div>
                 <!-- <div class="for-rent-badge "
-                    [ngStyle]="{'background-color': property.status =='rent' ? 'brown' : 'green'}">For
-                    {{property.status}}</div> -->
+                    [ngStyle]="{'background-color': property.purpose =='rent' ? 'brown' : 'green'}">For
+                    {{property.purpose}}</div> -->
 
 
-                <!-- @if(property.status=="rent"){
-                <div class="for-rent-badge bg-info">For {{property.status}}</div>
+                <!-- @if(property.purpose=="rent"){
+                <div class="for-rent-badge bg-info">For {{property.purpose}}</div>
                 }
                 @else{
-                <div class="for-rent-badge bg-primary">For {{property.status}}</div>
+                <div class="for-rent-badge bg-primary">For {{property.purpose}}</div>
                 } -->
             </div>
             <div class="property-details">
