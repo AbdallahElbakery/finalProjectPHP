@@ -36,6 +36,7 @@ export const routes: Routes = [
     { path: "sechedule-visit",component:SchedulePropVisitComponent},
     { path: 'user-profile' , component: UserProfileComponent},
     { path: 'chat' , component: ChatComponent},
-    { path: 'message' , component: MessageComponent}
+    { path: 'message' , component: MessageComponent},
+    { path: 'message/:id' , component: MessageComponent}
 ];
 
