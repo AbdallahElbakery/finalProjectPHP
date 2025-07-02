@@ -14,6 +14,8 @@ import { PropertyComponent } from './components/property/property.component';
 import { UserBookingsComponent } from './components/user-bookings/user-bookings.component';
 import {SchedulePropVisitComponent} from './components/schedule-prop-visit/schedule-prop-visit.component'
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { MessageComponent } from './components/message/message.component';
 
 
 export const routes: Routes = [
@@ -32,6 +34,8 @@ export const routes: Routes = [
     { path: 'property', component: PropertyComponent},
     { path: 'user-bookings', component: UserBookingsComponent, title: 'Bookings'},
     { path: "sechedule-visit",component:SchedulePropVisitComponent},
-    { path: 'user-profile' , component: UserProfileComponent}
+    { path: 'user-profile' , component: UserProfileComponent},
+    { path: 'chat' , component: ChatComponent},
+    { path: 'message' , component: MessageComponent}
 ];
 

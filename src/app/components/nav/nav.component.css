@@ -18,7 +18,7 @@
   border-bottom: 1px solid rgba(30, 64, 175, 0.1);
   padding: var(--padding) 0;
   transition: var(--transition);
-  position: fixed;
+  position:sticky;
   top: 0;
   width: 100%;
   z-index: 1000;
