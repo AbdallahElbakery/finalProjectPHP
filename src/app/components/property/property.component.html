@@ -59,11 +59,11 @@
                 <div class="for-rent-badge">For Rent</div>
             </div>
             <div class="property-details">
-                <h5 class="property-title fs-4"> {{property.title}} </h5>
+                <h5 class="property-title fs-4"> {{property.name}} </h5>
                 <p class="property-location">
                     <i class="fas fa-map-marker-alt me-1"></i>
                     {{property.location}}
-                <p class="property-date">{{property.date}}</p>
+                <p class="property-date">{{property.date | date:'medium'}}</p>
                 <p class="property-description">{{property.description}} </p>
 
                 <div class="property-features">

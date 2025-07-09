@@ -108,8 +108,8 @@
                 <span class="highlight-text">Popular Properties.</span>
             </h1>
         </div>
-        
-            <app-property></app-property>
+
+        <app-property></app-property>
     </div>
 </div>
 
@@ -130,15 +130,18 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="row justify-content-center align-items-center carousel-elements">
+                    @for(address of addresses; track address.id){
+
                     <div class="col-md-3">
                         <div class="city-card bg-white text-center p-4 h-100">
-                            <img src="https://images.unsplash.com/photo-1546436836-07a91091f160?w=300&h=300&fit=crop&crop=face"
+                            <img [src]="address.image"
                                 alt="New York" class="city-image mx-auto d-block mb-3">
-                            <h4 class="fw-bold text-dark mb-0">NEW YORK</h4>
+                            <h4 class="fw-bold text-dark mb-0">{{address.city}}</h4>
                         </div>
                     </div>
+                    }
 
-                    <div class="col-md-4">
+                    <!-- <div class="col-md-4">
                         <div class="city-card custom-blue text-center p-4 h-100 ">
                             <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=300&h=300&fit=crop&crop=face"
                                 alt="Los Angeles" class="city-image mx-auto d-block mb-3">
@@ -152,35 +155,21 @@
                                 alt="Chicago" class="city-image mx-auto d-block mb-3">
                             <h4 class="fw-bold text-dark mb-0">CHICAGO</h4>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
             <div class="carousel-item carousel-elements-1 ">
                 <div class="row justify-content-center align-items-center">
-                    <div class="col-md-3">
+                @for(address2 of addresses2; track address2){
+                                        <div class="col-md-3">
                         <div class="city-card bg-white text-center p-4 h-100">
-                            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=300&h=300&fit=crop&crop=face"
-                                alt="Miami" class="city-image mx-auto d-block mb-3">
-                            <h4 class="fw-bold text-dark mb-0">MIAMI</h4>
+                            <img [src]="address2.image"
+                                alt="New York" class="city-image mx-auto d-block mb-3">
+                            <h4 class="fw-bold text-dark mb-0">{{address2.city}}</h4>
                         </div>
                     </div>
-
-                    <div class="col-md-4">
-                        <div class="city-card custom-blue text-center p-4 h-100 ">
-                            <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=300&h=300&fit=crop&crop=face"
-                                alt="Los Angeles" class="city-image mx-auto d-block mb-3">
-                            <h4 class="fw-bold text-white mb-0">SAN FRANCISCO</h4>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="city-card bg-white text-center p-4 h-100">
-                            <img src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=300&h=300&fit=crop&crop=face"
-                                alt="Boston" class="city-image mx-auto d-block mb-3">
-                            <h4 class="fw-bold text-dark mb-0">BOSTON</h4>
-                        </div>
-                    </div>
+                }
                 </div>
             </div>
         </div>
