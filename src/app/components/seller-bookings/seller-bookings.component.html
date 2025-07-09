@@ -1,0 +1,161 @@
+<div class="container-custom mt-5 container">
+    <div
+        class="header-section d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center ">
+        <div>
+            <h4 class="mb-1 ">Property Bookings</h4>
+            <p class="results-count mb-0 small-title">4 filtered results for: Properties booked today</p>
+        </div>
+    </div>
+
+    <div>
+        <div class="card booking-card"
+            *ngFor="let property of properties | paginate:{currentPage:currentPage,itemsPerPage:itemsPerPage}">
+            <div class="card-body">
+                <!-- Details Row -->
+                <div class="details-row">
+                    <div class="row align-items-center">
+                        <!-- Property Image -->
+                        <div class="col-md-2">
+                            <div class="image-container">
+                                <img [src]="property.image" alt="Property Image" class="property-img">
+                            </div>
+                        </div>
+
+                        <!-- Property Details -->
+                        <div class="col-md-3">
+                            <div class="property-details">
+                                <h5 class="property-title text-truncate">{{property.title}}</h5>
+                                <p class="property-address">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span class="text-truncate">{{property.location}}</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Seller Information -->
+                        <div class="col-md-2">
+                            <div class="seller-section">
+                                <img [src]="property.seller.image" alt="Seller Avatar" class="seller-avatar">
+                                <div class="seller-info">
+                                    <div class="seller-name text-truncate">{{property.seller.name}}</div>
+                                    <div class="seller-company text-truncate">{{property.seller.company}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Booking Date -->
+                        <div class="col-md-2">
+                            <div class="date-section">
+                                <div class="booking-date">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>{{property.date}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Price Information -->
+                        <div class="col-md-2">
+                            <div class="price-section">
+                                <div class="original-price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <div>
+                                        <span class="price-label">Original</span><br>
+                                        <strong>${{property.price}}/mo</strong>
+                                    </div>
+                                </div>
+                                <div class="offered-price">
+                                    <i class="fas fa-tag"></i>
+                                    <div>
+                                        <span class="price-label">Offered</span><br>
+                                        <strong>$100000,545/mo</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Actions Row -->
+                <div class="actions-row">
+
+                    <div class="action-buttons">
+                        <!-- Status -->
+                        @if(property.status=="pending"){
+                        <div class="col-md-2 ">
+                            <div class="status-section">
+                                <span class="status-badge bg-warning text-white">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Pending</span>
+                                </span>
+                            </div>
+                        </div>
+                        }@else if(property.status=="confirmed"){
+                        <div class="col-md-2 ">
+                            <div class="status-section">
+                                <span class="status-badge bg-success text-white">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Confirmed</span>
+                                </span>
+                            </div>
+                        </div>
+                        }@else {
+                        <div class="col-md-2 ">
+                            <div class="status-section">
+                                <span class="status-badge bg-danger text-white">
+                                    <i class="fa-solid fa-circle-xmark fs-6"></i>
+                                    <span>Canecled</span>
+                                </span>
+                            </div>
+                        </div>
+                        }
+                        <button class="btn action-btn accept-btn" type="button">
+                            <i class="fas fa-check"></i>
+                            <span>Accept</span>
+                        </button>
+                        <button class="btn action-btn reject-btn" type="button" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            <i class="fas fa-times"></i>
+                            <span>Reject</span>
+                        </button>
+                        <button class="btn action-btn chat-btn" type="button">
+                            <i class="fas fa-comment"></i>
+                            <span>Chat</span>
+                        </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content bg-danger-subtle text-danger">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5 " id="staticBackdropLabel">Are u sure u
+                                            want to
+                                            reject this booking?</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-dark">
+                                        Rejecting this booking Terminates all agreements with the user and appointments
+                                        of that user related to this property.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancel</button>
+
+                                        <button type="button" class="btn btn-danger" (click)="reject(property.id)"
+                                            data-bs-dismiss="modal">Reject</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <pagination-controls
+            class="align-content-center align-items-center justify-content-center mt-3 pagination-label"
+            (pageChange)="currentPage=$event"></pagination-controls>
+    </div>

@@ -1,0 +1,157 @@
+<!-- Chat Component Container -->
+    <div class="chat-container">
+      
+      <!-- Chat Header with Back Button -->
+      <div class="chat-header">
+        <div class="back-button">
+          <button class="back-btn" id="backButton">
+            <span class="back-icon"><i class="fas fa-arrow-left"></i></span>
+          </button>
+        </div>
+        
+        <div class="user-info">
+          <div class="user-avatar">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="John Smith" class="avatar-image">
+            <div class="online-indicator"></div>
+          </div>
+          <div class="user-details">
+            <h3 class="user-name">John Smith</h3>
+            <p class="user-status">Online • Last seen 2 min ago</p>
+          </div>
+        </div>
+        
+        <div class="header-actions">
+          <button class="action-btn call-btn" title="Call User">
+            <span class="action-icon"><i class="fas fa-phone"></i></span>
+          </button>
+          <button class="action-btn more-btn" title="More Options">
+            <span class="action-icon"><i class="fas fa-ellipsis-v"></i></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Property Context Card -->
+      <div class="property-context">
+        <div class="property-card">
+          <div class="property-image">
+            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=200&h=150&fit=crop" alt="Modern Villa" class="context-property-img">
+          </div>
+          <div class="property-details">
+            <h4 class="property-title">Modern Villa in Downtown</h4>
+            <div class="property-meta">
+              <span class="property-price">$850,000</span>
+              <span class="property-specs">4BR • 3BA • 2,500 sqft</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Chat Area -->
+      <div class="chat-main">
+        
+        <!-- Messages Container -->
+        <div class="messages-container" id="messagesContainer">
+          
+          <!-- Date Separator -->
+          <div class="date-separator">
+            <span class="date-text">Today</span>
+          </div>
+          
+          <!-- System Message -->
+          <div class="system-message">
+            <span class="system-text">John Smith started asking about Modern Villa in Downtown</span>
+            <span class="system-time">10:30 AM</span>
+          </div>
+          
+          <!-- Received Message 1 -->
+          <div class="message-group received">
+            <div class="message-bubble">
+              <p class="message-text">Hi! I'm really interested in the Modern Villa listing. Could you tell me more about the neighborhood?</p>
+            </div>
+            <div class="message-meta">
+              <span class="message-time">10:32 AM</span>
+            </div>
+          </div>
+          
+          <!-- Sent Message 1 -->
+          <div class="message-group sent">
+            <div class="message-bubble">
+              <p class="message-text">Hello John! Great choice. The villa is located in one of the most prestigious areas downtown, with excellent schools and shopping nearby.</p>
+            </div>
+            <div class="message-meta">
+              <span class="message-time">10:35 AM</span>
+              <span class="message-status read"><i class="fas fa-check-double"></i></span>
+            </div>
+          </div>
+          
+          <!-- Received Message -->
+          <div class="message-group received">
+            <div class="message-bubble">
+              <p class="message-text">That sounds perfect! Do you have any photos of the backyard?</p>
+            </div>
+            <div class="message-meta">
+              <span class="message-time">10:38 AM</span>
+            </div>
+          </div>
+          
+          <!-- Sent Message with Image Attachment -->
+          <div class="message-group sent">
+            <div class="message-bubble">
+              <p class="message-text">Absolutely! Here are some photos of the beautiful landscaped backyard:</p>
+            </div>
+            <div class="message-attachment">
+              <div class="attachment-gallery">
+                <div class="attachment-item">
+                  <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&h=200&fit=crop" alt="Backyard View 1" class="attachment-image">
+                </div>
+                <div class="attachment-item">
+                  <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=300&h=200&fit=crop" alt="Backyard View 2" class="attachment-image">
+                </div>
+              </div>
+            </div>
+            <div class="message-meta">
+              <span class="message-time">10:42 AM</span>
+              <span class="message-status read"><i class="fas fa-check-double"></i></span>
+            </div>
+          </div>
+          
+          <!-- Received Message -->
+          <div class="message-group received">
+            <div class="message-bubble">
+              <p class="message-text">Wow! The backyard looks amazing. Perfect for our family gatherings. Can we schedule a viewing this weekend?</p>
+            </div>
+            <div class="message-meta">
+              <span class="message-time">10:45 AM</span>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Message Input Area -->
+        <div class="message-input-area">
+          <div class="input-container">
+            
+            <!-- Attachment Button -->
+            <button class="attachment-btn" title="Attach Files">
+              <span class="attachment-icon"><i class="fas fa-paperclip"></i></span>
+            </button>
+            
+            <!-- Text Input -->
+            <div class="text-input-wrapper">
+              <textarea class="message-input" id="messageInput" placeholder="Type a message..." rows="1"></textarea>
+              <button class="emoji-btn" title="Add Emoji">
+                <span class="emoji-icon"><i class="far fa-smile"></i></span>
+              </button>
+            </div>
+            
+            <!-- Send Button -->
+            <button class="send-btn" id="sendButton" title="Send Message">
+              <span class="send-icon"><i class="fas fa-paper-plane"></i></span>
+            </button>
+            
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>

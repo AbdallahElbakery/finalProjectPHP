@@ -1,0 +1,237 @@
+:host {
+  --primary-color: #1e40af;
+  --primary-light: #3b82f6;
+  --bg-light: #eff6ff;
+  --bg-lighter: #dbeafe;
+  --text-color: #2C3E50;
+  --border-radius: 0.75rem;
+  --padding: 1rem;
+  --transition: 0.3s ease-in-out;
+  --font-main: 'Poppins', sans-serif;
+  --font-title: 'Lora', serif;
+  --font-button: 'Aldrich', sans-serif;
+}
+
+.edit-profile-page {
+  display: flex;
+  justify-content: center;
+  padding: 8rem;
+  background-color: var(--bg-light);
+  min-height: 100vh;
+  font-family: var(--font-main);
+}
+
+.profile-card {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 20px 60px rgba(30, 64, 175, 0.1);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 700px;
+  border: 2px solid transparent;
+  transition: var(--transition);
+}
+
+.profile-card:hover {
+  border-color: var(--primary-light);
+}
+
+.profile-title {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  font-weight: 700;
+  font-family: var(--font-title);
+  font-size: 2rem;
+}
+
+/* تحميل الصورة */
+.avatar-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.avatar-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--bg-lighter);
+  margin-bottom: 1rem;
+}
+
+.avatar-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-button);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: var(--transition);
+}
+
+.upload-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+#imageUpload {
+  display: none;
+}
+
+/* الحقول */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+input, select {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+  font-family: var(--font-main);
+}
+
+input:focus, select:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  outline: none;
+}
+
+.invalid {
+  border-color: #e74c3c !important;
+}
+
+.error-msg {
+  color: #e74c3c;
+  font-size: 0.85rem;
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: #7f8c8d;
+}
+
+/* التحديد المتعدد */
+.custom-select {
+  position: relative;
+}
+
+.selected-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.selected-tag {
+  background: var(--primary-light);
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.selected-tag i {
+  cursor: pointer;
+  font-size: 0.7rem;
+}
+
+/* الأزرار */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.save-btn {
+  font-family: var(--font-button);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.save-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: var(--transition);
+}
+
+.save-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(30, 64, 175, 0.3);
+}
+
+.save-btn:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+}

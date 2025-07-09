@@ -5,15 +5,17 @@ export interface Property {
   location: string;
   city: string;
   type: string;
+  purpose: string
+  status: string
   bedrooms: number;
   bathrooms: number;
   area: number;
   image: string;
   description: string;
-  date: string; 
+  date: string;
   seller: Seller;
-  gallery: string[]; 
-  attributes: Record<string, any>; 
+  gallery: string[];
+  attributes: Record<string, any>;
 }
 
 export interface Seller {

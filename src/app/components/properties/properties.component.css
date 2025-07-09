@@ -1,8 +1,3 @@
-/* properties.component.css */
-
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Aldrich:wght@400&display=swap');
-
 /* CSS Variables */
 :host {
   --primary-color: #1e40af;
@@ -21,10 +16,63 @@
 .properties-page {
   font-family: 'Poppins', sans-serif;
   color: var(--text-color);
-  margin-top: 80px; /* Account for fixed navbar */
+  margin-top: 80px;
+  /* Account for fixed navbar */
 }
 
 /* Header Section */
+.hero {
+  background: url('https://realestics.temptics.com/assets/img/banner-slide-1.jpg') no-repeat center center/cover;
+  height: 70vh;
+  color: white;
+  position: relative;
+  font-family: "Lora", serif;
+  margin-bottom: 10%;
+}
+
+.header-title {
+  font-size: 60px;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgb(0, 9, 41) 0%, rgba(0, 9, 41, 0.5) 100%);
+}
+
+.search-filter {
+  height: 50px;
+  border: 2px solid #1E40AF;
+  color: #3B82F6;
+}
+
+.location-filter::placeholder {
+  color: #3B82F6;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  top: 35%;
+  text-align: center;
+}
+
+.search-box {
+  background: #DBEAFE;
+  padding: 20px;
+  border-radius: 12px;
+  font-family: "Poppins", sans-serif !important;
+  height: auto;
+  margin-top: 120px !important;
+}
+
+.btn-search {
+  height: 50px;
+}
+
 .properties-header {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--hover-color) 100%);
   color: white;
@@ -306,21 +354,8 @@
   color: var(--text-color);
 }
 
-.sort-options {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  color: var(--text-color);
-}
 
-.sort-select {
-  padding: 0.5rem;
-  border: 1px solid var(--bg-lighter);
-  border-radius: var(--border-radius);
-  background: white;
-  font-family: 'Poppins', sans-serif;
-}
+
 
 /* Properties Grid */
 .properties-grid {
@@ -548,12 +583,16 @@
   margin-bottom: 1.5rem;
 }
 
+.pagination-label {
+  margin-top: 35px !important;
+}
+
 /* Responsive Design */
 @media (max-width: 992px) {
   .properties-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
-  
+
   .filters-sidebar {
     position: static;
   }
@@ -563,23 +602,23 @@
   .page-title {
     font-size: 2rem;
   }
-  
+
   .page-subtitle {
     font-size: 1rem;
   }
-  
+
   .quick-stats {
     gap: 1rem;
   }
-  
+
   .stat-number {
     font-size: 1.5rem;
   }
-  
+
   .price-options {
     grid-template-columns: 1fr;
   }
-  
+
   .results-header {
     flex-direction: column;
     align-items: flex-start;
@@ -591,12 +630,12 @@
   .properties-header {
     padding: 3rem 0 1.5rem;
   }
-  
+
   .quick-stats {
     flex-direction: column;
     gap: 1.5rem;
   }
-  
+
   .property-card {
     max-width: 100%;
   }

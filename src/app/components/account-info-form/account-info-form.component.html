@@ -1,0 +1,96 @@
+<section class="register-form-section">
+ <div class="form-wrapper">
+  <div class="form-card">
+    <h2 class="profile-title">Profile Information</h2>
+
+    <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+      
+      <!-- صورة البروفايل -->
+      <div class="avatar-upload">
+        <div class="avatar-preview">
+          <img [src]="registerForm.value.picture || 'assets/images/default-avatar.jpg'" alt="Profile picture">
+        </div>
+        <div class="avatar-edit">
+          <input type="file" id="imageUpload" (change)="onFileChange($event)" accept=".png, .jpg, .jpeg">
+          <label for="imageUpload" class="upload-btn">
+            <i class="fas fa-camera"></i> Upload Picture
+          </label>
+        </div>
+      </div>
+
+      <!-- Personal Information Section -->
+      <div class="form-section">
+        <div class="row g-3">
+
+          <!-- Name -->
+          <div class="col-12">
+            <div class="form-floating">
+              <input type="text" class="form-control custom-input" 
+                     id="name" placeholder="Full Name" formControlName="name"
+                     [class.is-invalid]="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
+              <label for="name">Full Name *</label>
+            </div>
+            <div class="invalid-feedback" *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
+              <div *ngIf="registerForm.get('name')?.errors?.['required']">Full name is required</div>
+              <div *ngIf="registerForm.get('name')?.errors?.['pattern']">Name must consist of two parts</div>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="email" class="form-control custom-input" 
+                     id="email" placeholder="Email Address" formControlName="email"
+                     [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+              <label for="email">Email Address *</label>
+            </div>
+            <div class="invalid-feedback" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+              <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</div>
+              <div *ngIf="registerForm.get('email')?.errors?.['email']">Enter a valid email</div>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="tel" class="form-control custom-input" 
+                     id="phone" placeholder="Phone Number" formControlName="phone"
+                     [class.is-invalid]="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched">
+              <label for="phone">Phone Number *</label>
+            </div>
+            <div class="invalid-feedback" *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched">
+              <div *ngIf="registerForm.get('phone')?.errors?.['required']">Phone number is required</div>
+              <div *ngIf="registerForm.get('phone')?.errors?.['pattern']">Phone must be 11 digits</div>
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class="col-12">
+            <div class="form-floating">
+              <textarea class="form-control custom-textarea" 
+                        id="address" placeholder="Address" style="height: 100px" formControlName="address"
+                        [class.is-invalid]="registerForm.get('address')?.invalid && registerForm.get('address')?.touched"></textarea>
+              <label for="address">Address *</label>
+            </div>
+            <div class="invalid-feedback" *ngIf="registerForm.get('address')?.invalid && registerForm.get('address')?.touched">
+              Address is required
+            </div>
+          </div>
+
+          <!-- Hidden Role -->
+          <input type="hidden" formControlName="role">
+
+        </div>
+      </div>
+
+      <!-- زر الحفظ -->
+      <div class="form-actions mt-4 text-center">
+        <button type="submit" class="save-btn" [disabled]="registerForm.invalid">
+          <i class="fas fa-save me-2"></i>
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+  </div>
+</section>

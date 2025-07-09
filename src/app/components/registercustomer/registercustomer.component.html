@@ -6,15 +6,15 @@
         <!-- Header Section -->
         <div class="register-header text-center mb-5">
           <div class="register-icon mx-auto mb-4">
-            <i class="fas fa-handshake"></i>
+            <i class="fas fa-user"></i>
           </div>
-          <h1 class="register-title">Seller Registration</h1>
-          <p class="register-subtitle">Join our platform and start showcasing your properties to thousands of potential buyers</p>
+          <h1 class="register-title">Customer Registration</h1>
+          <p class="register-subtitle">Join our platform and find your perfect property</p>
         </div>
 
         <!-- Registration Form -->
         <div class="register-form-card">
-          <form class="register-form" novalidate>
+          <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
             
             <!-- Personal Information Section -->
             <div class="form-section">
@@ -27,49 +27,101 @@
                 <!-- Name Field -->
                 <div class="col-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control custom-input" id="name" placeholder="Full Name" required>
+                    <input type="text" class="form-control custom-input" 
+                           id="name" placeholder="Full Name" formControlName="name"
+                           [class.is-invalid]="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
                     <label for="name">Full Name *</label>
                   </div>
-                  <!-- <div class="invalid-feedback">Please provide a valid name.</div> -->
+                  @if (registerForm.get('name')?.invalid && registerForm.get('name')?.touched) {
+                    <div class="invalid-feedback">
+                      @if (registerForm.get('name')?.errors?.['required']) {
+                        <div>Full name is required</div>
+                      }
+                      @if (registerForm.get('name')?.errors?.['pattern']) {
+                        <div>Name must consist of two parts with space between them (letters only)</div>
+                      }
+                    </div>
+                  }
                 </div>
 
                 <!-- Email Field -->
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="email" class="form-control custom-input" id="email" placeholder="Email Address" required>
+                    <input type="email" class="form-control custom-input" 
+                           id="email" placeholder="Email Address" formControlName="email"
+                           [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
                     <label for="email">Email Address *</label>
                   </div>
-                  <!-- <div class="invalid-feedback">Please provide a valid email address.</div> -->
+                  @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+                    <div class="invalid-feedback">
+                      @if (registerForm.get('email')?.errors?.['required']) {
+                        <div>Email is required</div>
+                      }
+                      @if (registerForm.get('email')?.errors?.['email']) {
+                        <div>Please enter a valid email address</div>
+                      }
+                    </div>
+                  }
                 </div>
 
                 <!-- Phone Field -->
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="tel" class="form-control custom-input" id="phone" placeholder="Phone Number" required>
+                    <input type="tel" class="form-control custom-input" 
+                           id="phone" placeholder="Phone Number" formControlName="phone"
+                           [class.is-invalid]="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched">
                     <label for="phone">Phone Number *</label>
                   </div>
-                  <!-- <div class="invalid-feedback">Please provide a valid phone number.</div> -->
+                  @if (registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched) {
+                    <div class="invalid-feedback">
+                      @if (registerForm.get('phone')?.errors?.['required']) {
+                        <div>Phone number is required</div>
+                      }
+                      @if (registerForm.get('phone')?.errors?.['pattern']) {
+                        <div>Phone must be 11 digits</div>
+                      }
+                    </div>
+                  }
                 </div>
 
                 <!-- Password Field -->
                 <div class="col-12">
                   <div class="form-floating position-relative">
-                    <input type="password" class="form-control custom-input" id="password" placeholder="Password" required>
+                    <input [type]="showPassword ? 'text' : 'password'" class="form-control custom-input" 
+                           id="password" placeholder="Password" formControlName="password"
+                           [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
                     <label for="password">Password *</label>
-                    <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-                      <i class="fas fa-eye"></i>
+                    <button type="button" class="password-toggle" aria-label="Toggle password visibility"
+                            (click)="togglePasswordVisibility()">
+                      <i class="fas" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
                     </button>
                   </div>
-                  <!-- <div class="invalid-feedback">Password must be at least 8 characters long.</div> -->
+                  @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+                    <div class="invalid-feedback">
+                      @if (registerForm.get('password')?.errors?.['required']) {
+                        <div>Password is required</div>
+                      }
+                      @if (registerForm.get('password')?.errors?.['minlength']) {
+                        <div>Password must be at least 8 characters</div>
+                      }
+                      @if (registerForm.get('password')?.errors?.['pattern']) {
+                        <div>Password must contain letters, numbers, and special characters (!&#64;#$%&*)</div>
+                      }
+                    </div>
+                  }
                 </div>
 
                 <!-- Address Field -->
                 <div class="col-12">
                   <div class="form-floating">
-                    <textarea class="form-control custom-textarea" id="address" placeholder="Address" style="height: 100px" required></textarea>
+                    <textarea class="form-control custom-textarea" 
+                              id="address" placeholder="Address" style="height: 100px" formControlName="address"
+                              [class.is-invalid]="registerForm.get('address')?.invalid && registerForm.get('address')?.touched"></textarea>
                     <label for="address">Address *</label>
                   </div>
-                  <!-- <div class="invalid-feedback">Please provide your address.</div> -->
+                  @if (registerForm.get('address')?.invalid && registerForm.get('address')?.touched) {
+                    <div class="invalid-feedback">Address is required</div>
+                  }
                 </div>
 
                 <!-- Hidden Role Field -->
@@ -77,44 +129,24 @@
               </div>
             </div>
 
-            <!-- Documents & Media Section -->
-            <!-- <div class="form-section">
-              <h3 class="section-header">
-                <i class="fas fa-folder-open me-2"></i>
-                Documents & Media
-              </h3>
-              
-              <div class="row g-3"> -->
-                <!-- Personal Photo Upload -->
-                <!-- <div class="col-md-6">
-                  <div class="upload-container">
-                    <label class="upload-label" for="photo">
-                      <i class="fas fa-user-circle"></i>
-                      <span class="upload-text">Personal Photo</span>
-                      <span class="upload-hint">PNG, JPG up to 2MB</span>
-                    </label>
-                    <input type="file" class="form-control upload-input" id="photo" accept="image/*" required>
-                    <div class="upload-preview" id="photo-preview"></div>
-                  </div> -->
-                  <!-- <div class="invalid-feedback">Please upload your photo.</div> -->
-                <!-- </div>
-              </div>
-            </div> -->
-
             <!-- Terms & Submit Section -->
             <div class="form-section">
               <div class="form-check custom-checkbox mb-4">
-                <input class="form-check-input" type="checkbox" id="terms" required>
+                <input class="form-check-input" type="checkbox" 
+                       id="terms" formControlName="terms"
+                       [class.is-invalid]="registerForm.get('terms')?.invalid && registerForm.get('terms')?.touched">
                 <label class="form-check-label" for="terms">
                   I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a> *
                 </label>
-                <!-- <div class="invalid-feedback">You must agree to the terms and conditions.</div> -->
+                @if (registerForm.get('terms')?.invalid && registerForm.get('terms')?.touched) {
+                  <div class="invalid-feedback">You must agree to the terms and conditions</div>
+                }
               </div>
 
               <!-- Submit Button -->
               <button type="submit" class="btn register-submit-btn w-100">
                 <i class="fas fa-user-plus me-2"></i>
-                Create Seller Account
+                Create Customer Account
               </button>
             </div>
 
@@ -123,7 +155,7 @@
 
         <!-- Login Link -->
         <div class="text-center mt-4">
-          <p class="login-link">Already have an account? <a href="#" class="link-primary">Sign In</a></p>
+          <p class="login-link">Already have an account? <a href="/login" class="link-primary">Sign In</a></p>
         </div>
 
       </div>

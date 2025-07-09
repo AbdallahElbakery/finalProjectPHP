@@ -1,0 +1,408 @@
+/* Import Poppins Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:host {
+    --primary-color: #1e40af;
+    --hover-color: #3b82f6;
+    --bg-light: #eff6ff;
+    --bg-lighter: #dbeafe;
+    --text-color: #2C3E50;
+    --border-radius: 0.75rem;
+    --padding: 1rem;
+    --transition: 0.3s ease-in-out;
+    --shadow: 0 4px 16px rgba(30, 64, 175, 0.1);
+    --shadow-hover: 0 8px 32px rgba(30, 64, 175, 0.15);
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+/* Main container with proper spacing from navbar */
+.main-container {
+    font-family: 'Poppins', sans-serif;
+    padding: 2rem 0; /* Add space from navbar */
+    margin-top: 80px; /* Adjust this value based on your navbar height */
+    min-height: calc(100vh - 80px); /* Ensure full height minus navbar */
+}
+
+.container {
+    font-family: 'Poppins', sans-serif;
+}
+
+.page-header {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.page-header h1 {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.page-header p {
+    color: #6b7280;
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+}
+
+.booking-card {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all var(--transition);
+    border: none;
+    margin-bottom: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.booking-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.property-image {
+    height: 200px;
+    background: linear-gradient(135deg, var(--primary-color), var(--hover-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.property-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+}
+
+.property-image i {
+    z-index: 1;
+}
+
+.card-body {
+    padding: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.booking-status {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.status-confirmed {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+}
+
+.status-pending {
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 1px solid #f59e0b;
+}
+
+.status-cancelled {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #ef4444;
+}
+
+.property-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.property-details {
+    font-family: 'Poppins', sans-serif;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f3f4f6;
+    font-family: 'Poppins', sans-serif;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 500;
+    color: #6b7280;
+    font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.detail-value {
+    color: var(--text-color);
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+}
+
+.owner-section {
+    background: var(--bg-light);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin: 1rem 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.owner-name {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.owner-type {
+    color: #6b7280;
+    font-size: 0.9rem;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pricing-section {
+    background: #f9fafb;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin: 1rem 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.price-row:last-child {
+    margin-bottom: 0;
+    padding-top: 0.5rem;
+    border-top: 2px solid var(--primary-color);
+}
+
+.price-label {
+    font-weight: 500;
+    color: #6b7280;
+    font-family: 'Poppins', sans-serif;
+}
+
+.original-price {
+    color: #9ca3af;
+    text-decoration: line-through;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+}
+
+.negotiated-price {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+}
+
+.final-price {
+    color: #059669;
+    font-weight: 700;
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-custom-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    transition: all var(--transition);
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-custom-primary:hover {
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-custom-secondary {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    transition: all var(--transition);
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-custom-secondary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    font-family: 'Poppins', sans-serif;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+    color: var(--text-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.empty-state p {
+    color: #6b7280;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-container {
+        margin-top: 70px; /* Adjust for smaller navbar on mobile */
+        padding-top: 1rem;
+    }
+    
+    .page-header {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .detail-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-container {
+        margin-top: 60px; /* Further adjustment for very small screens */
+    }
+    
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .property-title {
+        font-size: 1.1rem;
+    }
+}
+.user-profile {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  background-color: #eff6ff;
+  min-height: 50vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+.profile-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(30, 64, 175, 0.1);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.profile-image img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #dbeafe;
+  margin-bottom: 1rem;
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e40af;
+  margin-bottom: 1.5rem;
+}
+
+.profile-info p {
+  font-size: 1rem;
+  color: #2C3E50;
+  margin: 0.5rem 0;
+}
+
+.profile-info i {
+  margin-right: 0.5rem;
+  color: #3b82f6;
+}
+/* Form Wrapper لتوسيط الفورم زي user-profile */
+.register-form-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1rem;
+  min-height: 100vh;
+  background-color: #eff6ff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.profile-card {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 600px;
+}
+

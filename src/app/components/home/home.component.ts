@@ -1,24 +1,24 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { PropertyComponent } from '../property/property.component';
-<<<<<<< Updated upstream
-=======
 import { Property } from '../../types/property';
 import { PropertyServiceService } from '../../services/property-service.service';
 import { Address } from '../../types/address';
->>>>>>> Stashed changes
+
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink,RouterOutlet,PropertyComponent],
+  imports: [RouterLink, RouterOutlet, PropertyComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-<<<<<<< Updated upstream
 
-=======
+
   // properties: Property[] = [];
+
+  // properties: Property[] = [];
+  // constructor(private propertyService: PropertyServiceService) { }
 
 
   // ngOnInit(): void {
@@ -40,5 +40,4 @@ export class HomeComponent {
     });
   }
 
->>>>>>> Stashed changes
 }
