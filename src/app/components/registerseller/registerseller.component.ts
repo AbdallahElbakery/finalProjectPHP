@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, ValidatorFn, AbstractControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registerseller',
@@ -12,6 +14,8 @@ import { CommonModule } from '@angular/common';
 export class RegistersellerComponent {
   registerForm: FormGroup;
   showPassword = false;
+  loading = false;
+  errorMessage = '';
   serviceAreas = [
     { value: 'cairo', label: 'Cairo' },
     { value: 'giza', label: 'Giza' },
@@ -23,7 +27,7 @@ export class RegistersellerComponent {
     { value: 'nationwide', label: 'Nationwide' }
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.registerForm = this.fb.group({
       name: ['', [
         Validators.required,
@@ -40,21 +44,27 @@ export class RegistersellerComponent {
       password: ['', [
         Validators.required,
         Validators.minLength(8),
-        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%&*])[A-Za-z\d!@#$%&*]{8,}$/)
+        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%&*.])[A-Za-z\d!@#$%&*.]{8,}$/)
       ]],
-      address: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
       company_name: ['', [
         Validators.required,
         Validators.pattern(/^[A-Za-z\s]+$/)
       ]],
-      service_areas: ['', Validators.required],
-      about: ['', Validators.required],
       logo: [null],
       photo: [null, Validators.required],
       personal_id_image: [null, Validators.required],
       terms: [false, Validators.requiredTrue]
-    });
+    }, { validators: this.passwordsMatchValidator });
   }
+
+  passwordsMatchValidator: ValidatorFn = (group: AbstractControl) => {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordsMismatch: true };
+  };
 
   onFileChange(event: any, field: string) {
     const file = event.target.files[0];
@@ -81,8 +91,36 @@ export class RegistersellerComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      console.log('Form submitted:', this.registerForm.value);
-      // Handle form submission
+      this.loading = true;
+      this.errorMessage = '';
+      const formValue = this.registerForm.value;
+      const formData = new FormData();
+      formData.append('name', formValue.name);
+      formData.append('email', formValue.email);
+      formData.append('phone', formValue.phone);
+      formData.append('password', formValue.password);
+      formData.append('password_confirmation', formValue.confirmPassword);
+      formData.append('city', formValue.city);
+      formData.append('country', formValue.country);
+      formData.append('company_name', formValue.company_name);
+      if (formValue.logo) formData.append('logo', formValue.logo);
+      if (formValue.photo) formData.append('photo', formValue.photo);
+      if (formValue.personal_id_image) formData.append('personal_id_image', formValue.personal_id_image);
+      formData.append('role', 'seller');
+      this.authService.registerSeller(formData).subscribe({
+        next: () => {
+          this.loading = false;
+          this.router.navigate(['/home']);
+        },
+        error: (err) => {
+          this.loading = false;
+          if (err?.error?.errors) {
+            this.errorMessage = Object.values(err.error.errors).join(' | ');
+          } else {
+            this.errorMessage = err?.error?.message || 'Registration failed. Please try again.';
+          }
+        }
+      });
     } else {
       this.registerForm.markAllAsTouched();
     }
