@@ -59,7 +59,7 @@ export class MyPropertiesComponent implements OnInit {
 //   }
 
 
-   goToEditProperty(id: number) {
+  goToEditProperty(id: number) {
   this.router.navigate(['/create-property'], { queryParams: { id } });
 }
 

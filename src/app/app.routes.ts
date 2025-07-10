@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { PropertiesComponent } from './components/properties/properties.component';
 import { PropertyDetailsComponent } from './components/property-details/property-details.component';
 import { SellerProfileComponent } from './components/seller-profile/seller-profile.component';
@@ -12,10 +12,11 @@ import { MyPropertiesComponent } from './components/my-properties/my-properties.
 import { SellerBookingsComponent } from './components/seller-bookings/seller-bookings.component';
 import { PropertyComponent } from './components/property/property.component';
 import { UserBookingsComponent } from './components/user-bookings/user-bookings.component';
-import {SchedulePropVisitComponent} from './components/schedule-prop-visit/schedule-prop-visit.component'
+import { SchedulePropVisitComponent } from './components/schedule-prop-visit/schedule-prop-visit.component'
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { MessageComponent } from './components/message/message.component';
+import { NgModule } from '@angular/core';
 
 
 export const routes: Routes = [
@@ -25,18 +26,17 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent, title: 'Home' },
     { path: 'properties', component: PropertiesComponent, title: 'Properties' },
     { path: 'property-details', component: PropertyDetailsComponent, title: 'property-details' },
-    { path: 'seller-profile' , component: SellerProfileComponent},
-    { path: 'edit-profile' , component: EditProfileComponent},
-    { path: 'user-seller-profile' , component: UserSellerProfileComponent},
-    { path: 'create-property',component: CreatePropertyComponent },
-    { path: 'my-properties' , component: MyPropertiesComponent},
-    { path: 'seller-bookings', component: SellerBookingsComponent},
-    { path: 'property', component: PropertyComponent},
-    { path: 'user-bookings', component: UserBookingsComponent, title: 'Bookings'},
-    { path: "sechedule-visit",component:SchedulePropVisitComponent},
-    { path: 'user-profile' , component: UserProfileComponent},
-    { path: 'chat' , component: ChatComponent},
-    { path: 'message' , component: MessageComponent},
-    { path: 'message/:id' , component: MessageComponent}
+    { path: 'seller-profile', component: SellerProfileComponent },
+    { path: 'edit-profile', component: EditProfileComponent },
+    { path: 'user-seller-profile', component: UserSellerProfileComponent },
+    { path: 'create-property', component: CreatePropertyComponent },
+    { path: 'my-properties', component: MyPropertiesComponent },
+    { path: 'seller-bookings', component: SellerBookingsComponent },
+    { path: 'property', component: PropertyComponent },
+    { path: 'user-bookings', component: UserBookingsComponent, title: 'Bookings' },
+    { path: "sechedule-visit", component: SchedulePropVisitComponent },
+    { path: 'user-profile', component: UserProfileComponent },
+    { path: 'chat', component: ChatComponent },
+    { path: 'message', component: MessageComponent },
+    { path: 'message/:id', component: MessageComponent }
 ];
-

@@ -1,7 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, NgZone, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { PropertyServiceService } from '../../services/property-service.service';
+import { Category } from '../../types/category';
+import { Address } from '../../types/address';
 
 @Component({
   selector: 'app-create-property',
@@ -16,22 +19,58 @@ export class CreatePropertyComponent implements OnInit {
 
   propertyForm!: FormGroup;
   submitted = false;
+  categories: Category[] = [];
+  addresses: Address[] = []
+  constructor(
+    private propertyService: PropertyServiceService,
+    public formBuilder: FormBuilder,
+  ) {
+    this.propertyForm = this.formBuilder.group({
+      name: [''],
+      description: [''],
+      citynum: [''],
+      price: [''],
+      country: [''],
+      city: [''],
+      location: [''],
+      area: [''],
+      bedrooms: [''],
+      bathrooms: [''],
+      purpose: [''],
+      category_id: [''],
+      address_id: ['']
+    });
+
+  }
 
   ngOnInit(): void {
     this.initializeForm();
     this.loadPropertyData();
+
+    this.propertyService.getCategories().subscribe((category) => {
+      this.categories = category
+    })
+
+    this.propertyService.getAddresses().subscribe((cities) => {
+      return this.addresses = cities;
+    })
   }
 
   initializeForm() {
     this.propertyForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
+      citynum: [null, [Validators.required, Validators.min(1), Validators.max(20)]],
+      country: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       price: [null, [Validators.required, Validators.min(100000), Validators.max(100000000)]],
       city: ['', Validators.required],
-      address: ['', [Validators.required, Validators.minLength(5)]],
+      address_id: ['', Validators.required],
+      category_id: ['', Validators.required],
+      location: ['', [Validators.required, Validators.minLength(5)]],
       purpose: ['', Validators.required],
       area: [null, [Validators.required, Validators.min(20), Validators.max(5000)]],
       bedrooms: [null, [Validators.required, Validators.min(1), Validators.max(20)]],
+      bathrooms: [null, [Validators.required, Validators.min(1), Validators.max(20)]],
       image: ['']
     });
   }
@@ -61,10 +100,20 @@ export class CreatePropertyComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.propertyForm.value);
+
     this.submitted = true;
-    
+
     if (this.propertyForm.valid) {
       console.log('New Property:', this.propertyForm.value);
+      const data = { ...this.propertyForm.value };
+      if (data.image === null || data.image === '') {
+        delete data.image;
+      }
+      this.propertyService.addProperty(data).subscribe(
+        () => console.log('New Property:', this.propertyForm.value),
+        err => console.error(err)
+      )
       alert('✅ The property has been added successfully');
       this.propertyForm.reset();
       this.submitted = false;
@@ -74,6 +123,7 @@ export class CreatePropertyComponent implements OnInit {
         control.markAsTouched();
       });
     }
+
   }
 
   // Helper method to check field validity
@@ -85,9 +135,9 @@ export class CreatePropertyComponent implements OnInit {
   // Helper method to get error message
   getErrorMessage(field: string): string {
     const control = this.propertyForm.get(field);
-    
+
     if (!control || !control.errors) return '';
-    
+
     if (control.errors['required']) {
       return 'This field is required';
     }
@@ -103,7 +153,7 @@ export class CreatePropertyComponent implements OnInit {
     if (control.errors['max']) {
       return `Maximum value is ${control.errors['max'].max}`;
     }
-    
+
     return 'Invalid value';
   }
 }
