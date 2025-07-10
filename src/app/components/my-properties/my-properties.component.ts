@@ -9,7 +9,7 @@ import { OwnProperty, Root } from '../../types/seller';
 @Component({
   selector: 'app-my-properties',
   templateUrl: './my-properties.component.html',
-  imports: [CommonModule,NgxPaginationModule],
+  imports: [CommonModule, NgxPaginationModule],
   styleUrls: ['./my-properties.component.css']
 })
 export class MyPropertiesComponent implements OnInit {
@@ -38,38 +38,31 @@ export class MyPropertiesComponent implements OnInit {
   //     area: 400
   //   }
   // ];
-  sellerproperties:OwnProperty[]=[];
-  constructor(private router: Router,public propertyService:PropertyServiceService) {}
+  sellerproperties: OwnProperty[] = [];
+  constructor(private router: Router, public propertyService: PropertyServiceService) { }
 
   ngOnInit(): void {
-    this.propertyService.getSingleSeller().subscribe((sellerProps)=>{
-      this.sellerproperties=sellerProps.Seller.own_properties;
-    })
+    this.propertyService.getSingleSeller().subscribe((sellerProps) => {
+      this.sellerproperties = sellerProps.Seller.own_properties;
 
+    });
 
-    // this.propertyService.deleteSellerProp().subscribe((sellerProp)=>{
-    //   if (confirm('Are you sure you want to delete this property?')) {
-    //   this.sellerproperties=sellerProp.Seller.own_properties
-    //   } 
-    // })
   }
 
-//   editProperty(id: number) {
-//     console.log('Edit', id);
-//   }
 
+  deleteProp(id: number, i: number) {
+    if (confirm('are u sure u wanna delete this property')) {
+      return this.propertyService.delteProperty(id).subscribe(() => {
+        alert('Property deleted successfully');
+        this.sellerproperties.splice(i, 1);
+      })
+    }
+    else return false;
 
+  }
   goToEditProperty(id: number) {
-  this.router.navigate(['/create-property'], { queryParams: { id } });
-}
+    this.router.navigate(['/create-property'], { queryParams: { id } });
+  }
 
-//   deleteProperty(id: number) {
-//     if (confirm('Are you sure you want to delete this property?')) {
-//       this.properties = this.properties.filter(p => p.id !== id);
-//     }
-//   }
 
-  
-
-  
 }

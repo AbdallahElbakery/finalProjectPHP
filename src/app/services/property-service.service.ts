@@ -35,6 +35,10 @@ export class PropertyServiceService {
   addProperty(data: Property): Observable<any> {
     return this.http.post(this.addProperties, data, { headers: new HttpHeaders({ 'content-type': 'application/json' }) })
   }
+  delteProperty(id:number){
+    return this.http.delete(`${this.addProperties}/${id}`, { headers: new HttpHeaders({ 'content-type': 'application/json' }) })
+  }
+
   // deleteSellerProp(): Observable<Root> {
   //   return this.http.delete<Root>(this.deleteSellerProperty)
   // }

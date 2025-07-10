@@ -2,7 +2,7 @@
   <h2 class="section-title mb-5">My Properties</h2>
   <div class="properties-grid">
     <div class="property-card"
-      *ngFor="let property of sellerproperties|paginate:{currentPage:currentPage, itemsPerPage:itemsPerPage}">
+      *ngFor="let property of sellerproperties|paginate:{currentPage:currentPage, itemsPerPage:itemsPerPage}; let i=index">
       <img [src]="property.image" alt="property" class="property-img" />
       <div class="property-info">
         <h3 class="property-title">{{ property.name }}</h3>
@@ -17,7 +17,7 @@
           <button class="edit-btn" (click)="goToEditProperty(property.id)">
             <i class="fas fa-edit"></i> Edit
           </button>
-          <button class="delete-btn" >
+          <button class="delete-btn" (click)="deleteProp(property.id,i)">
             <i class="fas fa-trash"></i> Delete
           </button>
         </div>
