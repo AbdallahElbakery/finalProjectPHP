@@ -93,14 +93,7 @@ export class PropertyComponent implements OnInit {
       console.log(data);
     });
 
-
-    // ngOnInit(): void {
-    //   console.log("ok");
-    //   this.propertyService.getProperties().subscribe((data) => {
-    //     this.properties = data.slice(0, 3);
-    //     console.log(data);
-    //   })
-
+    
   }
 
 }

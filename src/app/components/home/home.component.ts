@@ -34,7 +34,7 @@ export class HomeComponent {
 
   ngOnInit() {
 
-    this.propertyService.getAddresses().subscribe((add) => {
+    this.propertyService.getAddresses().subscribe((add:any) => {
       this.addresses = add.slice(0, 3);
       this.addresses2 = add.slice(4, 7);
     });

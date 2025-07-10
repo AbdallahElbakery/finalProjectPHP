@@ -134,8 +134,7 @@
 
                     <div class="col-md-3">
                         <div class="city-card bg-white text-center p-4 h-100">
-                            <img [src]="address.image"
-                                alt="New York" class="city-image mx-auto d-block mb-3">
+                            <img [src]="address.image" alt="New York" class="city-image mx-auto d-block mb-3">
                             <h4 class="fw-bold text-dark mb-0">{{address.city}}</h4>
                         </div>
                     </div>
@@ -161,15 +160,14 @@
 
             <div class="carousel-item carousel-elements-1 ">
                 <div class="row justify-content-center align-items-center">
-                @for(address2 of addresses2; track address2){
-                                        <div class="col-md-3">
+                    @for(address2 of addresses2; track address2){
+                    <div class="col-md-3">
                         <div class="city-card bg-white text-center p-4 h-100">
-                            <img [src]="address2.image"
-                                alt="New York" class="city-image mx-auto d-block mb-3">
+                            <img [src]="address2.image" alt="New York" class="city-image mx-auto d-block mb-3">
                             <h4 class="fw-bold text-dark mb-0">{{address2.city}}</h4>
                         </div>
                     </div>
-                }
+                    }
                 </div>
             </div>
         </div>

@@ -2,10 +2,10 @@
   <h2 class="section-title mb-5">My Properties</h2>
   <div class="properties-grid">
     <div class="property-card"
-      *ngFor="let property of properties|paginate:{currentPage:currentPage, itemsPerPage:itemsPerPage}">
+      *ngFor="let property of sellerproperties|paginate:{currentPage:currentPage, itemsPerPage:itemsPerPage}">
       <img [src]="property.image" alt="property" class="property-img" />
       <div class="property-info">
-        <h3 class="property-title">{{ property.title }}</h3>
+        <h3 class="property-title">{{ property.name }}</h3>
         <p class="property-city"><i class="fas fa-location-dot"></i> {{ property.city }}</p>
         <p class="property-price">{{ property.price }} EGP</p>
         <div class="property-features">
@@ -17,7 +17,7 @@
           <button class="edit-btn" (click)="goToEditProperty(property.id)">
             <i class="fas fa-edit"></i> Edit
           </button>
-          <button class="delete-btn" (click)="deleteProperty(property.id)">
+          <button class="delete-btn" >
             <i class="fas fa-trash"></i> Delete
           </button>
         </div>
@@ -29,3 +29,7 @@
     class="d-flex align-content-center align-items-center justify-content-center mt-3 pagination-label"
     (pageChange)="currentPage = $event"></pagination-controls>
 </main>
+
+<!-- (click)="deleteProperty(property.id)" -->
+ <!-- (click)="goToEditProperty(property.id)" -->
+  <!-- (click)=" this.propertyService.deleteSellerProp()" -->
