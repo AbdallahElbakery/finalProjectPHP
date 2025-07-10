@@ -15,6 +15,7 @@
         <!-- Registration Form -->
         <div class="register-form-card">
           <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+            <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
             
             <!-- Personal Information Section -->
             <div class="form-section">
@@ -111,17 +112,52 @@
                   }
                 </div>
 
-                <!-- Address Field -->
+                <!-- Confirm Password Field -->
                 <div class="col-12">
                   <div class="form-floating">
-                    <textarea class="form-control custom-textarea" 
-                              id="address" placeholder="Address" style="height: 100px" formControlName="address"
-                              [class.is-invalid]="registerForm.get('address')?.invalid && registerForm.get('address')?.touched"></textarea>
-                    <label for="address">Address *</label>
+                    <input [type]="showPassword ? 'text' : 'password'" class="form-control custom-input" 
+                           id="confirmPassword" placeholder="Confirm Password" formControlName="confirmPassword"
+                           [class.is-invalid]="(registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched) || (registerForm.errors?.['passwordsMismatch'] && registerForm.get('confirmPassword')?.touched)">
+                    <label for="confirmPassword">Confirm Password *</label>
                   </div>
-                  @if (registerForm.get('address')?.invalid && registerForm.get('address')?.touched) {
-                    <div class="invalid-feedback">Address is required</div>
+                  @if ((registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched) || (registerForm.errors?.['passwordsMismatch'] && registerForm.get('confirmPassword')?.touched)) {
+                    <div class="invalid-feedback">
+                      @if (registerForm.get('confirmPassword')?.errors?.['required']) {
+                        <div>Confirm password is required</div>
+                      }
+                      @if (registerForm.errors?.['passwordsMismatch']) {
+                        <div>Passwords do not match</div>
+                      }
+                    </div>
                   }
+                </div>
+
+                <!-- City and Country Fields (on the same row) -->
+                <div class="col-12">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input type="text" class="form-control custom-input" 
+                               id="city" placeholder="City" formControlName="city"
+                               [class.is-invalid]="registerForm.get('city')?.invalid && registerForm.get('city')?.touched">
+                        <label for="city">City *</label>
+                      </div>
+                      @if (registerForm.get('city')?.invalid && registerForm.get('city')?.touched) {
+                        <div class="invalid-feedback">City is required</div>
+                      }
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input type="text" class="form-control custom-input" 
+                               id="country" placeholder="Country" formControlName="country"
+                               [class.is-invalid]="registerForm.get('country')?.invalid && registerForm.get('country')?.touched">
+                        <label for="country">Country *</label>
+                      </div>
+                      @if (registerForm.get('country')?.invalid && registerForm.get('country')?.touched) {
+                        <div class="invalid-feedback">Country is required</div>
+                      }
+                    </div>
+                  </div>
                 </div>
 
                 <!-- Hidden Role Field -->
@@ -157,96 +193,64 @@
                   }
                 </div>
 
-                <!-- Service Areas Field -->
-                <div class="col-12">
-                  <div class="form-floating">
-                    <select class="form-select custom-select" 
-                            id="service_areas" formControlName="service_areas"
-                            [class.is-invalid]="registerForm.get('service_areas')?.invalid && registerForm.get('service_areas')?.touched" multiple>
-                      <option value="" disabled selected>Choose Service Areas*</option>
-                      @for (area of serviceAreas; track area.value) {
-                        <option [value]="area.value">{{area.label}}</option>
+                <!-- Documents & Media Section -->
+                <div class="form-section">
+                  <h3 class="section-header">
+                    <i class="fas fa-folder-open me-2"></i>
+                    Documents & Media
+                  </h3>
+                  
+                  <div class="row g-3">
+                    <!-- Logo Upload -->
+                    <div class="col-md-6">
+                      <div class="upload-container">
+                        <label class="upload-label" for="logo">
+                          <i class="fas fa-image"></i>
+                          <span class="upload-text">Company Logo</span>
+                          <span class="upload-hint">PNG, JPG up to 2MB</span>
+                        </label>
+                        <input type="file" class="form-control upload-input" 
+                               id="logo" accept="image/*" (change)="onFileChange($event, 'logo')">
+                        <div class="upload-preview" id="logo-preview"></div>
+                      </div>
+                    </div>
+
+                    <!-- Personal Photo Upload -->
+                    <div class="col-md-6">
+                      <div class="upload-container">
+                        <label class="upload-label" for="photo">
+                          <i class="fas fa-user-circle"></i>
+                          <span class="upload-text">Personal Photo</span>
+                          <span class="upload-hint">PNG, JPG up to 2MB</span>
+                        </label>
+                        <input type="file" class="form-control upload-input" 
+                               id="photo" accept="image/*" required (change)="onFileChange($event, 'photo')"
+                               [class.is-invalid]="registerForm.get('photo')?.invalid && registerForm.get('photo')?.touched">
+                        <div class="upload-preview" id="photo-preview"></div>
+                      </div>
+                      @if (registerForm.get('photo')?.invalid && registerForm.get('photo')?.touched) {
+                        <div class="invalid-feedback">Personal photo is required</div>
                       }
-                    </select>
-                    <!-- <label for="service_areas">Service Areas *</label> -->
-                  </div>
-                  @if (registerForm.get('service_areas')?.invalid && registerForm.get('service_areas')?.touched) {
-                    <div class="invalid-feedback">Please select your service areas</div>
-                  }
-                </div>
+                    </div>
 
-                <!-- About Field -->
-                <div class="col-12">
-                  <div class="form-floating">
-                    <textarea class="form-control custom-textarea" 
-                              id="about" placeholder="About Your Business" style="height: 120px" formControlName="about"
-                              [class.is-invalid]="registerForm.get('about')?.invalid && registerForm.get('about')?.touched"></textarea>
-                    <label for="about">About Your Business *</label>
+                    <!-- Personal ID Upload -->
+                    <div class="col-12">
+                      <div class="upload-container">
+                        <label class="upload-label" for="personal_id_image">
+                          <i class="fas fa-id-card"></i>
+                          <span class="upload-text">Personal ID Document</span>
+                          <span class="upload-hint">PNG, JPG, PDF up to 5MB</span>
+                        <input type="file" class="form-control upload-input" 
+                               id="personal_id_image" accept="image/*,.pdf" required (change)="onFileChange($event, 'personal_id_image')"
+                               [class.is-invalid]="registerForm.get('personal_id_image')?.invalid && registerForm.get('personal_id_image')?.touched">
+                        <div class="upload-preview" id="id-preview"></div>
+                        </label>
+                      </div>
+                      @if (registerForm.get('personal_id_image')?.invalid && registerForm.get('personal_id_image')?.touched) {
+                        <div class="invalid-feedback">Personal ID document is required</div>
+                      }
+                    </div>
                   </div>
-                  @if (registerForm.get('about')?.invalid && registerForm.get('about')?.touched) {
-                    <div class="invalid-feedback">Please tell us about your business</div>
-                  }
-                  <div class="form-text">Describe your experience, specialties, and what makes your service unique.</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Documents & Media Section -->
-            <div class="form-section">
-              <h3 class="section-header">
-                <i class="fas fa-folder-open me-2"></i>
-                Documents & Media
-              </h3>
-              
-              <div class="row g-3">
-                <!-- Logo Upload -->
-                <div class="col-md-6">
-                  <div class="upload-container">
-                    <label class="upload-label" for="logo">
-                      <i class="fas fa-image"></i>
-                      <span class="upload-text">Company Logo</span>
-                      <span class="upload-hint">PNG, JPG up to 2MB</span>
-                    </label>
-                    <input type="file" class="form-control upload-input" 
-                           id="logo" accept="image/*" (change)="onFileChange($event, 'logo')">
-                    <div class="upload-preview" id="logo-preview"></div>
-                  </div>
-                </div>
-
-                <!-- Personal Photo Upload -->
-                <div class="col-md-6">
-                  <div class="upload-container">
-                    <label class="upload-label" for="photo">
-                      <i class="fas fa-user-circle"></i>
-                      <span class="upload-text">Personal Photo</span>
-                      <span class="upload-hint">PNG, JPG up to 2MB</span>
-                    </label>
-                    <input type="file" class="form-control upload-input" 
-                           id="photo" accept="image/*" required (change)="onFileChange($event, 'photo')"
-                           [class.is-invalid]="registerForm.get('photo')?.invalid && registerForm.get('photo')?.touched">
-                    <div class="upload-preview" id="photo-preview"></div>
-                  </div>
-                  @if (registerForm.get('photo')?.invalid && registerForm.get('photo')?.touched) {
-                    <div class="invalid-feedback">Personal photo is required</div>
-                  }
-                </div>
-
-                <!-- Personal ID Upload -->
-                <div class="col-12">
-                  <div class="upload-container">
-                    <label class="upload-label" for="personal_id_image">
-                      <i class="fas fa-id-card"></i>
-                      <span class="upload-text">Personal ID Document</span>
-                      <span class="upload-hint">PNG, JPG, PDF up to 5MB</span>
-                    <input type="file" class="form-control upload-input" 
-                           id="personal_id_image" accept="image/*,.pdf" required (change)="onFileChange($event, 'personal_id_image')"
-                           [class.is-invalid]="registerForm.get('personal_id_image')?.invalid && registerForm.get('personal_id_image')?.touched">
-                    <div class="upload-preview" id="id-preview"></div>
-                    </label>
-                  </div>
-                  @if (registerForm.get('personal_id_image')?.invalid && registerForm.get('personal_id_image')?.touched) {
-                    <div class="invalid-feedback">Personal ID document is required</div>
-                  }
                 </div>
               </div>
             </div>
@@ -266,9 +270,10 @@
               </div>
 
               <!-- Submit Button -->
-              <button type="submit" class="btn register-submit-btn w-100">
+              <button type="submit" class="btn register-submit-btn w-100" [disabled]="loading">
                 <i class="fas fa-user-plus me-2"></i>
                 Create Seller Account
+                <span *ngIf="loading" class="spinner-border spinner-border-sm ms-2"></span>
               </button>
             </div>
 

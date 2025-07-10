@@ -15,6 +15,7 @@
         <!-- Registration Form -->
         <div class="register-form-card">
           <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+            <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
             
             <!-- Personal Information Section -->
             <div class="form-section">
@@ -111,17 +112,61 @@
                   }
                 </div>
 
-                <!-- Address Field -->
+                <!-- Confirm Password Field -->
                 <div class="col-12">
                   <div class="form-floating">
-                    <textarea class="form-control custom-textarea" 
-                              id="address" placeholder="Address" style="height: 100px" formControlName="address"
-                              [class.is-invalid]="registerForm.get('address')?.invalid && registerForm.get('address')?.touched"></textarea>
-                    <label for="address">Address *</label>
+                    <input [type]="showPassword ? 'text' : 'password'" class="form-control custom-input" 
+                           id="confirmPassword" placeholder="Confirm Password" formControlName="confirmPassword"
+                           [class.is-invalid]="(registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched) || (registerForm.errors?.['passwordsMismatch'] && registerForm.get('confirmPassword')?.touched)">
+                    <label for="confirmPassword">Confirm Password *</label>
                   </div>
-                  @if (registerForm.get('address')?.invalid && registerForm.get('address')?.touched) {
-                    <div class="invalid-feedback">Address is required</div>
+                  @if ((registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched) || (registerForm.errors?.['passwordsMismatch'] && registerForm.get('confirmPassword')?.touched)) {
+                    <div class="invalid-feedback">
+                      @if (registerForm.get('confirmPassword')?.errors?.['required']) {
+                        <div>Confirm password is required</div>
+                      }
+                      @if (registerForm.errors?.['passwordsMismatch']) {
+                        <div>Passwords do not match</div>
+                      }
+                    </div>
                   }
+                </div>
+
+                <!-- Photo Upload Field -->
+                <div class="col-12">
+                  <label for="photo" class="form-label">Profile Photo *</label>
+                  <input type="file" class="form-control custom-input" id="photo" (change)="onFileChange($event)" accept="image/*">
+                  @if (registerForm.get('photo')?.invalid && registerForm.get('photo')?.touched) {
+                    <div class="invalid-feedback d-block">Profile photo is required</div>
+                  }
+                </div>
+
+                <!-- City and Country Fields (on the same row) -->
+                <div class="col-12">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input type="text" class="form-control custom-input" 
+                               id="city" placeholder="City" formControlName="city"
+                               [class.is-invalid]="registerForm.get('city')?.invalid && registerForm.get('city')?.touched">
+                        <label for="city">City *</label>
+                      </div>
+                      @if (registerForm.get('city')?.invalid && registerForm.get('city')?.touched) {
+                        <div class="invalid-feedback">City is required</div>
+                      }
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input type="text" class="form-control custom-input" 
+                               id="country" placeholder="Country" formControlName="country"
+                               [class.is-invalid]="registerForm.get('country')?.invalid && registerForm.get('country')?.touched">
+                        <label for="country">Country *</label>
+                      </div>
+                      @if (registerForm.get('country')?.invalid && registerForm.get('country')?.touched) {
+                        <div class="invalid-feedback">Country is required</div>
+                      }
+                    </div>
+                  </div>
                 </div>
 
                 <!-- Hidden Role Field -->
@@ -144,8 +189,8 @@
               </div>
 
               <!-- Submit Button -->
-              <button type="submit" class="btn register-submit-btn w-100">
-                <i class="fas fa-user-plus me-2"></i>
+              <button type="submit" class="btn register-submit-btn w-100" [disabled]="loading">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
                 Create Customer Account
               </button>
             </div>
