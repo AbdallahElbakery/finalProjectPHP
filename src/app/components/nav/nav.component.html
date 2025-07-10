@@ -50,11 +50,25 @@
         </li>
       </ul>
 
-      <!-- CTA Button -->
-      <a href="/registration" class="cta-button rounded-3">
-        <i class="fas fa-rocket"></i>
-        Get Started
-      </a>
+      <!-- CTA Button or User Dropdown -->
+      <ng-container *ngIf="!isAuthenticated; else userDropdown">
+        <a href="/login" class="btn btn-outline-primary me-2">Login</a>
+        <a href="/registration" class="cta-button rounded-3">Register</a>
+      </ng-container>
+      <ng-template #userDropdown>
+        <div class="dropdown d-inline-block">
+          <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center" type="button" id="userDropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+            <img *ngIf="photo" [src]="photoUrl" alt="User Photo" class="rounded-circle me-2" width="32" height="32">
+            <span *ngIf="!photo" class="user-initials me-2">{{ userName ? userName.charAt(0) : '?' }}</span>
+            {{ userName }}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenu">
+            <li><a class="dropdown-item" href="/user-profile">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><button class="dropdown-item" (click)="logout()">Logout</button></li>
+          </ul>
+        </div>
+      </ng-template>
     </div>
   </div>
 </nav>
