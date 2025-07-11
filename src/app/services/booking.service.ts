@@ -24,7 +24,7 @@ export interface BookingRequest {
   providedIn: 'root'
 })
 export class BookingService {
-  private apiUrl = 'http://127.0.0.1:8000/api/bookings';
+  private apiUrl = 'http://127.0.0.1:8000/api/user/bookings';
 
   constructor(private http: HttpClient) { }
 
