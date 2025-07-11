@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PropertyCardComponent } from "../property-card/property-card.component";
+import { ReviewService } from '../../services/review.service';
 
 @Component({
   selector: 'app-seller-profile',
@@ -11,43 +12,87 @@ import { PropertyCardComponent } from "../property-card/property-card.component"
   styleUrls: ['./seller-profile.component.css']
 })
 export class SellerProfileComponent implements OnInit {
-property: any;
-viewPropertyDetails(arg0: any) {
-throw new Error('Method not implemented.');
-}
-  constructor(private router: Router) {}
+  property: any;
+  reviews: any[] = [];
+  sellerId: number = 1; // يمكن تغييرها حسب البائع المعروض
+
+  constructor(
+    private router: Router,
+    private reviewService: ReviewService
+  ) {}
+
+  ngOnInit() {
+    this.loadReviews();
+  }
+
+  loadReviews() {
+    this.reviewService.getReviewsBySellerId(this.sellerId).subscribe({
+      next: (data) => {
+        this.reviews = data;
+        console.log('Loaded reviews for seller:', data);
+      },
+      error: (error) => {
+        console.error('Error loading reviews:', error);
+        // استخدام بيانات تجريبية في حالة الخطأ
+        this.reviews = [
+          {
+            username: 'Mohamed Ahmed',
+            userImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-298Da-Ky_ssBh7kph8vGdKxamW5Bsfakxw&s',
+            rating: 4,
+            date: new Date('2025-05-15'),
+            comment: 'Excellent service and the property description was accurate.'
+          },
+          {
+            username: 'Sara Ali',
+            userImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs8LkRSWmwwNSPhihu9mU8yNRBlptghMu_gw&s',
+            rating: 5,
+            date: new Date('2025-06-01'),
+            comment: 'The best real estate broker I have ever dealt with.'
+          },
+          {
+            username: 'Ahmed Hassan',
+            userImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu9XWVeFGveLD_O9SToBut3McpGBG6q1To9g&s',
+            rating: 3,
+            date: new Date('2025-06-10'),
+            comment: 'Good experience but there is some delay'
+          }
+        ];
+      }
+    });
+  }
+
+  viewPropertyDetails(property: any) {
+    // التنقل إلى صفحة تفاصيل العقار
+    this.router.navigate(['/property-details'], { queryParams: { id: property.id } });
+  }
+
+  openAddReviewModal() {
+    // التنقل إلى صفحة إضافة مراجعة
+    this.router.navigate(['/user-seller-profile']);
+  }
 
   goToEditProfile() {
     this.router.navigate(['/edit-profile']);
   }
 
-    listBookings() {
-    this.router.navigate(['/seller-bookings']);
-  }
-    listProperty() {
+  listProperty() {
     this.router.navigate(['/my-properties']);
   }
-    addProperty() {
+
+  listBookings() {
+    this.router.navigate(['/seller-bookings']);
+  }
+
+  addProperty() {
     this.router.navigate(['/create-property']);
   }
 
-openAddReviewModal() {
-throw new Error('Method not implemented.');
-}
-
-toggleFavorite(_t33: { title: string; city: string; price: number; image: string; bedrooms: number; bathrooms: number; area: number; isFavorite: boolean; }) {
-throw new Error('Method not implemented.');
-}
-viewDetails(_t33: { title: string; city: string; price: number; image: string; bedrooms: number; bathrooms: number; area: number; isFavorite: boolean; }) {
-throw new Error('Method not implemented.');
-}
-
   goToMyReviews() {
-    // غير المسار حسب اسم صفحة الريفيوهات عندك
-    this.router.navigate(['/reviews']);
+    // التنقل إلى صفحة المراجعات مع تمرير معرف البائع
+    this.router.navigate(['/reviews'], { queryParams: { sellerId: this.sellerId } });
   }
 
-   properties = [
+  properties = [
     {
       id: 1,
       title: 'Luxury Downtown Apartment',
@@ -88,7 +133,6 @@ throw new Error('Method not implemented.');
         id: 2,
         name: 'Sara Mohamed',
         company: 'Coastal Properties',
-        image: 'https://static.wikia.nocookie.net/disneychannel/images/3/3d/Sara_Paxton.jpg/revision/latest?cb=20231221160242',
         rating: 4.9
       },
       gallery: [],
@@ -118,42 +162,4 @@ throw new Error('Method not implemented.');
       attributes: {}
     },
   ];
-
-  reviews = [
-  {
-    username: 'Mohamed Ahmed',
-    userImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-298Da-Ky_ssBh7kph8vGdKxamW5Bsfakxw&s',
-    rating: 4,
-    date: new Date('2025-05-15'),
-    comment: 'Excellent service and the property description was accurate.'
-  },
-  {
-    username: 'Sara Ali',
-    userImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs8LkRSWmwwNSPhihu9mU8yNRBlptghMu_gw&s',
-    rating: 5,
-    date: new Date('2025-06-01'),
-    comment: 'The best real estate broker I have ever dealt with.'
-  },
-  {
-    username: 'Ahmed Hassan',
-    userImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu9XWVeFGveLD_O9SToBut3McpGBG6q1To9g&s',
-    rating: 3,
-    date: new Date('2025-06-10'),
-    comment: 'Good experience but there is some delay'
-  }
-  // يمكن إضافة المزيد
-];
-
-// دالة للحصول على النجوم المملوءة
-getStars(rating: number): any[] {
-  return Array(Math.floor(rating)).fill(0);
-}
-
-// دالة للحصول على النجوم الفارغة
-getEmptyStars(rating: number): any[] {
-  return Array(5 - Math.floor(rating)).fill(0);
-}
-
-
-  ngOnInit(): void {}
 }

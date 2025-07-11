@@ -25,6 +25,14 @@ interface RegisterSellerResponse {
   token: string;
 }
 
+interface CurrentUser {
+  id: string | number;
+  name: string;
+  role: string;
+  photo?: string;
+  sellerInfo?: any;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -98,6 +106,7 @@ export class AuthService {
     localStorage.removeItem('role');
     localStorage.removeItem('photo');
     localStorage.removeItem('sellerInfo');
+    localStorage.removeItem('userId');
   }
 
   private hasToken(): boolean {
@@ -131,5 +140,19 @@ export class AuthService {
 
   getUserId(): string | null {
     return localStorage.getItem('userId');
+  }
+
+  getCurrentUser(): CurrentUser | null {
+    if (!this.isAuthenticated()) {
+      return null;
+    }
+
+    return {
+      id: this.getUserId() || '',
+      name: this.getUserName() || '',
+      role: this.getRole() || '',
+      photo: this.getPhoto() || undefined,
+      sellerInfo: this.getSellerInfo()
+    };
   }
 } 

@@ -10,10 +10,10 @@
         <div class="hero-content">
             <div class="hero-badge">
                 <i class="fas fa-star"></i>
-                <span>Customer Experience</span>
+                <span>{{ isSellerSpecific ? 'Seller Reviews' : 'Customer Experience' }}</span>
             </div>
-            <h1 class="hero-title">What Our Clients Say</h1>
-            <p class="hero-subtitle">Discover authentic reviews from satisfied customers who found their dream homes with us</p>
+            <h1 class="hero-title">{{ isSellerSpecific ? 'What Clients Say About This Seller' : 'What Our Clients Say' }}</h1>
+            <p class="hero-subtitle">{{ isSellerSpecific ? 'Discover authentic reviews from satisfied customers who worked with this seller' : 'Discover authentic reviews from satisfied customers who found their dream homes with us' }}</p>
             <div class="hero-stats">
                 <div class="stat-item">
                     <div class="stat-number">{{ reviews.length }}+</div>
@@ -43,10 +43,10 @@
         <div class="section-header">
             <div class="section-badge">
                 <i class="fas fa-quote-left"></i>
-                <span>Testimonials</span>
+                <span>{{ isSellerSpecific ? 'Seller Testimonials' : 'Testimonials' }}</span>
             </div>
-            <h2 class="section-title">Real Stories from Real People</h2>
-            <p class="section-description">Read what our valued customers have to say about their experience with our real estate services</p>
+            <h2 class="section-title">{{ isSellerSpecific ? 'Real Stories from This Seller\'s Clients' : 'Real Stories from Real People' }}</h2>
+            <p class="section-description">{{ isSellerSpecific ? 'Read what our valued customers have to say about their experience with this specific seller' : 'Read what our valued customers have to say about their experience with our real estate services' }}</p>
         </div>
 
         <!-- Reviews Grid -->
@@ -130,15 +130,15 @@
                 <i class="fas fa-comments"></i>
             </div>
             <h3>No Reviews Yet</h3>
-            <p>Be the first to share your experience with our community</p>
-            <button class="btn-primary">
+            <p>{{ isSellerSpecific ? 'This seller doesn\'t have any reviews yet. Be the first to share your experience!' : 'Be the first to share your experience with our community' }}</p>
+            <button class="btn-primary" *ngIf="!isSellerSpecific">
                 <i class="fas fa-plus"></i>
                 Write a Review
             </button>
         </div>
 
         <!-- Call to Action -->
-        <div class="cta-section">
+        <div class="cta-section" *ngIf="!isSellerSpecific">
             <div class="cta-content">
                 <h3>Ready to Share Your Experience?</h3>
                 <p>Help others make informed decisions by sharing your story</p>

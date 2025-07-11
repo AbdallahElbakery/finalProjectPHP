@@ -16,7 +16,20 @@ export class UserBookingsComponent implements OnInit {
   constructor(private bookingService: BookingService) {}
 
   ngOnInit() {
-    this.loadBookings();
+    this.loading = true;
+    console.log('Loading bookings...');
+    this.bookingService.getMyBookings().subscribe({
+      next: (bookings) => {
+        console.log('Bookings loaded:', bookings);
+        this.bookings = bookings;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading bookings:', error);
+        this.error = 'Error loading bookings';
+        this.loading = false;
+      }
+    });
   }
 
   loadBookings() {
@@ -88,6 +101,17 @@ export class UserBookingsComponent implements OnInit {
     }
   }
 
+  getImageUrl(image: string): string {
+    if (!image) return '';
+    if (image.startsWith('http://') || image.startsWith('https://')) {
+      return image;
+    }
+    if (image.startsWith('public/uploads/')) {
+      image = image.replace('public/uploads/', '');
+    }
+    return 'http://127.0.0.1:8000/uploads/' + image;
+  }
+  
   formatPrice(price: number): string {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
