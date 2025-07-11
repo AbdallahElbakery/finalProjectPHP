@@ -11,4 +11,8 @@ export class ReviewService {
   getReviews(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
   }
+
+  getReviewsBySellerId(sellerId: number) {
+    return this.http.get<any[]>(`/api/sellers/${sellerId}/reviews`);
+  }
 }
