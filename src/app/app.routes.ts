@@ -16,6 +16,7 @@ import {SchedulePropVisitComponent} from './components/schedule-prop-visit/sched
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { MessageComponent } from './components/message/message.component';
+import { ReviewListComponent } from './components/review-list/review-list.component';
 
 
 export const routes: Routes = [
@@ -37,6 +38,7 @@ export const routes: Routes = [
     { path: 'user-profile' , component: UserProfileComponent},
     { path: 'chat' , component: ChatComponent},
     { path: 'message' , component: MessageComponent},
-    { path: 'message/:id' , component: MessageComponent}
+    { path: 'message/:id' , component: MessageComponent},
+    { path: 'reviews', component: ReviewListComponent}
 ];
 

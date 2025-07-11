@@ -5,12 +5,14 @@ import { FooterComponent } from "./components/footer/footer.component";
 import { HomeComponent } from './components/home/home.component';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavComponent, FooterComponent, CommonModule, NgxPaginationModule],
+  imports: [RouterOutlet, NavComponent, FooterComponent, HttpClientModule,CommonModule, NgxPaginationModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

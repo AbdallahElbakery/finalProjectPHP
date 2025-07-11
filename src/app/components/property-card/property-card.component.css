@@ -160,8 +160,13 @@
   font-size: 0.9rem;
 }
 
+.action-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
 .more-details-btn {
-  width: 100%;
+  flex: 1;
   padding: 0.75rem;
   background: var(--primary-color);
   color: white;
@@ -179,6 +184,28 @@
 
 .more-details-btn:hover {
   background: var(--hover-color);
+  transform: translateY(-2px);
+}
+
+.book-property-btn {
+  flex: 1;
+  padding: 0.75rem;
+  background: var(--success-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.book-property-btn:hover {
+  background: #059669;
   transform: translateY(-2px);
 }
 
