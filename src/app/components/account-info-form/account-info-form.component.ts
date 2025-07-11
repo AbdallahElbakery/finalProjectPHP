@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { PropertyServiceService } from '../../services/property-service.service';
 
 @Component({
   selector: 'app-account-info-form',
@@ -13,7 +14,21 @@ import { Router } from '@angular/router';
 export class AccountInfoFormComponent implements OnInit {
   registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder,
+    private router: Router,
+    private propertyService: PropertyServiceService
+  ) {
+      this.propertyService.getProfile().subscribe((res) => {
+      this.registerForm.setValue({
+        name: res['name'],
+        email: res['email'],
+        phone: res['phone'],
+        role: res['role'],
+        address: res['full_address'],
+
+      })
+    })
+  }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -42,6 +57,10 @@ export class AccountInfoFormComponent implements OnInit {
 
   onSubmit() {
     if (this.registerForm.valid) {
+      const data = { ...this.registerForm.value };
+       this.propertyService.updateProfile(data).subscribe(()=>{
+        console.log("updated")
+      })
       console.log('✅ Form submitted:', this.registerForm.value);
       this.router.navigate(['/seller-profile']);
     } else {

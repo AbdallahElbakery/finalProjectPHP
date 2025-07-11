@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyInfoFormComponent } from "../company-info-form/company-info-form.component";
 import { AccountInfoFormComponent } from "../account-info-form/account-info-form.component";
 import { ChangePasswordFormComponent } from "../change-password-form/change-password-form.component";
+import { PropertyServiceService } from '../../services/property-service.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -15,8 +16,12 @@ import { ChangePasswordFormComponent } from "../change-password-form/change-pass
 
 export class EditProfileComponent implements OnInit {
   activeTab: 'company' | 'account' | 'password' = 'company';
+  getId: any;
+  updateProfile!: FormGroup;
+  constructor(
+    private route: ActivatedRoute,
 
-  constructor(private route: ActivatedRoute) {}
+  ) {}
 
   ngOnInit(): void {
     const tab = this.route.snapshot.queryParamMap.get('tab');
@@ -28,4 +33,6 @@ export class EditProfileComponent implements OnInit {
   setTab(tab: 'company' | 'account' | 'password') {
     this.activeTab = tab;
   }
+
+
 }

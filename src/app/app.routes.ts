@@ -17,6 +17,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { ChatComponent } from './components/chat/chat.component';
 import { MessageComponent } from './components/message/message.component';
 import { AuthGuard } from './auth.guard';
+import { EditPropertyComponent } from './components/edit-property/edit-property.component';
 
 
 export const routes: Routes = [
@@ -26,17 +27,18 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent, title: 'Home', canActivate: [AuthGuard] },
     { path: 'properties', component: PropertiesComponent, title: 'Properties', canActivate: [AuthGuard] },
     { path: 'property-details', component: PropertyDetailsComponent, title: 'property-details', canActivate: [AuthGuard] },
-    { path: 'seller-profile' , component: SellerProfileComponent, canActivate: [AuthGuard] },
-    { path: 'edit-profile' , component: EditProfileComponent, canActivate: [AuthGuard] },
-    { path: 'user-seller-profile' , component: UserSellerProfileComponent, canActivate: [AuthGuard] },
-    { path: 'create-property',component: CreatePropertyComponent, canActivate: [AuthGuard] },
-    { path: 'my-properties' , component: MyPropertiesComponent, canActivate: [AuthGuard] },
+    { path: 'seller-profile', component: SellerProfileComponent, canActivate: [AuthGuard] },
+    { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
+    { path: 'user-seller-profile', component: UserSellerProfileComponent, canActivate: [AuthGuard] },
+    { path: 'create-property', component: CreatePropertyComponent, canActivate: [AuthGuard] },
+    { path: 'edit-property', component: EditPropertyComponent, canActivate: [AuthGuard] },
+    { path: 'my-properties', component: MyPropertiesComponent, canActivate: [AuthGuard] },
     { path: 'seller-bookings', component: SellerBookingsComponent, canActivate: [AuthGuard] },
     { path: 'property', component: PropertyComponent, canActivate: [AuthGuard] },
     { path: 'user-bookings', component: UserBookingsComponent, title: 'Bookings', canActivate: [AuthGuard] },
-    { path: "sechedule-visit",component:SchedulePropVisitComponent, canActivate: [AuthGuard] },
-    { path: 'user-profile' , component: UserProfileComponent, canActivate: [AuthGuard] },
-    { path: 'chat' , component: ChatComponent, canActivate: [AuthGuard] },
-    { path: 'message' , component: MessageComponent, canActivate: [AuthGuard] },
-    { path: 'message/:id' , component: MessageComponent, canActivate: [AuthGuard] }
+    { path: "sechedule-visit", component: SchedulePropVisitComponent, canActivate: [AuthGuard] },
+    { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
+    { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
+    { path: 'message', component: MessageComponent, canActivate: [AuthGuard] },
+    { path: 'message/:id', component: MessageComponent, canActivate: [AuthGuard] }
 ];
