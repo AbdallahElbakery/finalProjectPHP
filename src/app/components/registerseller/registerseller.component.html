@@ -15,7 +15,10 @@
         <!-- Registration Form -->
         <div class="register-form-card">
           <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
-            <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+            <div *ngIf="errorMessage" class="alert alert-danger">
+              <i class="fas fa-exclamation-circle me-2"></i>
+              {{ errorMessage || 'حدث خطأ غير متوقع. حاول مرة أخرى.' }}
+            </div>
             
             <!-- Personal Information Section -->
             <div class="form-section">
