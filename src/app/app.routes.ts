@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { PropertiesComponent } from './components/properties/properties.component';
 import { PropertyDetailsComponent } from './components/property-details/property-details.component';
 import { SellerProfileComponent } from './components/seller-profile/seller-profile.component';
@@ -12,11 +12,10 @@ import { MyPropertiesComponent } from './components/my-properties/my-properties.
 import { SellerBookingsComponent } from './components/seller-bookings/seller-bookings.component';
 import { PropertyComponent } from './components/property/property.component';
 import { UserBookingsComponent } from './components/user-bookings/user-bookings.component';
-import {SchedulePropVisitComponent} from './components/schedule-prop-visit/schedule-prop-visit.component'
+import { SchedulePropVisitComponent } from './components/schedule-prop-visit/schedule-prop-visit.component'
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { MessageComponent } from './components/message/message.component';
-import { ReviewListComponent } from './components/review-list/review-list.component';
 
 
 export const routes: Routes = [
@@ -38,7 +37,5 @@ export const routes: Routes = [
     { path: 'user-profile' , component: UserProfileComponent},
     { path: 'chat' , component: ChatComponent},
     { path: 'message' , component: MessageComponent},
-    { path: 'message/:id' , component: MessageComponent},
-    { path: 'reviews', component: ReviewListComponent}
+    { path: 'message/:id' , component: MessageComponent}
 ];
-

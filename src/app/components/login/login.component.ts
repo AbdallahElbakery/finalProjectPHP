@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 interface SocialProvider {
   id: string;
@@ -23,10 +25,14 @@ interface StatItem {
 })
 export class LoginComponent {
   private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
+  private router = inject(Router);
   
   loginForm: FormGroup;
   showPassword = false;
   passwordValidationMessage = '';
+  loading = false;
+  errorMessage = '';
 
   socialProviders: SocialProvider[] = [
     { id: 'google', name: 'Google', icon: 'fa-google' },
@@ -79,10 +85,21 @@ export class LoginComponent {
     return window.innerWidth < 992; // LG breakpoint
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.loginForm.valid) {
-      console.log('Form submitted:', this.loginForm.value);
-      // Handle form submission
+      this.loading = true;
+      this.errorMessage = '';
+      const { email, password } = this.loginForm.value;
+      this.authService.login(email, password).subscribe({
+        next: () => {
+          this.loading = false;
+          this.router.navigate(['/home']);
+        },
+        error: (err) => {
+          this.loading = false;
+          this.errorMessage = err?.error?.Message || 'Login failed. Please check your credentials.';
+        }
+      });
     } else {
       this.loginForm.markAllAsTouched();
       this.validatePassword();
