@@ -24,7 +24,7 @@ export const routes: Routes = [
     { path: 'registration', component: RegistrationComponent },
     { path: 'login', component: LoginComponent },
     { path: 'home', component: HomeComponent, title: 'Home', canActivate: [AuthGuard] },
-    { path: 'properties', component: PropertiesComponent, title: 'Properties', canActivate: [AuthGuard] },
+    { path: 'properties', component: PropertiesComponent, title: 'Properties' },
     { path: 'property-details', component: PropertyDetailsComponent, title: 'property-details', canActivate: [AuthGuard] },
     { path: 'seller-profile' , component: SellerProfileComponent, canActivate: [AuthGuard] },
     { path: 'edit-profile' , component: EditProfileComponent, canActivate: [AuthGuard] },
