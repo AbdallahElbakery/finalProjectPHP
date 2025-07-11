@@ -42,6 +42,11 @@ viewDetails(_t33: { title: string; city: string; price: number; image: string; b
 throw new Error('Method not implemented.');
 }
 
+  goToMyReviews() {
+    // غير المسار حسب اسم صفحة الريفيوهات عندك
+    this.router.navigate(['/reviews']);
+  }
+
    properties = [
     {
       id: 1,
