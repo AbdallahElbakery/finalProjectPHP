@@ -16,7 +16,7 @@ import {SchedulePropVisitComponent} from './components/schedule-prop-visit/sched
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { MessageComponent } from './components/message/message.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './auth.guard'; // dummy commit to force merge  
 
 
 export const routes: Routes = [
