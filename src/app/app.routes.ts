@@ -17,13 +17,14 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { ChatComponent } from './components/chat/chat.component';
 import { MessageComponent } from './components/message/message.component';
 import { ReviewListComponent } from './components/review-list/review-list.component';
-import { AuthGuard } from './auth.guard'; // dummy commit to force merge
+import { AuthGuard } from './auth.guard';
+import { GuestGuard } from './guest.guard';
 
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'registration', component: RegistrationComponent },
-    { path: 'login', component: LoginComponent },
+    { path: 'registration', component: RegistrationComponent, canActivate: [GuestGuard] },
+    { path: 'login', component: LoginComponent, canActivate: [GuestGuard] },
     { path: 'home', component: HomeComponent, title: 'Home', canActivate: [AuthGuard] },
     { path: 'properties', component: PropertiesComponent, title: 'Properties' },
     { path: 'property-details', component: PropertyDetailsComponent, title: 'property-details', canActivate: [AuthGuard] },
