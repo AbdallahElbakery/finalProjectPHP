@@ -17,27 +17,29 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { ChatComponent } from './components/chat/chat.component';
 import { MessageComponent } from './components/message/message.component';
 import { ReviewListComponent } from './components/review-list/review-list.component';
+import { AuthGuard } from './auth.guard'; // dummy commit to force merge
 
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'registration', component: RegistrationComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'home', component: HomeComponent, title: 'Home' },
+    { path: 'home', component: HomeComponent, title: 'Home', canActivate: [AuthGuard] },
     { path: 'properties', component: PropertiesComponent, title: 'Properties' },
-    { path: 'property-details', component: PropertyDetailsComponent, title: 'property-details' },
-    { path: 'seller-profile' , component: SellerProfileComponent},
-    { path: 'edit-profile' , component: EditProfileComponent},
-    { path: 'user-seller-profile' , component: UserSellerProfileComponent},
-    { path: 'create-property',component: CreatePropertyComponent },
-    { path: 'my-properties' , component: MyPropertiesComponent},
-    { path: 'seller-bookings', component: SellerBookingsComponent},
-    { path: 'property', component: PropertyComponent},
-    { path: 'user-bookings', component: UserBookingsComponent, title: 'Bookings'},
-    { path: "sechedule-visit",component:SchedulePropVisitComponent},
-    { path: 'user-profile' , component: UserProfileComponent},
-    { path: 'chat' , component: ChatComponent},
-    { path: 'message' , component: MessageComponent},
-    { path: 'message/:id' , component: MessageComponent},
-    { path: 'reviews', component: ReviewListComponent}
+    { path: 'property-details', component: PropertyDetailsComponent, title: 'property-details', canActivate: [AuthGuard] },
+    { path: 'seller-profile' , component: SellerProfileComponent, canActivate: [AuthGuard] },
+    { path: 'edit-profile' , component: EditProfileComponent, canActivate: [AuthGuard] },
+    { path: 'user-seller-profile' , component: UserSellerProfileComponent, canActivate: [AuthGuard] },
+    { path: 'create-property',component: CreatePropertyComponent, canActivate: [AuthGuard] },
+    { path: 'my-properties' , component: MyPropertiesComponent, canActivate: [AuthGuard] },
+    { path: 'seller-bookings', component: SellerBookingsComponent, canActivate: [AuthGuard] },
+    { path: 'property', component: PropertyComponent, canActivate: [AuthGuard] },
+    { path: 'user-bookings', component: UserBookingsComponent, title: 'Bookings', canActivate: [AuthGuard] },
+    { path: "sechedule-visit",component:SchedulePropVisitComponent, canActivate: [AuthGuard] },
+    { path: 'user-profile' , component: UserProfileComponent, canActivate: [AuthGuard] },
+    { path: 'chat' , component: ChatComponent, canActivate: [AuthGuard] },
+    { path: 'message' , component: MessageComponent, canActivate: [AuthGuard] },
+    { path: 'message/:id' , component: MessageComponent, canActivate: [AuthGuard] },
+    { path: 'reviews', component: ReviewListComponent, canActivate: [AuthGuard] }
+
 ];
