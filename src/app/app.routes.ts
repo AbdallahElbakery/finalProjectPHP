@@ -16,16 +16,18 @@ import { SchedulePropVisitComponent } from './components/schedule-prop-visit/sch
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { MessageComponent } from './components/message/message.component';
+import { ReviewListComponent } from './components/review-list/review-list.component';
 import { AuthGuard } from './auth.guard';
 import { EditPropertyComponent } from './components/edit-property/edit-property.component';
+import { GuestGuard } from './guest.guard';
 
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'registration', component: RegistrationComponent },
-    { path: 'login', component: LoginComponent },
+    { path: 'registration', component: RegistrationComponent, canActivate: [GuestGuard] },
+    { path: 'login', component: LoginComponent, canActivate: [GuestGuard] },
     { path: 'home', component: HomeComponent, title: 'Home', canActivate: [AuthGuard] },
-    { path: 'properties', component: PropertiesComponent, title: 'Properties', canActivate: [AuthGuard] },
+    { path: 'properties', component: PropertiesComponent, title: 'Properties' },
     { path: 'property-details', component: PropertyDetailsComponent, title: 'property-details', canActivate: [AuthGuard] },
     { path: 'seller-profile', component: SellerProfileComponent, canActivate: [AuthGuard] },
     { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
@@ -36,9 +38,11 @@ export const routes: Routes = [
     { path: 'seller-bookings', component: SellerBookingsComponent, canActivate: [AuthGuard] },
     { path: 'property', component: PropertyComponent, canActivate: [AuthGuard] },
     { path: 'user-bookings', component: UserBookingsComponent, title: 'Bookings', canActivate: [AuthGuard] },
-    { path: "sechedule-visit", component: SchedulePropVisitComponent, canActivate: [AuthGuard] },
-    { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
-    { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
-    { path: 'message', component: MessageComponent, canActivate: [AuthGuard] },
-    { path: 'message/:id', component: MessageComponent, canActivate: [AuthGuard] }
+    { path: "sechedule-visit",component:SchedulePropVisitComponent, canActivate: [AuthGuard] },
+    { path: 'user-profile' , component: UserProfileComponent, canActivate: [AuthGuard] },
+    { path: 'chat' , component: ChatComponent, canActivate: [AuthGuard] },
+    { path: 'message' , component: MessageComponent, canActivate: [AuthGuard] },
+    { path: 'message/:id' , component: MessageComponent, canActivate: [AuthGuard] },
+    { path: 'reviews', component: ReviewListComponent, canActivate: [AuthGuard] }
+
 ];

@@ -5,7 +5,10 @@ import { Router } from '@angular/router';
 
 interface LoginResponse {
   Message: string;
+  UserID: string | number;
   UserName: string;
+  UserPhoto: string;
+  UserRole: string;
   Token: string;
 }
 
@@ -22,6 +25,14 @@ interface RegisterSellerResponse {
   token: string;
 }
 
+interface CurrentUser {
+  id: string | number;
+  name: string;
+  role: string;
+  photo?: string;
+  sellerInfo?: any;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -33,9 +44,16 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { email, password }).pipe(
+    return this.http.post<any>(`${this.apiUrl}/login`, { email, password }).pipe(
       tap((res) => {
-        this.setSession(res.Token, res.UserName, 'user'); // Role may need to be fetched separately
+        this.setSession(
+          res.Token,
+          res.UserName,
+          res.UserRole,
+          res.UserPhoto,
+          undefined,
+          res.UserID
+        );
         this.authStatusSubject.next(true);
       })
     );
@@ -73,12 +91,13 @@ export class AuthService {
     );
   }
 
-  private setSession(token: string, userName: string, role: string, photo?: any, sellerInfo?: any) {
+  private setSession(token: string, userName: string, role: string, photo?: any, sellerInfo?: any, userId?: string | number) {
     localStorage.setItem('token', token);
     localStorage.setItem('userName', userName);
     localStorage.setItem('role', role);
     if (photo && typeof photo === 'string') localStorage.setItem('photo', photo);
     if (sellerInfo) localStorage.setItem('sellerInfo', JSON.stringify(sellerInfo));
+    if (userId) localStorage.setItem('userId', userId.toString());
   }
 
   private clearSession() {
@@ -87,6 +106,7 @@ export class AuthService {
     localStorage.removeItem('role');
     localStorage.removeItem('photo');
     localStorage.removeItem('sellerInfo');
+    localStorage.removeItem('userId');
   }
 
   private hasToken(): boolean {
@@ -116,5 +136,23 @@ export class AuthService {
   getSellerInfo(): any {
     const info = localStorage.getItem('sellerInfo');
     return info ? JSON.parse(info) : null;
+  }
+
+  getUserId(): string | null {
+    return localStorage.getItem('userId');
+  }
+
+  getCurrentUser(): CurrentUser | null {
+    if (!this.isAuthenticated()) {
+      return null;
+    }
+
+    return {
+      id: this.getUserId() || '',
+      name: this.getUserName() || '',
+      role: this.getRole() || '',
+      photo: this.getPhoto() || undefined,
+      sellerInfo: this.getSellerInfo()
+    };
   }
 } 

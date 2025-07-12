@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { BookingService } from '../../services/booking.service';
 
 @Component({
   selector: 'app-property-card',
@@ -11,7 +12,10 @@ import { Router, RouterModule } from '@angular/router';
 export class PropertyCardComponent {
   @Input() property: any;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private bookingService: BookingService
+  ) {}
 
 
   formatPrice(price: number): string {
@@ -29,6 +33,24 @@ export class PropertyCardComponent {
 
   viewPropertyDetails(propertyId: number) {
     this.router.navigate(['/property-details']);
+  }
+
+  bookProperty(propertyId: number) {
+    const suggestedPrice = prompt('أدخل السعر المقترح للحجز:');
+    if (suggestedPrice && !isNaN(Number(suggestedPrice)) && Number(suggestedPrice) > 0) {
+      this.bookingService.createBooking({
+        property_id: propertyId,
+        suggested_price: Number(suggestedPrice)
+      }).subscribe({
+        next: (response) => {
+          alert('تم إرسال طلب الحجز بنجاح!');
+        },
+        error: (error) => {
+          console.error('Error creating booking:', error);
+          alert('حدث خطأ أثناء إرسال طلب الحجز');
+        }
+      });
+    }
   }
 
 }

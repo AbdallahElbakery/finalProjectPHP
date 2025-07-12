@@ -125,19 +125,57 @@
                 </button>
                 }
                 @if (showOfferForm) {
-                <form [formGroup]="offerForm" (ngSubmit)="submitOffer()" class="offer-form">
-                  <div class="form-group">
-                    <input type="number" formControlName="price" class="form-control"
-                      placeholder="Enter your offer (e.g. 2500000)" />
-                  </div>
-                  <button type="submit" class="submit-btn" [disabled]="offerForm.invalid">
-                    <i class="fas fa-paper-plane"></i>
-                    Send Offer
-                  </button>
-                </form>
+                <div class="offer-form-container">
+                  <h4 class="offer-title">
+                    <i class="fas fa-edit"></i>
+                    قدم عرضك
+                  </h4>
+                  <form [formGroup]="offerForm" (ngSubmit)="submitOffer()" class="offer-form">
+                    <div class="form-group">
+                      <label for="suggested_price" class="form-label">السعر المقترح</label>
+                      <div class="input-group">
+                        <span class="input-prefix">$</span>
+                        <input 
+                          type="number" 
+                          id="suggested_price"
+                          formControlName="suggested_price" 
+                          class="form-control"
+                          placeholder="أدخل السعر المقترح (مثال: 2500000)"
+                          [class.is-invalid]="offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched"
+                        />
+                      </div>
+                      @if (offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched) {
+                        <div class="invalid-feedback">
+                          يرجى إدخال سعر صحيح
+                        </div>
+                      }
+                    </div>
+                    
+                    @if (submitMessage) {
+                      <div class="alert" [class.alert-success]="submitSuccess" [class.alert-danger]="!submitSuccess">
+                        {{ submitMessage }}
+                      </div>
+                    }
+                    
+                    <div class="form-actions">
+                      <button type="submit" class="submit-btn" [disabled]="offerForm.invalid || isSubmitting">
+                        @if (isSubmitting) {
+                          <i class="fas fa-spinner fa-spin"></i>
+                          جاري الإرسال...
+                        } @else {
+                          <i class="fas fa-paper-plane"></i>
+                          إرسال العرض
+                        }
+                      </button>
+                      <button type="button" class="cancel-btn" (click)="toggleOfferForm()" [disabled]="isSubmitting">
+                        <i class="fas fa-times"></i>
+                        إلغاء
+                      </button>
+                    </div>
+                  </form>
+                </div>
                 }
               </div>
-
             </div>
 
 

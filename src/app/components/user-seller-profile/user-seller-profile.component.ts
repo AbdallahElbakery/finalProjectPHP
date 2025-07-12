@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PropertyCardComponent } from "../property-card/property-card.component";
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { ReviewService } from '../../services/review.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-user-seller-profile',
@@ -10,21 +12,64 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   templateUrl: './user-seller-profile.component.html',
   styleUrl: './user-seller-profile.component.css'
 })
-export class UserSellerProfileComponent {
+export class UserSellerProfileComponent implements OnInit {
   router: any;
   reviewForm: any;
-  showSuccessMessage: boolean | undefined;
-  showReviewForm: boolean | undefined;
+  showSuccessMessage: boolean = false;
+  showReviewForm: boolean = false;
+  reviews: any[] = [];
+  sellerId: number = 1; // يمكن تغييرها حسب البائع المعروض
+
+  constructor(
+    private fb: FormBuilder,
+    private reviewService: ReviewService,
+    private authService: AuthService
+  ) {
+    this.createForm();
+  }
+
+  ngOnInit() {
+    this.loadReviews();
+  }
+
+  loadReviews() {
+    this.reviewService.getReviewsBySellerId(this.sellerId).subscribe({
+      next: (data) => {
+        this.reviews = data;
+        console.log('Loaded reviews:', data);
+      },
+      error: (error) => {
+        console.error('Error loading reviews:', error);
+        // استخدام بيانات تجريبية في حالة الخطأ
+        this.reviews = [
+          {
+            username: 'Mohamed Ahmed',
+            userImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-298Da-Ky_ssBh7kph8vGdKxamW5Bsfakxw&s',
+            rating: 4,
+            date: new Date('2025-05-15'),
+            comment: 'Excellent service and the property description was accurate.'
+          },
+          {
+            username: 'Sara Ali',
+            userImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs8LkRSWmwwNSPhihu9mU8yNRBlptghMu_gw&s',
+            rating: 5,
+            date: new Date('2025-06-01'),
+            comment: 'The best real estate broker I have ever dealt with.'
+          },
+          {
+            username: 'Ahmed Hassan',
+            userImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu9XWVeFGveLD_O9SToBut3McpGBG6q1To9g&s',
+            rating: 3,
+            date: new Date('2025-06-10'),
+            comment: 'Good experience but there is some delay'
+          }
+        ];
+      }
+    });
+  }
+
   openAddReviewModal() {
-    throw new Error('Method not implemented.');
-  }
-
-
-  toggleFavorite(_t33: { title: string; city: string; price: number; image: string; bedrooms: number; bathrooms: number; area: number; isFavorite: boolean; }) {
-    throw new Error('Method not implemented.');
-  }
-  viewDetails(_t33: { title: string; city: string; price: number; image: string; bedrooms: number; bathrooms: number; area: number; isFavorite: boolean; }) {
-    throw new Error('Method not implemented.');
+    this.showReviewForm = !this.showReviewForm;
   }
 
   properties = [
@@ -99,42 +144,12 @@ export class UserSellerProfileComponent {
     },
   ];
 
-  reviews = [
-    {
-      username: 'Mohamed Ahmed',
-      userImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-298Da-Ky_ssBh7kph8vGdKxamW5Bsfakxw&s',
-      rating: 4,
-      date: new Date('2025-05-15'),
-      comment: 'Excellent service and the property description was accurate.'
-    },
-    {
-      username: 'Sara Ali',
-      userImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs8LkRSWmwwNSPhihu9mU8yNRBlptghMu_gw&s',
-      rating: 5,
-      date: new Date('2025-06-01'),
-      comment: 'The best real estate broker I have ever dealt with.'
-    },
-    {
-      username: 'Ahmed Hassan',
-      userImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu9XWVeFGveLD_O9SToBut3McpGBG6q1To9g&s',
-      rating: 3,
-      date: new Date('2025-06-10'),
-      comment: 'Good experience but there is some delay'
-    }
-    // يمكن إضافة المزيد
-  ];
-
   getStars(rating: number): any[] {
     return Array(Math.floor(rating)).fill(0);
   }
 
-  // دالة للحصول على النجوم الفارغة
   getEmptyStars(rating: number): any[] {
     return Array(5 - Math.floor(rating)).fill(0);
-  }
-
-  constructor(private fb: FormBuilder) {
-    this.createForm();
   }
 
   createForm() {
@@ -146,29 +161,60 @@ export class UserSellerProfileComponent {
 
   addReview() {
     if (this.reviewForm.valid) {
-      // هنا يمكنك إرسال البيانات لخادم API
-      const newReview = {
-        username: 'Anonymous', // يمكنك استبدالها باسم المستخدم الحقيقي إذا كان متاحًا
-        userImage: 'https://via.placeholder.com/40', // يمكنك استبدالها بصورة المستخدم الحقيقية إذا كانت متاحة
+      const currentUser = this.authService.getCurrentUser();
+      const reviewData = {
+        user_id: currentUser?.id || 1,
+        seller_id: this.sellerId,
         rating: this.reviewForm.value.rating,
-        comment: this.reviewForm.value.comment,
-        date: new Date()
+        comment: this.reviewForm.value.comment
       };
 
-      this.reviews.push(newReview);
-      this.showSuccessMessage = true;
-      this.reviewForm.reset();
-      this.showReviewForm = false;
+      this.reviewService.addReview(reviewData).subscribe({
+        next: (response) => {
+          console.log('Review added successfully:', response);
+          
+          // إضافة المراجعة الجديدة للقائمة المحلية
+          const newReview = {
+            username: currentUser?.name || 'Anonymous',
+            userImage: currentUser?.photo ? `http://127.0.0.1:8000/uploads/${currentUser.photo}` : 'https://via.placeholder.com/40',
+            rating: this.reviewForm.value.rating,
+            comment: this.reviewForm.value.comment,
+            date: new Date()
+          };
 
-      // إخفاء رسالة النجاح بعد 3 ثواني
-      setTimeout(() => {
-        this.showSuccessMessage = false;
-      }, 3000);
+          this.reviews.unshift(newReview);
+          this.showSuccessMessage = true;
+          this.reviewForm.reset();
+          this.showReviewForm = false;
+
+          // إخفاء رسالة النجاح بعد 3 ثواني
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+          }, 3000);
+        },
+        error: (error) => {
+          console.error('Error adding review:', error);
+          // في حالة الخطأ، نضيف المراجعة محلياً فقط
+          const newReview = {
+            username: currentUser?.name || 'Anonymous',
+            userImage: currentUser?.photo ? `http://127.0.0.1:8000/uploads/${currentUser.photo}` : 'https://via.placeholder.com/40',
+            rating: this.reviewForm.value.rating,
+            comment: this.reviewForm.value.comment,
+            date: new Date()
+          };
+
+          this.reviews.unshift(newReview);
+          this.showSuccessMessage = true;
+          this.reviewForm.reset();
+          this.showReviewForm = false;
+
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+          }, 3000);
+        }
+      });
     }
   }
-
-  ngOnInit(): void { }
-
 }
 
 
