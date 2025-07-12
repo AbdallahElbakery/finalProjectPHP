@@ -6,8 +6,8 @@ export interface Root {
 export interface Seller {
   seller_data: SellerData[]
   password: string
-  newPass:string
-  confirmPassword:string
+  newPass: string
+  confirmPassword: string
   company_name: string
   about_company: any
   logo: string
@@ -24,7 +24,7 @@ export interface SellerData {
   email_verified_at: string
   phone: string
   role: string
-  photo: string
+  image: string
   created_at: string
   updated_at: string
   deleted_at: string
@@ -58,7 +58,7 @@ export interface Seller2 {
   email: string
   phone: string
   role: string
-  photo: string
+  image: string
   company_name: string
   logo: string
   status: string

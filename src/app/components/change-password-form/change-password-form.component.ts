@@ -42,6 +42,7 @@ export class ChangePasswordFormComponent implements OnInit {
   onSubmit() {
     if (this.passwordForm.valid) {
       const data = { ...this.passwordForm.value }
+
       this.propertyService.updatePass(data).subscribe(() => {
         alert('✅ Password updated');
       })

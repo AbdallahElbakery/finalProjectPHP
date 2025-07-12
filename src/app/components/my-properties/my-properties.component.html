@@ -3,7 +3,7 @@
   <div class="properties-grid">
     <div class="property-card"
       *ngFor="let property of sellerproperties|paginate:{currentPage:currentPage, itemsPerPage:itemsPerPage}; let i=index">
-      <img [src]="property.image" alt="property" class="property-img" />
+      <img [src]="'http://127.0.0.1:8000/storage/'+property.image" alt="property" class="property-img" />
       <div class="property-info">
         <h3 class="property-title">{{ property.name }}</h3>
         <p class="property-city"><i class="fas fa-location-dot"></i> {{ property.city }}</p>

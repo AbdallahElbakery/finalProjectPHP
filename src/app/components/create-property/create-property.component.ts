@@ -35,7 +35,8 @@ export class CreatePropertyComponent implements OnInit {
       bathrooms: [''],
       purpose: [''],
       category_id: [''],
-      address_id: ['']
+      address_id: [''],
+      image: ['']
     });
 
   }
@@ -65,7 +66,7 @@ export class CreatePropertyComponent implements OnInit {
       area: [null, [Validators.required, Validators.min(20), Validators.max(5000)]],
       bedrooms: [null, [Validators.required, Validators.min(1), Validators.max(20)]],
       bathrooms: [null, [Validators.required, Validators.min(1), Validators.max(20)]],
-      image: ['']
+      image: ['', [Validators.required]]
     });
   }
 
@@ -85,11 +86,12 @@ export class CreatePropertyComponent implements OnInit {
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.propertyForm.patchValue({ image: reader.result });
-      };
-      reader.readAsDataURL(file);
+      // const reader = new FileReader();
+      // reader.onload = () => {
+      //   this.propertyForm.patchValue({ image: reader.result });
+      // };
+      // reader.readAsDataURL(file);
+      this.propertyForm.patchValue({ 'image': file })
     }
   }
 
@@ -99,12 +101,17 @@ export class CreatePropertyComponent implements OnInit {
     this.submitted = true;
 
     if (this.propertyForm.valid) {
+      const formData = new FormData();
       console.log('New Property:', this.propertyForm.value);
       const data = { ...this.propertyForm.value };
       if (data.image === null || data.image === '') {
         delete data.image;
       }
-      this.propertyService.addProperty(data).subscribe(
+
+      Object.keys(data).forEach(key=>{
+        formData.append(key,data[key])
+      })
+      this.propertyService.addProperty(formData).subscribe(
         () => console.log('New Property:', this.propertyForm.value),
         err => console.error(err)
       )
