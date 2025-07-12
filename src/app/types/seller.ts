@@ -5,6 +5,9 @@ export interface Root {
 
 export interface Seller {
   seller_data: SellerData[]
+  password: string
+  newPass:string
+  confirmPassword:string
   company_name: string
   about_company: any
   logo: string

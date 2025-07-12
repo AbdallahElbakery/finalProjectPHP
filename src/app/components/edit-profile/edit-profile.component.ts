@@ -18,10 +18,7 @@ export class EditProfileComponent implements OnInit {
   activeTab: 'company' | 'account' | 'password' = 'company';
   getId: any;
   updateProfile!: FormGroup;
-  constructor(
-    private route: ActivatedRoute,
-
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     const tab = this.route.snapshot.queryParamMap.get('tab');

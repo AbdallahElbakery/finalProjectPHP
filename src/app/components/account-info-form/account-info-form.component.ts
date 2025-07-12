@@ -14,7 +14,8 @@ import { PropertyServiceService } from '../../services/property-service.service'
 export class AccountInfoFormComponent implements OnInit {
   registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private router: Router,
     private propertyService: PropertyServiceService
   ) {
@@ -25,7 +26,6 @@ export class AccountInfoFormComponent implements OnInit {
         phone: res['phone'],
         role: res['role'],
         address: res['full_address'],
-
       })
     })
   }
@@ -61,6 +61,7 @@ export class AccountInfoFormComponent implements OnInit {
        this.propertyService.updateProfile(data).subscribe(()=>{
         console.log("updated")
       })
+      alert('✅ Profile Info Updated')
       console.log('✅ Form submitted:', this.registerForm.value);
       this.router.navigate(['/seller-profile']);
     } else {
