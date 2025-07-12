@@ -86,11 +86,6 @@ export class CreatePropertyComponent implements OnInit {
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
-      // const reader = new FileReader();
-      // reader.onload = () => {
-      //   this.propertyForm.patchValue({ image: reader.result });
-      // };
-      // reader.readAsDataURL(file);
       this.propertyForm.patchValue({ 'image': file })
     }
   }

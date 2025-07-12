@@ -26,7 +26,7 @@ export class AccountInfoFormComponent implements OnInit {
         phone: res['phone'],
         role: res['role'],
         address: res['full_address'],
-        photo: res['image'],
+        photo: res['photo'],
       })
     })
   }
@@ -41,19 +41,14 @@ export class AccountInfoFormComponent implements OnInit {
       phone: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
       address: ['', Validators.required],
       role: ['seller'],
-      image: ['', Validators.required]
+      photo: ['', Validators.required]
     });
   }
 
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
-      // const reader = new FileReader();
-      // reader.onload = () => {
-      //   this.registerForm.patchValue({ picture: reader.result });
-      // };
-      // reader.readAsDataURL(file);
-      this.registerForm.patchValue({ 'image': file })
+      this.registerForm.patchValue({ 'photo': file })
     }
   }
 
@@ -68,14 +63,13 @@ export class AccountInfoFormComponent implements OnInit {
       formData.append('role', data.role);
       formData.append('address', data.address);
 
-      if (data.image instanceof File) {
-        formData.append('image', data.image);
+      if (data.photo instanceof File) {
+        formData.append('photo', data.photo);
       }
       this.propertyService.updateProfile(formData).subscribe(() => {
         console.log("updated")
-
       })
-      console.log(formData.get('image'));
+      console.log(formData.get('photo'));
       alert('✅ Profile Info Updated')
       console.log('✅ Form submitted:', this.registerForm.value);
       this.router.navigate(['/edit-profile']);
