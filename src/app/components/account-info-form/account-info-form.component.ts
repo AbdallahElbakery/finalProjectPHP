@@ -64,10 +64,9 @@ export class AccountInfoFormComponent implements OnInit {
       this.propertyService.updateProfile(formData).subscribe(() => {
         console.log("updated")
       })
-      console.log(formData.get('photo'));
+    
       
       alert('✅ Profile Info Updated')
-      console.log('✅ Form submitted:', this.registerForm.value);
       this.router.navigate(['/edit-profile']);
     } else {
       this.registerForm.markAllAsTouched();

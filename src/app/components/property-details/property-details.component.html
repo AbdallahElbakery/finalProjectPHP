@@ -128,11 +128,11 @@
                 <div class="offer-form-container">
                   <h4 class="offer-title">
                     <i class="fas fa-edit"></i>
-                    قدم عرضك
+                    Add your offer
                   </h4>
                   <form [formGroup]="offerForm" (ngSubmit)="submitOffer()" class="offer-form">
                     <div class="form-group">
-                      <label for="suggested_price" class="form-label">السعر المقترح</label>
+                      <label for="suggested_price" class="form-label">Suggested price</label>
                       <div class="input-group">
                         <span class="input-prefix">$</span>
                         <input 
@@ -140,13 +140,14 @@
                           id="suggested_price"
                           formControlName="suggested_price" 
                           class="form-control"
-                          placeholder="أدخل السعر المقترح (مثال: 2500000)"
+                          name="suggested_price"
+                          placeholder="enter price (eg: 2500000)"
                           [class.is-invalid]="offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched"
                         />
                       </div>
                       @if (offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched) {
                         <div class="invalid-feedback">
-                          يرجى إدخال سعر صحيح
+                          Enter correct price
                         </div>
                       }
                     </div>
@@ -161,15 +162,15 @@
                       <button type="submit" class="submit-btn" [disabled]="offerForm.invalid || isSubmitting">
                         @if (isSubmitting) {
                           <i class="fas fa-spinner fa-spin"></i>
-                          جاري الإرسال...
+                          sending...
                         } @else {
                           <i class="fas fa-paper-plane"></i>
-                          إرسال العرض
+                          Send offer
                         }
                       </button>
                       <button type="button" class="cancel-btn" (click)="toggleOfferForm()" [disabled]="isSubmitting">
                         <i class="fas fa-times"></i>
-                        إلغاء
+                        Cancel
                       </button>
                     </div>
                   </form>

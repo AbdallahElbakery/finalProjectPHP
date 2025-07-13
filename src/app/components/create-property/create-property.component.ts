@@ -91,8 +91,6 @@ export class CreatePropertyComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.propertyForm.value);
-
     this.submitted = true;
 
     if (this.propertyForm.valid) {
