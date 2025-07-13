@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 export interface Booking {
   id?: number;
@@ -36,9 +36,18 @@ export class BookingService {
   }
 
   // Create a new booking
-  createBooking(bookingData: BookingRequest): Observable<Booking> {
+  createBooking(bookingData: BookingRequest): Observable<any> {
     return this.http.post<any>(this.apiUrl, bookingData).pipe(
-      map(response => response.booking || response)
+      map(response => response),
+      catchError((error: any) => {
+        if (error.status === 400 && error.error.message === 'You already have an offer for this property') {
+          return throwError(() => new Error('You already have an offer for this property'));
+        }
+        if (error.status === 422) {
+          return throwError(() => new Error('Invalid data provided'));
+        }
+        return throwError(() => new Error('An error occurred while creating the booking'));
+      })
     );
   }
 
@@ -62,8 +71,50 @@ export class BookingService {
   }
 
   getMyBookings() {
-    return this.http.get<any>('http://127.0.0.1:8000/api/my-bookings').pipe(
+    return this.http.get<any>('http://127.0.0.1:8000/api/user/bookings').pipe(
       map(response => response.bookings || response)
+    );
+  }
+
+  // Get seller bookings (for property owners)
+  getSellerBookings() {
+    return this.http.get<any>('http://127.0.0.1:8000/api/seller/bookings').pipe(
+      map(response => response.data || response.bookings || response),
+      catchError((error: any) => {
+        if (error.status === 401) {
+          return throwError(() => new Error('Unauthorized access'));
+        }
+        if (error.status === 404) {
+          return throwError(() => new Error('No properties found for this seller'));
+        }
+        return throwError(() => new Error('An error occurred while fetching bookings'));
+      })
+    );
+  }
+
+  // Confirm booking (seller only)
+  confirmBooking(bookingId: number) {
+    return this.http.post<any>(`http://127.0.0.1:8000/api/seller/bookings/${bookingId}/confirm`, {}).pipe(
+      map(response => response),
+      catchError((error: any) => {
+        if (error.status === 403) {
+          return throwError(() => new Error('Unauthorized to confirm this booking'));
+        }
+        return throwError(() => new Error('An error occurred while confirming the booking'));
+      })
+    );
+  }
+
+  // Cancel booking (seller only)
+  cancelBooking(bookingId: number) {
+    return this.http.post<any>(`http://127.0.0.1:8000/api/seller/bookings/${bookingId}/cancel`, {}).pipe(
+      map(response => response),
+      catchError((error: any) => {
+        if (error.status === 403) {
+          return throwError(() => new Error('Unauthorized to cancel this booking'));
+        }
+        return throwError(() => new Error('An error occurred while cancelling the booking'));
+      })
     );
   }
 } 

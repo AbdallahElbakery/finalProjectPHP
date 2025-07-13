@@ -63,7 +63,7 @@ export class SellerProfileComponent implements OnInit {
 
   viewPropertyDetails(property: any) {
     // التنقل إلى صفحة تفاصيل العقار
-    this.router.navigate(['/property-details'], { queryParams: { id: property.id } });
+    this.router.navigate(['/property-details', property.id]);
   }
 
   openAddReviewModal() {
