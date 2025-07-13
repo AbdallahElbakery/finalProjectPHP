@@ -42,13 +42,12 @@ export class MyPropertiesComponent implements OnInit {
   constructor(private router: Router, public propertyService: PropertyServiceService) { }
 
   ngOnInit(): void {
+
     this.propertyService.getSingleSeller().subscribe((sellerProps) => {
       this.sellerproperties = sellerProps.Seller.own_properties;
-
     });
 
   }
-
 
   deleteProp(id: number, i: number) {
     if (confirm('are u sure u wanna delete this property')) {
@@ -61,7 +60,7 @@ export class MyPropertiesComponent implements OnInit {
 
   }
   goToEditProperty(id: number) {
-    this.router.navigate(['/create-property'], { queryParams: { id } });
+    this.router.navigate(['/edit-property'], { queryParams: { id } });
   }
 
 

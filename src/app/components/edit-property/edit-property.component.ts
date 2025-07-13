@@ -1,42 +1,47 @@
-import { Component, NgZone, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { PropertyServiceService } from '../../services/property-service.service';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Category } from '../../types/category';
 import { Address } from '../../types/address';
+import { PropertyServiceService } from '../../services/property-service.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Property } from '../../types/property';
 
 @Component({
-  selector: 'app-create-property',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './create-property.component.html',
-  styleUrls: ['./create-property.component.css']
+  selector: 'app-edit-property',
+  imports: [ReactiveFormsModule],
+  templateUrl: './edit-property.component.html',
+  styleUrl: './edit-property.component.css'
 })
-export class CreatePropertyComponent implements OnInit {
+export class EditPropertyComponent implements OnInit {
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
 
-  propertyForm!: FormGroup;
+  updatePropForm!: FormGroup;
   submitted = false;
+  getId: any;
   categories: Category[] = [];
   addresses: Address[] = []
   constructor(
     private propertyService: PropertyServiceService,
     public formBuilder: FormBuilder,
+    private activateRoute: ActivatedRoute,
   ) {
-    this.propertyForm = this.formBuilder.group({
-      name: [''],
-      description: [''],
-      citynum: [''],
-      price: [''],
-      area: [''],
-      bedrooms: [''],
-      bathrooms: [''],
-      purpose: [''],
-      category_id: [''],
-      address_id: [''],
-      image: ['']
+    this.getId = this.activateRoute.snapshot.queryParamMap.get('id');
+    this.propertyService.getProperty(this.getId).subscribe((res) => {
+
+      this.updatePropForm.setValue({
+        name: ['name'],
+        description: res['description'],
+        citynum: res['citynum'],
+        price: res['price'],
+        area: res['area'],
+        bedrooms: res['bedrooms'],
+        bathrooms: res['bathrooms'],
+        purpose: res['purpose'],
+        category_id: res['category_id'],
+        address_id: res['address_id']
+      })
     });
 
   }
@@ -55,7 +60,7 @@ export class CreatePropertyComponent implements OnInit {
   }
 
   initializeForm() {
-    this.propertyForm = this.fb.group({
+    this.updatePropForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
       citynum: [null, [Validators.required, Validators.min(1), Validators.max(20)]],
@@ -66,7 +71,7 @@ export class CreatePropertyComponent implements OnInit {
       area: [null, [Validators.required, Validators.min(20), Validators.max(5000)]],
       bedrooms: [null, [Validators.required, Validators.min(1), Validators.max(20)]],
       bathrooms: [null, [Validators.required, Validators.min(1), Validators.max(20)]],
-      image: ['', [Validators.required]]
+      image: ['']
     });
   }
 
@@ -77,7 +82,7 @@ export class CreatePropertyComponent implements OnInit {
         const mock = JSON.parse(localStorage.getItem('myProperties') || '[]');
         const property = mock.find((p: any) => p.id == id);
         if (property) {
-          this.propertyForm.patchValue(property);
+          this.updatePropForm.patchValue(property);
         }
       }
     });
@@ -86,37 +91,35 @@ export class CreatePropertyComponent implements OnInit {
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
-      this.propertyForm.patchValue({ 'photo': file })
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.updatePropForm.patchValue({ image: reader.result });
+      };
+      reader.readAsDataURL(file);
     }
   }
 
   onSubmit() {
-    console.log(this.propertyForm.value);
+    console.log(this.updatePropForm.value);
 
     this.submitted = true;
 
-    if (this.propertyForm.valid) {
-      const formData = new FormData();
-      const data = { ...this.propertyForm.value };
-      if (data.image === null || data.image === '') {
-        delete data.image;
-      }
-
-      Object.keys(data).forEach(key => {
-        if (key === 'photo' && this.propertyForm.get('photo')?.value instanceof File) {
-          formData.append(key, this.propertyForm.get('photo')?.value);
+    if (this.updatePropForm.valid) {
+      const data = { ...this.updatePropForm.value };
+      console.log(data);
+      this.propertyService.updateProperty(this.getId, this.updatePropForm.value).subscribe(() => {
+        console.log("updated")
+        if (data.image === null || data.image === '') {
+          delete data.image;
         }
-      });
+        alert('✅ The property has been updated successfully');
 
-      this.propertyService.addProperty(formData).subscribe(
-        () => console.log('New Property:', this.propertyForm.value),
-        err => console.error(err)
-      )
-      alert('✅ The property has been added successfully');
-      this.propertyForm.reset();
+      })
+
+      this.updatePropForm.reset();
       this.submitted = false;
     } else {
-      Object.values(this.propertyForm.controls).forEach(control => {
+      Object.values(this.updatePropForm.controls).forEach(control => {
         control.markAsTouched();
       });
     }
@@ -125,13 +128,13 @@ export class CreatePropertyComponent implements OnInit {
 
   //check field validity
   isFieldInvalid(field: string): boolean {
-    const control = this.propertyForm.get(field);
+    const control = this.updatePropForm.get(field);
     return !!control && control.invalid && (control.touched || this.submitted);
   }
 
   // error messages
   getErrorMessage(field: string): string {
-    const control = this.propertyForm.get(field);
+    const control = this.updatePropForm.get(field);
 
     if (!control || !control.errors) return '';
 

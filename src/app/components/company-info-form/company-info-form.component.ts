@@ -2,17 +2,18 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PropertyServiceService } from '../../services/property-service.service';
 
 @Component({
   selector: 'app-company-info-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule , FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './company-info-form.component.html',
   styleUrl: './company-info-form.component.css'
 })
 export class CompanyInfoFormComponent implements OnInit {
   profileForm!: FormGroup;
-     options = [
+  options = [
     'Cairo',
     'Giza',
     'Alexandria',
@@ -28,21 +29,21 @@ export class CompanyInfoFormComponent implements OnInit {
 
   // لعرض/إخفاء القائمة
   showDropdown = false;
-registerForm: any;
+  registerForm: any;
 
   // إضافة/إزالة عنصر من المحدد
   toggleSelection(option: string) {
-  const index = this.selectedOptions.indexOf(option);
-  if (index === -1) {
-    this.selectedOptions.push(option);
-  } else {
-    this.selectedOptions.splice(index, 1);
-  }
+    const index = this.selectedOptions.indexOf(option);
+    if (index === -1) {
+      this.selectedOptions.push(option);
+    } else {
+      this.selectedOptions.splice(index, 1);
+    }
 
-  // ✅ تحديث القيمة في الفورم
-  this.profileForm.get('locations')?.setValue(this.selectedOptions);
-  this.profileForm.get('locations')?.markAsTouched();
-}
+    // ✅ تحديث القيمة في الفورم
+    this.profileForm.get('locations')?.setValue(this.selectedOptions);
+    this.profileForm.get('locations')?.markAsTouched();
+  }
 
   // التحقق إذا كان العنصر محدد
   isSelected(option: string): boolean {
@@ -50,7 +51,18 @@ registerForm: any;
   }
 
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private propertyService: PropertyServiceService) {
+    this.propertyService.getComapnyDetails().subscribe((res) => {
+      this.profileForm.setValue({
+        company_name: res['company_name'],
+        logo: res['logo'],
+        about_company: res['about_company'],
+      })
+    })
+  }
 
   ngOnInit() {
     this.initForm();
@@ -59,9 +71,9 @@ registerForm: any;
   initForm() {
     this.profileForm = this.fb.group({
       picture: [''],
-      companyName: ['', Validators.required],
+      company_name: ['', Validators.required],
       locations: [[], Validators.required], // استخدم 'locations' لأن removeLocation تعتمد عليه
-      about: ['', Validators.required],
+      about_company: ['', Validators.required],
     });
   }
 
@@ -83,13 +95,18 @@ registerForm: any;
   }
 
   onSubmit() {
+    const data = { ... this.profileForm.value }
     if (this.profileForm.valid) {
-      console.log('✅ Saved:', this.profileForm.value);
-      // send data to API here
-
-      this.router.navigate(['/home']); // ✅ يوجهك للصفحة الرئيسية بعد الحفظ
+      if (data.logo == null || data.logo == '') {
+        delete data.logo;
+      }
+      this.propertyService.updateCompanyDetails(data).subscribe(() => {
+        console.log('✅ Saved:', this.profileForm.value);
+        alert('✅ Company details updated')
+        this.router.navigate(['/edit-profile']);
+      })
     } else {
-      this.profileForm.markAllAsTouched(); // يظهر الأخطاء لو فيه
+      this.profileForm.markAllAsTouched(); 
     }
   }
 }

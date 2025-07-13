@@ -3,6 +3,7 @@
     <h2 class="profile-title">Add New Property</h2>
 
     <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="edit-form">
+
       <!-- Property Image Upload -->
       <div class="avatar-upload">
         <div class="avatar-preview">
@@ -64,6 +65,7 @@
         <div class="input-group">
           <label>Address(select)</label>
           <select formControlName="address_id" [class.invalid]="isFieldInvalid('address_id')">
+            <option disabled value="">Select address</option>
             @for(address of addresses; track address.id){
             <option [ngValue]="address.id">
               {{address.country}},{{address.city}},{{address.street}},{{address.postal_code}}</option>
@@ -76,44 +78,11 @@
         </div>
 
 
-        <div class="input-group">
-          <label>Country</label>
-          <input type="text" formControlName="country" placeholder="Enter property country..."
-            [class.invalid]="isFieldInvalid('country')">
-          @if (isFieldInvalid('country')) {
-          <div class="error-msg">{{ getErrorMessage('country') }}</div>
-          }
-        </div>
-
-        <!-- City -->
-        <div class="input-group">
-          <label>City</label>
-          <select formControlName="city" [class.invalid]="isFieldInvalid('city')">
-            @for(address of addresses; track address.id){
-            <option>{{address.city}}</option>
-            }
-            <option value="Other">Other</option>
-          </select>
-          @if (isFieldInvalid('city')) {
-          <div class="error-msg">{{ getErrorMessage('city') }}</div>
-          }
-        </div>
-
-        <!-- Address -->
-        <div class="input-group">
-          <label>Address</label>
-          <input type="text" formControlName="location" placeholder="Street, building, etc."
-            [class.invalid]="isFieldInvalid('location')">
-          @if (isFieldInvalid('location')) {
-          <div class="error-msg">{{ getErrorMessage('location') }}</div>
-          }
-        </div>
-
         <!-- Purpose -->
         <div class="input-group">
           <label>Purpose</label>
           <select formControlName="purpose" [class.invalid]="isFieldInvalid('purpose')">
-            <option value="">Select Purpose</option>
+            <option value="" disabled>Select Purpose</option>
             <option value="sale">sale</option>
             <option value="rent">rent</option>
           </select>
@@ -125,7 +94,7 @@
         <div class="input-group">
           <label>Category</label>
           <select formControlName="category_id" [class.invalid]="isFieldInvalid('category')">
-            <option value="">Select Category</option>
+            <option value="" disabled>Select Category</option>
             @for(category of categories; track category.id){
             <option [ngValue]="category.id">{{category.category_name}}</option>
             }

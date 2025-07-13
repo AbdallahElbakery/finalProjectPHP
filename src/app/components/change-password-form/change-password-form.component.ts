@@ -2,39 +2,51 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PropertyServiceService } from '../../services/property-service.service';
 
 @Component({
   selector: 'app-change-password-form',
-  imports: [CommonModule , ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './change-password-form.component.html',
   styleUrl: './change-password-form.component.css'
 })
 export class ChangePasswordFormComponent implements OnInit {
- passwordForm!: FormGroup;
+  passwordForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router, private propertyService: PropertyServiceService) {
+    this.propertyService.getPass().subscribe((res) => {
+      console.log(res);
+      this.passwordForm.setValue({
+        current_password: '',
+        newPass: '',
+        confirmPassword: ''
+      });
+
+    })
+  }
 
   ngOnInit(): void {
     this.passwordForm = this.fb.group({
-      currentPassword: ['', Validators.required],
-      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      current_password: ['', Validators.required],
+      newPass: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
     }, { validators: this.passwordMatchValidator });
   }
 
   passwordMatchValidator(form: FormGroup) {
-    const newPassword = form.get('newPassword')?.value;
+    const newPass = form.get('newPass')?.value;
     const confirmPassword = form.get('confirmPassword')?.value;
-    return newPassword === confirmPassword ? null : { passwordMismatch: true };
+    return newPass === confirmPassword ? null : { passwordMismatch: true };
   }
 
   onSubmit() {
     if (this.passwordForm.valid) {
-      console.log('✅ Password updated:', this.passwordForm.value);
-      // هنا تبعت الـ API لتحديث كلمة المرور
+      const data = { ...this.passwordForm.value }
 
-      // توجيه بعد الحفظ
-      this.router.navigate(['/home']);
+      this.propertyService.updatePass(data).subscribe(() => {
+        alert('✅ Password updated');
+      })
+      this.router.navigate(['/edit-profile']);
     } else {
       this.passwordForm.markAllAsTouched();
     }

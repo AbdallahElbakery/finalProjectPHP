@@ -1,0 +1,154 @@
+<main class="edit-profile-page">
+    <div class="profile-card">
+        <h2 class="profile-title">Edit Property</h2>
+
+        <form [formGroup]="updatePropForm" (ngSubmit)="onSubmit()" class="edit-form">
+
+            <!-- Property Image Upload -->
+            <div class="avatar-upload">
+                <div class="avatar-preview">
+                    <img [src]="updatePropForm.value.image || 'assets/images/default-property.jpg'" alt="Property Image">
+                </div>
+                <div class="avatar-edit">
+                    <input type="file" id="imageUpload" (change)="onFileChange($event)" accept=".png,.jpg,.jpeg">
+                    <label for="imageUpload" class="upload-btn">
+                        <i class="fas fa-camera"></i> Upload Image
+                    </label>
+                </div>
+            </div>
+
+            <!-- Form Fields -->
+            <div class="form-grid">
+                <!-- Name -->
+                <div class="input-group">
+                    <label>Property Name</label>
+                    <input type="text" formControlName="name" placeholder="Enter property name..."
+                        [class.invalid]="isFieldInvalid('name')">
+                    @if (isFieldInvalid('name')) {
+                    <div class="error-msg">{{ getErrorMessage('name') }}</div>
+                    }
+                </div>
+
+                <!-- Description -->
+                <div class="input-group">
+                    <label>Description</label>
+                    <textarea formControlName="description" rows="3" placeholder="Enter property description..."
+                        [class.invalid]="isFieldInvalid('description')"></textarea>
+                    @if (isFieldInvalid('description')) {
+                    <div class="error-msg">{{ getErrorMessage('description') }}</div>
+                    }
+                </div>
+
+
+                <div class="input-group">
+                    <label>Citynum</label>
+                    <input type="number" formControlName="citynum"
+                        placeholder="city number helps find property quickly while searching"
+                        [class.invalid]="isFieldInvalid('citynum')">
+                    @if (isFieldInvalid('citynum')) {
+                    <div class="error-msg">{{ getErrorMessage('citynum') }}</div>
+                    }
+                    <!-- <div class="hint">Between 1 and 20 citynum</div> -->
+                </div>
+
+                <!-- Price -->
+                <div class="input-group">
+                    <label>Price (EGP)</label>
+                    <input type="number" formControlName="price" placeholder="Enter price"
+                        [class.invalid]="isFieldInvalid('price')">
+                    @if (isFieldInvalid('price')) {
+                    <div class="error-msg">{{ getErrorMessage('price') }}</div>
+                    }
+                    <div class="hint">Minimum price: 1,000 EGP</div>
+                </div>
+
+                <!-- address id -->
+                <div class="input-group">
+                    <label>Address(select)</label>
+                    <select formControlName="address_id" [class.invalid]="isFieldInvalid('address_id')">
+                        <option value="" disabled>Select Address</option>
+                        @for(address of addresses; track address.id){
+
+                        <option [ngValue]="address.id">
+                            {{address.country}},{{address.city}},{{address.street}},{{address.postal_code}}</option>
+                        }
+                    </select>
+                    @if (isFieldInvalid('address_id')) {
+                    <div class="error-msg">{{ getErrorMessage('address_id') }}</div>
+                    }
+                </div>
+
+
+
+
+                <!-- Purpose -->
+                <div class="input-group">
+                    <label>Purpose</label>
+                    <select formControlName="purpose" [class.invalid]="isFieldInvalid('purpose')">
+                        <option value="" disabled>Select Purpose</option>
+                        <option value="sale">sale</option>
+                        <option value="rent">rent</option>
+                    </select>
+                    @if (isFieldInvalid('purpose')) {
+                    <div class="error-msg">{{ getErrorMessage('purpose') }}</div>
+                    }
+                </div>
+
+                <!-- Category -->
+                <div class="input-group">
+                    <label>Category</label>
+                    <select formControlName="category_id" [class.invalid]="isFieldInvalid('category')">
+                        <option value="" disabled>Select category</option>
+                        @for(category of categories; track category.id){
+                        <option [ngValue]="category.id">{{category.category_name}}</option>
+                        }
+                        <option value="Other">Other</option>
+                    </select>
+                    @if (isFieldInvalid('category')) {
+                    <div class="error-msg">{{ getErrorMessage('category') }}</div>
+                    }
+                </div>
+
+                <!-- Area -->
+                <div class="input-group">
+                    <label>Area (m²)</label>
+                    <input type="number" formControlName="area" placeholder="Enter area in m²"
+                        [class.invalid]="isFieldInvalid('area')">
+                    @if (isFieldInvalid('area')) {
+                    <div class="error-msg">{{ getErrorMessage('area') }}</div>
+                    }
+                    <div class="hint">Minimum area: 20 m²</div>
+                </div>
+
+                <!-- Bedrooms -->
+                <div class="input-group">
+                    <label>Bedrooms</label>
+                    <input type="number" formControlName="bedrooms" placeholder="Number of bedrooms"
+                        [class.invalid]="isFieldInvalid('bedrooms')">
+                    @if (isFieldInvalid('bedrooms')) {
+                    <div class="error-msg">{{ getErrorMessage('bedrooms') }}</div>
+                    }
+                    <!-- <div class="hint">Between 1 and 20 bedrooms</div> -->
+                </div>
+
+                <!-- Bedrooms -->
+                <div class="input-group">
+                    <label>Bathrooms</label>
+                    <input type="number" formControlName="bathrooms" placeholder="Number of bathrooms"
+                        [class.invalid]="isFieldInvalid('bathrooms')">
+                    @if (isFieldInvalid('bathrooms')) {
+                    <div class="error-msg">{{ getErrorMessage('bathrooms') }}</div>
+                    }
+                    <!-- <div class="hint">Between 1 and 20 bathrooms</div> -->
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-actions">
+                <button type="submit" class="save-btn">
+                    Update Property
+                </button>
+            </div>
+        </form>
+    </div>
+</main>

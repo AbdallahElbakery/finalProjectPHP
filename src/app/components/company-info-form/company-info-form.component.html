@@ -19,14 +19,14 @@
 
       <!-- اسم الشركة -->
       <div class="input-group">
-        <label for="companyName">Company Name</label>
+        <label for="company_name">New Company Name</label>
         <input 
           type="text" 
-          id="companyName" 
-          formControlName="companyName" 
+          id="company_name" 
+          formControlName="company_name" 
           placeholder="Enter company name"
-          [ngClass]="{'invalid': profileForm.get('companyName')?.invalid && profileForm.get('companyName')?.touched}">
-        <span class="error-msg" *ngIf="profileForm.get('companyName')?.invalid && profileForm.get('companyName')?.touched">
+          [ngClass]="{'invalid': profileForm.get('company_name')?.invalid && profileForm.get('company_name')?.touched}">
+        <span class="error-msg" *ngIf="profileForm.get('company_name')?.invalid && profileForm.get('company_name')?.touched">
           Company name is required
         </span>
       </div>
@@ -60,14 +60,14 @@
 
       <!-- نبذة عن النشاط -->
       <div class="input-group">
-        <label for="about">About</label>
+        <label for="about_company">About</label>
         <textarea 
-          id="about" 
+          id="about_company" 
           rows="4" 
-          formControlName="about" 
+          formControlName="about_company" 
           placeholder="Tell us about your business"
-          [ngClass]="{'invalid': profileForm.get('about')?.invalid && profileForm.get('about')?.touched}"></textarea>
-        <span class="error-msg" *ngIf="profileForm.get('about')?.invalid && profileForm.get('about')?.touched">
+          [ngClass]="{'invalid': profileForm.get('about_company')?.invalid && profileForm.get('about_company')?.touched}"></textarea>
+        <span class="error-msg" *ngIf="profileForm.get('about_company')?.invalid && profileForm.get('about_company')?.touched">
           This field is required
         </span>
       </div>
