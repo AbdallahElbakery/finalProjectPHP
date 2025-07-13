@@ -11,7 +11,7 @@
           <img [src]="registerForm.value.image || 'assets/images/default-avatar.jpg'" alt="Profile picture">
         </div>
         <div class="avatar-edit">
-          <input type="file" id="imageUpload" (change)="onFileChange($event)" accept=".png, .jpg, .jpeg">
+          <input type="file" id="imageUpload" (change)="onFileChange($event)" accept=".png, .jpg, .jpeg" formControlName="photo">
           <label for="imageUpload" class="upload-btn">
             <i class="fas fa-camera"></i> Upload Picture
           </label>

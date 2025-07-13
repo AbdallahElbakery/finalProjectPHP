@@ -15,7 +15,7 @@ export class PropertyServiceService {
   private cateogries = "http://127.0.0.1:8000/api/categories";
   private addOwnProperty = "http://127.0.0.1:8000/api/seller-add-prop";
   private updateProp = "http://127.0.0.1:8000/api/seller-update-prop";
-  private deleteProp="http://127.0.0.1:8000/api/seller-delete-prop";
+  private deleteProp = "http://127.0.0.1:8000/api/seller-delete-prop";
   private companyDetails = "http://127.0.0.1:8000/api/seller/update-company-details";
   private updatePassword = "http://127.0.0.1:8000/api/seller/change-password";
   private profile = "http://127.0.0.1:8000/api/seller/update-personal-details";
@@ -50,11 +50,11 @@ export class PropertyServiceService {
     return this.http.put(`${this.updateProp}/${id}`, data, { headers: { 'content-type': 'application/json' } });
   }
 
-  updateProfile(data: FormData): Observable<any> {
-    return this.http.patch(`${this.profile}`, data);
-  }
   getProfile(): Observable<any> {
     return this.http.get<SellerData>(this.seller)
+  }
+  updateProfile(data: FormData): Observable<any> {
+    return this.http.post(`${this.profile}`, data);
   }
   getComapnyDetails(): Observable<any> {
     return this.http.get<Seller2>(this.seller);

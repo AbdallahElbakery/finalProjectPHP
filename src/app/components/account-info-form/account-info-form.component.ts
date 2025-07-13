@@ -54,19 +54,18 @@ export class AccountInfoFormComponent implements OnInit {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      const data = { ...this.registerForm.value };
       const formData = new FormData();
-      Object.keys(data).forEach(key=>{
-        formData.append(key,data[key])
+      const data = { ...this.registerForm.value };
+      Object.keys(data).forEach(key => {
+        formData.append(key, data[key])
       })
+      formData.append('_method', 'PATCH');
 
-      if (data.photo instanceof File) {
-        formData.append('photo', data.photo);
-      }
       this.propertyService.updateProfile(formData).subscribe(() => {
         console.log("updated")
       })
       console.log(formData.get('photo'));
+      
       alert('✅ Profile Info Updated')
       console.log('✅ Form submitted:', this.registerForm.value);
       this.router.navigate(['/edit-profile']);
@@ -74,4 +73,7 @@ export class AccountInfoFormComponent implements OnInit {
       this.registerForm.markAllAsTouched();
     }
   }
-}
+
+
+
+  }
