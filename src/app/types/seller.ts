@@ -24,7 +24,7 @@ export interface SellerData {
   email_verified_at: string
   phone: string
   role: string
-  image: string
+  photo: string
   created_at: string
   updated_at: string
   deleted_at: string

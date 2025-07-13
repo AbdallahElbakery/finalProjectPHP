@@ -41,7 +41,7 @@ export class AccountInfoFormComponent implements OnInit {
       phone: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
       address: ['', Validators.required],
       role: ['seller'],
-      photo: ['', Validators.required]
+      photo: ['']
     });
   }
 
@@ -56,12 +56,9 @@ export class AccountInfoFormComponent implements OnInit {
     if (this.registerForm.valid) {
       const data = { ...this.registerForm.value };
       const formData = new FormData();
-
-      formData.append('name', data.name);
-      formData.append('email', data.email);
-      formData.append('phone', data.phone);
-      formData.append('role', data.role);
-      formData.append('address', data.address);
+      Object.keys(data).forEach(key=>{
+        formData.append(key,data[key])
+      })
 
       if (data.photo instanceof File) {
         formData.append('photo', data.photo);

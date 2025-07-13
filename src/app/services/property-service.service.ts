@@ -11,13 +11,14 @@ import { Root, Seller, Seller2, SellerData } from '../types/seller';
 export class PropertyServiceService {
   private apiUrl = "http://127.0.0.1:8000/api/properties";
   private address = "http://127.0.0.1:8000/api/addresses";
-  private seller = "http://127.0.0.1:8000/api/sellers/3";
+  private seller = "http://127.0.0.1:8000/api/seller";
   private cateogries = "http://127.0.0.1:8000/api/categories";
-  private addProperties = "http://127.0.0.1:8000/api/sellers/3";
-  private getsingleProperty = "http://127.0.0.1:8000/api/sellers/3";
-  private profile = "http://127.0.0.1:8000/api/sellers/update-personal-details/2";
-  private companyDetails = "http://127.0.0.1:8000/api/sellers/update-company-details/2";
-  private updatePassword = "http://127.0.0.1:8000/api/sellers/change-password/1";
+  private addOwnProperty = "http://127.0.0.1:8000/api/seller-add-prop";
+  private updateProp = "http://127.0.0.1:8000/api/seller-update-prop";
+  private deleteProp="http://127.0.0.1:8000/api/seller-delete-prop";
+  private companyDetails = "http://127.0.0.1:8000/api/seller/update-company-details";
+  private updatePassword = "http://127.0.0.1:8000/api/seller/change-password";
+  private profile = "http://127.0.0.1:8000/api/seller/update-personal-details";
   // private deleteSellerProperty = "http://127.0.0.1:8000/api/sellers/1/14";
   constructor(private http: HttpClient) { }
   sellerData: SellerData[] = [];
@@ -35,21 +36,20 @@ export class PropertyServiceService {
   getCategories(): Observable<any> {
     return this.http.get<any>(this.cateogries);
   }
-
-  addProperty(data: any): Observable<any> {
-    return this.http.post(this.addProperties, data)
-  }
-  delteProperty(id: number) {
-    return this.http.delete(`${this.seller}/${id}`, { headers: new HttpHeaders({ 'content-type': 'application/json' }) })
-  }
-
-  updateProperty(id: number, data: Property): Observable<any> {
-    return this.http.put(`${this.seller}/${id}`, data, { headers: { 'content-type': 'application/json' } });
-  }
-
   getProperty(id: number): Observable<any> {
-    return this.http.get(`${this.getsingleProperty}/${id}`)
+    return this.http.get(`${this.seller}/${id}`)
   }
+  addProperty(data: any): Observable<any> {
+    return this.http.post(this.addOwnProperty, data)
+  }
+
+  delteProperty(id: number) {
+    return this.http.delete(`${this.deleteProp}/${id}`, { headers: new HttpHeaders({ 'content-type': 'application/json' }) })
+  }
+  updateProperty(id: number, data: Property): Observable<any> {
+    return this.http.put(`${this.updateProp}/${id}`, data, { headers: { 'content-type': 'application/json' } });
+  }
+
   updateProfile(data: FormData): Observable<any> {
     return this.http.patch(`${this.profile}`, data);
   }

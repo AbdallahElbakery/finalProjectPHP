@@ -106,7 +106,7 @@ export class CompanyInfoFormComponent implements OnInit {
         this.router.navigate(['/edit-profile']);
       })
     } else {
-      this.profileForm.markAllAsTouched(); // يظهر الأخطاء لو فيه
+      this.profileForm.markAllAsTouched(); 
     }
   }
 }
