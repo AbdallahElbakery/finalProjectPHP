@@ -1,18 +1,192 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Property } from '../../interfaces/property';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { findIndex } from 'rxjs';
+import { RouterModule, Router } from '@angular/router';
+import { BookingService, Booking } from '../../services/booking.service';
 
 @Component({
   selector: 'app-seller-bookings',
-  imports: [CommonModule, NgxPaginationModule],
+  imports: [CommonModule, NgxPaginationModule, RouterModule],
   templateUrl: './seller-bookings.component.html',
   styleUrl: './seller-bookings.component.css'
 })
-export class SellerBookingsComponent {
+export class SellerBookingsComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 4;
+  bookings: Booking[] = [];
+  loading = true;
+  error = '';
+  
+  constructor(private bookingService: BookingService, private router: Router) {}
+
+  ngOnInit() {
+    this.loadSellerBookings();
+  }
+
+  loadSellerBookings() {
+    this.loading = true;
+    this.error = '';
+    
+    this.bookingService.getSellerBookings().subscribe({
+      next: (bookings) => {
+        this.bookings = bookings;
+        this.loading = false;
+        console.log('Seller bookings loaded:', bookings);
+      },
+      error: (error) => {
+        this.error = error.message;
+        this.loading = false;
+        console.error('Error loading seller bookings:', error);
+      }
+    });
+  }
+
+
+
+  showToast(title: string, message: string, type: 'success' | 'error' | 'info') {
+    // Create toast element
+    const toastContainer = document.getElementById('toast-container') || this.createToastContainer();
+    
+    const toastId = 'toast-' + Date.now();
+    const toastHtml = `
+      <div id="${toastId}" class="toast align-items-center text-white bg-${type === 'success' ? 'success' : type === 'error' ? 'danger' : 'info'} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            <strong>${title}:</strong> ${message}
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    `;
+    
+    toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+    
+    // Show the toast
+    const toastElement = document.getElementById(toastId);
+    if (toastElement) {
+      const toast = new (window as any).bootstrap.Toast(toastElement);
+      toast.show();
+      
+      // Remove toast element after it's hidden
+      toastElement.addEventListener('hidden.bs.toast', () => {
+        toastElement.remove();
+      });
+    }
+  }
+
+  createToastContainer(): HTMLElement {
+    const container = document.createElement('div');
+    container.id = 'toast-container';
+    container.className = 'toast-container position-fixed top-0 end-0 p-3';
+    container.style.zIndex = '9999';
+    document.body.appendChild(container);
+    return container;
+  }
+
+  // Modal handling methods
+  private selectedBookingId: number | null = null;
+
+  confirmBooking(bookingId: number) {
+    this.selectedBookingId = bookingId;
+    const modal = new (window as any).bootstrap.Modal(document.getElementById('confirmBookingModal'));
+    modal.show();
+  }
+
+  cancelBooking(bookingId: number) {
+    this.selectedBookingId = bookingId;
+    const modal = new (window as any).bootstrap.Modal(document.getElementById('cancelBookingModal'));
+    modal.show();
+  }
+
+  confirmBookingAction() {
+    if (this.selectedBookingId) {
+      this.bookingService.confirmBooking(this.selectedBookingId).subscribe({
+        next: (response) => {
+          this.showToast('Success', response.message || 'Booking confirmed successfully!', 'success');
+          this.loadSellerBookings();
+          // Close modal
+          const modal = (window as any).bootstrap.Modal.getInstance(document.getElementById('confirmBookingModal'));
+          modal?.hide();
+        },
+        error: (error) => {
+          this.showToast('Error', error.message || 'Error confirming booking', 'error');
+        }
+      });
+    }
+  }
+
+  cancelBookingAction() {
+    if (this.selectedBookingId) {
+      this.bookingService.cancelBooking(this.selectedBookingId).subscribe({
+        next: (response) => {
+          this.showToast('Success', response.message || 'Booking cancelled successfully!', 'success');
+          this.loadSellerBookings();
+          // Close modal
+          const modal = (window as any).bootstrap.Modal.getInstance(document.getElementById('cancelBookingModal'));
+          modal?.hide();
+        },
+        error: (error) => {
+          this.showToast('Error', error.message || 'Error cancelling booking', 'error');
+        }
+      });
+    }
+  }
+
+  navigateToProperty(propertyId: number | undefined) {
+    if (propertyId) {
+      this.router.navigate(['/property-details', propertyId]);
+    }
+  }
+
+  getUserPhotoUrl(photo: string): string {
+    return photo ? `http://127.0.0.1:8000/uploads/${photo}` : 'assets/images/default-user.jpg';
+  }
+
+  getPropertyImageUrl(image: string | undefined): string {
+    return image ? `http://127.0.0.1:8000/uploads/${image}` : 'assets/images/default-property.jpg';
+  }
+
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'confirmed':
+        return 'status-confirmed';
+      case 'cancelled':
+        return 'status-cancelled';
+      default:
+        return 'status-pending';
+    }
+  }
+
+  getStatusText(status: string): string {
+    switch (status) {
+      case 'confirmed':
+        return 'Confirmed';
+      case 'cancelled':
+        return 'Cancelled';
+      default:
+        return 'Pending';
+    }
+  }
+
+  formatPrice(price: number): string {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(price);
+  }
+
+  formatDate(dateString: string): string {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+
+  // Mock data for fallback (remove this later)
   properties: Property[] = [
     {
       "id": 2,

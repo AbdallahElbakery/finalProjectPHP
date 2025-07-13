@@ -118,35 +118,43 @@
             <!-- Action Section with Toggleable Offer Form -->
             <div class="action-section">
               <div class="negotiate-offer">
-                @if (!showOfferForm) {
+                @if (!showOfferForm && !hasExistingOffer) {
                 <button class="buy-now-btn" (click)="toggleOfferForm()">
                   <i class="fas fa-handshake"></i>
                   Make an Offer
                 </button>
                 }
+                @if (hasExistingOffer) {
+                <div class="existing-offer-alert">
+                  <i class="fas fa-info-circle"></i>
+                  You already have an offer for this property
+                </div>
+                }
                 @if (showOfferForm) {
                 <div class="offer-form-container">
                   <h4 class="offer-title">
                     <i class="fas fa-edit"></i>
-                    قدم عرضك
+                    Make Your Offer
                   </h4>
                   <form [formGroup]="offerForm" (ngSubmit)="submitOffer()" class="offer-form">
                     <div class="form-group">
-                      <label for="suggested_price" class="form-label">السعر المقترح</label>
+                      <label for="suggested_price" class="form-label">Suggested Price</label>
                       <div class="input-group">
                         <span class="input-prefix">$</span>
                         <input 
-                          type="number" 
+                          type="text" 
                           id="suggested_price"
                           formControlName="suggested_price" 
                           class="form-control"
-                          placeholder="أدخل السعر المقترح (مثال: 2500000)"
+                          placeholder="Enter your suggested price (e.g., 2,500,000)"
                           [class.is-invalid]="offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched"
+                          autocomplete="off"
+                          (input)="formatPriceInput($event)"
                         />
                       </div>
                       @if (offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched) {
                         <div class="invalid-feedback">
-                          يرجى إدخال سعر صحيح
+                          Please enter a valid price
                         </div>
                       }
                     </div>
@@ -161,15 +169,15 @@
                       <button type="submit" class="submit-btn" [disabled]="offerForm.invalid || isSubmitting">
                         @if (isSubmitting) {
                           <i class="fas fa-spinner fa-spin"></i>
-                          جاري الإرسال...
+                          Sending...
                         } @else {
                           <i class="fas fa-paper-plane"></i>
-                          إرسال العرض
+                          Send Offer
                         }
                       </button>
                       <button type="button" class="cancel-btn" (click)="toggleOfferForm()" [disabled]="isSubmitting">
                         <i class="fas fa-times"></i>
-                        إلغاء
+                        Cancel
                       </button>
                     </div>
                   </form>
@@ -323,6 +331,20 @@
     </div>
     <div class="image-counter">
       1 / 6
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1050;">
+  <div id="offerToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <i class="fas fa-check-circle text-success me-2"></i>
+      <strong class="me-auto">Offer Status</strong>
+      <button type="button" class="btn-close" (click)="closeToast()" aria-label="Close"></button>
+    </div>
+    <div class="toast-body" id="toastMessage">
+      <!-- Toast message will be inserted here -->
     </div>
   </div>
 </div>

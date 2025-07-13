@@ -27,7 +27,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [GuestGuard] },
     { path: 'home', component: HomeComponent, title: 'Home', canActivate: [AuthGuard] },
     { path: 'properties', component: PropertiesComponent, title: 'Properties' },
-    { path: 'property-details', component: PropertyDetailsComponent, title: 'property-details', canActivate: [AuthGuard] },
+    { path: 'property-details/:id', component: PropertyDetailsComponent, title: 'property-details', canActivate: [AuthGuard] },
     { path: 'seller-profile' , component: SellerProfileComponent, canActivate: [AuthGuard] },
     { path: 'edit-profile' , component: EditProfileComponent, canActivate: [AuthGuard] },
     { path: 'user-seller-profile' , component: UserSellerProfileComponent, canActivate: [AuthGuard] },
