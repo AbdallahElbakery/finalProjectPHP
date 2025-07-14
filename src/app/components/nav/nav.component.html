@@ -30,9 +30,9 @@
         <li class="nav-item">
           <a class="nav-link" href="#rent">Rent</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="/seller-profile">Agents</a>
-        </li>
+        </li> -->
         <!-- <li class="nav-item">
           <a class="nav-link" href="/user-seller-profile">Users</a>
         </li> -->
@@ -57,16 +57,20 @@
       </ng-container>
       <ng-template #userDropdown>
         <div class="dropdown d-inline-block">
-          <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center" type="button" id="userDropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-            <img *ngIf="photo" [src]="photoUrl" alt="User Photo" class="rounded-circle me-2 user-photo" width="32" height="32">
+          <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center" type="button"
+            id="userDropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+            <img *ngIf="photo" [src]="photoUrl" alt="User Photo" class="rounded-circle me-2 user-photo" width="32"
+              height="32">
             <span *ngIf="!photo" class="user-initials me-2">{{ userName ? userName.charAt(0) : '?' }}</span>
             <span class="user-name">{{ userName }}</span>
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenu">
-            <li><a class="dropdown-item" href="/user-profile">Profile</a></li>
+            <li><a class="dropdown-item" herf="" style="cursor: pointer;" (click)="getrole()">Profile</a></li>
             <li><a class="dropdown-item" href="/user-bookings">My Bookings</a></li>
             <li><a class="dropdown-item" href="/seller-bookings">Property Bookings</a></li>
-            <li><hr class="dropdown-divider"></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
             <li><button class="dropdown-item" (click)="logout()">Logout</button></li>
           </ul>
         </div>

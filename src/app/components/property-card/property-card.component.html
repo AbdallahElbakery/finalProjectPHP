@@ -1,7 +1,7 @@
 <div class="property-card" (click)="viewPropertyDetails(property.id)">
   <!-- Property Image -->
   <div class="property-image">
-    <img [src]="property.image" [alt]="property.title" class="property-img">
+    <img [src]="'http://127.0.0.1:8000/storage/'+property.image" [alt]="property.title" class="property-img">
     <div class="property-badge">{{ property.type }}</div>
     <div class="property-date">
       <i class="fas fa-calendar"></i>
@@ -18,7 +18,7 @@
     </div>
 
     <!-- Title -->
-    <h3 class="property-title">{{ property.title }}</h3>
+    <h3 class="property-title">{{ property.name }}</h3>
 
     <!-- Price -->
     <div class="property-price">${{ formatPrice(property.price) }}</div>
@@ -49,7 +49,7 @@
 
     <!-- Seller Info -->
     <div class="seller-info">
-      <img [src]="property.seller.image" [alt]="property.seller.name" class="seller-avatar">
+      <img [src]="'http://127.0.0.1:8000/uploads/'+property.seller.photo" [alt]="property.seller.name" class="seller-avatar">
       <div class="seller-details">
         <span class="seller-name">{{ property.seller.name }}</span>
         <span class="seller-company">{{ property.seller.company }}</span>
@@ -64,7 +64,7 @@
     <div class="action-buttons">
       <button class="more-details-btn" (click)="viewPropertyDetails(property.id); $event.stopPropagation()">
         <i class="fas fa-eye"></i>
-           View Details
+        View Details
       </button>
       <!-- <button class="book-property-btn" (click)="bookProperty(property.id); $event.stopPropagation()">
         <i class="fas fa-handshake"></i>

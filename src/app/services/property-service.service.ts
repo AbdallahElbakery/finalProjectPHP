@@ -33,6 +33,9 @@ export class PropertyServiceService {
     return this.http.get<Root>(this.seller)
   }
 
+  getSellerProfile():Observable<Root>{
+    return this.http.get<Root>(this.seller)
+  }
   getCategories(): Observable<any> {
     return this.http.get<any>(this.cateogries);
   }
