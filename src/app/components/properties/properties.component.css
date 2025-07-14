@@ -360,8 +360,11 @@
 /* Properties Grid */
 .properties-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2rem;
+  align-items: stretch;
+  justify-items: center;
+  width: 100%;
 }
 
 .property-card {
@@ -590,7 +593,8 @@
 /* Responsive Design */
 @media (max-width: 992px) {
   .properties-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 
   .filters-sidebar {

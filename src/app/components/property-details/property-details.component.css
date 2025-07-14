@@ -155,6 +155,32 @@
   color: white;
 }
 
+.badge.sold {
+  background: #b91c1c;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sold-message {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0 2rem 0;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 500;
+}
+.sold-overlay .main-property-image {
+  filter: grayscale(0.85) brightness(0.85);
+  opacity: 0.85;
+}
+
 .expand-image-btn {
   background: rgba(255, 255, 255, 0.9);
   color: var(--primary-color);
@@ -1248,87 +1274,6 @@
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
-}
-
-/* Toast Styles */
-.toast-container {
-  z-index: 9999;
-}
-
-.toast {
-  min-width: 300px;
-  border: none;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(10px);
-}
-
-.toast-header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1rem 1.25rem 0.75rem;
-}
-
-.toast-body {
-  padding: 1rem 1.25rem;
-  font-weight: 500;
-}
-
-.toast.bg-success {
-  background: linear-gradient(135deg, #10b981, #059669) !important;
-}
-
-.toast.bg-danger {
-  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
-}
-
-/* Existing Offer Alert */
-.existing-offer-alert {
-  background: var(--bg-light);
-  border: 1px solid var(--primary-color);
-  color: var(--primary-color);
-  padding: 1rem;
-  border-radius: var(--border-radius);
-  text-align: center;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.existing-offer-alert i {
-  font-size: 1.1em;
-}
-
-/* Toast Animation */
-.toast {
-  display: none;
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: all 0.3s ease-in-out;
-}
-
-.toast.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Price Input Styling */
-.input-group .form-control {
-  border-left: none;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.input-prefix {
-  background: var(--bg-light);
-  border: 1px solid #dee2e6;
-  border-right: none;
-  padding: 0.75rem 1rem;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  color: var(--primary-color);
-  font-weight: 600;
 }
 
 @keyframes fadeIn {
