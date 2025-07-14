@@ -25,7 +25,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'home', component: HomeComponent, title: 'Home' },
     { path: 'properties', component: PropertiesComponent, title: 'Properties' },
-    { path: 'property-details', component: PropertyDetailsComponent, title: 'property-details' },
+    { path: 'property/:id', component: PropertyDetailsComponent, title: 'Property Details' },
     { path: 'seller-profile' , component: SellerProfileComponent},
     { path: 'edit-profile' , component: EditProfileComponent},
     { path: 'user-seller-profile' , component: UserSellerProfileComponent},

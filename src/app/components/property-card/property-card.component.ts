@@ -32,7 +32,7 @@ export class PropertyCardComponent {
   }
 
   viewPropertyDetails(propertyId: number) {
-    this.router.navigate(['/property-details']);
+    this.router.navigate(['/property', propertyId]);
   }
 
   bookProperty(propertyId: number) {

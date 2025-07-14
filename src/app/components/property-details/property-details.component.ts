@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BookingService, BookingRequest } from '../../services/booking.service';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-property-details',
@@ -11,6 +13,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './property-details.component.css'
 })
 export class PropertyDetailsComponent implements OnInit {
+  propertyData: any = null;
+  loading = false;
   @Input() propertyId: number = 0;
   
   showOfferForm = false;
@@ -18,10 +22,13 @@ export class PropertyDetailsComponent implements OnInit {
   isSubmitting = false;
   submitMessage = '';
   submitSuccess = false;
+  addressData: any = null;
 
   constructor(
     private fb: FormBuilder,
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    private route: ActivatedRoute,
+    private http: HttpClient
   ) {
     // validate for form
     this.offerForm = this.fb.group({
@@ -32,9 +39,40 @@ export class PropertyDetailsComponent implements OnInit {
   ngOnInit() {
     // Get property ID from route or input
     if (!this.propertyId) {
-      // You can get it from route params or other sources
-      this.propertyId = 1; // Default for demo
+      this.route.paramMap.subscribe(params => {
+        const id = params.get('id');
+        if (id) {
+          this.propertyId = +id;
+          this.fetchProperty();
+        }
+      });
+    } else {
+      this.fetchProperty();
     }
+  }
+
+  fetchProperty() {
+    this.loading = true;
+    this.http.get<any>(`http://127.0.0.1:8000/api/properties/${this.propertyId}`).subscribe({
+      next: (res) => {
+        this.propertyData = res.Property;
+        this.loading = false;
+        if (this.propertyData && this.propertyData.address_id) {
+          this.http.get<any>(`http://127.0.0.1:8000/api/addresses/${this.propertyData.address_id}`).subscribe({
+            next: (addressRes) => {
+              this.addressData = Array.isArray(addressRes) ? addressRes[0] : addressRes;
+            },
+            error: () => {
+              this.addressData = null;
+            }
+          });
+        }
+      },
+      error: (err) => {
+        this.propertyData = null;
+        this.loading = false;
+      }
+    });
   }
 
   toggleOfferForm() {
