@@ -20,9 +20,10 @@ export class PropertyCardComponent {
 
   formatPrice(price: number): string {
     return new Intl.NumberFormat('en-US', {
-      // style: 'currency',
-      // currency: 'USD',
-      // minimumFractionDigits: 0
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
     }).format(price);
   }
 
@@ -32,22 +33,53 @@ export class PropertyCardComponent {
   }
 
   viewPropertyDetails(propertyId: number) {
-    this.router.navigate(['/property-details']);
+    this.router.navigate(['/property-details', propertyId]);
+  }
+
+  // Validate offer price
+  validateOfferPrice(price: number, propertyPrice: number): { isValid: boolean; message: string } {
+    const minPrice = propertyPrice * 0.7; // 70% of original price
+    const maxPrice = propertyPrice * 1.3; // 130% of original price
+
+    if (price < minPrice) {
+      return {
+        isValid: false,
+        message: `Offer must be at least ${this.formatPrice(minPrice)} (70% of original price)`
+      };
+    }
+
+    if (price > maxPrice) {
+      return {
+        isValid: false,
+        message: `Offer cannot exceed ${this.formatPrice(maxPrice)} (130% of original price)`
+      };
+    }
+
+    return { isValid: true, message: '' };
   }
 
   bookProperty(propertyId: number) {
-    const suggestedPrice = prompt('أدخل السعر المقترح للحجز:');
+    const suggestedPrice = prompt('Enter your suggested price for booking:');
     if (suggestedPrice && !isNaN(Number(suggestedPrice)) && Number(suggestedPrice) > 0) {
+      // Validate the offer price if property price is available
+      if (this.property?.price) {
+        const validation = this.validateOfferPrice(Number(suggestedPrice), this.property.price);
+        if (!validation.isValid) {
+          alert(validation.message);
+          return;
+        }
+      }
+
       this.bookingService.createBooking({
         property_id: propertyId,
         suggested_price: Number(suggestedPrice)
       }).subscribe({
         next: (response) => {
-          alert('تم إرسال طلب الحجز بنجاح!');
+          alert(response.message || 'Booking request sent successfully!');
         },
         error: (error) => {
           console.error('Error creating booking:', error);
-          alert('حدث خطأ أثناء إرسال طلب الحجز');
+          alert(error.message || 'An error occurred while sending the booking request');
         }
       });
     }

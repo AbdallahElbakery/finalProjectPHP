@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
 import { PropertyComponent } from '../property/property.component';
 import { Property } from '../../types/property';
 import { PropertyServiceService } from '../../services/property-service.service';
@@ -8,7 +7,7 @@ import { Address } from '../../types/address';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, RouterOutlet, PropertyComponent],
+  imports: [PropertyComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
