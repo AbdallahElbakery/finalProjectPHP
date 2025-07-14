@@ -86,11 +86,12 @@ export class CreatePropertyComponent implements OnInit {
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
-      this.propertyForm.patchValue({ 'photo': file })
+      this.propertyForm.patchValue({ 'image': file })
     }
   }
 
   onSubmit() {
+    console.log(this.propertyForm.valid)
     this.submitted = true;
 
     if (this.propertyForm.valid) {
@@ -99,12 +100,14 @@ export class CreatePropertyComponent implements OnInit {
       if (data.image === null || data.image === '') {
         delete data.image;
       }
+    Object.keys(data).forEach(key => {
+      if (key === 'image' && data[key] instanceof File) {
+        formData.append('image', data[key]);
+      } else {
+        formData.append(key, data[key]);
+      }
+    });
 
-      Object.keys(data).forEach(key => {
-        if (key === 'photo' && this.propertyForm.get('photo')?.value instanceof File) {
-          formData.append(key, this.propertyForm.get('photo')?.value);
-        }
-      });
 
       this.propertyService.addProperty(formData).subscribe(
         () => console.log('New Property:', this.propertyForm.value),
