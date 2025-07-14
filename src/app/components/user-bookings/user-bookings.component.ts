@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { BookingService, Booking } from '../../services/booking.service';
+import { PropertyServiceService } from '../../services/property-service.service';
 
 @Component({
   selector: 'app-user-bookings',
@@ -14,7 +15,7 @@ export class UserBookingsComponent implements OnInit, AfterViewInit {
   bookings: Booking[] = [];
   loading = true;
   error = '';
-  
+  approvalLink: string = ''
   // Modal states
   showDeleteModal = false;
   showEditModal = false;
@@ -25,7 +26,8 @@ export class UserBookingsComponent implements OnInit, AfterViewInit {
   constructor(
     private bookingService: BookingService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private propertyService: PropertyServiceService
   ) {
     this.editForm = this.fb.group({
       suggested_price: ['', [Validators.required, Validators.min(1)]]
@@ -105,13 +107,13 @@ export class UserBookingsComponent implements OnInit, AfterViewInit {
   formatPriceInput(event: any) {
     const input = event.target;
     let value = input.value.replace(/[^\d]/g, '');
-    
+
     if (value) {
       const numValue = parseInt(value);
       if (!isNaN(numValue)) {
         const formattedValue = numValue.toLocaleString('en-US');
         input.value = formattedValue;
-        
+
         this.editForm.patchValue({
           suggested_price: formattedValue
         }, { emitEvent: false });
@@ -122,7 +124,7 @@ export class UserBookingsComponent implements OnInit, AfterViewInit {
   // Delete booking
   deleteBooking() {
     if (!this.selectedBooking) return;
-    
+
     this.isSubmitting = true;
     this.bookingService.deleteBooking(this.selectedBooking.id!).subscribe({
       next: () => {
@@ -164,13 +166,13 @@ export class UserBookingsComponent implements OnInit, AfterViewInit {
   // Edit booking
   editBooking() {
     if (!this.selectedBooking || this.editForm.invalid) return;
-    
+
     this.isSubmitting = true;
     let priceValue = this.editForm.value.suggested_price;
     if (typeof priceValue === 'string') {
       priceValue = parseInt(priceValue.replace(/,/g, ''));
     }
-    
+
     // Validate the offer price if property price is available
     if (this.selectedBooking.property?.price) {
       const validation = this.validateOfferPrice(priceValue, this.selectedBooking.property.price);
@@ -180,7 +182,7 @@ export class UserBookingsComponent implements OnInit, AfterViewInit {
         return;
       }
     }
-    
+
     this.bookingService.updateBooking(this.selectedBooking.id!, { suggested_price: priceValue }).subscribe({
       next: (updatedBooking) => {
         const index = this.bookings.findIndex(b => b.id === this.selectedBooking!.id);
@@ -215,10 +217,10 @@ export class UserBookingsComponent implements OnInit, AfterViewInit {
     const toastElement = document.getElementById('bookingToast');
     const toastMessage = document.getElementById('toastMessage');
     const toastIcon = toastElement?.querySelector('.toast-header i');
-    
+
     if (toastElement && toastMessage && toastIcon) {
       toastMessage.textContent = message;
-      
+
       if (isSuccess) {
         toastIcon.className = 'fas fa-check-circle text-success me-2';
         toastElement.classList.remove('bg-danger', 'text-white');
@@ -228,10 +230,10 @@ export class UserBookingsComponent implements OnInit, AfterViewInit {
         toastElement.classList.remove('bg-success', 'text-white');
         toastElement.classList.add('bg-danger', 'text-white');
       }
-      
+
       toastElement.classList.add('show');
       toastElement.style.display = 'block';
-      
+
       setTimeout(() => {
         toastElement.classList.remove('show');
         setTimeout(() => {
@@ -273,7 +275,7 @@ export class UserBookingsComponent implements OnInit, AfterViewInit {
     }
     return 'http://127.0.0.1:8000/uploads/' + image;
   }
-  
+
   formatPrice(price: number): string {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -289,5 +291,13 @@ export class UserBookingsComponent implements OnInit, AfterViewInit {
       month: 'long',
       day: 'numeric'
     });
+  }
+
+
+  pay(id: number) {
+    this.propertyService.getPayment(id).subscribe((res) => {
+      this.approvalLink = res.approval_url;
+      window.open(this.approvalLink, '_blank')
+    })
   }
 }

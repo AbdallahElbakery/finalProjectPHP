@@ -19,6 +19,8 @@ export class PropertyServiceService {
   private companyDetails = "http://127.0.0.1:8000/api/seller/update-company-details";
   private updatePassword = "http://127.0.0.1:8000/api/seller/change-password";
   private profile = "http://127.0.0.1:8000/api/seller/update-personal-details";
+  private getOwnProp = "http://127.0.0.1:8000/api/seller-get-prop";
+  private getpay="http://127.0.0.1:8000/api/payment";
   // private deleteSellerProperty = "http://127.0.0.1:8000/api/sellers/1/14";
   constructor(private http: HttpClient) { }
   sellerData: SellerData[] = [];
@@ -33,14 +35,14 @@ export class PropertyServiceService {
     return this.http.get<Root>(this.seller)
   }
 
-  getSellerProfile():Observable<Root>{
+  getSellerProfile(): Observable<Root> {
     return this.http.get<Root>(this.seller)
   }
   getCategories(): Observable<any> {
     return this.http.get<any>(this.cateogries);
   }
   getProperty(id: number): Observable<any> {
-    return this.http.get(`${this.seller}/${id}`)
+    return this.http.get(`${this.getOwnProp}/${id}`)
   }
   addProperty(data: any): Observable<any> {
     return this.http.post(this.addOwnProperty, data)
@@ -74,6 +76,9 @@ export class PropertyServiceService {
     return this.http.patch(this.updatePassword, data, { headers: { 'content-type': 'application/json' } });
   }
 
+  getPayment(id:number):Observable<any>{
+    return this.http.post(`${this.getpay}`,{id:id},{headers:{'content-type':'application/json'}})
+  }
   // }
   // deleteSellerProp(): Observable<Root> {
   //   return this.http.delete<Root>(this.deleteSellerProperty)

@@ -47,7 +47,7 @@ export class EditPropertyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initializeForm();
+    this.initializeForm();    
     this.loadPropertyData();
 
     this.propertyService.getCategories().subscribe((category) => {
@@ -58,6 +58,7 @@ export class EditPropertyComponent implements OnInit {
       return this.addresses = cities;
     })
   }
+
 
   initializeForm() {
     this.updatePropForm = this.fb.group({
