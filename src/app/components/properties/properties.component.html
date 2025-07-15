@@ -8,6 +8,25 @@
 
         <!-- Main Search Bar -->
         <div class="container  search-box ">
+          <!-- New Live Search -->
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-text bg-white border-end-0 search-filter focus-ring">
+                  <i class="fa-solid fa-search"></i>
+                </span>
+                <input 
+                  type="text" 
+                  class="form-control border-start-0 search-filter" 
+                  placeholder="Search by property name, seller, or category"
+                  [(ngModel)]="searchTerm"
+                  (input)="onSearchInput()">
+              </div>
+            </div>
+          </div>
+
+          <!-- Commented out old search filters -->
+          <!--
           <form class="row g-2 justify-content-center">
             <div class="col-md-3">
               <div class="input-group">
@@ -53,6 +72,7 @@
                 style="cursor: pointer;">Search</button>
             </div>
           </form>
+          -->
         </div>
 
         <!-- Quick Stats -->
@@ -153,9 +173,8 @@
           <!-- Results Header -->
           <div class="results-header">
             <h2 class="results-title">
-              6 Properties Found
+              {{ filteredProperties.length }} Properties Found
             </h2>
-
           </div>
 
           <!-- Properties Card -->
@@ -182,6 +201,22 @@
             <app-property-card [property]="property"
               *ngFor="let property of filteredProperties | paginate: {itemsPerPage: itemsPerPage,currentPage: currentPage}">
             </app-property-card>
+          </div>
+
+          <!-- No Search Results -->
+          <div *ngIf="!loading && searchTerm && filteredProperties.length === 0" class="no-results">
+            <div class="no-results-content">
+              <i class="fas fa-search no-results-icon"></i>
+              <h3 class="no-results-title">No Results Found</h3>
+              <p class="no-results-text">
+                We couldn't find any properties matching "{{ searchTerm }}". 
+                Try searching for different keywords or clear your search.
+              </p>
+              <button class="clear-filters-btn" (click)="clearSearch()">
+                <i class="fas fa-times"></i>
+                Clear Search
+              </button>
+            </div>
           </div>
 
 

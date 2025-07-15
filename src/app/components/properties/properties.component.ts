@@ -30,6 +30,9 @@ export class PropertiesComponent implements OnInit {
   filterBedrooms: number|null = null;
   filterSeller: string = '';
 
+  // search variable
+  searchTerm: string = '';
+
   // for select options
   cities: string[] = [];
   purposes: string[] = [];
@@ -65,18 +68,7 @@ export class PropertiesComponent implements OnInit {
   }
 
   onFilterChange() {
-    this.filteredProperties = this.allProperties.filter((p: any) => {
-      const price = Number(p.price);
-      const priceMinOk = this.filterPriceMin == null || price >= this.filterPriceMin;
-      const priceMaxOk = this.filterPriceMax == null || price <= this.filterPriceMax;
-      const cityOk = !this.filterCity || p.city === this.filterCity;
-      const purposeOk = !this.filterPurpose || p.purpose === this.filterPurpose;
-      const categoryOk = !this.filterCategory || p.category === this.filterCategory;
-      const bedroomsOk = this.filterBedrooms == null || p.bedrooms == this.filterBedrooms;
-      const sellerOk = !this.filterSeller || (p.seller && p.seller.name === this.filterSeller);
-      return priceMinOk && priceMaxOk && cityOk && purposeOk && categoryOk && bedroomsOk && sellerOk;
-    });
-    this.currentPage = 1;
+    this.applyFiltersAndSearch();
   }
 
   resetFilters() {
@@ -87,7 +79,51 @@ export class PropertiesComponent implements OnInit {
     this.filterCategory = '';
     this.filterBedrooms = null;
     this.filterSeller = '';
-    this.filteredProperties = [...this.allProperties];
+    this.searchTerm = '';
+    this.applyFiltersAndSearch();
+  }
+
+  onSearchInput() {
+    this.applyFiltersAndSearch();
+  }
+
+  clearSearch() {
+    this.searchTerm = '';
+    this.applyFiltersAndSearch();
+  }
+
+  private applyFiltersAndSearch() {
+    let filtered = [...this.allProperties];
+
+    // Apply search filter
+    if (this.searchTerm.trim()) {
+      const searchLower = this.searchTerm.toLowerCase().trim();
+      filtered = filtered.filter((property: any) => {
+        const propertyName = (property.name || '').toLowerCase();
+        const sellerName = (property.seller?.name || '').toLowerCase();
+        const category = (property.category || '').toLowerCase();
+        
+        return propertyName.includes(searchLower) || 
+               sellerName.includes(searchLower) || 
+               category.includes(searchLower);
+      });
+    }
+
+    // Apply other filters
+    filtered = filtered.filter((p: any) => {
+      const price = Number(p.price);
+      const priceMinOk = this.filterPriceMin == null || price >= this.filterPriceMin;
+      const priceMaxOk = this.filterPriceMax == null || price <= this.filterPriceMax;
+      const cityOk = !this.filterCity || p.city === this.filterCity;
+      const purposeOk = !this.filterPurpose || p.purpose === this.filterPurpose;
+      const categoryOk = !this.filterCategory || p.category === this.filterCategory;
+      const bedroomsOk = this.filterBedrooms == null || p.bedrooms == this.filterBedrooms;
+      const sellerOk = !this.filterSeller || (p.seller && p.seller.name === this.filterSeller);
+      
+      return priceMinOk && priceMaxOk && cityOk && purposeOk && categoryOk && bedroomsOk && sellerOk;
+    });
+
+    this.filteredProperties = filtered;
     this.currentPage = 1;
   }
 }
