@@ -153,6 +153,8 @@ export class SellerBookingsComponent implements OnInit {
         return 'status-confirmed';
       case 'cancelled':
         return 'status-cancelled';
+      case 'paid':
+        return 'status-paid';
       default:
         return 'status-pending';
     }
@@ -164,6 +166,8 @@ export class SellerBookingsComponent implements OnInit {
         return 'Confirmed';
       case 'cancelled':
         return 'Cancelled';
+      case 'paid':
+        return 'Paid';
       default:
         return 'Pending';
     }

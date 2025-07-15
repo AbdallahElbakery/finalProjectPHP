@@ -21,7 +21,9 @@
         </a>
       </button>
       <div class="property-status">
-        <span class="status-badge available">Available</span>
+        <span class="status-badge" [ngClass]="{'available': propertyData?.status !== 'sold', 'sold': propertyData?.status === 'sold'}">
+          {{ propertyData?.status ? (propertyData.status | titlecase) : 'Available' }}
+        </span>
       </div>
     </div>
   </div>
@@ -139,7 +141,7 @@
             <!-- Action Section with Toggleable Offer Form -->
             <div class="action-section">
               <div class="negotiate-offer">
-                <button class="buy-now-btn" (click)="toggleOfferForm()" *ngIf="!showOfferForm && !hasBookingForThisProperty && !submitSuccess">
+                <button class="buy-now-btn" (click)="toggleOfferForm()" *ngIf="!showOfferForm && !hasBookingForThisProperty && !submitSuccess && propertyData?.status !== 'sold'">
                   <i class="fas fa-handshake"></i>
                   Make an Offer
                 </button>

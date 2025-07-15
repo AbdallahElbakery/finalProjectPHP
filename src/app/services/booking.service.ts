@@ -8,7 +8,7 @@ export interface Booking {
   user_id: number;
   property_id: number;
   suggested_price: number;
-  status: 'pending' | 'confirmed' | 'cancelled';
+  status: 'pending' | 'confirmed' | 'cancelled' | 'paid';
   created_at?: string;
   updated_at?: string;
   property?: any;
