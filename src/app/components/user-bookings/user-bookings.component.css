@@ -73,8 +73,13 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Error State */
@@ -231,6 +236,11 @@
   color: white;
 }
 
+.status-paid {
+  background: #1e40af;
+  color: white;
+}
+
 .status-cancelled {
   background: var(--danger-color);
   color: white;
@@ -253,13 +263,13 @@
   margin-bottom: 1.5rem;
 }
 
-  .info-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
-    font-size: 0.9rem;
-  }
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
 
 /* Modal Styles */
 .modal-overlay {
@@ -568,20 +578,20 @@
     margin-top: 60px;
     padding: 1rem 0;
   }
-  
+
   .page-title {
     font-size: 2rem;
   }
-  
+
   .bookings-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .booking-actions {
     flex-direction: column;
   }
-  
+
   .action-btn {
     width: 100%;
   }
@@ -591,15 +601,15 @@
   .page-title {
     font-size: 1.75rem;
   }
-  
+
   .booking-details {
     padding: 1rem;
   }
-  
+
   .property-name {
     font-size: 1.1rem;
   }
-  
+
   .info-item {
     font-size: 0.85rem;
   }

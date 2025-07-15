@@ -48,10 +48,10 @@
         <!-- Property Image -->
         <div class="booking-image">
           @if (booking.property?.images && booking.property.images.length > 0) {
-          <img [src]="'http://127.0.0.1:8000/uploads/' + booking.property.images[0]"
+          <img [src]="'http://127.0.0.1:8000/uploads/'+booking.property.images[0]"
             [alt]="booking.property?.name || 'Property'">
           } @else if (booking.property?.image) {
-          <img [src]="'http://127.0.0.1:8000/uploads/' + booking.property.image"
+          <img [src]="'http://127.0.0.1:8000/storage/'+booking.property.image"
             [alt]="booking.property?.name || 'Property'">
           } @else {
           <div class="no-image">
