@@ -249,6 +249,8 @@ export class UserBookingsComponent implements OnInit, AfterViewInit {
         return 'status-confirmed';
       case 'cancelled':
         return 'status-cancelled';
+      case 'paid':
+        return 'status-paid';
       default:
         return 'status-pending';
     }
@@ -260,6 +262,8 @@ export class UserBookingsComponent implements OnInit, AfterViewInit {
         return 'Confirmed';
       case 'cancelled':
         return 'Cancelled';
+      case 'paid':
+        return 'Paid';
       default:
         return 'Pending';
     }
