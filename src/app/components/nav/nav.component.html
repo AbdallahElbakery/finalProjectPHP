@@ -13,19 +13,24 @@
           <a class="nav-link" routerLink="/home" routerLinkActive="activeLink">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/properties" routerLinkActive="activeLink">Properties</a>
+          <a class="nav-link" routerLinkActive="activeLink" routerLink="/properties">Properties</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="activeLink" routerLink="/my-properties">My Properties</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="activeLink" routerLink="/about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/about" routerLinkActive="activeLink">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/contact" routerLinkActive="activeLink">ContactUs</a>
+          <a class="nav-link" routerLinkActive="activeLink" routerLink="/contact">Contact</a>
         </li>
       </ul>
       <!-- CTA Button or User Dropdown -->
       <ng-container *ngIf="!isAuthenticated; else userDropdown">
-        <a routerLink="/login" class="login-btn ms-3">Login</a>
-        <a routerLink="/registration" class="cta-button rounded-3 ms-2">Register</a>
+        <a routerLink="/login" class="login-btn">Login</a>
+        <a routerLink="/registration" class="cta-button rounded-3">Register</a>
       </ng-container>
       <ng-template #userDropdown>
         <div class="dropdown d-inline-block ms-3">

@@ -20,7 +20,7 @@ export class PropertyServiceService {
   private updatePassword = "http://127.0.0.1:8000/api/seller/change-password";
   private profile = "http://127.0.0.1:8000/api/seller/update-personal-details";
   private getOwnProp = "http://127.0.0.1:8000/api/seller-get-prop";
-  private getpay="http://127.0.0.1:8000/api/payment";
+  private getpay = "http://127.0.0.1:8000/api/payment";
   // private deleteSellerProperty = "http://127.0.0.1:8000/api/sellers/1/14";
   constructor(private http: HttpClient) { }
   sellerData: SellerData[] = [];
@@ -51,7 +51,8 @@ export class PropertyServiceService {
   delteProperty(id: number) {
     return this.http.delete(`${this.deleteProp}/${id}`, { headers: new HttpHeaders({ 'content-type': 'application/json' }) })
   }
-  updateProperty(id: number, data:FormData): Observable<any> {
+  updateProperty(id: number, data: FormData): Observable<any> {
+    data.append('_method', 'PUT')
     return this.http.post(`${this.updateProp}/${id}`, data);
   }
 
@@ -78,8 +79,8 @@ export class PropertyServiceService {
     return this.http.patch(this.updatePassword, data, { headers: { 'content-type': 'application/json' } });
   }
 
-  getPayment(id:number):Observable<any>{
-    return this.http.post(`${this.getpay}`,{id:id},{headers:{'content-type':'application/json'}})
+  getPayment(id: number): Observable<any> {
+    return this.http.post(`${this.getpay}`, { id: id }, { headers: { 'content-type': 'application/json' } })
   }
   // }
   // deleteSellerProp(): Observable<Root> {

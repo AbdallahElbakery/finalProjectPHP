@@ -356,41 +356,84 @@
   transform: translateY(-2px);
 }
 
-/* Back to Top Button */
-.back-to-top {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 50px;
-  height: 50px;
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
+/* Payment Methods */
+.payment-methods {
+  margin-top: 1.5rem;
+}
+
+.payment-title {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--white);
+  font-size: 1rem;
+}
+
+.payment-icons {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #2563eb;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: var(--white-80);
+  font-size: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: var(--transition);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  z-index: 1000;
-  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.3);
 }
 
-.back-to-top.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+.payment-method:hover {
+  background: rgba(8, 24, 255, 0.548);
+  color: var(--white);
 }
 
-.back-to-top:hover {
-  background: var(--primary-light);
-  transform: translateY(-3px) scale(1.1);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+.payment-icon {
+  font-size: 1.2rem;
 }
 
-.back-to-top-icon {
-  font-size: 1.25rem;
-  font-weight: bold;
+/* Payment Methods */
+.payment-methods {
+  margin-top: 1.5rem;
+}
+
+.payment-title {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--white);
+  font-size: 1rem;
+}
+
+.payment-icons {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #1e40af;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: var(--white-80);
+  font-size: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: var(--transition);
+}
+
+.payment-method:hover {
+  background: rgba(255, 255, 255, 0.308);
+  color: var(--white);
+}
+
+.payment-icon {
+  font-size: 1.2rem;
 }
 
 /* Payment Methods */
