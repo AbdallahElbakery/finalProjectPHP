@@ -12,167 +12,170 @@
 
     <!-- Loading State -->
     @if (loading) {
-        <div class="text-center py-5">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <p class="mt-3">Loading bookings...</p>
+    <div class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
         </div>
+        <p class="mt-3">Loading bookings...</p>
+    </div>
     }
 
     <!-- Error State -->
     @if (error && !loading) {
-        <div class="alert alert-danger" role="alert">
-            <i class="fas fa-exclamation-triangle"></i>
-            {{ error }}
-        </div>
+    <div class="alert alert-danger" role="alert">
+        <i class="fas fa-exclamation-triangle"></i>
+        {{ error }}
+    </div>
     }
 
     <!-- Bookings List -->
     @if (!loading && !error) {
-        @if (bookings.length === 0) {
-            <div class="text-center py-5">
-                <i class="fas fa-calendar-times fa-3x text-muted mb-3"></i>
-                <h5>No Bookings Found</h5>
-                <p class="text-muted">You don't have any bookings for your properties yet.</p>
-            </div>
-        } @else {
-        <div class="card booking-card"
-                *ngFor="let booking of bookings | paginate:{currentPage:currentPage,itemsPerPage:itemsPerPage}">
-            <div class="card-body">
-                <!-- Details Row -->
-                <div class="details-row">
-                    <div class="row align-items-center">
-                        <!-- Property Image -->
-                        <div class="col-md-2">
-                            <div class="image-container">
-                                <img [src]="getPropertyImageUrl(booking.property?.image)" alt="Property Image" class="property-img">
-                            </div>
+    @if (bookings.length === 0) {
+    <div class="text-center py-5">
+        <i class="fas fa-calendar-times fa-3x text-muted mb-3"></i>
+        <h5>No Bookings Found</h5>
+        <p class="text-muted">You don't have any bookings for your properties yet.</p>
+    </div>
+    } @else {
+    <div class="card booking-card"
+        *ngFor="let booking of bookings | paginate:{currentPage:currentPage,itemsPerPage:itemsPerPage}">
+        <div class="card-body">
+            <!-- Details Row -->
+            <div class="details-row">
+                <div class="row align-items-center">
+                    <!-- Property Image -->
+                    <div class="col-md-2">
+                        <div class="image-container">
+                            <img [src]="'http://127.0.0.1:8000/storage/'+booking.property?.image" alt="Property Image"
+                                class="property-img">
                         </div>
-
-                        <!-- Property Details -->
-                        <div class="col-md-3">
-                            <div class="property-details">
-                                <h5 class="property-title text-truncate" 
-                                    [routerLink]="['/property-details', booking.property?.id]" 
-                                    style="cursor: pointer; color: #1E40AF;">
-                                    {{booking.property?.name || 'Property'}}
-                                </h5>
-                                <p class="property-address">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span class="text-truncate">{{booking.property?.address_id || 'Location not available'}}</span>
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- User Information -->
-                        <div class="col-md-2">
-                            <div class="user-section">
-                                @if (booking.user?.photo) {
-                                    <img [src]="getUserPhotoUrl(booking.user.photo)" alt="User Avatar" class="user-avatar">
-                                } @else {
-                                    <div class="user-avatar-fallback">
-                                        {{ (booking.user?.name || 'U').charAt(0).toUpperCase() }}
-                                    </div>
-                                }
-                                <div class="user-info">
-                                    <span class="user-name" [title]="booking.user?.name || 'User'">{{booking.user?.name || 'User'}}</span>
-                                    <span class="user-email" [title]="booking.user?.email || 'Email not available'">{{booking.user?.email || 'Email not available'}}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Booking Date -->
-                        <div class="col-md-2">
-                            <div class="date-section">
-                                <div class="booking-date">
-                                    <i class="fas fa-calendar"></i>
-                                    <span>{{formatDate(booking.created_at || '')}}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Price Information -->
-                        <div class="col-md-2">
-                            <div class="price-section">
-                                @if (booking.property?.price) {
-                                <div class="original-price">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    <div>
-                                        <span class="price-label">Original</span><br>
-                                            <strong>{{formatPrice(booking.property.price)}}</strong>
-                                        </div>
-                                    </div>
-                                }
-                                <div class="offered-price">
-                                    <i class="fas fa-tag"></i>
-                                    <div>
-                                        <span class="price-label">Offered</span><br>
-                                        <strong>{{formatPrice(booking.suggested_price)}}</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
                     </div>
+
+                    <!-- Property Details -->
+                    <div class="col-md-3">
+                        <div class="property-details">
+                            <h5 class="property-title text-truncate"
+                                [routerLink]="['/property-details', booking.property?.id]"
+                                style="cursor: pointer; color: #1E40AF;">
+                                {{booking.property?.name || 'Property'}}
+                            </h5>
+                            <p class="property-address">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="text-truncate">{{booking.property?.address_id || 'Location not
+                                    available'}}</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- User Information -->
+                    <div class="col-md-2">
+                        <div class="user-section">
+                            @if (booking.user?.photo) {
+                            <img [src]="getUserPhotoUrl(booking.user.photo)" alt="User Avatar" class="user-avatar">
+                            } @else {
+                            <div class="user-avatar-fallback">
+                                {{ (booking.user?.name || 'U').charAt(0).toUpperCase() }}
+                            </div>
+                            }
+                            <div class="user-info">
+                                <span class="user-name" [title]="booking.user?.name || 'User'">{{booking.user?.name ||
+                                    'User'}}</span>
+                                <span class="user-email"
+                                    [title]="booking.user?.email || 'Email not available'">{{booking.user?.email ||
+                                    'Email not available'}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Booking Date -->
+                    <div class="col-md-2">
+                        <div class="date-section">
+                            <div class="booking-date">
+                                <i class="fas fa-calendar"></i>
+                                <span>{{formatDate(booking.created_at || '')}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Price Information -->
+                    <div class="col-md-2">
+                        <div class="price-section">
+                            @if (booking.property?.price) {
+                            <div class="original-price">
+                                <i class="fas fa-dollar-sign"></i>
+                                <div>
+                                    <span class="price-label">Original</span><br>
+                                    <strong>{{formatPrice(booking.property.price)}}</strong>
+                                </div>
+                            </div>
+                            }
+                            <div class="offered-price">
+                                <i class="fas fa-tag"></i>
+                                <div>
+                                    <span class="price-label">Offered</span><br>
+                                    <strong>{{formatPrice(booking.suggested_price)}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
+            </div>
 
-                <!-- Actions Row -->
-                <div class="actions-row">
+            <!-- Actions Row -->
+            <div class="actions-row">
 
-                    <div class="action-buttons">
-                        <!-- Status -->
-                        <div class="col-md-2">
-                            <div class="status-section">
-                                <span class="status-badge" [ngClass]="getStatusClass(booking.status)">
-                                    <i class="fas" [ngClass]="{
+                <div class="action-buttons">
+                    <!-- Status -->
+                    <div class="col-md-2">
+                        <div class="status-section">
+                            <span class="status-badge" [ngClass]="getStatusClass(booking.status)">
+                                <i class="fas" [ngClass]="{
                                         'fa-clock': booking.status === 'pending',
                                         'fa-check-circle': booking.status === 'confirmed',
                                         'fa-times-circle': booking.status === 'cancelled',
                                         'fa-dollar-sign': booking.status === 'paid'
                                     }"></i>
-                                    <span>{{getStatusText(booking.status)}}</span>
-                                </span>
-                            </div>
+                                <span>{{getStatusText(booking.status)}}</span>
+                            </span>
                         </div>
-                        
-                        <!-- Action Buttons -->
-                        @if (booking.status === 'pending') {
-                            <button class="btn action-btn accept-btn" type="button" (click)="confirmBooking(booking.id!)">
-                            <i class="fas fa-check"></i>
-                            <span>Accept</span>
-                        </button>
-                            <button class="btn action-btn reject-btn" type="button" (click)="cancelBooking(booking.id!)">
-                            <i class="fas fa-times"></i>
-                            <span>Reject</span>
-                        </button>
-                        }
-                        
-                        <button class="btn action-btn chat-btn" type="button">
-                            <i class="fas fa-comment"></i>
-                            <span>Chat</span>
-                        </button>
                     </div>
+
+                    <!-- Action Buttons -->
+                    @if (booking.status === 'pending') {
+                    <button class="btn action-btn accept-btn" type="button" (click)="confirmBooking(booking.id!)">
+                        <i class="fas fa-check"></i>
+                        <span>Accept</span>
+                    </button>
+                    <button class="btn action-btn reject-btn" type="button" (click)="cancelBooking(booking.id!)">
+                        <i class="fas fa-times"></i>
+                        <span>Reject</span>
+                    </button>
+                    }
+
+
                 </div>
             </div>
         </div>
-        }
+    </div>
+    }
 
-        <pagination-controls
-            class="align-content-center align-items-center justify-content-center mt-3 pagination-label"
-            (pageChange)="currentPage=$event"></pagination-controls>
+    <pagination-controls class="align-content-center align-items-center justify-content-center mt-3 pagination-label"
+        (pageChange)="currentPage=$event"></pagination-controls>
     }
 
     <!-- Confirm Booking Modal -->
-    <div class="modal fade" id="confirmBookingModal" tabindex="-1" aria-labelledby="confirmBookingModalLabel" aria-hidden="true">
+    <div class="modal fade" id="confirmBookingModal" tabindex="-1" aria-labelledby="confirmBookingModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-success text-white">
                     <h5 class="modal-title" id="confirmBookingModalLabel">
                         <i class="fas fa-check-circle me-2"></i>Confirm Booking
                     </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to confirm this booking?</p>
@@ -189,14 +192,16 @@
     </div>
 
     <!-- Cancel Booking Modal -->
-    <div class="modal fade" id="cancelBookingModal" tabindex="-1" aria-labelledby="cancelBookingModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cancelBookingModal" tabindex="-1" aria-labelledby="cancelBookingModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
                     <h5 class="modal-title" id="cancelBookingModalLabel">
                         <i class="fas fa-times-circle me-2"></i>Cancel Booking
                     </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to cancel this booking?</p>
@@ -211,4 +216,4 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
