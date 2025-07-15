@@ -1,7 +1,4 @@
-/* Modern Two-Row Booking Card Design */
-.container-custom {
-    /* margin-top: 150px !important; */
-}
+
 
 .booking-card {
     border: none;
@@ -129,7 +126,8 @@ h4 {
 
 .user-info {
     flex: 1;
-    min-width: 0; /* Important for text truncation */
+    min-width: 0;
+    /* Important for text truncation */
     overflow: hidden;
 }
 
@@ -274,6 +272,11 @@ h4 {
 
 .status-cancelled {
     background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+}
+
+.status-paid {
+    background: linear-gradient(135deg, #191cc7 0%, #1935d3 100%);
     color: white;
 }
 
