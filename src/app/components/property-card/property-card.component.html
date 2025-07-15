@@ -7,7 +7,10 @@
       <i class="fas fa-calendar"></i>
       {{ property.date | date:'MMM dd' }}
     </div>
-    <div *ngIf="property.purpose" class="property-purpose">{{ property.purpose | titlecase }}</div>
+  </div>
+  <div *ngIf="property.purpose" [ngClass]="property.purpose =='rent' ? 'bg-info' : 'bg-primary'"
+    class="property-purpose badge p-2 mb-3">For {{ property.purpose | titlecase
+    }}
   </div>
 
   <!-- Property Info -->

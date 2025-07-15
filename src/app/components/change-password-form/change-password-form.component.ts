@@ -43,12 +43,32 @@ export class ChangePasswordFormComponent implements OnInit {
     if (this.passwordForm.valid) {
       const data = { ...this.passwordForm.value }
 
-      this.propertyService.updatePass(data).subscribe(() => {
-        alert('✅ Password updated');
+      this.propertyService.updatePass(data).subscribe({
+      next: () => {
+          alert('✅ Password updated');
+        },
+        error: (error) => {
+          if(error.status == 400){
+            alert('Current password is incorrect');
+          }
+        }
       })
+
       this.router.navigate(['/edit-profile']);
     } else {
       this.passwordForm.markAllAsTouched();
     }
   }
+  // onSubmit() {
+  //   if (this.passwordForm.valid) {
+  //     const data = { ...this.passwordForm.value }
+
+  //     this.propertyService.updatePass(data).subscribe(() => {
+  //       alert('✅ Password updated');
+  //     })
+  //     this.router.navigate(['/edit-profile']);
+  //   } else {
+  //     this.passwordForm.markAllAsTouched();
+  //   }
+  // }
 }
