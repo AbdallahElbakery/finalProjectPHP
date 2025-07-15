@@ -37,16 +37,30 @@ export class BookingService {
 
   // Create a new booking
   createBooking(bookingData: BookingRequest): Observable<any> {
+    console.log('Sending booking request:', bookingData);
+    
     return this.http.post<any>(this.apiUrl, bookingData).pipe(
-      map(response => response),
+      map(response => {
+        console.log('Booking response:', response);
+        return response;
+      }),
       catchError((error: any) => {
-        if (error.status === 400 && error.error.message === 'You already have an offer for this property') {
-          return throwError(() => new Error('You already have an offer for this property'));
+        console.error('Booking API error:', error);
+        
+        if (error.status === 401) {
+          return throwError(() => new Error('Please login to make an offer'));
         }
-        if (error.status === 422) {
-          return throwError(() => new Error('Invalid data provided'));
+        if (error.status === 400 && error.error?.message) {
+          return throwError(() => new Error(error.error.message));
         }
-        return throwError(() => new Error('An error occurred while creating the booking'));
+        if (error.status === 422 && error.error?.errors) {
+          return throwError(() => new Error('Please check your input and try again'));
+        }
+        if (error.status === 500) {
+          return throwError(() => new Error('Server error occurred'));
+        }
+        
+        return throwError(() => new Error(error.error?.message || 'An error occurred while creating the booking'));
       })
     );
   }

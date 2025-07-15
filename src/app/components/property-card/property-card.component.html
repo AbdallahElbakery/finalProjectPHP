@@ -1,12 +1,13 @@
 <div class="property-card" (click)="viewPropertyDetails(property.id)">
   <!-- Property Image -->
   <div class="property-image">
-    <img [src]="property.image" [alt]="property.title" class="property-img">
-    <div class="property-badge">{{ property.type }}</div>
+    <img [src]="property.image" [alt]="property.name" class="property-img">
+    <div class="property-badge">{{ property.category }}</div>
     <div class="property-date">
       <i class="fas fa-calendar"></i>
       {{ property.date | date:'MMM dd' }}
     </div>
+    <div *ngIf="property.purpose" class="property-purpose">{{ property.purpose | titlecase }}</div>
   </div>
 
   <!-- Property Info -->
@@ -15,20 +16,19 @@
     <div class="property-location">
       <i class="fas fa-map-marker-alt"></i>
       <span>{{ property.location }}</span>
+      <span *ngIf="property.city">, {{ property.city }}</span>
+      <span *ngIf="property.country">, {{ property.country }}</span>
     </div>
 
     <!-- Title -->
-    <h3 class="property-title">{{ property.title }}</h3>
+    <h3 class="property-title">{{ property.name }}</h3>
 
     <!-- Price -->
     <div class="property-price">${{ formatPrice(property.price) }}</div>
 
     <!-- Description -->
     <p class="property-description">
-      {{ truncateDescription(property.description) }}
-      @if (property.description.length > 120) {
-      <span class="read-more">more...</span>
-      }
+      {{ truncateDescription(property.description, 100) }}
     </p>
 
     <!-- Property Features -->
@@ -49,16 +49,19 @@
 
     <!-- Seller Info -->
     <div class="seller-info">
-      <img [src]="property.seller.image" [alt]="property.seller.name" class="seller-avatar">
+      <img [src]="property.seller?.photo" [alt]="property.seller?.name" class="seller-avatar">
       <div class="seller-details">
-        <span class="seller-name">{{ property.seller.name }}</span>
-        <span class="seller-company">{{ property.seller.company }}</span>
+        <span class="seller-name">{{ property.seller?.name }}</span>
+        <span class="seller-company">{{ property.seller?.company_name }}</span>
       </div>
-      <div class="seller-rating">
+      <div class="seller-rating" *ngIf="property.seller?.rating">
         <i class="fas fa-star"></i>
-        <span>{{ property.seller.rating }}</span>
+        <span>{{ property.seller?.rating }}</span>
       </div>
     </div>
+
+    <!-- Extra Images Gallery -->
+    <!-- تم حذف الجالاري بناءً على طلب المستخدم -->
 
     <!-- Action Buttons -->
     <div class="action-buttons">

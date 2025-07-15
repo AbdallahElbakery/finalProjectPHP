@@ -8,6 +8,25 @@
 
         <!-- Main Search Bar -->
         <div class="container  search-box ">
+          <!-- New Live Search -->
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-text bg-white border-end-0 search-filter focus-ring">
+                  <i class="fa-solid fa-search"></i>
+                </span>
+                <input 
+                  type="text" 
+                  class="form-control border-start-0 search-filter" 
+                  placeholder="Search by property name, seller, or category"
+                  [(ngModel)]="searchTerm"
+                  (input)="onSearchInput()">
+              </div>
+            </div>
+          </div>
+
+          <!-- Commented out old search filters -->
+          <!--
           <form class="row g-2 justify-content-center">
             <div class="col-md-3">
               <div class="input-group">
@@ -53,6 +72,7 @@
                 style="cursor: pointer;">Search</button>
             </div>
           </form>
+          -->
         </div>
 
         <!-- Quick Stats -->
@@ -88,7 +108,7 @@
               <i class="fas fa-filter"></i>
               Filter Properties
             </h3>
-            <button class="clear-filters-btn">
+            <button class="clear-filters-btn" (click)="resetFilters()">
               <i class="fas fa-refresh"></i>
               Clear All
             </button>
@@ -97,87 +117,53 @@
           <!-- Price Filter -->
           <div class="filter-section">
             <h4 class="filter-title">Price Range</h4>
-            <div class="price-options">
-              <div class="price-option active">
-                Any Price
-              </div>
-              <div class="price-option">
-                Under $100k
-              </div>
-              <div class="price-option">
-                $100k - $300k
-              </div>
-              <div class="price-option">
-                $300k-$500k
-              </div>
-              <div class="price-option">
-                $500K - $1M
-              </div>
-              <div class="price-option">
-                Over $1M
-              </div>
+            <div class="d-flex gap-2 mb-2">
+              <input type="number" class="form-control" [(ngModel)]="filterPriceMin" (ngModelChange)="onFilterChange()" placeholder="Min">
+              <input type="number" class="form-control" [(ngModel)]="filterPriceMax" (ngModelChange)="onFilterChange()" placeholder="Max">
             </div>
           </div>
 
           <!-- Property Type Filter -->
           <div class="filter-section">
             <h4 class="filter-title">Property Type</h4>
-            <select class="filter-select">
+            <select class="filter-select" [(ngModel)]="filterCategory" (ngModelChange)="onFilterChange()">
               <option value="">All Types</option>
-              <option>Apartment</option>
-              <option>Villa</option>
-              <option>Studio</option>
-              <option>House</option>
-              <option>Penthouse</option>
-              <option>Duplex</option>
+              <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
             </select>
           </div>
 
           <!-- City Filter -->
           <div class="filter-section">
             <h4 class="filter-title">City</h4>
-            <select class="filter-select">
+            <select class="filter-select" [(ngModel)]="filterCity" (ngModelChange)="onFilterChange()">
               <option value="">All Cities</option>
-              <option>Cairo</option>
-              <option>Alexandria</option>
-              <option>Giza</option>
+              <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
             </select>
           </div>
 
-          <!-- Seller Filter (Optional) -->
+          <!-- Purpose Filter -->
+          <div class="filter-section">
+            <h4 class="filter-title">Purpose</h4>
+            <select class="filter-select" [(ngModel)]="filterPurpose" (ngModelChange)="onFilterChange()">
+              <option value="">All Purposes</option>
+              <option *ngFor="let purpose of purposes" [value]="purpose">{{ purpose | titlecase }}</option>
+            </select>
+          </div>
+
+          <!-- Bedrooms Filter -->
+          <div class="filter-section">
+            <h4 class="filter-title">Bedrooms</h4>
+            <input type="number" class="form-control" [(ngModel)]="filterBedrooms" (ngModelChange)="onFilterChange()" min="1" placeholder="#">
+          </div>
+
+          <!-- Seller Filter -->
           <div class="filter-section">
             <h4 class="filter-title">Seller <span class="optional">(Optional)</span></h4>
-            <select class="filter-select">
+            <select class="filter-select" [(ngModel)]="filterSeller" (ngModelChange)="onFilterChange()">
               <option value="">All Sellers</option>
-              <option>Ahmed Hassan </option>
-              <option>Sara Mohamed</option>
-              <option>Fatma Ahmed</option>
-              <option>Omar Mahmoud</option>
+              <option *ngFor="let seller of sellers" [value]="seller">{{ seller }}</option>
             </select>
           </div>
-
-          <!-- Filter Summary -->
-          <!-- <div class="filter-summary">
-            <h4 class="summary-title">Active Filters:</h4>
-            <div class="active-filters">
-              <span class="filter-tag">
-                Search:
-                <i class="fas fa-times"></i>
-              </span>
-              <span class="filter-tag">
-                City:
-                <i class="fas fa-times"></i>
-              </span>
-              <span class="filter-tag">
-                Type:
-                <i class="fas fa-times"></i>
-              </span>
-              <span class="filter-tag">
-                Seller:
-                <i class="fas fa-times"></i>
-              </span>
-            </div>
-          </div> -->
         </div>
       </div>
 
@@ -187,18 +173,50 @@
           <!-- Results Header -->
           <div class="results-header">
             <h2 class="results-title">
-              6 Properties Found
+              {{ filteredProperties.length }} Properties Found
             </h2>
-
           </div>
 
           <!-- Properties Card -->
-          <div class="properties-grid">
-
+          <div *ngIf="loading" class="d-flex justify-content-center align-items-center my-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <div *ngIf="!loading && properties.length === 0" class="no-results">
+            <div class="no-results-content">
+              <i class="fas fa-search no-results-icon"></i>
+              <h3 class="no-results-title">No Properties Found</h3>
+              <p class="no-results-text">
+                We couldn't find any properties matching your criteria. 
+                Try adjusting your filters or search terms.
+              </p>
+              <button class="clear-filters-btn">
+                <i class="fas fa-refresh"></i>
+                Clear All Filters
+              </button>
+            </div>
+          </div>
+          <div class="properties-grid" *ngIf="!loading && filteredProperties.length > 0">
             <app-property-card [property]="property"
-              *ngFor="let property of properties | paginate: {itemsPerPage: itemsPerPage,currentPage: currentPage}">
+              *ngFor="let property of filteredProperties | paginate: {itemsPerPage: itemsPerPage,currentPage: currentPage}">
             </app-property-card>
+          </div>
 
+          <!-- No Search Results -->
+          <div *ngIf="!loading && searchTerm && filteredProperties.length === 0" class="no-results">
+            <div class="no-results-content">
+              <i class="fas fa-search no-results-icon"></i>
+              <h3 class="no-results-title">No Results Found</h3>
+              <p class="no-results-text">
+                We couldn't find any properties matching "{{ searchTerm }}". 
+                Try searching for different keywords or clear your search.
+              </p>
+              <button class="clear-filters-btn" (click)="clearSearch()">
+                <i class="fas fa-times"></i>
+                Clear Search
+              </button>
+            </div>
           </div>
 
 

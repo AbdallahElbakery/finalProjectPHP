@@ -11,112 +11,121 @@
 
     <!-- Loading State -->
     @if (loading) {
-      <div class="loading-container">
-        <div class="spinner"></div>
-        <p>Loading bookings...</p>
-      </div>
+    <div class="loading-container">
+      <div class="spinner"></div>
+      <p>Loading bookings...</p>
+    </div>
     }
 
     <!-- Error State -->
     @if (error && !loading) {
-      <div class="error-container">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p>{{ error }}</p>
-        <button class="retry-btn" (click)="loadBookings()">
-          <i class="fas fa-redo"></i>
-          Try Again
-        </button>
-      </div>
+    <div class="error-container">
+      <i class="fas fa-exclamation-triangle"></i>
+      <p>{{ error }}</p>
+      <button class="retry-btn" (click)="loadBookings()">
+        <i class="fas fa-redo"></i>
+        Try Again
+      </button>
+    </div>
     }
 
     <!-- Bookings List -->
     @if (!loading && !error) {
-      @if (bookings.length === 0) {
-        <div class="empty-state">
-          <i class="fas fa-calendar-times"></i>
-          <h3>No Bookings Found</h3>
-          <p>You haven't made any property bookings yet. Start browsing and find the perfect property for you!</p>
-          <a href="/properties" class="browse-btn">
-            <i class="fas fa-search"></i>
-            Browse Properties
-          </a>
-        </div>
-      } @else {
-        <div class="bookings-grid">
-          @for (booking of bookings; track booking.id) {
-            <div class="booking-card">
-              <!-- Property Image -->
-              <div class="booking-image">
-                @if (booking.property?.images && booking.property.images.length > 0) {
-                  <img [src]="'http://127.0.0.1:8000/uploads/' + booking.property.images[0]" [alt]="booking.property?.name || 'Property'">
-                } @else if (booking.property?.image) {
-                  <img [src]="'http://127.0.0.1:8000/uploads/' + booking.property.image" [alt]="booking.property?.name || 'Property'">
-                } @else {
-                  <div class="no-image">
-                    <i class="fas fa-home"></i>
-                  </div>
-                }
-                <div class="status-badge" [class]="getStatusClass(booking.status)">
-                  {{ getStatusText(booking.status) }}
-                </div>
-              </div>
-
-              <!-- Booking Details -->
-              <div class="booking-details">
-                <h3 class="property-name" (click)="viewProperty(booking.property_id)" style="cursor: pointer;">
-                  {{ booking.property?.name || 'Property Not Found' }}
-                  <i class="fas fa-external-link-alt ms-2" style="font-size: 0.8em; opacity: 0.7;"></i>
-                </h3>
-                
-                <div class="booking-info">
-                  @if (booking.property?.price) {
-                    <div class="info-item">
-                      <i class="fas fa-tag"></i>
-                      <span class="label">Original Price:</span>
-                      <span class="value original-price">{{ formatPrice(booking.property.price) }}</span>
-                    </div>
-                  }
-                  
-                  <div class="info-item">
-                    <i class="fas fa-dollar-sign"></i>
-                    <span class="label">Your Offer:</span>
-                    <span class="value offer-price">{{ formatPrice(booking.suggested_price) }}</span>
-                  </div>
-                  
-                  <div class="info-item">
-                    <i class="fas fa-calendar"></i>
-                    <span class="label">Booking Date:</span>
-                    <span class="value">{{ formatDate(booking.created_at || '') }}</span>
-                  </div>
-
-                  @if (booking.property?.location) {
-                    <div class="info-item">
-                      <i class="fas fa-map-marker-alt"></i>
-                      <span class="label">Location:</span>
-                      <span class="value">{{ booking.property.location }}</span>
-                    </div>
-                  }
-                </div>
-
-                <!-- Actions -->
-                <div class="booking-actions">
-                  @if (booking.status === 'pending') {
-                    <button class="action-btn edit-btn" (click)="showEditForm(booking)">
-                      <i class="fas fa-edit"></i>
-                      Edit Price
-                    </button>
-                  }
-                  
-                  <button class="action-btn delete-btn" (click)="showDeleteConfirmation(booking)">
-                    <i class="fas fa-trash"></i>
-                    Delete Booking
-                  </button>
-                </div>
-              </div>
-            </div>
+    @if (bookings.length === 0) {
+    <div class="empty-state">
+      <i class="fas fa-calendar-times"></i>
+      <h3>No Bookings Found</h3>
+      <p>You haven't made any property bookings yet. Start browsing and find the perfect property for you!</p>
+      <a href="/properties" class="browse-btn">
+        <i class="fas fa-search"></i>
+        Browse Properties
+      </a>
+    </div>
+    } @else {
+    <div class="bookings-grid">
+      @for (booking of bookings; track booking.id) {
+      <div class="booking-card">
+        <!-- Property Image -->
+        <div class="booking-image">
+          @if (booking.property?.images && booking.property.images.length > 0) {
+          <img [src]="'http://127.0.0.1:8000/uploads/' + booking.property.images[0]"
+            [alt]="booking.property?.name || 'Property'">
+          } @else if (booking.property?.image) {
+          <img [src]="'http://127.0.0.1:8000/uploads/' + booking.property.image"
+            [alt]="booking.property?.name || 'Property'">
+          } @else {
+          <div class="no-image">
+            <i class="fas fa-home"></i>
+          </div>
           }
+          <div class="status-badge" [class]="getStatusClass(booking.status)">
+            {{ getStatusText(booking.status) }}
+          </div>
+
+
         </div>
+
+        <!-- Booking Details -->
+        <div class="booking-details">
+          <h3 class="property-name" (click)="viewProperty(booking.property_id)" style="cursor: pointer;">
+            {{ booking.property?.name || 'Property Not Found' }}
+            <i class="fas fa-external-link-alt ms-2" style="font-size: 0.8em; opacity: 0.7;"></i>
+          </h3>
+
+          <div class="booking-info">
+            @if (booking.property?.price) {
+            <div class="info-item">
+              <i class="fas fa-tag"></i>
+              <span class="label">Original Price:</span>
+              <span class="value original-price">{{ formatPrice(booking.property.price) }}</span>
+            </div>
+            }
+
+            <div class="info-item">
+              <i class="fas fa-dollar-sign"></i>
+              <span class="label">Your Offer:</span>
+              <span class="value offer-price">{{ formatPrice(booking.suggested_price) }}</span>
+            </div>
+
+            <div class="info-item">
+              <i class="fas fa-calendar"></i>
+              <span class="label">Booking Date:</span>
+              <span class="value">{{ formatDate(booking.created_at || '') }}</span>
+            </div>
+
+            @if (booking.property?.location) {
+            <div class="info-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span class="label">Location:</span>
+              <span class="value">{{ booking.property.location }}</span>
+            </div>
+            }
+          </div>
+
+          <!-- Actions -->
+          <div class="booking-actions">
+            @if (booking.status === 'pending') {
+            <button class="action-btn edit-btn" (click)="showEditForm(booking)">
+              <i class="fas fa-edit"></i>
+              Edit Price
+            </button>
+            }@else if(booking.status === 'confirmed'){
+            <button class="action-btn edit-btn" (click)="pay(booking.id || 1 )">
+              <i class="fa-brands fa-paypal"></i>
+              Pay
+            </button>
+            }
+
+            <button class="action-btn delete-btn" (click)="showDeleteConfirmation(booking)">
+              <i class="fas fa-trash"></i>
+              Delete Booking
+            </button>
+          </div>
+        </div>
+      </div>
       }
+    </div>
+    }
     }
   </div>
 </div>
@@ -135,29 +144,29 @@
     <div class="modal-body">
       <p>Are you sure you want to delete this booking?</p>
       @if (selectedBooking) {
-        <div class="booking-summary">
-          <strong>{{ selectedBooking.property?.name || 'Property' }}</strong>
-          <br>
-          @if (selectedBooking.property?.price) {
-            <small class="text-muted">
-              Original Price: <span class="original-price">{{ formatPrice(selectedBooking.property.price) }}</span>
-            </small>
-            <br>
-          }
-          <small class="text-muted">
-            Your Offer: <span class="offer-price">{{ formatPrice(selectedBooking.suggested_price) }}</span>
-          </small>
-        </div>
+      <div class="booking-summary">
+        <strong>{{ selectedBooking.property?.name || 'Property' }}</strong>
+        <br>
+        @if (selectedBooking.property?.price) {
+        <small class="text-muted">
+          Original Price: <span class="original-price">{{ formatPrice(selectedBooking.property.price) }}</span>
+        </small>
+        <br>
+        }
+        <small class="text-muted">
+          Your Offer: <span class="offer-price">{{ formatPrice(selectedBooking.suggested_price) }}</span>
+        </small>
+      </div>
       }
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" (click)="deleteBooking()" [disabled]="isSubmitting">
         @if (isSubmitting) {
-          <i class="fas fa-spinner fa-spin"></i>
-          Deleting...
+        <i class="fas fa-spinner fa-spin"></i>
+        Deleting...
         } @else {
-          <i class="fas fa-trash"></i>
-          Delete
+        <i class="fas fa-trash"></i>
+        Delete
         }
       </button>
       <button type="button" class="btn btn-secondary" (click)="hideDeleteModal()">
@@ -181,49 +190,44 @@
     </div>
     <div class="modal-body">
       @if (selectedBooking) {
-        <div class="property-info mb-3">
-          <h6>{{ selectedBooking.property?.name || 'Property' }}</h6>
-          <small class="text-muted">{{ selectedBooking.property?.location || 'Location not available' }}</small>
-          @if (selectedBooking.property?.price) {
-            <br>
-            <small class="text-muted">
-              Original Price: <span class="original-price">{{ formatPrice(selectedBooking.property.price) }}</span>
-            </small>
+      <div class="property-info mb-3">
+        <h6>{{ selectedBooking.property?.name || 'Property' }}</h6>
+        <small class="text-muted">{{ selectedBooking.property?.location || 'Location not available' }}</small>
+        @if (selectedBooking.property?.price) {
+        <br>
+        <small class="text-muted">
+          Original Price: <span class="original-price">{{ formatPrice(selectedBooking.property.price) }}</span>
+        </small>
+        }
+      </div>
+
+      <form [formGroup]="editForm" (ngSubmit)="editBooking()">
+        <div class="form-group">
+          <label for="edit_price" class="form-label">Suggested Price</label>
+          <div class="input-group">
+            <span class="input-prefix">$</span>
+            <input type="text" id="edit_price" formControlName="suggested_price" class="form-control"
+              placeholder="Enter new price (e.g., 2,500,000)" (input)="formatPriceInput($event)"
+              [class.is-invalid]="editForm.get('suggested_price')?.invalid && editForm.get('suggested_price')?.touched" />
+          </div>
+          @if (editForm.get('suggested_price')?.invalid && editForm.get('suggested_price')?.touched) {
+          <div class="invalid-feedback">
+            Please enter a valid price
+          </div>
           }
         </div>
-        
-        <form [formGroup]="editForm" (ngSubmit)="editBooking()">
-          <div class="form-group">
-            <label for="edit_price" class="form-label">Suggested Price</label>
-            <div class="input-group">
-              <span class="input-prefix">$</span>
-              <input 
-                type="text" 
-                id="edit_price"
-                formControlName="suggested_price" 
-                class="form-control"
-                placeholder="Enter new price (e.g., 2,500,000)"
-                (input)="formatPriceInput($event)"
-                [class.is-invalid]="editForm.get('suggested_price')?.invalid && editForm.get('suggested_price')?.touched"
-              />
-            </div>
-            @if (editForm.get('suggested_price')?.invalid && editForm.get('suggested_price')?.touched) {
-              <div class="invalid-feedback">
-                Please enter a valid price
-              </div>
-            }
-          </div>
-        </form>
+      </form>
       }
     </div>
     <div class="modal-footer">
-      <button type="submit" class="btn btn-primary" (click)="editBooking()" [disabled]="editForm.invalid || isSubmitting">
+      <button type="submit" class="btn btn-primary" (click)="editBooking()"
+        [disabled]="editForm.invalid || isSubmitting">
         @if (isSubmitting) {
-          <i class="fas fa-spinner fa-spin"></i>
-          Updating...
+        <i class="fas fa-spinner fa-spin"></i>
+        Updating...
         } @else {
-          <i class="fas fa-save"></i>
-          Update
+        <i class="fas fa-save"></i>
+        Update
         }
       </button>
       <button type="button" class="btn btn-secondary" (click)="hideEditModal()">

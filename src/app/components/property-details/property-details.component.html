@@ -1,10 +1,21 @@
+<!-- Toast Bootstrap -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999; margin-top: 80px;">
+  <div *ngIf="showToast" class="toast show align-items-center text-bg-{{toastType}} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        {{ toastMessage }}
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close" (click)="showToast = false"></button>
+    </div>
+  </div>
+</div>
 <!-- property-details.component.html -->
 <div class="property-details-page">
   <!-- Header with Back Button -->
   <div class="container">
     <div class="page-header">
       <button class="back-btn">
-        <a href="/properties" class="back-link" style="text-decoration: none;">
+        <a routerLink="/properties" class="back-link" style="text-decoration: none;">
           <i class="fas fa-arrow-left"></i>
           Back to Properties
         </a>
@@ -16,20 +27,20 @@
   </div>
 
   <!-- Main Content -->
-  <div class="container main-content">
+  <div class="container main-content" *ngIf="!loading && propertyData">
     <div class="row">
       <!-- Left Side - Property Details -->
       <div class="col-lg-8 col-md-7">
         <div class="property-details-section">
 
           <!-- Main Image -->
-          <div class="main-image-container">
-            <img src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200'
-              alt="Luxury Modern Villa with Pool" class="main-property-image">
+          <div class="main-image-container" [ngClass]="{'sold-overlay': propertyData.status === 'paid'}">
+            <img [src]="propertyData.image" [alt]="propertyData.name" class="main-property-image">
             <div class="image-overlay">
               <div class="property-badges">
                 <span class="badge featured">Featured</span>
                 <span class="badge new">New</span>
+                <span *ngIf="propertyData.status === 'paid'" class="badge sold"><i class="fas fa-certificate"></i> Sold</span>
               </div>
               <button class="expand-image-btn">
                 <i class="fas fa-expand"></i>
@@ -37,22 +48,28 @@
               </button>
             </div>
           </div>
+          <!-- رسالة عند البيع -->
+          <div *ngIf="propertyData.status === 'paid'" class="sold-message">
+            <i class="fas fa-check-circle"></i> This property has been sold and is no longer available for offers.
+          </div>
 
           <!-- Property Info -->
           <div class="property-info-card">
             <div class="property-header">
               <div class="location-info">
                 <i class="fas fa-map-marker-alt"></i>
-                <span>Beverly Hills, California</span>
+                <span>{{ propertyData.location }}</span>
+                <span *ngIf="propertyData.city">, {{ propertyData.city }}</span>
+                <span *ngIf="propertyData.country">, {{ propertyData.country }}</span>
               </div>
             </div>
 
-            <h1 class="property-title">Luxury Modern Villa with Pool and Garden</h1>
+            <h1 class="property-title">{{ propertyData.name }}</h1>
 
             <div class="price-section">
               <div class="current-price">
-                <span class="price-amount">$2,850,000</span>
-                <span class="price-type">/Sale</span>
+                <span class="price-amount">${{ propertyData.price }}</span>
+                <span class="price-type">/{{ propertyData.purpose | titlecase }}</span>
               </div>
               <div class="price-history">
                 <span class="previous-price">Was $3,200,000</span>
@@ -64,18 +81,18 @@
             <div class="key-features">
               <div class="feature-item">
                 <i class="fas fa-bed"></i>
-                <span class="feature-number">5</span>
+                <span class="feature-number">{{ propertyData.bedrooms }}</span>
                 <span class="feature-label">Bedrooms</span>
               </div>
               <div class="feature-item">
                 <i class="fas fa-bath"></i>
-                <span class="feature-number">4</span>
+                <span class="feature-number">{{ propertyData.bathrooms }}</span>
                 <span class="feature-label">Bathrooms</span>
               </div>
               <div class="feature-item">
                 <i class="fas fa-ruler-combined"></i>
-                <span class="feature-number">4,200</span>
-                <span class="feature-label">Sq Ft</span>
+                <span class="feature-number">{{ propertyData.area }}</span>
+                <span class="feature-label">m²</span>
               </div>
 
             </div>
@@ -86,10 +103,7 @@
                 <i class="fas fa-info-circle"></i>
                 Property Description
               </h3>
-              <p class="property-description">This stunning luxury villa offers the perfect blend of modern architecture
-                and comfortable living. Located in the prestigious Beverly Hills area, this property features spacious
-                rooms, high-end finishes, and breathtaking views. The open-plan design creates a seamless flow between
-                indoor and outdoor living spaces, making it ideal for both relaxation and entertaining.</p>
+              <p class="property-description">{{ propertyData.description }}</p>
               <button class="read-more-btn">
                 Read More
                 <i class="fas fa-chevron-down"></i>
@@ -104,135 +118,97 @@
               </h3>
               <div class="attributes-table">
                 <div class="attribute-row">
-                  <span class="attribute-label">Property Type:</span>
-                  <span class="attribute-value">Single Family Home</span>
+                  <span class="attribute-label">Category:</span>
+                  <span class="attribute-value">{{ propertyData.category }}</span>
                 </div>
                 <div class="attribute-row">
-                  <span class="attribute-label">Year Built:</span>
-                  <span class="attribute-value">2018</span>
+                  <span class="attribute-label">Date:</span>
+                  <span class="attribute-value">{{ propertyData.date | date:'mediumDate' }}</span>
                 </div>
-
+                <div class="attribute-row" *ngIf="addressData">
+                  <span class="attribute-label">Address:</span>
+                  <span class="attribute-value">{{ addressData.full_address }}<br>{{ addressData.street }}, {{ addressData.city }}, {{ addressData.country }}<span *ngIf="addressData.postal_code">, {{ addressData.postal_code }}</span></span>
+                </div>
               </div>
             </div>
 
             <!-- Action Section with Toggleable Offer Form -->
             <div class="action-section">
               <div class="negotiate-offer">
-                @if (!showOfferForm && !hasExistingOffer) {
-                <button class="buy-now-btn" (click)="toggleOfferForm()">
+                <button class="buy-now-btn" (click)="toggleOfferForm()" *ngIf="!showOfferForm && !hasBookingForThisProperty && !submitSuccess">
                   <i class="fas fa-handshake"></i>
                   Make an Offer
                 </button>
-                }
-                @if (hasExistingOffer) {
-                <div class="existing-offer-alert">
-                  <i class="fas fa-info-circle"></i>
-                  You already have an offer for this property
+                <div *ngIf="submitSuccess && !hasBookingForThisProperty" class="alert mt-3" style="background: var(--primary-color); color: #fff; border: none; font-weight: 500;">
+                  <i class="fas fa-check-circle"></i>
+                  Thank you for your booking! The seller will respond to your offer soon.<br>
+                  <a routerLink="/user-bookings" style="color: #fff; text-decoration: underline;">Track your booking here</a>
                 </div>
-                }
-                @if (showOfferForm) {
-                <div class="offer-form-container">
+                <div *ngIf="hasBookingForThisProperty" class="alert mt-3" style="background: var(--primary-color); color: #fff; border: none; font-weight: 500;">
+                  <i class="fas fa-check-circle"></i>
+                  Thank you for your booking! The seller will respond to your offer soon.<br>
+                  <a href="/user-bookings" style="color: #fff; text-decoration: underline;">Track your booking here</a>
+                </div>
+                <div class="offer-form-container" *ngIf="showOfferForm">
                   <h4 class="offer-title">
                     <i class="fas fa-edit"></i>
-                    Add your offer
+                    make an offer
                   </h4>
                   <form [formGroup]="offerForm" (ngSubmit)="submitOffer()" class="offer-form">
                     <div class="form-group">
-                      <label for="suggested_price" class="form-label">Suggested price</label>
+                      <label for="suggested_price" class="form-label">suggested price</label>
                       <div class="input-group">
                         <span class="input-prefix">$</span>
                         <input 
-                          type="text" 
+                          type="number" 
                           id="suggested_price"
                           formControlName="suggested_price" 
                           class="form-control"
-                          placeholder="Enter your suggested price (e.g., 2,500,000)"
+                          placeholder="  Enter the suggested price (ex: 2500000)"
                           [class.is-invalid]="offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched"
-                          autocomplete="off"
-                          (input)="formatPriceInput($event)"
                         />
                       </div>
-                      @if (offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched) {
-                        <div class="invalid-feedback">
-                          Please enter a valid price
-                        </div>
-                      }
-                    </div>
-                    
-                    @if (submitMessage) {
-                      <div class="alert" [class.alert-success]="submitSuccess" [class.alert-danger]="!submitSuccess">
-                        {{ submitMessage }}
+                      <div class="invalid-feedback" *ngIf="offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched">
+                        Please enter a valid price.
                       </div>
-                    }
-                    
+                      <div class="text-danger mt-1" *ngIf="offerForm.get('suggested_price')?.value && (offerForm.get('suggested_price')?.value < minAllowedPrice() || offerForm.get('suggested_price')?.value > maxAllowedPrice())">
+                        Offer must be between ${{ minAllowedPrice() }} and ${{ maxAllowedPrice() }}
+                      </div>
+                    </div>
+                    <div class="alert" *ngIf="submitMessage" [class.alert-success]="submitSuccess" [class.alert-danger]="!submitSuccess">
+                      {{ submitMessage }}
+                    </div>
                     <div class="form-actions">
-                      <button type="submit" class="submit-btn" [disabled]="offerForm.invalid || isSubmitting">
-                        @if (isSubmitting) {
+                      <button type="submit" class="submit-btn" [disabled]="offerForm.invalid || isSubmitting || submitSuccess">
+                        <ng-container *ngIf="isSubmitting; else notLoading">
                           <i class="fas fa-spinner fa-spin"></i>
-                          Sending...
-                        } @else {
+                          Loading ...
+                        </ng-container>
+                        <ng-template #notLoading>
                           <i class="fas fa-paper-plane"></i>
-                          Send Offer
-                        }
+                          send offer
+                        </ng-template>
                       </button>
                       <button type="button" class="cancel-btn" (click)="toggleOfferForm()" [disabled]="isSubmitting">
                         <i class="fas fa-times"></i>
-                        Cancel
-                        Cancel
+                        cancel
                       </button>
                     </div>
                   </form>
                 </div>
-                }
               </div>
             </div>
 
 
             <!-- Image Gallery -->
-            <div class="gallery-section">
+            <div class="gallery-section" *ngIf="propertyData.images && propertyData.images.length">
               <h3 class="section-title">
                 <i class="fas fa-images"></i>
                 Property Gallery
               </h3>
               <div class="gallery-grid">
-                <div class="gallery-item">
-                  <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400" alt="Spacious Living Room"
-                    class="gallery-image">
-                  <div class="gallery-overlay">
-                    <i class="fas fa-search-plus"></i>
-                  </div>
-                </div>
-                <div class="gallery-item">
-                  <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400" alt="Modern Kitchen"
-                    class="gallery-image">
-                  <div class="gallery-overlay">
-                    <i class="fas fa-search-plus"></i>
-                  </div>
-                </div>
-                <div class="gallery-item">
-                  <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400" alt="Master Bedroom"
-                    class="gallery-image">
-                  <div class="gallery-overlay">
-                    <i class="fas fa-search-plus"></i>
-                  </div>
-                </div>
-                <div class="gallery-item">
-                  <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400" alt="Swimming Pool"
-                    class="gallery-image">
-                  <div class="gallery-overlay">
-                    <i class="fas fa-search-plus"></i>
-                  </div>
-                </div>
-                <div class="gallery-item">
-                  <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400" alt="Beautiful Garden"
-                    class="gallery-image">
-                  <div class="gallery-overlay">
-                    <i class="fas fa-search-plus"></i>
-                  </div>
-                </div>
-                <div class="gallery-item">
-                  <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400" alt="Luxury Bathroom"
-                    class="gallery-image">
+                <div class="gallery-item" *ngFor="let img of propertyData.images">
+                  <img [src]="img" [alt]="propertyData.name" class="gallery-image">
                   <div class="gallery-overlay">
                     <i class="fas fa-search-plus"></i>
                   </div>
@@ -252,11 +228,10 @@
           <!-- Main Seller Card -->
           <div class="seller-card">
             <div class="seller-header">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" alt="Sarah Johnson"
-                class="seller-avatar">
+              <img [src]="propertyData.seller?.photo" [alt]="propertyData.seller?.name" class="seller-avatar">
               <div class="seller-details">
-                <h3 class="seller-name">Mohamed Ali</h3>
-                <p class="seller-company">Premium Real Estate Group</p>
+                <h3 class="seller-name">{{ propertyData.seller?.name }}</h3>
+                <p class="seller-company">{{ propertyData.seller?.company_name }}</p>
                 <div class="seller-rating">
                   <div class="stars">
                     <i class="fas fa-star"></i>
@@ -274,7 +249,7 @@
 
 
           <!-- Similar Properties -->
-          <div class="similar-properties-card">
+          <!-- <div class="similar-properties-card">
             <h4 class="similar-title">
               <i class="fas fa-home"></i>
               Similar Properties
@@ -308,9 +283,24 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
+    </div>
+  </div>
+  <div *ngIf="loading" class="d-flex justify-content-center align-items-center my-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <div *ngIf="!loading && !propertyData" class="no-results">
+    <div class="no-results-content">
+      <i class="fas fa-search no-results-icon"></i>
+      <h3 class="no-results-title">Property Not Found</h3>
+      <p class="no-results-text">
+        Sorry, we couldn't find the property you are looking for.
+      </p>
+      <a routerLink="/properties" class="btn btn-primary">Back to Properties</a>
     </div>
   </div>
 </div>
@@ -332,20 +322,6 @@
     </div>
     <div class="image-counter">
       1 / 6
-    </div>
-  </div>
-</div>
-
-<!-- Toast Notification -->
-<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1050;">
-  <div id="offerToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-      <i class="fas fa-check-circle text-success me-2"></i>
-      <strong class="me-auto">Offer Status</strong>
-      <button type="button" class="btn-close" (click)="closeToast()" aria-label="Close"></button>
-    </div>
-    <div class="toast-body" id="toastMessage">
-      <!-- Toast message will be inserted here -->
     </div>
   </div>
 </div>

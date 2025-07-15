@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { BookingService, BookingRequest } from '../../services/booking.service';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-property-details',
@@ -11,7 +12,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './property-details.component.html',
   styleUrl: './property-details.component.css'
 })
-export class PropertyDetailsComponent implements OnInit, AfterViewInit {
+export class PropertyDetailsComponent implements OnInit {
+  propertyData: any = null;
+  loading = false;
   @Input() propertyId: number = 0;
   
   showOfferForm = false;
@@ -19,86 +22,76 @@ export class PropertyDetailsComponent implements OnInit, AfterViewInit {
   isSubmitting = false;
   submitMessage = '';
   submitSuccess = false;
-  hasExistingOffer = false;
+  addressData: any = null;
+  toastMessage: string = '';
+  toastType: 'success' | 'danger' | '' = '';
+  showToast: boolean = false;
+  hasBookingForThisProperty: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private bookingService: BookingService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private http: HttpClient
   ) {
     // validate for form
     this.offerForm = this.fb.group({
       suggested_price: ['', [Validators.required, Validators.min(1)]],
     });
-
-    // Form initialized
-  }
-
-  // Get property price for validation (you'll need to fetch this from your property data)
-  getPropertyPrice(): number {
-    // This should return the actual property price from your property data
-    // For now, returning a default value - you should replace this with actual property price
-    return 2850000; // Example property price
-  }
-
-  // Validate offer price
-  validateOfferPrice(price: number): { isValid: boolean; message: string } {
-    const propertyPrice = this.getPropertyPrice();
-    const minPrice = propertyPrice * 0.7; // 70% of original price
-    const maxPrice = propertyPrice * 1.3; // 130% of original price
-
-    if (price < minPrice) {
-      return {
-        isValid: false,
-        message: `Offer must be at least ${this.formatPrice(minPrice)} (70% of original price)`
-      };
-    }
-
-    if (price > maxPrice) {
-      return {
-        isValid: false,
-        message: `Offer cannot exceed ${this.formatPrice(maxPrice)} (130% of original price)`
-      };
-    }
-
-    return { isValid: true, message: '' };
   }
 
   ngOnInit() {
-    // Get property ID from route params
-    this.route.params.subscribe(params => {
-      if (params['id']) {
-        // this.propertyId = +params['id'];
-        this.propertyId = 2;
-        console.log('Property ID loaded:', this.propertyId);
-      } else if (!this.propertyId) {
-        // Fallback to default if no ID provided
-        this.propertyId = 2;
-        console.log('Using default Property ID:', this.propertyId);
-      }
-      
-      // Check if user already has an offer for this property
-      this.checkExistingOffer();
-    });
+    // Get property ID from route or input
+    if (!this.propertyId) {
+      this.route.paramMap.subscribe(params => {
+        const id = params.get('id');
+        if (id) {
+          this.propertyId = +id;
+          this.fetchProperty();
+          this.checkUserBooking();
+          this.checkBookingSuccessMessage();
+        }
+      });
+    } else {
+      this.fetchProperty();
+      this.checkUserBooking();
+      this.checkBookingSuccessMessage();
+    }
   }
 
-  // Check if user already has an offer for this property
-  private checkExistingOffer() {
+  checkUserBooking() {
     this.bookingService.getBookings().subscribe({
       next: (bookings) => {
-        const existingBooking = bookings.find(booking => 
-          booking.property_id === this.propertyId
-        );
-        this.hasExistingOffer = !!existingBooking;
+        this.hasBookingForThisProperty = bookings.some((b: any) => b.property_id === this.propertyId);
       },
-      error: (error) => {
-        console.error('Error checking existing offers:', error);
+      error: (err) => {
+        this.hasBookingForThisProperty = false;
       }
     });
   }
 
-  ngAfterViewInit() {
-    // Component initialized
+  fetchProperty() {
+    this.loading = true;
+    this.http.get<any>(`http://127.0.0.1:8000/api/properties/${this.propertyId}`).subscribe({
+      next: (res) => {
+        this.propertyData = res.Property;
+        this.loading = false;
+        if (this.propertyData && this.propertyData.address_id) {
+          this.http.get<any>(`http://127.0.0.1:8000/api/addresses/${this.propertyData.address_id}`).subscribe({
+            next: (addressRes) => {
+              this.addressData = Array.isArray(addressRes) ? addressRes[0] : addressRes;
+            },
+            error: () => {
+              this.addressData = null;
+            }
+          });
+        }
+      },
+      error: (err) => {
+        this.propertyData = null;
+        this.loading = false;
+      }
+    });
   }
 
   toggleOfferForm() {
@@ -108,45 +101,62 @@ export class PropertyDetailsComponent implements OnInit, AfterViewInit {
     }
   }
 
+  showToastWithTimeout() {
+    this.showToast = true;
+    setTimeout(() => {
+      this.showToast = false;
+    }, 3000);
+  }
+
+  minAllowedPrice(): number {
+    return this.propertyData ? Math.floor(this.propertyData.price * 0.7) : 0;
+  }
+  maxAllowedPrice(): number {
+    return this.propertyData ? Math.ceil(this.propertyData.price * 1.3) : 0;
+  }
+
   submitOffer() {
     if (this.offerForm.valid && !this.isSubmitting) {
-      this.isSubmitting = true;
-      this.submitMessage = '';
-      
-      // Get the price value and remove commas for API
-      let priceValue = this.offerForm.value.suggested_price;
-      if (typeof priceValue === 'string') {
-        priceValue = parseInt(priceValue.replace(/,/g, ''));
-      }
-      
-      // Validate the offer price
-      const validation = this.validateOfferPrice(priceValue);
-      if (!validation.isValid) {
+      const price = this.offerForm.value.suggested_price;
+      if (this.propertyData && (price < this.minAllowedPrice() || price > this.maxAllowedPrice())) {
         this.submitSuccess = false;
-        this.submitMessage = validation.message;
-        this.showToast(validation.message, false);
-        this.isSubmitting = false;
+        this.submitMessage = `Offer must be between $${this.minAllowedPrice()} and $${this.maxAllowedPrice()}`;
+        this.toastMessage = this.submitMessage;
+        this.toastType = 'danger';
+        this.showToastWithTimeout();
         return;
       }
-      
+      this.isSubmitting = true;
+      this.submitMessage = '';
+      this.showToast = false;
       const bookingData: BookingRequest = {
         property_id: this.propertyId,
-        suggested_price: priceValue
+        suggested_price: this.offerForm.value.suggested_price
       };
-
       this.bookingService.createBooking(bookingData).subscribe({
         next: (response) => {
           this.submitSuccess = true;
-          this.submitMessage = response.message || 'Your offer has been sent successfully! We will contact you soon.';
-          this.showToast(this.submitMessage, true);
+          this.submitMessage = 'Your offer has been sent successfully! We will contact you soon.';
+          this.toastMessage = 'Your offer has been sent successfully! We will contact you soon.';
+          this.toastType = 'success';
+          this.showToastWithTimeout();
           this.resetForm();
           this.showOfferForm = false;
           this.isSubmitting = false;
+          this.hasBookingForThisProperty = true;
+          localStorage.setItem(this.bookingSuccessKey(), '1');
         },
         error: (error) => {
           this.submitSuccess = false;
-          this.submitMessage = error.message || 'An error occurred while sending your offer. Please try again.';
-          this.showToast(this.submitMessage, false);
+          if (error.message && (error.message.includes('عرض') || error.message.includes('offer'))) {
+            this.submitMessage = 'You have already made a booking for this property.';
+            this.toastMessage = 'You have already made a booking for this property.';
+          } else {
+            this.submitMessage = 'An error occurred while sending your offer. Please try again.';
+            this.toastMessage = 'An error occurred while sending your offer. Please try again.';
+          }
+          this.toastType = 'danger';
+          this.showToastWithTimeout();
           this.isSubmitting = false;
           console.error('Booking error:', error);
         }
@@ -160,80 +170,26 @@ export class PropertyDetailsComponent implements OnInit, AfterViewInit {
     this.submitSuccess = false;
   }
 
+  bookingSuccessKey(): string {
+    return `bookingSuccess_property_${this.propertyId}`;
+  }
+
+  checkBookingSuccessMessage() {
+    const key = this.bookingSuccessKey();
+    if (localStorage.getItem(key)) {
+      this.submitSuccess = true;
+      setTimeout(() => {
+        this.submitSuccess = false;
+        localStorage.removeItem(key);
+      }, 5000);
+    }
+  }
+
   // Format price for display
   formatPrice(price: number): string {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
+      currency: 'USD'
     }).format(price);
-  }
-
-  // Format price input while typing
-  formatPriceInput(event: any) {
-    const input = event.target;
-    let value = input.value.replace(/[^\d]/g, ''); // Remove non-digits
-    
-    if (value) {
-      const numValue = parseInt(value);
-      if (!isNaN(numValue)) {
-        const formattedValue = numValue.toLocaleString('en-US');
-        input.value = formattedValue;
-        
-        // Update form control
-        this.offerForm.patchValue({
-          suggested_price: formattedValue
-        }, { emitEvent: false });
-      }
-    }
-  }
-
-
-
-  // Close toast notification
-  closeToast() {
-    const toastElement = document.getElementById('offerToast');
-    if (toastElement) {
-      toastElement.classList.remove('show');
-      setTimeout(() => {
-        toastElement.style.display = 'none';
-      }, 300);
-    }
-  }
-
-  // Show toast notification
-  private showToast(message: string, isSuccess: boolean = true) {
-    const toastElement = document.getElementById('offerToast');
-    const toastMessage = document.getElementById('toastMessage');
-    const toastIcon = toastElement?.querySelector('.toast-header i');
-    
-    if (toastElement && toastMessage && toastIcon) {
-      // Update message
-      toastMessage.textContent = message;
-      
-      // Update icon and styling
-      if (isSuccess) {
-        toastIcon.className = 'fas fa-check-circle text-success me-2';
-        toastElement.classList.remove('bg-danger', 'text-white');
-        toastElement.classList.add('bg-success', 'text-white');
-      } else {
-        toastIcon.className = 'fas fa-exclamation-circle text-danger me-2';
-        toastElement.classList.remove('bg-success', 'text-white');
-        toastElement.classList.add('bg-danger', 'text-white');
-      }
-      
-      // Show toast
-      toastElement.classList.add('show');
-      toastElement.style.display = 'block';
-      
-      // Auto hide after 5 seconds
-      setTimeout(() => {
-        toastElement.classList.remove('show');
-        setTimeout(() => {
-          toastElement.style.display = 'none';
-        }, 300);
-      }, 5000);
-    }
   }
 }

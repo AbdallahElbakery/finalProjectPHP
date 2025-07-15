@@ -21,7 +21,7 @@
 .user-bookings-page {
   font-family: 'Poppins', sans-serif;
   color: var(--text-color);
-  margin-top: 80px;
+  margin-top: 30px;
   padding: 2rem 0;
   min-height: calc(100vh - 80px);
   background: var(--bg-light);
@@ -253,13 +253,13 @@
   margin-bottom: 1.5rem;
 }
 
-  .info-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
-    font-size: 0.9rem;
-  }
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
 
 /* Modal Styles */
 .modal-overlay {

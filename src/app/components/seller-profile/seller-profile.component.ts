@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PropertyCardComponent } from "../property-card/property-card.component";
 import { ReviewService } from '../../services/review.service';
+import { OwnProperty, Seller, Seller2, SellerData } from '../../types/seller';
+import { PropertyServiceService } from '../../services/property-service.service';
+import { Root } from '../../types/category';
 
 @Component({
   selector: 'app-seller-profile',
@@ -15,14 +18,27 @@ export class SellerProfileComponent implements OnInit {
   property: any;
   reviews: any[] = [];
   sellerId: number = 1; // يمكن تغييرها حسب البائع المعروض
-
+  sellerData: SellerData[] = [];
+  sellerproperties: OwnProperty[] = [];
+  
   constructor(
     private router: Router,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private propertyService: PropertyServiceService
+
   ) {}
 
   ngOnInit() {
     this.loadReviews();
+        
+    this.propertyService.getSellerProfile().subscribe((seller)=>{
+      this.sellerData=seller.Seller.seller_data;
+    });
+
+
+    this.propertyService.getSingleSeller().subscribe((sellerprops)=>{
+      this.sellerproperties=sellerprops.Seller.own_properties;
+    })
   }
 
   loadReviews() {
@@ -91,6 +107,7 @@ export class SellerProfileComponent implements OnInit {
     // التنقل إلى صفحة المراجعات مع تمرير معرف البائع
     this.router.navigate(['/reviews'], { queryParams: { sellerId: this.sellerId } });
   }
+
 
   properties = [
     {

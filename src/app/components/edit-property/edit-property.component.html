@@ -54,7 +54,7 @@
                 <!-- Price -->
                 <div class="input-group">
                     <label>Price (EGP)</label>
-                    <input type="number" formControlName="price" placeholder="Enter price"
+                    <input type="number" formControlName="price" placeholder="Enter price" value=""
                         [class.invalid]="isFieldInvalid('price')">
                     @if (isFieldInvalid('price')) {
                     <div class="error-msg">{{ getErrorMessage('price') }}</div>
@@ -77,9 +77,6 @@
                     <div class="error-msg">{{ getErrorMessage('address_id') }}</div>
                     }
                 </div>
-
-
-
 
                 <!-- Purpose -->
                 <div class="input-group">

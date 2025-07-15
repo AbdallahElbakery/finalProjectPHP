@@ -26,8 +26,34 @@ export class NavComponent {
     const photo = this.authService.getPhoto();
     return photo ? `http://127.0.0.1:8000/uploads/${photo}` : 'assets/images/logo.png'; // fallback to default image
   }
+  get isUser() {
+    return this.authService.isAuthenticated() && this.authService.getRole() === 'user';
+  }
+  get isSeller() {
+    return this.authService.isAuthenticated() && this.authService.getRole() === 'seller';
+  }
 
   logout() {
     this.authService.logout().subscribe();
+  }
+
+  getrole() {
+    if (this.authService.getRole() == 'seller') {
+      this.router.navigate(['/seller-profile'])
+    } else if (this.authService.getRole() == 'user') {
+      this.router.navigate(['/user-profile'])
+    } else {
+      this.router.navigate(['/login'])
+    }
+  }
+
+  listProperty() {
+    this.router.navigate(['/my-properties']);
+  }
+  listBookings() {
+    this.router.navigate(['/seller-bookings']);
+  }
+  addProperty() {
+    this.router.navigate(['/create-property']);
   }
 }
