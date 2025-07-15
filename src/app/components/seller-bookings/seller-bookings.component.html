@@ -37,7 +37,7 @@
                 <p class="text-muted">You don't have any bookings for your properties yet.</p>
             </div>
         } @else {
-            <div class="card booking-card"
+        <div class="card booking-card"
                 *ngFor="let booking of bookings | paginate:{currentPage:currentPage,itemsPerPage:itemsPerPage}">
             <div class="card-body">
                 <!-- Details Row -->
@@ -96,10 +96,10 @@
                         <div class="col-md-2">
                             <div class="price-section">
                                 @if (booking.property?.price) {
-                                    <div class="original-price">
-                                        <i class="fas fa-dollar-sign"></i>
-                                        <div>
-                                            <span class="price-label">Original</span><br>
+                                <div class="original-price">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <div>
+                                        <span class="price-label">Original</span><br>
                                             <strong>{{formatPrice(booking.property.price)}}</strong>
                                         </div>
                                     </div>
@@ -139,13 +139,13 @@
                         <!-- Action Buttons -->
                         @if (booking.status === 'pending') {
                             <button class="btn action-btn accept-btn" type="button" (click)="confirmBooking(booking.id!)">
-                                <i class="fas fa-check"></i>
-                                <span>Accept</span>
-                            </button>
+                            <i class="fas fa-check"></i>
+                            <span>Accept</span>
+                        </button>
                             <button class="btn action-btn reject-btn" type="button" (click)="cancelBooking(booking.id!)">
-                                <i class="fas fa-times"></i>
-                                <span>Reject</span>
-                            </button>
+                            <i class="fas fa-times"></i>
+                            <span>Reject</span>
+                        </button>
                         }
                         
                         <button class="btn action-btn chat-btn" type="button">
@@ -210,4 +210,4 @@
             </div>
         </div>
     </div>
-</div>
+    </div>

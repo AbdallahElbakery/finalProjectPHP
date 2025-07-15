@@ -23,6 +23,10 @@ export class PropertyDetailsComponent implements OnInit {
   submitMessage = '';
   submitSuccess = false;
   addressData: any = null;
+  toastMessage: string = '';
+  toastType: 'success' | 'danger' | '' = '';
+  showToast: boolean = false;
+  hasBookingForThisProperty: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -44,11 +48,26 @@ export class PropertyDetailsComponent implements OnInit {
         if (id) {
           this.propertyId = +id;
           this.fetchProperty();
+          this.checkUserBooking();
+          this.checkBookingSuccessMessage();
         }
       });
     } else {
       this.fetchProperty();
+      this.checkUserBooking();
+      this.checkBookingSuccessMessage();
     }
+  }
+
+  checkUserBooking() {
+    this.bookingService.getBookings().subscribe({
+      next: (bookings) => {
+        this.hasBookingForThisProperty = bookings.some((b: any) => b.property_id === this.propertyId);
+      },
+      error: (err) => {
+        this.hasBookingForThisProperty = false;
+      }
+    });
   }
 
   fetchProperty() {
@@ -82,27 +101,62 @@ export class PropertyDetailsComponent implements OnInit {
     }
   }
 
+  showToastWithTimeout() {
+    this.showToast = true;
+    setTimeout(() => {
+      this.showToast = false;
+    }, 3000);
+  }
+
+  minAllowedPrice(): number {
+    return this.propertyData ? Math.floor(this.propertyData.price * 0.7) : 0;
+  }
+  maxAllowedPrice(): number {
+    return this.propertyData ? Math.ceil(this.propertyData.price * 1.3) : 0;
+  }
+
   submitOffer() {
     if (this.offerForm.valid && !this.isSubmitting) {
+      const price = this.offerForm.value.suggested_price;
+      if (this.propertyData && (price < this.minAllowedPrice() || price > this.maxAllowedPrice())) {
+        this.submitSuccess = false;
+        this.submitMessage = `Offer must be between $${this.minAllowedPrice()} and $${this.maxAllowedPrice()}`;
+        this.toastMessage = this.submitMessage;
+        this.toastType = 'danger';
+        this.showToastWithTimeout();
+        return;
+      }
       this.isSubmitting = true;
       this.submitMessage = '';
-      
+      this.showToast = false;
       const bookingData: BookingRequest = {
         property_id: this.propertyId,
         suggested_price: this.offerForm.value.suggested_price
       };
-
       this.bookingService.createBooking(bookingData).subscribe({
         next: (response) => {
           this.submitSuccess = true;
-          this.submitMessage = 'تم إرسال عرضك بنجاح! سنتواصل معك قريباً.';
+          this.submitMessage = 'Your offer has been sent successfully! We will contact you soon.';
+          this.toastMessage = 'Your offer has been sent successfully! We will contact you soon.';
+          this.toastType = 'success';
+          this.showToastWithTimeout();
           this.resetForm();
           this.showOfferForm = false;
           this.isSubmitting = false;
+          this.hasBookingForThisProperty = true;
+          localStorage.setItem(this.bookingSuccessKey(), '1');
         },
         error: (error) => {
           this.submitSuccess = false;
-          this.submitMessage = 'حدث خطأ أثناء إرسال العرض. يرجى المحاولة مرة أخرى.';
+          if (error.message && (error.message.includes('عرض') || error.message.includes('offer'))) {
+            this.submitMessage = 'You have already made a booking for this property.';
+            this.toastMessage = 'You have already made a booking for this property.';
+          } else {
+            this.submitMessage = 'An error occurred while sending your offer. Please try again.';
+            this.toastMessage = 'An error occurred while sending your offer. Please try again.';
+          }
+          this.toastType = 'danger';
+          this.showToastWithTimeout();
           this.isSubmitting = false;
           console.error('Booking error:', error);
         }
@@ -114,6 +168,21 @@ export class PropertyDetailsComponent implements OnInit {
     this.offerForm.reset();
     this.submitMessage = '';
     this.submitSuccess = false;
+  }
+
+  bookingSuccessKey(): string {
+    return `bookingSuccess_property_${this.propertyId}`;
+  }
+
+  checkBookingSuccessMessage() {
+    const key = this.bookingSuccessKey();
+    if (localStorage.getItem(key)) {
+      this.submitSuccess = true;
+      setTimeout(() => {
+        this.submitSuccess = false;
+        localStorage.removeItem(key);
+      }, 5000);
+    }
   }
 
   // Format price for display

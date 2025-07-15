@@ -21,7 +21,7 @@
 .main-container {
     font-family: 'Poppins', sans-serif;
     padding: 2rem 0; /* Add space from navbar */
-    margin-top: 80px; /* Adjust this value based on your navbar height */
+    /* margin-top: 80px; */
     min-height: calc(100vh - 80px); /* Ensure full height minus navbar */
 }
 
@@ -33,7 +33,7 @@
     background: white;
     border-radius: var(--border-radius);
     padding: 2rem;
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
     box-shadow: var(--shadow);
     text-align: center;
     font-family: 'Poppins', sans-serif;

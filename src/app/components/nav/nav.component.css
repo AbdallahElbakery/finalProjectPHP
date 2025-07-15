@@ -298,7 +298,7 @@
 
 @media (min-width: 1400px) {
   .container {
-    max-width: 1320px;
+    max-width: 1420px !important;
   }
 
   .navbar-nav .nav-link {

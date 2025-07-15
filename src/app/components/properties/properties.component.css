@@ -16,7 +16,7 @@
 .properties-page {
   font-family: 'Poppins', sans-serif;
   color: var(--text-color);
-  margin-top: 80px;
+  /* margin-top: 80px; */
   /* Account for fixed navbar */
 }
 
@@ -66,7 +66,7 @@
   border-radius: 12px;
   font-family: "Poppins", sans-serif !important;
   height: auto;
-  margin-top: 120px !important;
+  /* margin-top: 120px !important; */
 }
 
 .btn-search {

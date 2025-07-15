@@ -1,3 +1,14 @@
+<!-- Toast Bootstrap -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999; margin-top: 80px;">
+  <div *ngIf="showToast" class="toast show align-items-center text-bg-{{toastType}} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        {{ toastMessage }}
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close" (click)="showToast = false"></button>
+    </div>
+  </div>
+</div>
 <!-- property-details.component.html -->
 <div class="property-details-page">
   <!-- Header with Back Button -->
@@ -128,10 +139,20 @@
             <!-- Action Section with Toggleable Offer Form -->
             <div class="action-section">
               <div class="negotiate-offer">
-                <button class="buy-now-btn" (click)="toggleOfferForm()" *ngIf="!showOfferForm">
+                <button class="buy-now-btn" (click)="toggleOfferForm()" *ngIf="!showOfferForm && !hasBookingForThisProperty && !submitSuccess">
                   <i class="fas fa-handshake"></i>
                   Make an Offer
                 </button>
+                <div *ngIf="submitSuccess && !hasBookingForThisProperty" class="alert mt-3" style="background: var(--primary-color); color: #fff; border: none; font-weight: 500;">
+                  <i class="fas fa-check-circle"></i>
+                  Thank you for your booking! The seller will respond to your offer soon.<br>
+                  <a routerLink="/user-bookings" style="color: #fff; text-decoration: underline;">Track your booking here</a>
+                </div>
+                <div *ngIf="hasBookingForThisProperty" class="alert mt-3" style="background: var(--primary-color); color: #fff; border: none; font-weight: 500;">
+                  <i class="fas fa-check-circle"></i>
+                  Thank you for your booking! The seller will respond to your offer soon.<br>
+                  <a href="/user-bookings" style="color: #fff; text-decoration: underline;">Track your booking here</a>
+                </div>
                 <div class="offer-form-container" *ngIf="showOfferForm">
                   <h4 class="offer-title">
                     <i class="fas fa-edit"></i>
@@ -146,9 +167,11 @@
                           placeholder="  Enter the suggested price (ex: 2500000)"
                           [class.is-invalid]="offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched" />
                       </div>
-                      <div class="invalid-feedback"
-                        *ngIf="offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched">
-                        يرجى إدخال سعر صحيح
+                      <div class="invalid-feedback" *ngIf="offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched">
+                        Please enter a valid price.
+                      </div>
+                      <div class="text-danger mt-1" *ngIf="offerForm.get('suggested_price')?.value && (offerForm.get('suggested_price')?.value < minAllowedPrice() || offerForm.get('suggested_price')?.value > maxAllowedPrice())">
+                        Offer must be between ${{ minAllowedPrice() }} and ${{ maxAllowedPrice() }}
                       </div>
                     </div>
                     <div class="alert" *ngIf="submitMessage" [class.alert-success]="submitSuccess"
@@ -156,7 +179,7 @@
                       {{ submitMessage }}
                     </div>
                     <div class="form-actions">
-                      <button type="submit" class="submit-btn" [disabled]="offerForm.invalid || isSubmitting">
+                      <button type="submit" class="submit-btn" [disabled]="offerForm.invalid || isSubmitting || submitSuccess">
                         <ng-container *ngIf="isSubmitting; else notLoading">
                           <i class="fas fa-spinner fa-spin"></i>
                           Loading ...

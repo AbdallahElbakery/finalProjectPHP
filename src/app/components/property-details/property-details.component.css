@@ -24,7 +24,6 @@
 .property-details-page {
   font-family: 'Poppins', sans-serif;
   color: var(--text-color);
-  margin-top: 80px; /* Account for fixed navbar */
   padding: 2rem 0;
 }
 
