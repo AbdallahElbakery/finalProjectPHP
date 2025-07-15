@@ -2,7 +2,7 @@
 <nav class="navbar-custom">
   <div class="container">
     <!-- Logo -->
-    <a class="navbar-brand" href="#home">
+    <a class="navbar-brand" routerLink="/home">
       <img src="assets/images/logo.png">
     </a>
 
@@ -16,44 +16,28 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#home">Home</a>
+          <a class="nav-link" routerLinkActive="activeLink" routerLink="/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="properties">Properties</a>
+          <a class="nav-link" routerLinkActive="activeLink" routerLink="/properties">Properties</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="activeLink" routerLink="/my-properties">My Properties</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="activeLink" routerLink="/about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#sell">Sell</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/my-properties">My Properties</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#rent">Rent</a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="/seller-profile">Agents</a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="/user-seller-profile">Users</a>
-        </li> -->
-        <li class="nav-item">
-          <a class="nav-link" href="#about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#contact">Contact</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/user-profile">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/chat">chat</a>
+          <a class="nav-link" routerLinkActive="activeLink" routerLink="/contact">Contact</a>
         </li>
       </ul>
 
       <!-- CTA Button or User Dropdown -->
       <ng-container *ngIf="!isAuthenticated; else userDropdown">
-        <a href="/login" class="login-btn">Login</a>
-        <a href="/registration" class="cta-button rounded-3">Register</a>
+        <a routerLink="/login" class="login-btn">Login</a>
+        <a routerLink="/registration" class="cta-button rounded-3">Register</a>
       </ng-container>
       <ng-template #userDropdown>
         <div class="dropdown d-inline-block">
@@ -66,8 +50,8 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenu">
             <li><a class="dropdown-item" herf="" style="cursor: pointer;" (click)="getrole()">Profile</a></li>
-            <li><a class="dropdown-item" href="/user-bookings">My Bookings</a></li>
-            <li><a class="dropdown-item" href="/seller-bookings">Property Bookings</a></li>
+            <li><a class="dropdown-item" routerLink="/user-bookings">My Bookings</a></li>
+            <li><a class="dropdown-item" routerLink="/seller-bookings">Property Bookings</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
