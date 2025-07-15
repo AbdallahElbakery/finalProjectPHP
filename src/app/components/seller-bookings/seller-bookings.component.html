@@ -129,7 +129,8 @@
                                     <i class="fas" [ngClass]="{
                                         'fa-clock': booking.status === 'pending',
                                         'fa-check-circle': booking.status === 'confirmed',
-                                        'fa-times-circle': booking.status === 'cancelled'
+                                        'fa-times-circle': booking.status === 'cancelled',
+                                        'fa-dollar-sign': booking.status === 'paid'
                                     }"></i>
                                     <span>{{getStatusText(booking.status)}}</span>
                                 </span>
