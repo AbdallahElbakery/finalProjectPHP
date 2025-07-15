@@ -7,20 +7,20 @@
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
         <div class="footer-section">
           <div class="footer-logo mb-3">
-            <h3 class="logo-text">RealEstate Pro</h3>
+            <h3 class="logo-text">RealEase</h3>
             <p class="logo-tagline">Your Dream Home Awaits</p>
           </div>
           <div class="contact-info">
             <div class="contact-item">
-              <i class="contact-icon">📍</i>
+              <i class="contact-icon fas fa-location"></i>
               <span>123 Business Avenue, Downtown District</span>
             </div>
             <div class="contact-item">
-              <i class="contact-icon">📞</i>
+              <i class="contact-icon fas fa-phone"></i>
               <span>+20 1141107855</span>
             </div>
             <div class="contact-item">
-              <i class="contact-icon">✉️</i>
+              <i class="contact-icon fas fa-envelope"></i>
               <span>info&#64;realestatepro.com</span>
             </div>
             <!-- Social Media Links -->
@@ -50,53 +50,32 @@
         <div class="footer-section">
           <h5 class="footer-title">Quick Links</h5>
           <ul class="footer-links">
-            <li><a href="#" class="footer-link">FAQ</a></li>
-            <li><a href="#" class="footer-link">Live Chat</a></li>
-            <li><a href="#" class="footer-link">Contact Us</a></li>
+            <li><a routerLink="/home" class="footer-link">Home</a></li>
+            <li><a routerLink="/properties" class="footer-link">Properties</a></li>
+            <li><a routerLink="/about" class="footer-link">About Us</a></li>
+            <li><a routerLink="/contact" class="footer-link">Contact Us</a></li>
           </ul>
         </div>
       </div>
 
-      <!-- Services Section -->
-      <!-- <div class="col-lg-2 col-md-6 col-sm-6 mb-4">
-        <div class="footer-section">
-          <h5 class="footer-title">Services</h5>
-          <ul class="footer-links">
-            <li><a href="#" class="footer-link">Property Management</a></li>
-            <li><a href="#" class="footer-link">Home Inspection</a></li>
-            <li><a href="#" class="footer-link">Legal Services</a></li>
-          </ul>
-        </div>
-      </div> -->
-
-      <!-- Support Section -->
-      <!-- <div class="col-lg-2 col-md-6 col-sm-6 mb-4">
-        <div class="footer-section">
-          <h5 class="footer-title">Support</h5>
-          <ul class="footer-links">
-            <li><a href="#" class="footer-link">Help Center</a></li>
-            <li><a href="#" class="footer-link">Terms of Service</a></li>
-            <li><a href="#" class="footer-link">Privacy Policy</a></li>
-          </ul>
-        </div>
-      </div> -->
 
       <!-- Newsletter Section -->
       <div class="col-lg-2 col-md-6 col-sm-12 mb-4">
         <div class="footer-section">
-          <h5 class="footer-title">Stay Updated</h5>
-          <p class="newsletter-description">
-            Subscribe to get the latest property listings and market updates.
-          </p>
-          <form class="newsletter-form">
-            <div class="input-group">
-              <input type="email" class="newsletter-input" placeholder="Your email address" name="email" required>
-              <button type="submit" class="newsletter-btn">
-                Subscribe
-              </button>
-            </div>
-          </form>
+          <h5 class="footer-title">We Accept</h5>
 
+          <div class="payment-methods">
+            <div class="payment-icons">
+              <div class="payment-method">
+                <i class="payment-icon fab fa-paypal"></i>
+                <span>PayPal</span>
+              </div>
+              <div class="payment-method">
+                <i class="payment-icon fas fa-credit-card"></i>
+                <span>Cash</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -108,7 +87,7 @@
       <div class="row align-items-center">
         <div class="col-md-6 col-sm-12 text-center text-md-start">
           <p class="copyright-text">
-            © {{ currentYear }} RealEstate Pro. All rights reserved.
+            © {{ currentYear }} RealEase. All rights reserved.
             <span class="separator">|</span>
             Built with excellence for your real estate needs.
           </p>

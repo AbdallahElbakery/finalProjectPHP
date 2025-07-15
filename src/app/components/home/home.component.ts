@@ -8,7 +8,7 @@ import { PropertyCardComponent } from '../property-card/property-card.component'
 
 @Component({
   selector: 'app-home',
-  imports: [PropertyComponent, PropertyCardComponent],
+  imports: [PropertyComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

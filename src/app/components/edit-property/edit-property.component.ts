@@ -31,7 +31,7 @@ export class EditPropertyComponent implements OnInit {
     this.propertyService.getProperty(this.getId).subscribe((res) => {
 
       this.updatePropForm.setValue({
-        name: ['name'],
+        name: res['name'],
         description: res['description'],
         citynum: res['citynum'],
         price: res['price'],
@@ -40,14 +40,15 @@ export class EditPropertyComponent implements OnInit {
         bathrooms: res['bathrooms'],
         purpose: res['purpose'],
         category_id: res['category_id'],
-        address_id: res['address_id']
+        address_id: res['address_id'],
+        image: ''
       })
     });
 
   }
 
   ngOnInit(): void {
-    this.initializeForm();    
+    this.initializeForm();
     this.loadPropertyData();
 
     this.propertyService.getCategories().subscribe((category) => {
@@ -92,29 +93,38 @@ export class EditPropertyComponent implements OnInit {
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.updatePropForm.patchValue({ image: reader.result });
-      };
-      reader.readAsDataURL(file);
+      this.updatePropForm.patchValue({ 'image': file })
     }
   }
 
   onSubmit() {
     console.log(this.updatePropForm.value);
-
+    const data = { ...this.updatePropForm.value };
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => {
+      if (key == 'image' || data[key] instanceof File) {
+        formData.append('image', data[key])
+      }
+      else {
+        formData.append(key, data[key])
+      }
+    })
+    formData.append('_method','PUT')
     this.submitted = true;
-
+    
     if (this.updatePropForm.valid) {
-      const data = { ...this.updatePropForm.value };
       console.log(data);
-      this.propertyService.updateProperty(this.getId, this.updatePropForm.value).subscribe(() => {
-        console.log("updated")
-        if (data.image === null || data.image === '') {
-          delete data.image;
+      this.propertyService.updateProperty(this.getId, formData).subscribe({
+        next: () => {
+          console.log("updated")
+          if (data.image === null || data.image === '') {
+            delete data.image;
+          }
+          alert('✅ The property has been updated successfully');
+        },
+        error: (error) => {
+          console.log(error);
         }
-        alert('✅ The property has been updated successfully');
-
       })
 
       this.updatePropForm.reset();

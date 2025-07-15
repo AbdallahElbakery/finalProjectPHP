@@ -2,7 +2,7 @@
 <nav class="navbar-custom">
   <div class="container d-flex justify-content-between align-items-center">
     <!-- Logo -->
-    <a class="navbar-brand" href="/home">
+    <a class="navbar-brand" routerLink="/home">
       <img src="assets/images/logo.png">
     </a>
 
@@ -10,22 +10,22 @@
     <div class="d-flex align-items-center ms-auto">
       <ul class="navbar-nav flex-row gap-2 mb-0">
         <li class="nav-item">
-          <a class="nav-link" href="/home">Home</a>
+          <a class="nav-link" routerLink="/home" routerLinkActive="activeLink">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/properties">Properties</a>
+          <a class="nav-link" routerLink="/properties" routerLinkActive="activeLink">Properties</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
+          <a class="nav-link" routerLink="/about" routerLinkActive="activeLink">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/contact">ContactUs</a>
+          <a class="nav-link" routerLink="/contact" routerLinkActive="activeLink">ContactUs</a>
         </li>
       </ul>
       <!-- CTA Button or User Dropdown -->
       <ng-container *ngIf="!isAuthenticated; else userDropdown">
-        <a href="/login" class="login-btn ms-3">Login</a>
-        <a href="/registration" class="cta-button rounded-3 ms-2">Register</a>
+        <a routerLink="/login" class="login-btn ms-3">Login</a>
+        <a routerLink="/registration" class="cta-button rounded-3 ms-2">Register</a>
       </ng-container>
       <ng-template #userDropdown>
         <div class="dropdown d-inline-block ms-3">
@@ -38,7 +38,7 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenu">
             <li><a class="dropdown-item" style="cursor: pointer;" (click)="getrole()">Profile</a></li>
-            <li *ngIf="isUser"><a class="dropdown-item" href="/user-bookings">My Bookings</a></li>
+            <li *ngIf="isUser"><a class="dropdown-item" routerLink="/user-bookings">My Bookings</a></li>
             <ng-container *ngIf="isSeller">
               <li><a class="dropdown-item" (click)="listProperty()">My Properties</a></li>
               <li><a class="dropdown-item" (click)="listBookings()">My Bookings</a></li>

@@ -51,14 +51,16 @@ export class PropertyServiceService {
   delteProperty(id: number) {
     return this.http.delete(`${this.deleteProp}/${id}`, { headers: new HttpHeaders({ 'content-type': 'application/json' }) })
   }
-  updateProperty(id: number, data: Property): Observable<any> {
-    return this.http.put(`${this.updateProp}/${id}`, data, { headers: { 'content-type': 'application/json' } });
+  updateProperty(id: number, data:FormData): Observable<any> {
+    return this.http.post(`${this.updateProp}/${id}`, data);
   }
 
   getProfile(): Observable<any> {
     return this.http.get<SellerData>(this.seller)
   }
   updateProfile(data: FormData): Observable<any> {
+  data.append('_method', 'PUT')
+
     return this.http.post(`${this.profile}`, data);
   }
   getComapnyDetails(): Observable<any> {

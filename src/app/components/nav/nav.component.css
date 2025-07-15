@@ -18,7 +18,7 @@
   border-bottom: 1px solid rgba(30, 64, 175, 0.1);
   padding: var(--padding) 0;
   transition: var(--transition);
-  position:sticky;
+  position: sticky;
   top: 0;
   width: 100%;
   z-index: 1000;
@@ -111,7 +111,7 @@
 .navbar-nav .nav-link {
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
-  color: var(--text-color) !important;
+  /* color: var(--text-color) !important; */
   padding: 0.75rem 1rem !important;
   margin: 0 0.15rem;
   border-radius: var(--border-radius);
@@ -124,11 +124,17 @@
   align-items: center;
 }
 
-.navbar-nav .nav-link:hover,
+/* .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active {
   color: var(--primary-color) !important;
   background: var(--bg-lighter);
   transform: translateY(-2px);
+} */
+.activeLink {
+  background-color: #1e40af !important;
+  border-radius: 8px !important;
+  color: #dbeafe !important;
+
 }
 
 .navbar-nav .nav-link::after {
@@ -309,6 +315,7 @@
   .navbar-toggler {
     display: flex;
   }
+
   .navbar-collapse {
     display: none !important;
     flex-direction: column;
@@ -322,30 +329,36 @@
     padding: 1rem 0.5rem;
     border-radius: 0 0 var(--border-radius) var(--border-radius);
   }
+
   .navbar-collapse.show {
     display: flex !important;
   }
+
   .navbar-nav {
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
     gap: 0.5rem;
   }
+
   .navbar-nav .nav-link {
     width: 100%;
     padding: 0.75rem 1.2rem !important;
     font-size: 1rem;
     border-radius: 0.5rem;
   }
+
   .cta-button {
     margin: 1rem 0 0 0;
     width: 100%;
     justify-content: center;
     font-size: 1rem;
   }
+
   .dropdown.d-inline-block {
     width: 100%;
   }
+
   .dropdown-menu {
     position: static !important;
     float: none;
@@ -354,6 +367,7 @@
     box-shadow: none;
     border-radius: 0.5rem;
   }
+
   .container {
     flex-direction: row;
     align-items: center;
@@ -365,11 +379,13 @@
   .navbar-brand {
     font-size: 1.2rem;
   }
+
   .logo-icon {
     width: 32px;
     height: 32px;
     font-size: 1rem;
   }
+
   .cta-button {
     font-size: 0.95rem;
     padding: 0.6rem 1rem;
@@ -380,13 +396,16 @@
   .navbar-custom {
     padding: 0.5rem 0;
   }
+
   .navbar-brand {
     font-size: 1rem;
   }
+
   .cta-button {
     font-size: 0.85rem;
     padding: 0.5rem 0.7rem;
   }
+
   .navbar-nav .nav-link {
     font-size: 0.95rem;
     padding: 0.6rem 0.8rem !important;
