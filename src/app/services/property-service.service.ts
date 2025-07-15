@@ -60,6 +60,8 @@ export class PropertyServiceService {
     return this.http.get<SellerData>(this.seller)
   }
   updateProfile(data: FormData): Observable<any> {
+  data.append('_method', 'PUT')
+
     return this.http.post(`${this.profile}`, data);
   }
   getComapnyDetails(): Observable<any> {

@@ -102,15 +102,16 @@ export class EditPropertyComponent implements OnInit {
     const data = { ...this.updatePropForm.value };
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
-      if (data[key] instanceof File) {
-        formData.append(key, data[key])
+      if (key == 'image' || data[key] instanceof File) {
+        formData.append('image', data[key])
       }
       else {
         formData.append(key, data[key])
       }
     })
+    formData.append('_method','PUT')
     this.submitted = true;
-
+    
     if (this.updatePropForm.valid) {
       console.log(data);
       this.propertyService.updateProperty(this.getId, formData).subscribe({

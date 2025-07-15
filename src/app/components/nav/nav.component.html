@@ -43,7 +43,7 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenu">
             <li><a class="dropdown-item" style="cursor: pointer;" (click)="getrole()">Profile</a></li>
-            <li *ngIf="isUser"><a class="dropdown-item" href="/user-bookings">My Bookings</a></li>
+            <li *ngIf="isUser"><a class="dropdown-item" routerLink="/user-bookings">My Bookings</a></li>
             <ng-container *ngIf="isSeller">
               <li><a class="dropdown-item" (click)="listProperty()">My Properties</a></li>
               <li><a class="dropdown-item" (click)="listBookings()">My Bookings</a></li>
