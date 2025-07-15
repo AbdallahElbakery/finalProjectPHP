@@ -24,12 +24,14 @@
 
           <!-- Main Image -->
           <div class="main-image-container" [ngClass]="{'sold-overlay': propertyData.status === 'paid'}">
-            <img [src]="propertyData.image" [alt]="propertyData.name" class="main-property-image">
+            <img [src]="'http://127.0.0.1:8000/storage/'+propertyData.image" [alt]="propertyData.name"
+              class="main-property-image">
             <div class="image-overlay">
               <div class="property-badges">
                 <span class="badge featured">Featured</span>
                 <span class="badge new">New</span>
-                <span *ngIf="propertyData.status === 'paid'" class="badge sold"><i class="fas fa-certificate"></i> Sold</span>
+                <span *ngIf="propertyData.status === 'paid'" class="badge sold"><i class="fas fa-certificate"></i>
+                  Sold</span>
               </div>
               <button class="expand-image-btn">
                 <i class="fas fa-expand"></i>
@@ -116,7 +118,9 @@
                 </div>
                 <div class="attribute-row" *ngIf="addressData">
                   <span class="attribute-label">Address:</span>
-                  <span class="attribute-value">{{ addressData.full_address }}<br>{{ addressData.street }}, {{ addressData.city }}, {{ addressData.country }}<span *ngIf="addressData.postal_code">, {{ addressData.postal_code }}</span></span>
+                  <span class="attribute-value">{{ addressData.full_address }}<br>{{ addressData.street }}, {{
+                    addressData.city }}, {{ addressData.country }}<span *ngIf="addressData.postal_code">, {{
+                      addressData.postal_code }}</span></span>
                 </div>
               </div>
             </div>
@@ -138,20 +142,17 @@
                       <label for="suggested_price" class="form-label">suggested price</label>
                       <div class="input-group">
                         <span class="input-prefix">$</span>
-                        <input 
-                          type="number" 
-                          id="suggested_price"
-                          formControlName="suggested_price" 
-                          class="form-control"
+                        <input type="number" id="suggested_price" formControlName="suggested_price" class="form-control"
                           placeholder="  Enter the suggested price (ex: 2500000)"
-                          [class.is-invalid]="offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched"
-                        />
+                          [class.is-invalid]="offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched" />
                       </div>
-                      <div class="invalid-feedback" *ngIf="offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched">
+                      <div class="invalid-feedback"
+                        *ngIf="offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched">
                         يرجى إدخال سعر صحيح
                       </div>
                     </div>
-                    <div class="alert" *ngIf="submitMessage" [class.alert-success]="submitSuccess" [class.alert-danger]="!submitSuccess">
+                    <div class="alert" *ngIf="submitMessage" [class.alert-success]="submitSuccess"
+                      [class.alert-danger]="!submitSuccess">
                       {{ submitMessage }}
                     </div>
                     <div class="form-actions">
@@ -204,7 +205,8 @@
           <!-- Main Seller Card -->
           <div class="seller-card">
             <div class="seller-header">
-              <img [src]="propertyData.seller?.photo" [alt]="propertyData.seller?.name" class="seller-avatar">
+              <img [src]="'http://127.0.0.1:8000/uploads/'+propertyData?.seller?.photo" [alt]="propertyData.seller?.name"
+                class="seller-avatar">
               <div class="seller-details">
                 <h3 class="seller-name">{{ propertyData.seller?.name }}</h3>
                 <p class="seller-company">{{ propertyData.seller?.company_name }}</p>

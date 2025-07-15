@@ -110,7 +110,7 @@
               Edit Price
             </button>
             }@else if(booking.status === 'confirmed'){
-            <button class="action-btn edit-btn" (click)="pay(booking.id || 1 )">
+            <button class="action-btn edit-btn" (click)="pay(booking.id || 0 )">
               <i class="fa-brands fa-paypal"></i>
               Pay
             </button>
