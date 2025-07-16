@@ -24,14 +24,11 @@ export class CompanyInfoFormComponent implements OnInit {
     '6 October',
   ];
 
-  // العناصر المختارة
   selectedOptions: string[] = [];
 
-  // لعرض/إخفاء القائمة
   showDropdown = false;
   registerForm: any;
 
-  // إضافة/إزالة عنصر من المحدد
   toggleSelection(option: string) {
     const index = this.selectedOptions.indexOf(option);
     if (index === -1) {
@@ -40,12 +37,10 @@ export class CompanyInfoFormComponent implements OnInit {
       this.selectedOptions.splice(index, 1);
     }
 
-    // ✅ تحديث القيمة في الفورم
     this.profileForm.get('locations')?.setValue(this.selectedOptions);
     this.profileForm.get('locations')?.markAsTouched();
   }
 
-  // التحقق إذا كان العنصر محدد
   isSelected(option: string): boolean {
     return this.selectedOptions.includes(option);
   }
@@ -58,8 +53,8 @@ export class CompanyInfoFormComponent implements OnInit {
     this.propertyService.getComapnyDetails().subscribe((res) => {
       this.profileForm.setValue({
         company_name: res['company_name'],
-        logo: res['logo'],
         about_company: res['about_company'],
+        logo: '',
       })
     })
   }
@@ -70,21 +65,17 @@ export class CompanyInfoFormComponent implements OnInit {
 
   initForm() {
     this.profileForm = this.fb.group({
-      picture: [''],
       company_name: ['', Validators.required],
-      locations: [[], Validators.required], // استخدم 'locations' لأن removeLocation تعتمد عليه
+      locations: [[], Validators.required],
       about_company: ['', Validators.required],
+      logo:['']
     });
   }
 
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.profileForm.patchValue({ picture: reader.result });
-      };
-      reader.readAsDataURL(file);
+        this.profileForm.patchValue({ 'logo': file});
     }
   }
 
@@ -95,12 +86,21 @@ export class CompanyInfoFormComponent implements OnInit {
   }
 
   onSubmit() {
-    const data = { ... this.profileForm.value }
     if (this.profileForm.valid) {
-      if (data.logo == null || data.logo == '') {
-        delete data.logo;
+    
+      const data = { ... this.profileForm.value }
+    const formData=new FormData();
+    
+    Object.keys(data).forEach((key)=>{
+      if(key =='logo'||data[key] instanceof File){
+        formData.append('logo',data[key])
       }
-      this.propertyService.updateCompanyDetails(data).subscribe(() => {
+      formData.append(key,data[key])
+    })
+
+    formData.append('_method','PATCH')
+    console.log(this.profileForm.value)
+      this.propertyService.updateCompanyDetails(formData).subscribe(() => {
         console.log('✅ Saved:', this.profileForm.value);
         alert('✅ Company details updated')
         this.router.navigate(['/edit-profile']);

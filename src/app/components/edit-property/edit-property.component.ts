@@ -126,8 +126,6 @@ export class EditPropertyComponent implements OnInit {
           console.log(error);
         }
       })
-
-      this.updatePropForm.reset();
       this.submitted = false;
     } else {
       Object.values(this.updatePropForm.controls).forEach(control => {
