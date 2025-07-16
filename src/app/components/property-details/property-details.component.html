@@ -22,7 +22,7 @@
           Back to Properties
         </a>
       </button>
-      @if(propertyData?.status == 'available'){
+      <!-- @if(propertyData?.status == 'available'){
       <div class="property-status">
         <span class="status-badge">
           Available
@@ -35,12 +35,13 @@
         </span>
       </div>
 
-      }
-      <!-- <div class="property-status">
-        <span class="status-badge" [ngClass]="{'available': propertyData?.status != 'sold', 'sold': propertyData?.status == 'sold'}">
+      } -->
+      <div class="property-status">
+        <span class="status-badge"
+          [ngClass]="{'available': propertyData?.status != 'sold', 'sold': propertyData?.status == 'sold'}">
           {{ propertyData?.status ? (propertyData.status | titlecase) : 'Available' }}
         </span>
-      </div> -->
+      </div>
     </div>
   </div>
 
