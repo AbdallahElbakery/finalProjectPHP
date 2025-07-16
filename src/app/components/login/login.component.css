@@ -27,7 +27,7 @@
 .login-form-wrapper {
   width: 100%;
   max-width: 420px;
-  padding: 2rem;
+  padding: 7rem 0 3rem 0;
 }
 
 /* Logo Section */
@@ -362,19 +362,19 @@
   .login-form-wrapper {
     padding: 1.5rem 1rem;
   }
-  
+
   .welcome-title {
     font-size: 1.8rem;
   }
-  
+
   .logo-text {
     font-size: 1.5rem;
   }
-  
+
   .social-login {
     flex-direction: column;
   }
-  
+
   .hero-stats {
     flex-direction: column;
     gap: 1.5rem;
@@ -385,17 +385,17 @@
   .login-form-wrapper {
     padding: 1rem 0.5rem;
   }
-  
+
   .welcome-title {
     font-size: 1.6rem;
   }
-  
+
   .form-control,
   .input-group-text,
   .password-toggle {
     padding: 0.625rem 0.875rem;
   }
-  
+
   .login-btn {
     padding: 0.75rem 1.25rem;
     font-size: 0.95rem;
