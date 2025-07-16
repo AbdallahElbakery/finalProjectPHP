@@ -93,8 +93,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><button class="dropdown-item logoutBtn" 
-                (click)="logout()">
+            <li><button class="dropdown-item logoutBtn" (click)="logout()">
                 <i class="fas fa-sign-out-alt"></i>
                 Logout
               </button></li>
@@ -129,16 +128,16 @@
           About
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item ">
         <a class="nav-link" routerLinkActive="activeLink" routerLink="/contact">
           <i class="fas fa-envelope"></i>
           Contact
         </a>
       </li>
       <ng-container *ngIf="!isAuthenticated">
-        <li class="nav-item">
-          <a routerLink="/login" class="nav-link">
-            <i class="fas fa-sign-in-alt"></i>
+        <li class=" nav-item">
+          <a routerLink="/login" class="nav-link gap-2">
+            <i class="fas fa-sign-in-alt "></i>
             Login
           </a>
         </li>

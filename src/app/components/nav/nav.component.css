@@ -120,7 +120,7 @@ body {
 }
 
 /* Authentication Buttons */
-.login-btn {
+/* .login-btn {
   color: var(--primary);
   background: white;
   border: 2px solid var(--primary);
@@ -139,27 +139,79 @@ body {
   background: var(--primary);
   color: white;
   box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25);
-}
+} */
 
+
+/* CTA Button */
 .cta-button {
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  font-family: 'Aldrich', sans-serif;
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
   color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--border-radius);
-  text-decoration: none;
-  font-weight: 600;
-  transition: var(--transition);
   border: none;
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-  display: flex;
+  padding: 0.7rem 1.3rem;
+  border-radius: 8px !important;
+  font-weight: 400;
+  text-decoration: none;
+  transition: var(--transition);
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
+  box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  margin-left: 1.5rem;
 }
 
 .cta-button:hover {
-  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
-  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
-  color: white;
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
+  color: white !important;
+}
+
+/* Login and Register Buttons */
+.navbar-custom .login-btn {
+  font-family: 'Aldrich', sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 0.85rem !important;
+  padding: 8px !important;
+  border-radius: 0.5rem !important;
+  border: 2px solid #1e40af !important;
+  color: #1e40af !important;
+  background: #fff !important;
+  transition: 0.3s !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 90px !important;
+  height: 40px !important;
+  margin-right: 15px !important;
+  margin-left: 1.5rem;
+
+  gap: 0.4rem;
+
+  text-transform: uppercase !important;
+  letter-spacing: 0.3px !important;
+  box-shadow: 0 4px 15px rgba(30, 64, 175, 0.08) !important;
+}
+
+.navbar-custom .login-btn:hover {
+  background: #1e40af !important;
+  color: #fff !important;
+}
+
+.navbar-custom .login-btn:active {
+  transform: translateY(-1px) !important;
+}
+
+.navbar-custom .cta-button {
+  margin-left: 0;
+  margin-right: 0;
+  min-width: 80px;
+  height: 40px;
+  justify-content: center;
 }
 
 /* User Dropdown */
