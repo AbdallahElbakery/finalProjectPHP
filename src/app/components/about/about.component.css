@@ -21,6 +21,7 @@ body {
     max-width: 1200px;
     margin: 50px auto;
     padding: 2rem var(--padding);
+    margin-top: 150px !important;
 }
 
 .about-header {

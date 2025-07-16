@@ -23,6 +23,7 @@ body {
   max-width: 1200px;
   margin: auto;
   padding: 2rem 1rem;
+  margin-top: 100px !important;
 }
 
 /* Header */

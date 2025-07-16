@@ -1,61 +1,154 @@
-<!-- navbar.component.html -->
 <nav class="navbar-custom">
   <div class="container d-flex justify-content-between align-items-center">
     <!-- Logo -->
     <a class="navbar-brand" routerLink="/home">
-      <img src="assets/images/logo.png">
+      <img src="assets/images/logo.png" alt="Logo">
     </a>
 
-    <!-- Navigation Menu (يمين) -->
+    <!-- Mobile Toggle Button -->
+    <button class="mobile-toggle d-lg-none">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Navigation Menu -->
     <div class="d-flex align-items-center ms-auto">
-      <ul class="navbar-nav flex-row gap-2 mb-0">
+      <ul class="navbar-nav flex-row gap-1 mb-0 d-none d-lg-flex">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="activeLink">Home</a>
+          <a class="nav-link" routerLink="/home" routerLinkActive="activeLink">
+            <i class="fas fa-home"></i>
+            Home
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="activeLink" routerLink="/properties">Properties</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="activeLink" routerLink="/my-properties">My Properties</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="activeLink" routerLink="/about">About</a>
+          <a class="nav-link" routerLinkActive="activeLink" routerLink="/properties">
+            <i class="fas fa-building"></i>
+            Properties
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="activeLink" routerLink="/contact">Contact</a>
+          <a class="nav-link" routerLinkActive="activeLink" routerLink="/my-properties">
+            <i class="fas fa-key"></i>
+            My Properties
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="activeLink" routerLink="/about">
+            <i class="fas fa-info-circle"></i>
+            About
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="activeLink" routerLink="/contact">
+            <i class="fas fa-envelope"></i>
+            Contact
+          </a>
         </li>
       </ul>
-      <!-- CTA Button or User Dropdown -->
+
+      <!-- Authentication Section -->
       <ng-container *ngIf="!isAuthenticated; else userDropdown">
-        <a routerLink="/login" class="login-btn">Login</a>
-        <a routerLink="/registration" class="cta-button rounded-3">Register</a>
+        <a routerLink="/login" class="login-btn d-none d-lg-flex">
+          <i class="fas fa-sign-in-alt"></i>
+          Login
+        </a>
+        <a routerLink="/registration" class="cta-button d-none d-lg-flex">
+          <i class="fas fa-user-plus"></i>
+          Register
+        </a>
       </ng-container>
+
+      <!-- User Dropdown -->
       <ng-template #userDropdown>
         <div class="dropdown d-inline-block ms-3">
-          <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center" type="button"
-            id="userDropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-            <img *ngIf="photo" [src]="photoUrl" alt="User Photo" class="rounded-circle me-2 user-photo" width="32"
-              height="32">
-            <span *ngIf="!photo" class="user-initials me-2">{{ userName ? userName.charAt(0) : '?' }}</span>
+          <button class="dropdown-toggle d-flex align-items-center" type="button" id="userDropdownMenu"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img *ngIf="photo" [src]="photoUrl" alt="User Photo" class="user-photo">
+            <span *ngIf="!photo" class="user-initials">{{ userName ? userName.charAt(0) : '?' }}</span>
             <span class="user-name">{{ userName }}</span>
+            <i class="fas fa-chevron-down ms-2"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenu">
-            <li><a class="dropdown-item" style="cursor: pointer;" (click)="getrole()">Profile</a></li>
-            <li *ngIf="isUser"><a class="dropdown-item" routerLink="/user-bookings">My Bookings</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="getrole()">
+                <i class="fas fa-user"></i>
+                Profile
+              </a></li>
+            <li *ngIf="isUser"><a class="dropdown-item" routerLink="/user-bookings">
+                <i class="fas fa-calendar-check"></i>
+                My Bookings
+              </a></li>
             <ng-container *ngIf="isSeller">
-              <li><a class="dropdown-item" (click)="listProperty()">My Properties</a></li>
-              <li><a class="dropdown-item" (click)="listBookings()">My Bookings</a></li>
-              <li><a class="dropdown-item" (click)="addProperty()">Add Property</a></li>
+              <li><a class="dropdown-item" (click)="listProperty()">
+                  <i class="fas fa-home"></i>
+                  My Properties
+                </a></li>
+              <li><a class="dropdown-item" (click)="listBookings()">
+                  <i class="fas fa-calendar-alt"></i>
+                  My Bookings
+                </a></li>
+              <li><a class="dropdown-item" (click)="addProperty()">
+                  <i class="fas fa-plus-circle"></i>
+                  Add Property
+                </a></li>
             </ng-container>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><button class="dropdown-item" (click)="logout()">Logout</button></li>
+            <li><button class="dropdown-item logoutBtn" 
+                (click)="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+              </button></li>
           </ul>
         </div>
       </ng-template>
     </div>
+
+    <!-- Mobile Menu -->
+    <ul class="navbar-nav d-lg-none">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home" routerLinkActive="activeLink">
+          <i class="fas fa-home"></i>
+          Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="activeLink" routerLink="/properties">
+          <i class="fas fa-building"></i>
+          Properties
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="activeLink" routerLink="/my-properties">
+          <i class="fas fa-key"></i>
+          My Properties
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="activeLink" routerLink="/about">
+          <i class="fas fa-info-circle"></i>
+          About
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="activeLink" routerLink="/contact">
+          <i class="fas fa-envelope"></i>
+          Contact
+        </a>
+      </li>
+      <ng-container *ngIf="!isAuthenticated">
+        <li class="nav-item">
+          <a routerLink="/login" class="nav-link">
+            <i class="fas fa-sign-in-alt"></i>
+            Login
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/registration" class="nav-link">
+            <i class="fas fa-user-plus"></i>
+            Register
+          </a>
+        </li>
+      </ng-container>
+    </ul>
   </div>
 </nav>

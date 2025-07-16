@@ -16,12 +16,13 @@
 .properties-page {
   font-family: 'Poppins', sans-serif;
   color: var(--text-color);
-  /* margin-top: 80px; */
+  margin-top: 100px;
   /* Account for fixed navbar */
 }
 
 /* Header Section */
 .hero {
+  margin-top: 200px !important;
   background: url('https://realestics.temptics.com/assets/img/banner-slide-1.jpg') no-repeat center center/cover;
   height: 70vh;
   color: white;

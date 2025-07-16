@@ -21,7 +21,7 @@
 .user-bookings-page {
   font-family: 'Poppins', sans-serif;
   color: var(--text-color);
-  margin-top: 30px;
+  margin-top: 80px;
   padding: 2rem 0;
   min-height: calc(100vh - 80px);
   background: var(--bg-light);

@@ -11,8 +11,10 @@
 
 
 .contact-container {
+
     max-width: 1200px;
     margin: 50px auto;
+    margin-top: 200px !important;
     padding: 2rem var(--padding);
 }
 

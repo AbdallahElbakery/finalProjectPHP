@@ -19,13 +19,14 @@ body {
   font-family: var(--font-main);
   background-color: var(--bg-soft);
   color: var(--dark);
+  margin-top: 120px !important;
 }
 
 /* خلفية وبوكس للصفحة */
 .profile-box {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
   padding: 32px 24px;
   margin-bottom: 32px;
 }
@@ -43,7 +44,7 @@ body {
   width: 120px;
   height: 120px;
   object-fit: cover;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .profile-header .seller-info {
@@ -66,11 +67,12 @@ body {
   font-size: 1.2rem;
   padding: 12px 40px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: background 0.2s;
 }
 
-.btn-primary:focus, .btn-primary:hover {
+.btn-primary:focus,
+.btn-primary:hover {
   background: #0056b3;
 }
 
@@ -297,6 +299,7 @@ body {
 .review-rating {
   color: #facc15;
 }
+
 .property-card {
   background: white;
   border-radius: var(--border-radius);
@@ -523,7 +526,7 @@ body {
   .properties-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
-  
+
   .filters-sidebar {
     position: static;
   }
@@ -533,33 +536,35 @@ body {
   .page-title {
     font-size: 2rem;
   }
-  
+
   .page-subtitle {
     font-size: 1rem;
   }
-  
+
   .quick-stats {
     gap: 1rem;
   }
-  
+
   .stat-number {
     font-size: 1.5rem;
   }
-  
+
   .price-options {
     grid-template-columns: 1fr;
   }
-  
+
   .results-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
   }
+
   .profile-header {
     flex-direction: column;
     text-align: center;
     gap: 16px;
   }
+
   .profile-header img {
     margin-bottom: 12px;
   }
@@ -569,12 +574,12 @@ body {
   .properties-header {
     padding: 3rem 0 1.5rem;
   }
-  
+
   .quick-stats {
     flex-direction: column;
     gap: 1.5rem;
   }
-  
+
   .property-card {
     max-width: 100%;
   }
@@ -590,7 +595,7 @@ body {
     z-index: 10;
   }
 
-.dropdown-menu-btn:hover {
-  background:  #3b82f6;
-}
+  .dropdown-menu-btn:hover {
+    background: #3b82f6;
+  }
 }
