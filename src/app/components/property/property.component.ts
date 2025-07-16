@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Property } from '../../types/property';
 import { PropertyServiceService } from '../../services/property-service.service';
 import { CommonModule } from '@angular/common';
 import { Address } from '../../types/address';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-property,date-pipe',
@@ -84,8 +85,9 @@ export class PropertyComponent implements OnInit {
   // ];
 
   properties: Property[] = [];
+  @Input() property: any;
 
-  constructor(private propertyService: PropertyServiceService) { }
+  constructor(private propertyService: PropertyServiceService, private router: Router) { }
 
   ngOnInit(): void {
     this.propertyService.getProperties().subscribe((data: any) => {
@@ -93,7 +95,9 @@ export class PropertyComponent implements OnInit {
       console.log(data);
     });
 
-
   }
 
+  viewPropertyDetails(propertyId: number) {
+    this.router.navigate(['/property', propertyId])
+  }
 }

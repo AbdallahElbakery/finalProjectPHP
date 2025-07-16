@@ -3,7 +3,7 @@
     @for(property of properties; track property.id){
 
     <div class="col-lg-4 col-md-6">
-        <div class="property-card">
+        <div class="property-card" (click)="viewPropertyDetails(property.id)">
             <div class="position-relative">
                 <img [src]="'http://127.0.0.1:8000/storage/'+property.image" alt="Modern House" class="property-image">
 

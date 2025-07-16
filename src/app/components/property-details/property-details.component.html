@@ -1,11 +1,13 @@
 <!-- Toast Bootstrap -->
 <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999; margin-top: 80px;">
-  <div *ngIf="showToast" class="toast show align-items-center text-bg-{{toastType}} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+  <div *ngIf="showToast" class="toast show align-items-center text-bg-{{toastType}} border-0" role="alert"
+    aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
       <div class="toast-body">
         {{ toastMessage }}
       </div>
-      <button type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close" (click)="showToast = false"></button>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close"
+        (click)="showToast = false"></button>
     </div>
   </div>
 </div>
@@ -20,11 +22,25 @@
           Back to Properties
         </a>
       </button>
+      @if(propertyData?.status == 'available'){
       <div class="property-status">
-        <span class="status-badge" [ngClass]="{'available': propertyData?.status !== 'sold', 'sold': propertyData?.status === 'sold'}">
-          {{ propertyData?.status ? (propertyData.status | titlecase) : 'Available' }}
+        <span class="status-badge">
+          Available
         </span>
       </div>
+      }@else{
+      <div class="property-status">
+        <span class="status-badge bg-danger text-light">
+          Sold
+        </span>
+      </div>
+
+      }
+      <!-- <div class="property-status">
+        <span class="status-badge" [ngClass]="{'available': propertyData?.status != 'sold', 'sold': propertyData?.status == 'sold'}">
+          {{ propertyData?.status ? (propertyData.status | titlecase) : 'Available' }}
+        </span>
+      </div> -->
     </div>
   </div>
 
@@ -141,16 +157,20 @@
             <!-- Action Section with Toggleable Offer Form -->
             <div class="action-section">
               <div class="negotiate-offer">
-                <button class="buy-now-btn" (click)="toggleOfferForm()" *ngIf="!showOfferForm && !hasBookingForThisProperty && !submitSuccess && propertyData?.status !== 'sold'">
+                <button class="buy-now-btn" (click)="toggleOfferForm()"
+                  *ngIf="!showOfferForm && !hasBookingForThisProperty && !submitSuccess && propertyData?.status !== 'sold'">
                   <i class="fas fa-handshake"></i>
                   Make an Offer
                 </button>
-                <div *ngIf="submitSuccess && !hasBookingForThisProperty" class="alert mt-3" style="background: var(--primary-color); color: #fff; border: none; font-weight: 500;">
+                <div *ngIf="submitSuccess && !hasBookingForThisProperty" class="alert mt-3"
+                  style="background: var(--primary-color); color: #fff; border: none; font-weight: 500;">
                   <i class="fas fa-check-circle"></i>
                   Thank you for your booking! The seller will respond to your offer soon.<br>
-                  <a routerLink="/user-bookings" style="color: #fff; text-decoration: underline;">Track your booking here</a>
+                  <a routerLink="/user-bookings" style="color: #fff; text-decoration: underline;">Track your booking
+                    here</a>
                 </div>
-                <div *ngIf="hasBookingForThisProperty" class="alert mt-3" style="background: var(--primary-color); color: #fff; border: none; font-weight: 500;">
+                <div *ngIf="hasBookingForThisProperty" class="alert mt-3"
+                  style="background: var(--primary-color); color: #fff; border: none; font-weight: 500;">
                   <i class="fas fa-check-circle"></i>
                   Thank you for your booking! The seller will respond to your offer soon.<br>
                   <a href="/user-bookings" style="color: #fff; text-decoration: underline;">Track your booking here</a>
@@ -169,10 +189,12 @@
                           placeholder="  Enter the suggested price (ex: 2500000)"
                           [class.is-invalid]="offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched" />
                       </div>
-                      <div class="invalid-feedback" *ngIf="offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched">
+                      <div class="invalid-feedback"
+                        *ngIf="offerForm.get('suggested_price')?.invalid && offerForm.get('suggested_price')?.touched">
                         Please enter a valid price.
                       </div>
-                      <div class="text-danger mt-1" *ngIf="offerForm.get('suggested_price')?.value && (offerForm.get('suggested_price')?.value < minAllowedPrice() || offerForm.get('suggested_price')?.value > maxAllowedPrice())">
+                      <div class="text-danger mt-1"
+                        *ngIf="offerForm.get('suggested_price')?.value && (offerForm.get('suggested_price')?.value < minAllowedPrice() || offerForm.get('suggested_price')?.value > maxAllowedPrice())">
                         Offer must be between ${{ minAllowedPrice() }} and ${{ maxAllowedPrice() }}
                       </div>
                     </div>
@@ -181,7 +203,8 @@
                       {{ submitMessage }}
                     </div>
                     <div class="form-actions">
-                      <button type="submit" class="submit-btn" [disabled]="offerForm.invalid || isSubmitting || submitSuccess">
+                      <button type="submit" class="submit-btn"
+                        [disabled]="offerForm.invalid || isSubmitting || submitSuccess">
                         <ng-container *ngIf="isSubmitting; else notLoading">
                           <i class="fas fa-spinner fa-spin"></i>
                           Loading ...
@@ -230,8 +253,8 @@
           <!-- Main Seller Card -->
           <div class="seller-card">
             <div class="seller-header">
-              <img [src]="'http://127.0.0.1:8000/uploads/'+propertyData?.seller?.photo" [alt]="propertyData.seller?.name"
-                class="seller-avatar">
+              <img [src]="'http://127.0.0.1:8000/uploads/'+propertyData?.seller?.photo"
+                [alt]="propertyData.seller?.name" class="seller-avatar">
               <div class="seller-details">
                 <h3 class="seller-name">{{ propertyData.seller?.name }}</h3>
                 <p class="seller-company">{{ propertyData.seller?.company_name }}</p>
@@ -251,42 +274,6 @@
 
 
 
-          <!-- Similar Properties -->
-          <!-- <div class="similar-properties-card">
-            <h4 class="similar-title">
-              <i class="fas fa-home"></i>
-              Similar Properties
-            </h4>
-            <div class="similar-list">
-              <div class="similar-item">
-                <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400"
-                  alt="Modern Villa in Malibu" class="similar-image">
-                <div class="similar-info">
-                  <h5 class="similar-title">Modern Villa in Malibu</h5>
-                  <p class="similar-location">Malibu, California</p>
-                  <span class="similar-price">$3,200,000</span>
-                </div>
-              </div>
-              <div class="similar-item">
-                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400"
-                  alt="Luxury Estate in Manhattan Beach" class="similar-image">
-                <div class="similar-info">
-                  <h5 class="similar-title">Luxury Estate in Manhattan Beach</h5>
-                  <p class="similar-location">Manhattan Beach, California</p>
-                  <span class="similar-price">$2,750,000</span>
-                </div>
-              </div>
-              <div class="similar-item">
-                <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400"
-                  alt="Contemporary Home in Venice" class="similar-image">
-                <div class="similar-info">
-                  <h5 class="similar-title">Contemporary Home in Venice</h5>
-                  <p class="similar-location">Venice, California</p>
-                  <span class="similar-price">$2,450,000</span>
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>
