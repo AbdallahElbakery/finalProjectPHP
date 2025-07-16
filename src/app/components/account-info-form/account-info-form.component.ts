@@ -19,16 +19,7 @@ export class AccountInfoFormComponent implements OnInit {
     private router: Router,
     private propertyService: PropertyServiceService
   ) {
-    this.propertyService.getProfile().subscribe((res) => {
-      this.registerForm.setValue({
-        name: res['name'],
-        email: res['email'],
-        phone: res['phone'],
-        role: res['role'],
-        address: res['full_address'],
-        photo: res['photo'],
-      })
-    })
+
   }
 
   ngOnInit(): void {
@@ -43,6 +34,17 @@ export class AccountInfoFormComponent implements OnInit {
       role: ['seller'],
       photo: ['']
     });
+    this.propertyService.getProfile().subscribe((res) => {
+      console.log(res)
+      this.registerForm.patchValue({
+        name: res.Seller.seller_data[0]['name'],
+        email: res.Seller.seller_data[0]['email'],
+        phone: res.Seller.seller_data[0]['phone'],
+        role: res.Seller.seller_data[0]['role'],
+        address: res.Seller.seller_data[0]['full_address'],
+        photo: '',
+      })
+    })
   }
 
   onFileChange(event: any) {
@@ -64,8 +66,8 @@ export class AccountInfoFormComponent implements OnInit {
       this.propertyService.updateProfile(formData).subscribe(() => {
         console.log("updated")
       })
-    
-      
+
+
       alert('✅ Profile Info Updated')
       this.router.navigate(['/edit-profile']);
     } else {
@@ -75,4 +77,4 @@ export class AccountInfoFormComponent implements OnInit {
 
 
 
-  }
+}

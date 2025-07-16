@@ -28,22 +28,7 @@ export class EditPropertyComponent implements OnInit {
     private activateRoute: ActivatedRoute,
   ) {
     this.getId = this.activateRoute.snapshot.queryParamMap.get('id');
-    this.propertyService.getProperty(this.getId).subscribe((res) => {
 
-      this.updatePropForm.setValue({
-        name: res['name'],
-        description: res['description'],
-        citynum: res['citynum'],
-        price: res['price'],
-        area: res['area'],
-        bedrooms: res['bedrooms'],
-        bathrooms: res['bathrooms'],
-        purpose: res['purpose'],
-        category_id: res['category_id'],
-        address_id: res['address_id'],
-        image: ''
-      })
-    });
 
   }
 
@@ -58,6 +43,22 @@ export class EditPropertyComponent implements OnInit {
     this.propertyService.getAddresses().subscribe((cities) => {
       return this.addresses = cities;
     })
+    this.propertyService.getProperty(this.getId).subscribe((res) => {
+      console.log(res.Property)
+      this.updatePropForm.patchValue({
+        name: res.Property.name,
+        description: res.Property['description'],
+        citynum: res.Property['citynum'],
+        price: res.Property['price'],
+        area: res.Property['area'],
+        bedrooms: res.Property['bedrooms'],
+        bathrooms: res.Property['bathrooms'],
+        purpose: res.Property['purpose'],
+        category_id: res.Property['category_id'],
+        address_id: res.Property['address_id'],
+        image: res.Property.image
+      })
+    });
   }
 
 
@@ -109,9 +110,9 @@ export class EditPropertyComponent implements OnInit {
         formData.append(key, data[key])
       }
     })
-    formData.append('_method','PUT')
+    formData.append('_method', 'PUT')
     this.submitted = true;
-    
+
     if (this.updatePropForm.valid) {
       console.log(data);
       this.propertyService.updateProperty(this.getId, formData).subscribe({

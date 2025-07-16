@@ -8,7 +8,7 @@
       <!-- صورة البروفايل -->
       <div class="avatar-upload">
         <div class="avatar-preview">
-          <img [src]="registerForm.value.photo || 'assets/images/default-avatar.jpg'" alt="Profile picture">
+         <img [src]="'http://127.0.0.1:8000/uploads/'+registerForm.value.photo || 'assets/images/default-avatar.jpg'" alt="Profile picture">
         </div>
         <div class="avatar-edit">
           <input type="file" id="imageUpload" (change)="onFileChange($event)" accept=".png, .jpg, .jpeg" formControlName="photo">

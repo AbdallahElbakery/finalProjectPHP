@@ -6,12 +6,13 @@
       <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="edit-form">
         <div class="avatar-upload">
           <div class="avatar-preview">
-            <img [src]="profileForm.value.logo || 'assets/images/default-avatar.jpg'" alt="Profile picture">
+            <img [src]="'http://127.0.0.1:8000/uploads/'+profileForm.value.logo || 'assets/images/default-avatar.jpg'"
+              alt="Profile picture">
           </div>
           <div class="avatar-edit">
             <input type="file" id="imageUpload" (change)="onFileChange($event)" accept=".png, .jpg, .jpeg">
             <label for="imageUpload" class="upload-btn">
-              <i class="fas fa-camera"></i> Upload Picture
+              <i class="fas fa-camera"></i> Upload Logo
             </label>
           </div>
         </div>

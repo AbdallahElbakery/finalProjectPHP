@@ -50,17 +50,19 @@ export class CompanyInfoFormComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private propertyService: PropertyServiceService) {
-    this.propertyService.getComapnyDetails().subscribe((res) => {
-      this.profileForm.setValue({
-        company_name: res['company_name'],
-        about_company: res['about_company'],
-        logo: '',
-      })
-    })
+
   }
 
   ngOnInit() {
     this.initForm();
+    this.propertyService.getComapnyDetails().subscribe((res) => {
+      console.log(res);
+      this.profileForm.patchValue({
+        company_name: res.Seller.company_name,
+        about_company: res.Seller['about_company'],
+        logo: res.Seller.logo,
+      })
+    })
   }
 
   initForm() {
@@ -68,14 +70,14 @@ export class CompanyInfoFormComponent implements OnInit {
       company_name: ['', Validators.required],
       locations: [[], Validators.required],
       about_company: ['', Validators.required],
-      logo:['']
+      logo: ['']
     });
   }
 
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
-        this.profileForm.patchValue({ 'logo': file});
+      this.profileForm.patchValue({ 'logo': file });
     }
   }
 
@@ -87,26 +89,25 @@ export class CompanyInfoFormComponent implements OnInit {
 
   onSubmit() {
     if (this.profileForm.valid) {
-    
       const data = { ... this.profileForm.value }
-    const formData=new FormData();
-    
-    Object.keys(data).forEach((key)=>{
-      if(key =='logo'||data[key] instanceof File){
-        formData.append('logo',data[key])
-      }
-      formData.append(key,data[key])
-    })
+      const formData = new FormData();
 
-    formData.append('_method','PATCH')
-    console.log(this.profileForm.value)
+      Object.keys(data).forEach((key) => {
+        if (key == 'logo' || data[key] instanceof File) {
+          formData.append('logo', data[key])
+        }
+        formData.append(key, data[key])
+      })
+
+      formData.append('_method', 'PATCH')
+      console.log(this.profileForm.value)
       this.propertyService.updateCompanyDetails(formData).subscribe(() => {
         console.log('✅ Saved:', this.profileForm.value);
         alert('✅ Company details updated')
         this.router.navigate(['/edit-profile']);
       })
     } else {
-      this.profileForm.markAllAsTouched(); 
+      this.profileForm.markAllAsTouched();
     }
   }
 }
