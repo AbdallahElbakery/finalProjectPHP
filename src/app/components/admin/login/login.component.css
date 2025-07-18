@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Aldrich:wght@400&display=swap');
+
+:host {
+  --primary-color: #1e40af;
+  --hover-color: #3b82f6;
+  --bg-light: #eff6ff;
+  --bg-lighter: #dbeafe;
+  --text-color: #2C3E50;
+  --border-radius: 0.75rem;
+  --padding: 1rem;
+  --transition: 0.3s ease-in-out;
+  --shadow: 0 4px 16px rgba(30, 64, 175, 0.1);
+  --shadow-hover: 0 8px 32px rgba(30, 64, 175, 0.15);
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+}
+
+.bg-admin-login {
+  background: linear-gradient(120deg, var(--bg-light) 60%, var(--bg-lighter) 100%);
+  min-height: 100vh;
+}
+
+.login-card {
+  background: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: box-shadow var(--transition), transform var(--transition);
+  font-family: 'Poppins', sans-serif;
+}
+.login-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px) scale(1.01);
+}
+.admin-logo {
+  width: 60px;
+  height: 60px;
+  background: var(--bg-lighter);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.08);
+  font-family: 'Aldrich', sans-serif;
+}
+.login-btn {
+  background: linear-gradient(90deg, var(--primary-color) 80%, var(--hover-color) 100%);
+  border: none;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  font-size: 1.08rem;
+  letter-spacing: 0.2px;
+  transition: background var(--transition), box-shadow var(--transition), transform 0.18s;
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.10);
+}
+.login-btn:hover, .login-btn:focus {
+  background: linear-gradient(90deg, var(--hover-color) 60%, var(--primary-color) 100%);
+  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.16);
+  transform: translateY(-1px) scale(1.03);
+}
+.form-label {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.15rem rgba(30, 64, 175, 0.10);
+}
+@media (max-width: 600px) {
+  .login-card {
+    padding: 1.2rem 0.7rem !important;
+    max-width: 98vw !important;
+  }
+  .admin-logo {
+    width: 44px;
+    height: 44px;
+    font-size: 1.7rem;
+  }
+  h2 {
+    font-size: 1.3rem !important;
+  }
+}

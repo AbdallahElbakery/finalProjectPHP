@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Aldrich:wght@400&display=swap');
+
+:host {
+  --primary-color: #1e40af;
+  --hover-color: #3b82f6;
+  --bg-light: #eff6ff;
+  --bg-lighter: #dbeafe;
+  --text-color: #2C3E50;
+  --border-radius: 0.75rem;
+  --transition: 0.3s ease-in-out;
+  --shadow: 0 4px 16px rgba(30, 64, 175, 0.1);
+  --shadow-hover: 0 8px 32px rgba(30, 64, 175, 0.15);
+}
+
+.property-details-bg {
+  background: linear-gradient(120deg, var(--bg-light) 60%, var(--bg-lighter) 100%);
+  min-height: 100vh;
+}
+.property-details-card {
+  background: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  font-family: 'Poppins', sans-serif;
+}
+.property-photo-lg {
+  width: 320px;
+  height: 180px;
+  border-radius: 1.2rem;
+  object-fit: cover;
+  box-shadow: 0 1px 8px rgba(30, 64, 175, 0.10);
+}
+.badge {
+  font-size: 1rem;
+  padding: 0.5em 1em;
+  border-radius: 0.7rem;
+}
+.detail-label {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1.01rem;
+  margin-bottom: 0.2rem;
+}
+.detail-value {
+  color: var(--text-color);
+  font-size: 1.04rem;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-lighter);
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.7rem;
+}
+@media (max-width: 900px) {
+  .property-photo-lg {
+    width: 100%;
+    height: 160px;
+  }
+  .property-details-card {
+    padding: 1.1rem 0.5rem !important;
+    max-width: 99vw !important;
+  }
+}
+@media (max-width: 600px) {
+  .property-photo-lg {
+    width: 100%;
+    height: 110px;
+  }
+  .detail-label, .detail-value {
+    font-size: 0.97rem;
+  }
+}
