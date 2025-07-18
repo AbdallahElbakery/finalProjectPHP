@@ -20,8 +20,17 @@ import { ReviewListComponent } from './components/review-list/review-list.compon
 import { AuthGuard } from './auth.guard';
 import { EditPropertyComponent } from './components/edit-property/edit-property.component';
 import { GuestGuard } from './guest.guard';
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 
-
+import { HomeAdminComponent } from './components/admin/home/home.component';
+import { UsersListComponent } from './components/admin/users-list/users-list.component';
+import { PropertiesListComponent } from './components/admin/properties-list/properties-list.component';
+import { PropertyAddComponent } from './components/admin/property-add/property-add.component';
+import { PropertyEditComponent } from './components/admin/property-edit/property-edit.component';
+import { UserAddComponent } from './components/admin/user-add/user-add.component';
+import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
+import { UserEditComponent } from './components/admin/user-edit/user-edit.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -39,14 +48,33 @@ export const routes: Routes = [
     { path: 'seller-bookings', component: SellerBookingsComponent, canActivate: [AuthGuard] },
     { path: 'property', component: PropertyComponent, canActivate: [AuthGuard] },
     { path: 'user-bookings', component: UserBookingsComponent, title: 'Bookings', canActivate: [AuthGuard] },
-    { path: "sechedule-visit",component:SchedulePropVisitComponent, canActivate: [AuthGuard] },
-    { path: 'user-profile' , component: UserProfileComponent, canActivate: [AuthGuard] },
-    { path: 'chat' , component: ChatComponent, canActivate: [AuthGuard] },
-    { path: 'message' , component: MessageComponent, canActivate: [AuthGuard] },
-    { path: 'message/:id' , component: MessageComponent, canActivate: [AuthGuard] },
+    { path: "sechedule-visit", component: SchedulePropVisitComponent, canActivate: [AuthGuard] },
+    { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
+    { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
+    { path: 'message', component: MessageComponent, canActivate: [AuthGuard] },
+    { path: 'message/:id', component: MessageComponent, canActivate: [AuthGuard] },
     { path: 'reviews', component: ReviewListComponent, canActivate: [AuthGuard] },
-    { path: 'property/:id', component: PropertyDetailsComponent, title: 'Property Details' , canActivate: [AuthGuard] }
+    { path: 'property/:id', component: PropertyDetailsComponent, title: 'Property Details', canActivate: [AuthGuard] },
 
+    //admin pannel routes
+
+
+    {
+        path: 'admin', component: AdminLayoutComponent, title: 'Admin', children:
+            [
+                { path: '', component: DashboardComponent, title: 'Admin' },
+                { path: 'login', component: LoginComponent, title: 'Admin login' },
+                { path: 'home', component: HomeAdminComponent, title: 'login admin' },
+                { path: 'users', component: UsersListComponent, title: 'Admin users' },
+                { path: 'add/users', component: UserAddComponent, title: 'Admin add users' },
+                { path: 'edit/users', component: UserEditComponent, title: 'Admin edit users' },
+                { path: 'details/users', component: UserDetailsComponent, title: 'Admin details users' },
+                { path: 'properties', component: PropertiesListComponent, title: 'Admin properties' },
+                { path: 'add/properties', component: PropertyAddComponent, title: 'Admin properties' },
+                { path: 'edit/properties', component: PropertyEditComponent, title: 'Admin edit properties' },
+                { path: 'details/properties', component: PropertyAddComponent, title: 'Admin details properties' },
+            ]
+    },
 
 
 ];
