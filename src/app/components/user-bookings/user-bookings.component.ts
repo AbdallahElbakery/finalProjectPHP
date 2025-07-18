@@ -1,13 +1,13 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { BookingService, Booking } from '../../services/booking.service';
 import { PropertyServiceService } from '../../services/property-service.service';
 
 @Component({
   selector: 'app-user-bookings',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,RouterLink],
   templateUrl: './user-bookings.component.html',
   styleUrl: './user-bookings.component.css'
 })
