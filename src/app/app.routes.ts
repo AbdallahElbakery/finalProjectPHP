@@ -24,6 +24,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { userRoleGuard } from './user-role.guard';
 import { sellerRoleGuard } from './seller-role.guard';
+import { AiChatComponent } from './components/ai-chat/ai-chat.component';
 
 
 export const routes: Routes = [
@@ -50,6 +51,7 @@ export const routes: Routes = [
     { path: 'property/:id', component: PropertyDetailsComponent, title: 'Property Details', canActivate: [AuthGuard] },
     { path: 'about', component: AboutComponent },
     { path: 'contact', component: ContactComponent },
+    { path: 'ai-chat', component: AiChatComponent, title: 'AI Chat' },
 
 
 ];
