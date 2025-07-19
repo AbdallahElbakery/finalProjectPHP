@@ -31,6 +31,15 @@ import { PropertyEditComponent } from './components/admin/property-edit/property
 import { UserAddComponent } from './components/admin/user-add/user-add.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
 import { UserEditComponent } from './components/admin/user-edit/user-edit.component';
+import { ReviewsListComponent } from './components/admin/reviews-list/reviews-list.component';
+import { ReviewDetailsComponent } from './components/admin/review-details/review-details.component';
+import { ReviewDeleteComponent } from './components/admin/review-delete/review-delete.component';
+import { BookingsListComponent } from './components/admin/bookings-list/bookings-list.component';
+import { BookingDetailsComponent } from './components/admin/booking-details/booking-details.component';
+import { BookingEditComponent } from './components/admin/booking-edit/booking-edit.component';
+import { BookingDeleteComponent } from './components/admin/booking-delete/booking-delete.component';
+import { PaymentsListComponent } from './components/admin/payments-list/payments-list.component';
+import { PaymentDetailsComponent } from './components/admin/payment-details/payment-details.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -73,6 +82,18 @@ export const routes: Routes = [
                 { path: 'add/properties', component: PropertyAddComponent, title: 'Admin properties' },
                 { path: 'edit/properties', component: PropertyEditComponent, title: 'Admin edit properties' },
                 { path: 'details/properties', component: PropertyAddComponent, title: 'Admin details properties' },
+                // --- Reviews ---
+                { path: 'reviews', component: ReviewsListComponent, title: 'Admin reviews' },
+                { path: 'details/reviews', component: ReviewDetailsComponent, title: 'Admin review details' },
+                { path: 'delete/reviews', component: ReviewDeleteComponent, title: 'Admin review delete' },
+                // --- Bookings ---
+                { path: 'bookings', component: BookingsListComponent, title: 'Admin bookings' },
+                { path: 'details/bookings', component: BookingDetailsComponent, title: 'Admin booking details' },
+                { path: 'edit/bookings', component: BookingEditComponent, title: 'Admin booking edit status' },
+                { path: 'delete/bookings', component: BookingDeleteComponent, title: 'Admin booking delete' },
+                // --- Payments ---
+                { path: 'payments', component: PaymentsListComponent, title: 'Admin payments' },
+                { path: 'details/payments', component: PaymentDetailsComponent, title: 'Admin payment details' },
             ]
     },
 

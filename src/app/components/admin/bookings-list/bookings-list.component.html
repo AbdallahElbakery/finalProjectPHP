@@ -1,0 +1,40 @@
+<!-- Bookings List Page - Responsive, Modern, Bootstrap Only -->
+<div class="bookings-list-bg min-vh-100 py-4">
+  <div class="container-fluid">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+      <h2 class="fw-bold mb-0" style="font-family: 'Lora', serif; color: var(--primary-color);">Bookings Management</h2>
+    </div>
+    <div class="table-responsive rounded-4 shadow-sm bg-white p-3">
+      <table class="table align-middle mb-0 bookings-table">
+        <thead class="table-light">
+          <tr>
+            <th>User</th>
+            <th>Property</th>
+            <th>Suggested Price</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Example Row -->
+          <tr>
+            <td>Sarah Smith</td>
+            <td>Villa 21</td>
+            <td>$1,150,000</td>
+            <td><span class="badge bg-info">Pending</span></td>
+            <td>2024-05-01</td>
+            <td>2024-05-10</td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-outline-primary me-1" title="Details" routerLink="/admin/details/bookings"><i class="bi bi-eye"></i></button>
+              <button class="btn btn-sm btn-outline-warning me-1" title="Edit Status" routerLink="/admin/edit/bookings"><i class="bi bi-pencil"></i></button>
+              <button class="btn btn-sm btn-outline-danger" title="Delete" routerLink="/admin/delete/bookings"><i class="bi bi-trash"></i></button>
+            </td>
+          </tr>
+          <!-- More rows can be added here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
