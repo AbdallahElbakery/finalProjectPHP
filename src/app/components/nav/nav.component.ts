@@ -37,6 +37,7 @@ export class NavComponent {
     this.authService.logout().subscribe();
   }
 
+  
   getrole() {
     if (this.authService.getRole() == 'seller') {
       this.router.navigate(['/seller-profile'])

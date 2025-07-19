@@ -4,7 +4,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [SidebarComponent, NavbarComponent],
+  imports: [SidebarComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

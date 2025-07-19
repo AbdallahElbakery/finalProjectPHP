@@ -7,6 +7,7 @@
             class="bi bi-person-plus me-2"></i>Add User</button></a>
     </div>
     <div class="table-responsive rounded-4 shadow-sm bg-white p-3">
+      @for(user of allusers; track user.id){
       <table class="table align-middle mb-0 users-table">
         <thead class="table-light">
           <tr>
@@ -27,14 +28,14 @@
           <tr>
             <td><img src="https://ui-avatars.com/api/?name=Sarah+Smith&background=1e40af&color=fff&rounded=true&size=40"
                 alt="User Photo" class="user-photo"></td>
-            <td>Sarah Smith</td>
-            <td>sarah#example.com</td>
-            <td>+1 555 123 4567</td>
-            <td><span class="badge bg-success">Admin</span></td>
-            <td>2024-05-01</td>
-            <td>2024-05-10</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone }}</td>
+            <td><span class="badge bg-success">{{ user.role }}</span></td>
+            <td>{{ user.created }}</td>
+            <td>{{ user.updated }}</td>
             <td>-</td>
-            <td>New York, USA</td>
+            <td>{{ user.address }}</td>
             <td class="text-center">
               <button class="btn btn-sm btn-outline-primary me-1" title="Details"><i class="fa fa-eye"></i></button>
               <button class="btn btn-sm btn-outline-warning me-1" title="Edit"><i class="fa fa-pencil"></i></button>
@@ -44,6 +45,7 @@
           <!-- More rows can be added here -->
         </tbody>
       </table>
+    }
     </div>
   </div>
 </div>

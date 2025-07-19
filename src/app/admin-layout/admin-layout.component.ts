@@ -5,7 +5,7 @@ import { SidebarComponent } from '../components/admin/sidebar/sidebar.component'
 
 @Component({
   selector: 'app-admin-layout',
-  imports: [NavbarComponent, RouterOutlet,SidebarComponent],
+  imports: [NavbarComponent, RouterOutlet],
   templateUrl: './admin-layout.component.html',
   styleUrl: './admin-layout.component.css'
 })

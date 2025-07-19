@@ -85,6 +85,7 @@ export class LoginComponent {
     return window.innerWidth < 992; // LG breakpoint
   }
 
+ 
   async onSubmit() {
     if (this.loginForm.valid) {
       this.loading = true;
@@ -93,7 +94,7 @@ export class LoginComponent {
       this.authService.login(email, password).subscribe({
         next: () => {
           this.loading = false;
-          this.router.navigate(['/home']);
+          this.router.navigate(['/admin/']);
         },
         error: (err) => {
           this.loading = false;
