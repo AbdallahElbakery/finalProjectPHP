@@ -31,6 +31,7 @@ import { PropertyEditComponent } from './components/admin/property-edit/property
 import { UserAddComponent } from './components/admin/user-add/user-add.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
 import { UserEditComponent } from './components/admin/user-edit/user-edit.component';
+import { PropertyDetailsComponent as PopertyAdminDetails } from './components/admin/property-details/property-details.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -73,7 +74,7 @@ export const routes: Routes = [
                 { path: 'properties', component: PropertiesListComponent, title: 'Admin properties' },
                 { path: 'add/properties', component: PropertyAddComponent, title: 'Admin properties' },
                 { path: 'edit/properties', component: PropertyEditComponent, title: 'Admin edit properties' },
-                { path: 'details/properties', component: PropertyAddComponent, title: 'Admin details properties' },
+                { path: 'details/properties/:id', component: PopertyAdminDetails, title: 'Admin details properties' },
             ]
     },
 
