@@ -17,6 +17,7 @@
   box-shadow: var(--shadow);
   z-index: 10;
 }
+
 .navbar-logo {
   background: var(--bg-lighter);
   color: var(--primary-color);
@@ -30,6 +31,7 @@
   justify-content: center;
   box-shadow: 0 2px 8px rgba(30, 64, 175, 0.08);
 }
+
 .admin-avatar {
   width: 38px;
   height: 38px;
@@ -38,6 +40,7 @@
   border: 2px solid var(--bg-lighter);
   box-shadow: 0 1px 4px rgba(30, 64, 175, 0.07);
 }
+
 .logout-btn {
   border-radius: 0.5rem;
   font-weight: 500;
@@ -46,24 +49,30 @@
   background: #fff;
   transition: background var(--transition), color var(--transition), border var(--transition);
 }
-.logout-btn:hover, .logout-btn:focus {
+
+.logout-btn:hover,
+.logout-btn:focus {
   background: var(--primary-color);
   color: #fff;
   border: 1.5px solid var(--primary-color);
 }
+
 @media (max-width: 600px) {
   .admin-navbar {
     padding: 0.5rem 0.2rem !important;
   }
+
   .navbar-logo {
     width: 28px;
     height: 28px;
     font-size: 1.1rem;
   }
+
   .admin-avatar {
     width: 28px;
     height: 28px;
   }
+
   .logout-btn {
     font-size: 0.95rem;
     padding: 0.2rem 0.5rem;
