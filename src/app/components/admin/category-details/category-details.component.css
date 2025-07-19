@@ -1,0 +1,36 @@
+.category-details-bg {
+  background: linear-gradient(135deg, var(--light-bg) 0%, #f8f9fa 100%);
+}
+
+.category-details-card {
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
+}
+
+.detail-label {
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-value {
+  color: var(--text-color);
+  font-size: 1rem;
+  padding: 0.75rem;
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+  border-left: 3px solid var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .category-details-card {
+    margin: 0 1rem;
+  }
+  
+  .detail-value {
+    font-size: 0.875rem;
+    padding: 0.5rem;
+  }
+} 

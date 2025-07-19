@@ -41,6 +41,11 @@ import { BookingEditComponent } from './components/admin/booking-edit/booking-ed
 import { BookingDeleteComponent } from './components/admin/booking-delete/booking-delete.component';
 import { PaymentsListComponent } from './components/admin/payments-list/payments-list.component';
 import { PaymentDetailsComponent } from './components/admin/payment-details/payment-details.component';
+import { CategoriesListComponent } from './components/admin/categories-list/categories-list.component';
+import { CategoryDetailsComponent } from './components/admin/category-details/category-details.component';
+import { CategoryAddComponent } from './components/admin/category-add/category-add.component';
+import { CategoryEditComponent } from './components/admin/category-edit/category-edit.component';
+import { CategoryDeleteComponent } from './components/admin/category-delete/category-delete.component';
 
 
 export const routes: Routes = [
@@ -86,18 +91,20 @@ export const routes: Routes = [
                 { path: 'edit/properties', component: PropertyEditComponent, title: 'Admin edit properties' },
                 { path: 'details/properties', component: PropertyAddComponent, title: 'Admin details properties' },
                 { path: 'details/properties/:id', component: PopertyAdminDetails, title: 'Admin details properties' },
-                // --- Reviews ---
                 { path: 'reviews', component: ReviewsListComponent, title: 'Admin reviews' },
                 { path: 'details/reviews', component: ReviewDetailsComponent, title: 'Admin review details' },
                 { path: 'delete/reviews', component: ReviewDeleteComponent, title: 'Admin review delete' },
-                // --- Bookings ---
                 { path: 'bookings', component: BookingsListComponent, title: 'Admin bookings' },
                 { path: 'details/bookings', component: BookingDetailsComponent, title: 'Admin booking details' },
                 { path: 'edit/bookings', component: BookingEditComponent, title: 'Admin booking edit status' },
                 { path: 'delete/bookings', component: BookingDeleteComponent, title: 'Admin booking delete' },
-                // --- Payments ---
                 { path: 'payments', component: PaymentsListComponent, title: 'Admin payments' },
                 { path: 'details/payments', component: PaymentDetailsComponent, title: 'Admin payment details' },
+                { path: 'categories', component: CategoriesListComponent, title: 'Admin categories' },
+                { path: 'details/categories', component: CategoryDetailsComponent, title: 'Admin category details' },
+                { path: 'add/categories', component: CategoryAddComponent, title: 'Admin add category' },
+                { path: 'edit/categories', component: CategoryEditComponent, title: 'Admin edit category' },
+                { path: 'delete/categories', component: CategoryDeleteComponent, title: 'Admin delete category' },
             
             ]
     },

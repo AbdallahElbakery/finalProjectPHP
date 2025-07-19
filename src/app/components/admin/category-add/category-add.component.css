@@ -1,0 +1,47 @@
+.category-add-bg {
+  background: linear-gradient(135deg, var(--light-bg) 0%, #f8f9fa 100%);
+}
+
+.category-add-card {
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
+}
+
+.category-add-card .form-control {
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.category-add-card .form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.25);
+}
+
+.category-add-card .form-label {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.category-add-card .btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.category-add-card .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .category-add-card {
+    margin: 0 1rem;
+  }
+  
+  .category-add-card .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+} 

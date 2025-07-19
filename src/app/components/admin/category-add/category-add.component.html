@@ -1,0 +1,24 @@
+<!-- Category Add Page - Responsive, Modern, Bootstrap Only -->
+<div class="category-add-bg min-vh-100 py-4">
+  <div class="container-fluid">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+      <h2 class="fw-bold mb-0" style="font-family: 'Lora', serif; color: var(--primary-color);">Add New Category</h2>
+      <button class="btn btn-outline-secondary" type="button" routerLink="/admin/categories"><i class="bi bi-arrow-left me-1"></i>Back</button>
+    </div>
+    <div class="category-add-card shadow-sm rounded-4 bg-white p-4 mx-auto" style="max-width: 540px;">
+      <form>
+        <div class="mb-3">
+          <label for="categoryName" class="form-label fw-semibold">Category Name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="categoryName" placeholder="Enter category name" required>
+          <div class="invalid-feedback">
+            Please provide a valid category name.
+          </div>
+        </div>
+        <div class="d-flex gap-2 justify-content-end">
+          <button type="button" class="btn btn-outline-secondary" routerLink="/admin/categories">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Category</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> 

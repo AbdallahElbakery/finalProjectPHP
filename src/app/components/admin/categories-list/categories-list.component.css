@@ -1,0 +1,40 @@
+.categories-list-bg {
+  background: linear-gradient(135deg, var(--light-bg) 0%, #f8f9fa 100%);
+}
+
+.categories-table th {
+  font-weight: 600;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+  padding: 1rem 0.75rem;
+}
+
+.categories-table td {
+  padding: 1rem 0.75rem;
+  vertical-align: middle;
+}
+
+.categories-table tbody tr:hover {
+  background-color: rgba(var(--primary-rgb), 0.05);
+  transition: background-color 0.2s ease;
+}
+
+.categories-table .btn {
+  transition: all 0.2s ease;
+}
+
+.categories-table .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .categories-table {
+    font-size: 0.875rem;
+  }
+  
+  .categories-table .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+} 
