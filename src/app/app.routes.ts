@@ -22,7 +22,6 @@ import { EditPropertyComponent } from './components/edit-property/edit-property.
 import { GuestGuard } from './guest.guard';
 
 
-
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'registration', component: RegistrationComponent, canActivate: [GuestGuard] },
@@ -46,7 +45,6 @@ export const routes: Routes = [
     { path: 'message/:id' , component: MessageComponent, canActivate: [AuthGuard] },
     { path: 'reviews', component: ReviewListComponent, canActivate: [AuthGuard] },
     { path: 'property/:id', component: PropertyDetailsComponent, title: 'Property Details' , canActivate: [AuthGuard] }
-
 
 
 ];
