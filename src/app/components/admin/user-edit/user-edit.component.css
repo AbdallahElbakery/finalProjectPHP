@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Aldrich:wght@400&display=swap');
+
+:host {
+  --primary-color: #1e40af;
+  --hover-color: #3b82f6;
+  --bg-light: #eff6ff;
+  --bg-lighter: #dbeafe;
+  --text-color: #2C3E50;
+  --border-radius: 0.75rem;
+  --transition: 0.3s ease-in-out;
+  --shadow: 0 4px 16px rgba(30, 64, 175, 0.1);
+  --shadow-hover: 0 8px 32px rgba(30, 64, 175, 0.15);
+}
+
+.user-edit-bg {
+  background: linear-gradient(120deg, var(--bg-light) 60%, var(--bg-lighter) 100%);
+  min-height: 100vh;
+}
+.user-edit-card {
+  background: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  font-family: 'Poppins', sans-serif;
+}
+.user-photo-lg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid var(--bg-lighter);
+  box-shadow: 0 1px 4px rgba(30, 64, 175, 0.07);
+}
+.form-label {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.15rem rgba(30, 64, 175, 0.10);
+}
+.is-invalid {
+  border-color: var(--danger-color) !important;
+  background-color: #fff0f0 !important;
+}
+.invalid-feedback {
+  color: var(--danger-color);
+  font-size: 0.97rem;
+}
+.btn-primary {
+  background: linear-gradient(90deg, var(--primary-color) 80%, var(--hover-color) 100%);
+  border: none;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  font-size: 1.08rem;
+  letter-spacing: 0.2px;
+  transition: background var(--transition), box-shadow var(--transition), transform 0.18s;
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.10);
+}
+.btn-primary:hover, .btn-primary:focus {
+  background: linear-gradient(90deg, var(--hover-color) 60%, var(--primary-color) 100%);
+  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.16);
+  transform: translateY(-1px) scale(1.03);
+}
+.invalid {
+    border-color: #e74c3c !important;
+}
+.error-msg {
+    color: #e74c3c;
+    font-size: 0.85rem;
+}
+@media (max-width: 600px) {
+  .user-edit-card {
+    padding: 1.1rem 0.5rem !important;
+    max-width: 99vw !important;
+  }
+  .user-photo-lg {
+    width: 54px;
+    height: 54px;
+  }
+  .form-label, .form-control, .form-select {
+    font-size: 0.97rem;
+  }
+  .btn-primary {
+    font-size: 0.97rem;
+    padding: 0.5rem 1.1rem;
+  }
+}

@@ -1,4 +1,4 @@
-<app-nav></app-nav>
+<app-nav *ngIf="showNavbar"></app-nav>
 <!-- <app-home></app-home> -->
 <!-- <app-registration></app-registration>
     <app-registercustomer></app-registercustomer>
@@ -7,4 +7,4 @@
 <!-- <app-properties></app-properties> -->
 
 <router-outlet></router-outlet>
-<app-footer></app-footer>
+<app-footer *ngIf="showFooter"></app-footer>

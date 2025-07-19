@@ -25,9 +25,9 @@
                     <label>Property Name</label>
                     <input type="text" formControlName="name" placeholder="Enter property name..."
                         [class.invalid]="isFieldInvalid('name')">
-                    @if (isFieldInvalid('name')) {
-                    <div class="error-msg">{{ getErrorMessage('name') }}</div>
-                    }
+                        @if (isFieldInvalid('name')) {
+                        <div class="error-msg">{{ getErrorMessage('name') }}</div>
+                        }
                 </div>
 
                 <!-- Description -->

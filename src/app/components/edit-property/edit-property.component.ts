@@ -28,8 +28,6 @@ export class EditPropertyComponent implements OnInit {
     private activateRoute: ActivatedRoute,
   ) {
     this.getId = this.activateRoute.snapshot.queryParamMap.get('id');
-
-
   }
 
   ngOnInit(): void {

@@ -1,0 +1,17 @@
+<!-- Admin Navbar - Responsive, Modern, Bootstrap Only -->
+<nav class="admin-navbar navbar navbar-expand-lg navbar-light bg-white shadow-sm px-3 py-2">
+  <div class="container-fluid">
+    <!-- <span class="navbar-brand fw-bold d-flex align-items-center gap-2">
+      <span class="navbar-logo">A</span>
+      <span class="d-none d-md-inline" style="font-family: 'Lora', serif; color: var(--primary-color);">Admin Panel</span>
+    </span> -->
+    <div class="d-flex align-items-center gap-3 ms-auto">
+      <span class="fw-semibold text-primary d-none d-md-inline">{{UserName}}</span>
+      <img src="https://ui-avatars.com/api/?name=Admin&background=1e40af&color=fff&rounded=true&size=40"
+        alt="Admin Avatar" class="admin-avatar">
+      <button class="btn btn-outline-primary btn-sm ms-2 logout-btn" type="button">
+        <i class="bi bi-box-arrow-right"></i> <span class="d-none d-md-inline" (click)="logout()">Logout</span>
+      </button>
+    </div>
+  </div>
+</nav>

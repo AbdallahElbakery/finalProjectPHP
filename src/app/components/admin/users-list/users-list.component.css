@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Aldrich:wght@400&display=swap');
+
+:host {
+  --primary-color: #1e40af;
+  --hover-color: #3b82f6;
+  --bg-light: #eff6ff;
+  --bg-lighter: #dbeafe;
+  --text-color: #2C3E50;
+  --border-radius: 0.75rem;
+  --transition: 0.3s ease-in-out;
+  --shadow: 0 4px 16px rgba(30, 64, 175, 0.1);
+  --shadow-hover: 0 8px 32px rgba(30, 64, 175, 0.15);
+}
+
+.users-list-bg {
+  background: linear-gradient(120deg, var(--bg-light) 60%, var(--bg-lighter) 100%);
+  min-height: 100vh;
+}
+.add-user-btn {
+  background: linear-gradient(90deg, var(--primary-color) 80%, var(--hover-color) 100%);
+  border: none;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  font-size: 1.08rem;
+  letter-spacing: 0.2px;
+  transition: background var(--transition), box-shadow var(--transition), transform 0.18s;
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.10);
+}
+.add-user-btn:hover, .add-user-btn:focus {
+  background: linear-gradient(90deg, var(--hover-color) 60%, var(--primary-color) 100%);
+  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.16);
+  transform: translateY(-1px) scale(1.03);
+}
+.users-table th, .users-table td {
+  vertical-align: middle;
+  font-family: 'Poppins', sans-serif;
+}
+.users-table th {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1.04rem;
+}
+.users-table td {
+  font-size: 1.01rem;
+  color: var(--text-color);
+}
+.user-photo {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--bg-lighter);
+  box-shadow: 0 1px 4px rgba(30, 64, 175, 0.07);
+}
+.badge {
+  font-size: 0.97rem;
+  padding: 0.5em 0.8em;
+  border-radius: 0.6rem;
+}
+@media (max-width: 991px) {
+  .users-table th, .users-table td {
+    font-size: 0.97rem;
+  }
+  .add-user-btn {
+    font-size: 0.97rem;
+    padding: 0.5rem 1.1rem;
+  }
+}
+@media (max-width: 600px) {
+  .users-list-bg {
+    padding: 0.5rem 0.2rem !important;
+  }
+  .users-table th, .users-table td {
+    font-size: 0.93rem;
+    padding: 0.4rem 0.3rem;
+  }
+  .add-user-btn {
+    font-size: 0.93rem;
+    padding: 0.4rem 0.7rem;
+  }
+  .user-photo {
+    width: 28px;
+    height: 28px;
+  }
+}

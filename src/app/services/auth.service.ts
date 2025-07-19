@@ -41,7 +41,7 @@ export class AuthService {
   private authStatusSubject = new BehaviorSubject<boolean>(this.hasToken());
   authStatus$ = this.authStatusSubject.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(email: string, password: string): Observable<LoginResponse> {
     return this.http.post<any>(`${this.apiUrl}/login`, { email, password }).pipe(
@@ -87,6 +87,19 @@ export class AuthService {
         this.clearSession();
         this.authStatusSubject.next(false);
         this.router.navigate(['/login']);
+      })
+    );
+  }
+  logoutAdmin(): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post(`${this.apiUrl}/logout`, {}, { headers }).pipe(
+      tap(() => {
+        this.clearSession();
+        this.authStatusSubject.next(false);
+          this.router.navigate(['/admin/login']);
       })
     );
   }

@@ -1,0 +1,67 @@
+<!-- Properties List Page - Responsive, Modern, Bootstrap Only -->
+<div class="properties-list-bg min-vh-100 py-4">
+  <div class="container-fluid">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+      <h2 class="fw-bold mb-0" style="font-family: 'Lora', serif; color: var(--primary-color);">Properties Management
+      </h2>
+      <button class="btn btn-primary btn-lg add-property-btn"><i class="bi bi-building-add me-2"></i>Add
+        Property</button>
+    </div>
+    <div class="table-responsive rounded-4 shadow-sm bg-white p-3">
+      <table class="table align-middle mb-0 properties-table">
+        <thead class="table-light">
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Purpose</th>
+            <th>City</th>
+            <th>Payment</th>
+            <th>Status</th>
+            <th>Area</th>
+            <th>Bedrooms</th>
+            <th>Bathrooms</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th>Deleted</th>
+            <th>Seller</th>
+            <th>Category</th>
+            <th>Address</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Example Row -->
+          <tr>
+            <td><img
+                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=80&h=60"
+                alt="Property" class="property-img-thumb"></td>
+            <td>Villa 21</td>
+            <td>Luxury villa with pool</td>
+            <td>$1,200,000</td>
+            <td><span class="badge bg-info">Sale</span></td>
+            <td>New York</td>
+            <td>Cash</td>
+            <td><span class="badge bg-success">Active</span></td>
+            <td>350 m²</td>
+            <td>5</td>
+            <td>4</td>
+            <td>2024-05-01</td>
+            <td>2024-05-10</td>
+            <td>-</td>
+            <td>Sarah Smith</td>
+            <td>Villa</td>
+            <td>123 Main St</td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-outline-primary me-1" title="Details"><i class="fa fa-eye"></i></button>
+              <button class="btn btn-sm btn-outline-warning me-1" title="Edit"><i class="fa fa-pencil"></i></button>
+              <button class="btn btn-sm btn-outline-danger" title="Delete"><i class="fa fa-trash"></i></button>
+            </td>
+          </tr>
+          <!-- More rows can be added here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

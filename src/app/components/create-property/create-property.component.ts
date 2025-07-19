@@ -113,7 +113,7 @@ export class CreatePropertyComponent implements OnInit {
         () => console.log('New Property:', this.propertyForm.value),
         err => console.error(err)
       )
-      alert('✅ The property has been added successfully');
+      alert('The property has been added successfully');
       this.propertyForm.reset();
       this.submitted = false;
     } else {

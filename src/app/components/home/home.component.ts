@@ -5,16 +5,17 @@ import { PropertyServiceService } from '../../services/property-service.service'
 import { Address } from '../../types/address';
 import { PropertyCardComponent } from '../property-card/property-card.component';
 import { RouterLink } from '@angular/router';
+import { NavComponent } from '../nav/nav.component';
 
 
 @Component({
   selector: 'app-home',
-  imports: [PropertyComponent,RouterLink],
+  imports: [PropertyComponent, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
- @Input() property:any
+  @Input() property: any
 
   addresses: Address[] = [];
   addresses2: Address[] = [];

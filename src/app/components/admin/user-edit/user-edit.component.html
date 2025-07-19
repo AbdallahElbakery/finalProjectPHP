@@ -1,0 +1,85 @@
+<!-- User Edit Page - Responsive, Modern, Bootstrap Only -->
+<div class="user-edit-bg min-vh-100 py-4">
+  <div class="container-fluid">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+      <h2 class="fw-bold mb-0" style="font-family: 'Lora', serif; color: var(--primary-color);">Edit User</h2>
+      <a routerLink="/admin/users"><button class="btn btn-outline-secondary" type="button"><i
+            class="bi bi-arrow-left me-1"></i>Back</button></a>
+    </div>
+    <div class="user-edit-card shadow-sm rounded-4 bg-white p-4 mx-auto" style="max-width: 540px;">
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()" autocomplete="off" novalidate>
+        <div class="mb-3 text-center">
+          <img src="https://ui-avatars.com/api/?name=Sarah+Smith&background=1e40af&color=fff&rounded=true&size=80"
+            alt="User Photo" class="user-photo-lg mb-2"  value="">
+        </div>
+                  <input type="text" class="form-control form-control-lg " id="name" placeholder="Enter name" formControlName="photo" value="" hidden>
+        <div class="mb-3">
+          <label for="name" class="form-label fw-semibold">Name</label>
+          <input type="text" class="form-control form-control-lg " id="name" placeholder="Enter name"
+            formControlName="name" required [class.invalid]="isFieldInvalid('name')">
+          @if(isFieldInvalid('name')) {
+          <div class="error-msg">{{ getErrorMessage('name') }}</div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label fw-semibold">Email</label>
+          <input type="email" class="form-control form-control-lg " id="email" placeholder="Enter email"
+            formControlName="email" required [class.invalid]="isFieldInvalid('email')">
+          @if(isFieldInvalid('email')) {
+          <div class="error-msg">{{ getErrorMessage('email') }}</div>
+          }
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label fw-semibold">Password</label>
+          <input type="password" class="form-control form-control-lg " id="password" placeholder="Enter password"
+            formControlName="password" required [class.invalid]="isFieldInvalid('password')">
+          @if(isFieldInvalid('password')) {
+          <div class="is-invalid">{{ getErrorMessage('password') }}</div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="phone" class="form-label fw-semibold">Phone</label>
+          <input type="text" class="form-control form-control-lg" id="phone" placeholder="Enter phone"
+            formControlName="phone" [class.invalid]="isFieldInvalid('phone')">
+          @if(isFieldInvalid('phone')) {
+          <div class="error-msg">{{ getErrorMessage('phone') }}</div>
+          }
+        </div>
+        <div class="mb-3">
+          <label for="role" class="form-label fw-semibold">Role</label>
+          <select class="form-select form-select-lg" id="role" required formControlName="role"
+            [class.invalid]="isFieldInvalid('role')">
+            <option disabled selected>Select role</option>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+            <option value="seller">Seller</option>
+          </select>
+          @if (isFieldInvalid('role')) {
+          <div class="error-msg">{{ getErrorMessage('role') }}</div>
+          }
+
+        </div>
+
+        <div class="mb-3">
+          <label for="address_id" class="form-label fw-semibold">Address</label>
+          <select class="form-select form-select-lg" id="address_id" required formControlName="address_id"
+            [class.invalid]="isFieldInvalid('address_id')">
+            <option disabled selected>Select Address</option>
+            @for(address of addresses; track address.id){
+            <option [ngValue]="address.id">{{address.full_address}}</option>
+            }
+          </select>
+          @if (isFieldInvalid('address')) {
+          <div class="error-msg">{{ getErrorMessage('address') }}</div>
+          }
+        </div>
+        <div class="mt-4 d-flex gap-2 justify-content-end">
+          <a routerLink="/admin/users"><button type="button" class="btn btn-secondary">Cancel</button></a>
+          <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
