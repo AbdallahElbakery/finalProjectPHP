@@ -1,4 +1,4 @@
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AllUser, User } from '../../../types/admin-users';
 import { AdminServiceService } from './../../../services/admin-service.service';
 import { Component } from '@angular/core';
@@ -15,7 +15,8 @@ export class UserDetailsComponent {
   user: any;
   constructor(
     private adminService: AdminServiceService,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private router: Router
   ) {
   }
   ngOnInit() {
@@ -29,4 +30,7 @@ export class UserDetailsComponent {
   const imgElement = event.target as HTMLImageElement;
   imgElement.src = 'https://ui-avatars.com/api/?name=Sarah+Smith&background=1e40af&color=fff&rounded=true&size=80';
 }
+ goEditUser(id:any){
+    return this.router.navigate(['admin/edit/users', id]);
+  }
 }

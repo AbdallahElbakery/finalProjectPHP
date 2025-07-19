@@ -7,7 +7,7 @@ import { S } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-users-list',
-  imports: [RouterLink, CommonModule],
+  imports: [CommonModule],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.css'
 })
@@ -32,24 +32,28 @@ export class UsersListComponent {
   viewUser(userId: number) {
     this.router.navigate(['admin/details/users', userId])
   }
-  onImageError(event:any){
-    const SrcElement=event.target as HTMLImageElement;
-    SrcElement.src='https://ui-avatars.com/api/?name=user&background=1e40af&color=fff&rounded=true&size=80';
+  onImageError(event: any) {
+    const SrcElement = event.target as HTMLImageElement;
+    SrcElement.src = 'https://ui-avatars.com/api/?name=user&background=1e40af&color=fff&rounded=true&size=80';
   }
 
-  deleteUser(id:number,i:number){
-    if(confirm('are u share u want to permenantly delete this user?')){
-    return this.adminService.deleteUser(id).subscribe((res)=>{
-      this.allusers.splice(i,1)
-      alert('deleted successfully');
-    })
+  deleteUser(id: number, i: number) {
+    if (confirm('are u share u want to permenantly delete this user?')) {
+      return this.adminService.deleteUser(id).subscribe((res) => {
+        this.allusers.splice(i, 1)
+        alert('deleted successfully');
+      })
     }
-    else{
+    else {
       return false;
     }
   }
 
-  goEditUser(id:any){
+  goEditUser(id: any) {
     return this.router.navigate(['admin/edit/users', id]);
+  }
+
+  goAddUser() {
+    return this.router.navigate(['admin/add/users']);
   }
 }

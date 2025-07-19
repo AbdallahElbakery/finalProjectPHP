@@ -14,6 +14,7 @@ export interface User {
   date: string
   updated: string
   address: Address
+  address_id?: number
 }
 export interface AllUser {
   id: number
