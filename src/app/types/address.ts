@@ -13,4 +13,5 @@ export interface Address {
   updated_at: string
   deleted_at: any
   image?: string
+  address_id?: number
 }

@@ -31,6 +31,7 @@ import { PropertyEditComponent } from './components/admin/property-edit/property
 import { UserAddComponent } from './components/admin/user-add/user-add.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
 import { UserEditComponent } from './components/admin/user-edit/user-edit.component';
+import { PropertyDetailsComponent as PopertyAdminDetails } from './components/admin/property-details/property-details.component';
 import { ReviewsListComponent } from './components/admin/reviews-list/reviews-list.component';
 import { ReviewDetailsComponent } from './components/admin/review-details/review-details.component';
 import { ReviewDeleteComponent } from './components/admin/review-delete/review-delete.component';
@@ -40,6 +41,7 @@ import { BookingEditComponent } from './components/admin/booking-edit/booking-ed
 import { BookingDeleteComponent } from './components/admin/booking-delete/booking-delete.component';
 import { PaymentsListComponent } from './components/admin/payments-list/payments-list.component';
 import { PaymentDetailsComponent } from './components/admin/payment-details/payment-details.component';
+
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -75,13 +77,15 @@ export const routes: Routes = [
                 { path: 'login', component: LoginComponent, title: 'Admin login' },
                 { path: 'home', component: HomeAdminComponent, title: 'login admin' },
                 { path: 'users', component: UsersListComponent, title: 'Admin users' },
+                { path: 'user', component: UserDetailsComponent, title: 'User' },
                 { path: 'add/users', component: UserAddComponent, title: 'Admin add users' },
-                { path: 'edit/users', component: UserEditComponent, title: 'Admin edit users' },
-                { path: 'details/users', component: UserDetailsComponent, title: 'Admin details users' },
+                { path: 'edit/users/:id', component: UserEditComponent, title: 'Admin edit users' },
+                { path: 'details/users/:id', component: UserDetailsComponent, title: 'Admin details users' },
                 { path: 'properties', component: PropertiesListComponent, title: 'Admin properties' },
                 { path: 'add/properties', component: PropertyAddComponent, title: 'Admin properties' },
                 { path: 'edit/properties', component: PropertyEditComponent, title: 'Admin edit properties' },
                 { path: 'details/properties', component: PropertyAddComponent, title: 'Admin details properties' },
+                { path: 'details/properties/:id', component: PopertyAdminDetails, title: 'Admin details properties' },
                 // --- Reviews ---
                 { path: 'reviews', component: ReviewsListComponent, title: 'Admin reviews' },
                 { path: 'details/reviews', component: ReviewDetailsComponent, title: 'Admin review details' },
@@ -94,6 +98,7 @@ export const routes: Routes = [
                 // --- Payments ---
                 { path: 'payments', component: PaymentsListComponent, title: 'Admin payments' },
                 { path: 'details/payments', component: PaymentDetailsComponent, title: 'Admin payment details' },
+            
             ]
     },
 

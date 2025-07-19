@@ -61,6 +61,13 @@
   box-shadow: 0 4px 16px rgba(30, 64, 175, 0.16);
   transform: translateY(-1px) scale(1.03);
 }
+.invalid {
+    border-color: #e74c3c !important;
+}
+.error-msg {
+    color: #e74c3c;
+    font-size: 0.85rem;
+}
 @media (max-width: 600px) {
   .user-edit-card {
     padding: 1.1rem 0.5rem !important;
