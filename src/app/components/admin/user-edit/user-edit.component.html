@@ -3,42 +3,55 @@
   <div class="container-fluid">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
       <h2 class="fw-bold mb-0" style="font-family: 'Lora', serif; color: var(--primary-color);">Edit User</h2>
-      <button class="btn btn-outline-secondary" type="button"><i class="bi bi-arrow-left me-1"></i>Back</button>
+      <a routerLink="/admin/users"><button class="btn btn-outline-secondary" type="button"><i class="bi bi-arrow-left me-1"></i>Back</button></a>
     </div>
     <div class="user-edit-card shadow-sm rounded-4 bg-white p-4 mx-auto" style="max-width: 540px;">
-      <form autocomplete="off" novalidate>
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()" autocomplete="off" novalidate>
         <div class="mb-3 text-center">
-          <img src="https://ui-avatars.com/api/?name=Sarah+Smith&background=1e40af&color=fff&rounded=true&size=80" alt="User Photo" class="user-photo-lg mb-2">
+          <img src="https://ui-avatars.com/api/?name=Sarah+Smith&background=1e40af&color=fff&rounded=true&size=80"
+            alt="User Photo" class="user-photo-lg mb-2">
         </div>
         <div class="mb-3">
           <label for="name" class="form-label fw-semibold">Name</label>
-          <input type="text" class="form-control form-control-lg is-invalid" id="name" placeholder="Enter name" required>
+          <input type="text" class="form-control form-control-lg is-invalid" id="name" placeholder="Enter name" formControlName="name"
+            required>
           <div class="invalid-feedback">Name is required.</div>
         </div>
+
         <div class="mb-3">
           <label for="email" class="form-label fw-semibold">Email</label>
-          <input type="email" class="form-control form-control-lg is-invalid" id="email" placeholder="Enter email" required>
+          <input type="email" class="form-control form-control-lg is-invalid" id="email" placeholder="Enter email" formControlName="email"
+            required>
           <div class="invalid-feedback">Please enter a valid email address.</div>
         </div>
+        
         <div class="mb-3">
           <label for="phone" class="form-label fw-semibold">Phone</label>
-          <input type="text" class="form-control form-control-lg" id="phone" placeholder="Enter phone">
+          <input type="text" class="form-control form-control-lg" id="phone" placeholder="Enter phone" formControlName="phone">
         </div>
         <div class="mb-3">
           <label for="role" class="form-label fw-semibold">Role</label>
-          <select class="form-select form-select-lg" id="role" required>
-            <option value="">Select role</option>
+          <select class="form-select form-select-lg" id="role" required formControlName="role">
+            <option disabled selected>Select role</option>
             <option value="admin">Admin</option>
             <option value="user">User</option>
             <option value="seller">Seller</option>
           </select>
           <div class="invalid-feedback">Role is required.</div>
         </div>
+
         <div class="mb-3">
-          <label for="address" class="form-label fw-semibold">Address</label>
-          <input type="text" class="form-control form-control-lg" id="address" placeholder="Enter address">
+          <label for="address" class="form-label fw-semibold" >Address</label>
+          <select class="form-select form-select-lg" id="address" required formControlName="address">
+            <option value="" disabled selected>Select Address</option>
+            @for(address of addresses; track address.id){
+            <option>{{address.full_address}}</option>
+            }
+
+          </select>
+          <div class="invalid-feedback">address is required.</div>
         </div>
-        <div class="row g-3">
+        <!-- <div class="row g-3">
           <div class="col-6">
             <label for="created_at" class="form-label fw-semibold">Created At</label>
             <input type="date" class="form-control form-control-lg" id="created_at" disabled value="2024-05-01">
@@ -47,9 +60,9 @@
             <label for="updated_at" class="form-label fw-semibold">Updated At</label>
             <input type="date" class="form-control form-control-lg" id="updated_at" disabled value="2024-05-10">
           </div>
-        </div>
+        </div> -->
         <div class="mt-4 d-flex gap-2 justify-content-end">
-          <button type="button" class="btn btn-secondary">Cancel</button>
+          <a routerLink="/admin/users"><button type="button" class="btn btn-secondary" >Cancel</button></a>
           <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
         </div>
       </form>
