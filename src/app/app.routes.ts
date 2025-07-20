@@ -31,6 +31,22 @@ import { PropertyEditComponent } from './components/admin/property-edit/property
 import { UserAddComponent } from './components/admin/user-add/user-add.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
 import { UserEditComponent } from './components/admin/user-edit/user-edit.component';
+import { PropertyDetailsComponent as PropertyAdminDetails } from './components/admin/property-details/property-details.component';
+import { ReviewsListComponent } from './components/admin/reviews-list/reviews-list.component';
+import { ReviewDetailsComponent } from './components/admin/review-details/review-details.component';
+import { ReviewDeleteComponent } from './components/admin/review-delete/review-delete.component';
+import { BookingsListComponent } from './components/admin/bookings-list/bookings-list.component';
+import { BookingDetailsComponent } from './components/admin/booking-details/booking-details.component';
+import { BookingEditComponent } from './components/admin/booking-edit/booking-edit.component';
+import { BookingDeleteComponent } from './components/admin/booking-delete/booking-delete.component';
+import { PaymentsListComponent } from './components/admin/payments-list/payments-list.component';
+import { PaymentDetailsComponent } from './components/admin/payment-details/payment-details.component';
+import { CategoriesListComponent } from './components/admin/categories-list/categories-list.component';
+import { CategoryDetailsComponent } from './components/admin/category-details/category-details.component';
+import { CategoryAddComponent } from './components/admin/category-add/category-add.component';
+import { CategoryEditComponent } from './components/admin/category-edit/category-edit.component';
+import { CategoryDeleteComponent } from './components/admin/category-delete/category-delete.component';
+
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -72,8 +88,24 @@ export const routes: Routes = [
                 { path: 'details/users/:id', component: UserDetailsComponent, title: 'Admin details users' },
                 { path: 'properties', component: PropertiesListComponent, title: 'Admin properties' },
                 { path: 'add/properties', component: PropertyAddComponent, title: 'Admin properties' },
-                { path: 'edit/properties', component: PropertyEditComponent, title: 'Admin edit properties' },
+                { path: 'edit/properties/:id', component: PropertyEditComponent, title: 'Admin edit properties' },
                 { path: 'details/properties', component: PropertyAddComponent, title: 'Admin details properties' },
+                { path: 'details/properties/:id', component: PropertyAdminDetails, title: 'Admin details properties' },
+                { path: 'reviews', component: ReviewsListComponent, title: 'Admin reviews' },
+                { path: 'details/reviews', component: ReviewDetailsComponent, title: 'Admin review details' },
+                { path: 'delete/reviews', component: ReviewDeleteComponent, title: 'Admin review delete' },
+                { path: 'bookings', component: BookingsListComponent, title: 'Admin bookings' },
+                { path: 'details/bookings', component: BookingDetailsComponent, title: 'Admin booking details' },
+                { path: 'edit/bookings', component: BookingEditComponent, title: 'Admin booking edit status' },
+                { path: 'delete/bookings', component: BookingDeleteComponent, title: 'Admin booking delete' },
+                { path: 'payments', component: PaymentsListComponent, title: 'Admin payments' },
+                { path: 'details/payments/:id', component: PaymentDetailsComponent, title: 'Admin payment details' },
+                { path: 'categories', component: CategoriesListComponent, title: 'Admin categories' },
+                { path: 'details/categories/:id', component: CategoryDetailsComponent, title: 'Admin category details' },
+                { path: 'add/categories', component: CategoryAddComponent, title: 'Admin add category' },
+                { path: 'edit/categories/:id', component: CategoryEditComponent, title: 'Admin edit category' },
+                { path: 'delete/categories', component: CategoryDeleteComponent, title: 'Admin delete category' },
+
             ]
     },
 

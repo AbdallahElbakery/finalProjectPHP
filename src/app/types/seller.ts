@@ -1,6 +1,7 @@
 export interface Root {
   Message: string
   Seller: Seller
+  allsellers: SellerData[]
 }
 
 export interface Seller {

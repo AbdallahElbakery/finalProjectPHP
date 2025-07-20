@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:host {
+  --primary-color: #1e40af;
+  --hover-color: #3b82f6;
+  --bg-light: #eff6ff;
+  --bg-lighter: #dbeafe;
+  --text-color: #2C3E50;
+  --border-radius: 0.75rem;
+  --transition: 0.3s ease-in-out;
+  --shadow: 0 4px 16px rgba(30, 64, 175, 0.1);
+  --shadow-hover: 0 8px 32px rgba(30, 64, 175, 0.15);
+}
+
+.reviews-list-bg {
+  background: linear-gradient(120deg, var(--bg-light) 60%, var(--bg-lighter) 100%);
+  min-height: 100vh;
+}
+.reviews-table th, .reviews-table td {
+  vertical-align: middle;
+  font-family: 'Poppins', sans-serif;
+}
+.reviews-table th {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1.04rem;
+}
+.reviews-table td {
+  font-size: 1.01rem;
+  color: var(--text-color);
+}
+.badge {
+  font-size: 0.97rem;
+  padding: 0.5em 0.8em;
+  border-radius: 0.6rem;
+}
+@media (max-width: 991px) {
+  .reviews-table th, .reviews-table td {
+    font-size: 0.97rem;
+  }
+}
+@media (max-width: 600px) {
+  .reviews-list-bg {
+    padding: 0.5rem 0.2rem !important;
+  }
+  .reviews-table th, .reviews-table td {
+    font-size: 0.93rem;
+    padding: 0.4rem 0.3rem;
+  }
+}

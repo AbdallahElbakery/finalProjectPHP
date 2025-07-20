@@ -3,95 +3,161 @@
   <div class="container-fluid">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
       <h2 class="fw-bold mb-0" style="font-family: 'Lora', serif; color: var(--primary-color);">Edit Property</h2>
-      <button class="btn btn-outline-secondary" type="button"><i class="bi bi-arrow-left me-1"></i>Back</button>
+      <a [routerLink]="['/admin/properties']" routerLinkActive="router-link-active"><button
+          class="btn btn-outline-secondary" type="button"><i class="fa fa-arrow-left me-1"></i>Back</button></a>
     </div>
     <div class="property-edit-card shadow-sm rounded-4 bg-white p-4 mx-auto" style="max-width: 700px;">
-      <form autocomplete="off" novalidate>
+      <form autocomplete="off" novalidate [formGroup]="editForm" (ngSubmit)="onSubmit()">
         <div class="mb-3 text-center">
-          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=320&h=180" alt="Property" class="property-photo-lg mb-2">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=320&h=180"
+            alt="Property" class="property-photo-lg mb-2" value="image">
         </div>
         <div class="row g-3">
           <div class="col-12 col-md-6">
             <label for="name" class="form-label fw-semibold">Name</label>
-            <input type="text" class="form-control form-control-lg is-invalid" id="name" placeholder="Enter property name" required>
-            <div class="invalid-feedback">Name is required.</div>
+            <input type="text" class="form-control form-control-lg " id="name" placeholder="Enter property name"
+              formControlName="name" [class.invalid]="isFieldInvalid('name')">
+            @if(isFieldInvalid('name')){
+            <div class="error-msg">{{ getErrorMessage('name') }}</div>
+            }
           </div>
+
+
           <div class="col-12 col-md-6">
             <label for="price" class="form-label fw-semibold">Price</label>
-            <input type="number" class="form-control form-control-lg is-invalid" id="price" placeholder="Enter price" required>
-            <div class="invalid-feedback">Price is required.</div>
+            <input type="number" class="form-control form-control-lg " id="price" placeholder="Enter price" required
+              formControlName="price" [class.invalid]="isFieldInvalid('price')">
+            @if(isFieldInvalid('price')){
+            <div class="error-msg">{{getErrorMessage('price')}}</div>
+            }
           </div>
           <div class="col-12">
             <label for="description" class="form-label fw-semibold">Description</label>
-            <textarea class="form-control form-control-lg is-invalid" id="description" rows="2" placeholder="Enter description" required></textarea>
-            <div class="invalid-feedback">Description is required.</div>
+            <textarea class="form-control form-control-lg " id="description" rows="2" placeholder="Enter description"
+              required formControlName="description" [class.invalid]="isFieldInvalid('description')"></textarea>
+            @if(isFieldInvalid('description')){
+            <div class="error-msg">{{getErrorMessage('description')}}</div>
+            }
           </div>
           <div class="col-12 col-md-6">
             <label for="purpose" class="form-label fw-semibold">Purpose</label>
-            <select class="form-select form-select-lg is-invalid" id="purpose" required>
-              <option value="">Select purpose</option>
+            <select class="form-select form-select-lg " id="purpose" required formControlName="purpose"
+              [class.invalid]="isFieldInvalid('purpose')">
+              <option value="" selected disabled>Select purpose</option>
               <option value="sale">Sale</option>
               <option value="rent">Rent</option>
             </select>
-            <div class="invalid-feedback">Purpose is required.</div>
+            @if(isFieldInvalid('purpose')){
+            <div class="error-msg is-invalid">{{getErrorMessage('purpose')}}</div>
+            }
           </div>
           <div class="col-12 col-md-6">
-            <label for="citynum" class="form-label fw-semibold">City</label>
-            <input type="text" class="form-control form-control-lg" id="citynum" placeholder="Enter city">
+            <label for="citynum" class="form-label fw-semibold">City num</label>
+            <input type="text" class="form-control form-control-lg" id="citynum" placeholder="Enter city number"
+              required formControlName="citynum" [class.invalid]="isFieldInvalid('citynum')">
+            @if(isFieldInvalid('citynum')){
+            <div class="error-msg">{{getErrorMessage('citynum')}}</div>
+            }
           </div>
           <div class="col-12 col-md-6">
             <label for="payment_method" class="form-label fw-semibold">Payment Method</label>
-            <input type="text" class="form-control form-control-lg" id="payment_method" placeholder="Enter payment method">
+            <select class="form-select form-select-lg" id="payment_method" required formControlName="payment_method"
+              [class.invalid]="isFieldInvalid('payment_method')">
+              <option disabled selected value="">Select payment method</option>
+              <option value="cash">cash</option>
+              <option value="installment">installment</option>
+            </select>
           </div>
+          @if(isFieldInvalid('payment_method')){
+          <div class="error-msg ">{{getErrorMessage('payment_method')}}</div>
+          }
           <div class="col-12 col-md-6">
             <label for="status" class="form-label fw-semibold">Status</label>
-            <select class="form-select form-select-lg is-invalid" id="status" required>
-              <option value="">Select status</option>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
+            <select class="form-select form-select-lg" id="status" required formControlName="status"
+              [class.invalid]="isFieldInvalid('status')">
+              <option value="" disabled>Select status</option>
+              <option [ngValue]="available">available</option>
+              <option [ngValue]="sold">sold</option>
             </select>
-            <div class="invalid-feedback">Status is required.</div>
+            @if(isFieldInvalid('status')){
+            <div class="error-msg">{{getErrorMessage('status')}}</div>
+            }
           </div>
           <div class="col-12 col-md-4">
             <label for="area" class="form-label fw-semibold">Area (m²)</label>
-            <input type="number" class="form-control form-control-lg" id="area" placeholder="Enter area">
+            <input type="number" class="form-control form-control-lg" id="area" placeholder="Enter area"
+              formControlName="area" [class.invalid]="isFieldInvalid('area')">
           </div>
+          @if(isFieldInvalid('area')){
+          <div class="error-msg">{{getErrorMessage('area')}}</div>
+          }
+
           <div class="col-6 col-md-4">
             <label for="bedrooms" class="form-label fw-semibold">Bedrooms</label>
-            <input type="number" class="form-control form-control-lg" id="bedrooms" placeholder="Bedrooms">
+            <input type="number" class="form-control form-control-lg" id="bedrooms" placeholder="Bedrooms"
+              formControlName="bedrooms" [class.invalid]="isFieldInvalid('bedrooms')">
           </div>
+          @if(isFieldInvalid('bedrooms')){
+          <div class="error-msg">{{getErrorMessage('bedrooms')}}</div>
+          }
           <div class="col-6 col-md-4">
             <label for="bathrooms" class="form-label fw-semibold">Bathrooms</label>
-            <input type="number" class="form-control form-control-lg" id="bathrooms" placeholder="Bathrooms">
+            <input type="number" class="form-control form-control-lg" id="bathrooms" placeholder="Bathrooms"
+              formControlName="bathrooms" [class.invalid]="isFieldInvalid('bathrooms')">
           </div>
+          @if(isFieldInvalid('bathrooms')){
+          <div class="error-msg">{{getErrorMessage('bathrooms')}}</div>
+          }
+          <div class="col-12 col-md-4">
+            <label for="city" class="form-label fw-semibold">City</label>
+            <input class="form-control form-control-lg" id="city" placeholder="Enter city" formControlName="city"
+              [class.invalid]="isFieldInvalid('city')">
+          </div>
+          @if(isFieldInvalid('city')){
+          <div class="error-msg">{{getErrorMessage('city')}}</div>
+          }
+          <div class="col-12 col-md-4">
+            <label for="country" class="form-label fw-semibold">Country</label>
+            <input class="form-control form-control-lg" id="country" placeholder="Enter country"
+              formControlName="country" [class.invalid]="isFieldInvalid('country')">
+          </div>
+          @if(isFieldInvalid('country')){
+          <div class="error-msg">{{getErrorMessage('country')}}</div>
+          }
+
           <div class="col-12 col-md-6">
             <label for="seller_id" class="form-label fw-semibold">Seller</label>
-            <input type="text" class="form-control form-control-lg" id="seller_id" placeholder="Enter seller name or ID">
+            <select class="form-select form-select-lg" id="seller_id" required formControlName="seller_id"
+              [class.invalid]="isFieldInvalid('seller_id')">
+              <option disabled selected value="">Select Seller</option>
+              <option *ngFor="let seller of sellers" [ngValue]="seller.seller_data[0].id">{{seller.seller_data[0].name}}
+              </option>
+            </select>
+            @if(isFieldInvalid('seller_id')){
+            <div class="error-msg">{{getErrorMessage('seller_id')}}</div>
+            }
           </div>
+
           <div class="col-12 col-md-6">
             <label for="category_id" class="form-label fw-semibold">Category</label>
-            <input type="text" class="form-control form-control-lg" id="category_id" placeholder="Enter category">
+            <select class="form-select form-select-lg" id="category_id" required formControlName="category_id"
+              [class.invalid]="isFieldInvalid('category_id')">
+              <option disabled selected value="">Select category</option>
+              <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.category_name }}</option>
+            </select>
+            @if(isFieldInvalid('category_id')){
+            <div class="error-msg">{{getErrorMessage('category_id')}}</div>
+            }
           </div>
           <div class="col-12 col-md-6">
-            <label for="address_id" class="form-label fw-semibold">Address</label>
-            <input type="text" class="form-control form-control-lg" id="address_id" placeholder="Enter address">
-          </div>
-          <div class="col-12 col-md-6">
-            <label for="image" class="form-label fw-semibold">Image URL</label>
-            <input type="text" class="form-control form-control-lg" id="image" placeholder="Enter image URL">
-          </div>
-          <div class="col-6">
-            <label for="created_at" class="form-label fw-semibold">Created At</label>
-            <input type="date" class="form-control form-control-lg" id="created_at" disabled value="2024-05-01">
-          </div>
-          <div class="col-6">
-            <label for="updated_at" class="form-label fw-semibold">Updated At</label>
-            <input type="date" class="form-control form-control-lg" id="updated_at" disabled value="2024-05-10">
+            <!-- <label for="image" class="form-label fw-semibold">Image URL</label> -->
+            <input type="text" class="form-control form-control-lg" id="image" placeholder="Enter image URL"
+              formControlName="image" hidden>
           </div>
         </div>
         <div class="mt-4 d-flex gap-2 justify-content-end">
-          <button type="button" class="btn btn-secondary">Cancel</button>
-          <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
+          <a routerLink="/admin/properties"><button type="button" class="btn btn-secondary">Cancel</button></a>
+          <button type="submit" class="btn btn-primary btn-lg">Add Property</button>
         </div>
       </form>
     </div>

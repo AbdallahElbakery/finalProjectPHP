@@ -1,21 +1,47 @@
-<!-- Admin Sidebar - Responsive, Modern, Bootstrap Only -->
-<nav class="admin-sidebar d-flex flex-column p-3 h-100 shadow-sm">
-  <a href="#" class="sidebar-logo mb-4 text-decoration-none d-flex align-items-center gap-2">
-    <span class="sidebar-logo-icon">A</span>
-    <span class="fw-bold fs-5 sidebar-title">Admin</span>
-  </a>
+<!-- Admin Sidebar - Responsive, Collapsible, Modern, Bootstrap Only -->
+<nav class="admin-sidebar d-flex flex-column p-3 h-100 shadow-sm" [class.collapsed]="collapsed">
+  <div class="sidebar-header d-flex align-items-center justify-content-between mb-4">
+    <a href="#" class="sidebar-logo text-decoration-none d-flex align-items-center gap-2">
+      <span class="sidebar-logo-icon">A</span>
+      <span class="fw-bold fs-5 sidebar-title" *ngIf="!collapsed">Admin</span>
+    </a>
+    <button class="btn btn-sm toggle-btn" (click)="collapsed = !collapsed"
+      [attr.aria-label]="collapsed ? 'Expand sidebar' : 'Collapse sidebar'">
+      <i class="fa" [ngClass]="collapsed ? 'fa-arrow-circle-right' : 'fa-arrow-circle-left'"></i>
+    </button>
+  </div>
   <ul class="nav nav-pills flex-column mb-auto gap-2">
     <li class="nav-item">
-      <a routerLink="/admin" class="nav-link " routerLinkActive="active"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+      <a routerLink="/admin/dashboard" routerLinkActive="active" class="nav-link"><i class="fa fa-home me-2"></i><span
+          *ngIf="!collapsed">Dashboard</span></a>
     </li>
     <li>
-      <a routerLink="/admin/users" class="nav-link" routerLinkActive="active"><i class="bi bi-people me-2"></i>Users</a>
+      <a routerLink="/admin/users" routerLinkActive="active" class="nav-link"><i class="fa fa-user me-2"></i><span
+          *ngIf="!collapsed">Users</span></a>
     </li>
     <li>
-      <a routerLink="/admin/properties" class="nav-link" routerLinkActive="active"><i class="bi bi-building me-2"></i>Properties</a>
+      <a routerLink="/admin/properties" routerLinkActive="active" class="nav-link"><i
+          class="fa fa-building me-2"></i><span *ngIf="!collapsed">Properties</span></a>
     </li>
     <li>
-      <a routerLink="/admin/settings" class="nav-link" routerLinkActive="active"><i class="bi bi-gear me-2"></i>Settings</a>
+      <a routerLink="/admin/categories" routerLinkActive="active" class="nav-link"><i class="fa fa-tags me-2"></i><span
+          *ngIf="!collapsed">Categories</span></a>
+    </li>
+    <li>
+      <a routerLink="/admin/reviews" routerLinkActive="active" class="nav-link"><i class="fa fa-star me-2"></i><span
+          *ngIf="!collapsed">Reviews</span></a>
+    </li>
+    <li>
+      <a routerLink="/admin/bookings" routerLinkActive="active" class="nav-link"><i
+          class="fa fa-calendar-check me-2"></i><span *ngIf="!collapsed">Bookings</span></a>
+    </li>
+    <li>
+      <a routerLink="/admin/payments" routerLinkActive="active" class="nav-link"><i
+          class="fa fa-credit-card me-2"></i><span *ngIf="!collapsed">Payments</span></a>
+    </li>
+    <li>
+      <a routerLink="/admin/settings" routerLinkActive="active" class="nav-link"><i class="fa fa-gear me-2"></i><span
+          *ngIf="!collapsed">Settings</span></a>
     </li>
   </ul>
 </nav>

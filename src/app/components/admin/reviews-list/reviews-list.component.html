@@ -1,0 +1,41 @@
+<!-- Reviews List Page - Responsive, Modern, Bootstrap Only -->
+<div class="reviews-list-bg min-vh-100 py-4">
+  <div class="container-fluid">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+      <h2 class="fw-bold mb-0" style="font-family: 'Lora', serif; color: var(--primary-color);">Reviews Management</h2>
+    </div>
+    <div class="table-responsive rounded-4 shadow-sm bg-white p-3">
+      <table class="table align-middle mb-0 reviews-table">
+        <thead class="table-light">
+          <tr>
+            <th>User</th>
+            <th>Seller</th>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>Created</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Example Row -->
+          <tr>
+            <td>Sarah Smith</td>
+            <td>John Seller</td>
+            <td>
+              <span class="text-warning">
+                <i class="bi bi-star-fill"></i> 4.5
+              </span>
+            </td>
+            <td>Great service and fast response!</td>
+            <td>2024-05-01</td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-outline-primary me-1" title="Details" routerLink="/admin/details/reviews"><i class="fa fa-eye"></i></button>
+              <button class="btn btn-sm btn-outline-danger" title="Delete" routerLink="/admin/delete/reviews"><i class="fa fa-trash"></i></button>
+            </td>
+          </tr>
+          <!-- More rows can be added here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

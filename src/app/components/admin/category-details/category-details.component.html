@@ -1,0 +1,29 @@
+<!-- Category Details Page - Responsive, Modern, Bootstrap Only -->
+<div class="category-details-bg min-vh-100 py-4">
+  <div class="container-fluid">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+      <h2 class="fw-bold mb-0" style="font-family: 'Lora', serif; color: var(--primary-color);">Category Details</h2>
+      <button class="btn btn-outline-secondary" type="button" routerLink="/admin/categories"><i class="fa fa-arrow-left me-1"></i>Back</button>
+    </div>
+    <div class="category-details-card shadow-sm rounded-4 bg-white p-4 mx-auto" style="max-width: 540px;">
+      <div class="row g-3 mb-2">
+        <div class="col-12">
+          <div class="detail-label">Category Name</div>
+          <div class="detail-value">{{category.category_name}}</div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="detail-label">Created At</div>
+          <div class="detail-value">{{category.created_at | date:'medium'}}</div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="detail-label">Updated At</div>
+          <div class="detail-value">{{category.updated_at | date:'medium'}}</div>
+        </div>
+        <div class="col-12">
+          <div class="detail-label">Deleted At</div>
+          <div class="detail-value">-</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

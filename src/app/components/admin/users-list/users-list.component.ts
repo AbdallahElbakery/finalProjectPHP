@@ -6,7 +6,7 @@ import { CommonModule, NgClass } from '@angular/common';
 import { S } from '@angular/cdk/keycodes';
 
 @Component({
-  selector: 'app-users-list',
+  selector: 'app-users-list,date-pipe',
   imports: [CommonModule],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.css'

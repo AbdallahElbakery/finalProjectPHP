@@ -4,7 +4,7 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
       <h2 class="fw-bold mb-0" style="font-family: 'Lora', serif; color: var(--primary-color);">Properties Management
       </h2>
-      <button class="btn btn-primary btn-lg add-property-btn"><i class="bi bi-building-add me-2"></i>Add
+      <button class="btn btn-primary btn-lg add-property-btn" (click)="goAddProperty()"><i class="bi bi-building-add me-2"></i>Add
         Property</button>
     </div>
     <div class="table-responsive rounded-4 shadow-sm bg-white p-3">
@@ -24,7 +24,6 @@
             <th>Bathrooms</th>
             <th>Created</th>
             <th>Updated</th>
-            <th>Deleted</th>
             <th>Seller</th>
             <th>Category</th>
             <th>Address</th>
@@ -33,32 +32,38 @@
         </thead>
         <tbody>
           <!-- Example Row -->
+          @for(property of allProperties; track property.id;let i=$index){
           <tr>
-            <td><img
-                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=80&h=60"
-                alt="Property" class="property-img-thumb"></td>
-            <td>Villa 21</td>
-            <td>Luxury villa with pool</td>
-            <td>$1,200,000</td>
-            <td><span class="badge bg-info">Sale</span></td>
-            <td>New York</td>
-            <td>Cash</td>
-            <td><span class="badge bg-success">Active</span></td>
-            <td>350 m²</td>
-            <td>5</td>
-            <td>4</td>
-            <td>2024-05-01</td>
-            <td>2024-05-10</td>
-            <td>-</td>
-            <td>Sarah Smith</td>
-            <td>Villa</td>
-            <td>123 Main St</td>
+            <td><img style="width: 60px; border-radius: 4px !important;"
+                [src]="'http://127.0.0.1:8000/storage/'+property.image" alt="Property" class="property-photo-lg mb-2"
+                (error)="onImageEror($event)"></td>
+            <td>{{property.name | slice:0:100}}</td>
+            <td>{{property.description | slice:0:100}}...</td>
+            <td>{{property.price | currency}}</td>
+            <td><span class="badge"
+                [ngClass]="property.purpose=='sale'? 'bg-primary':'bg-info'">{{property.purpose}}</span></td>
+            <td>{{property.city}}</td>
+            <td>{{property.payment_method}}</td>
+            <td><span class="badge"
+                [ngClass]="property.status =='available' ? 'bg-success': 'bg-danger'">{{property.status}}</span>
+            </td>
+            <td>{{property.area}} m²</td>
+            <td>{{property.bedrooms}}</td>
+            <td>{{property.bathrooms}}</td>
+            <td>{{property.date |date :'medium'}}</td>
+            <td>{{property.updated |date :'medium'}}</td>
+            <td>{{property.seller.name}}</td>
+            <td>{{property.category}}</td>
+            <td>{{property.location}}</td>
             <td class="text-center">
-              <button class="btn btn-sm btn-outline-primary me-1" title="Details"><i class="fa fa-eye"></i></button>
-              <button class="btn btn-sm btn-outline-warning me-1" title="Edit"><i class="fa fa-pencil"></i></button>
-              <button class="btn btn-sm btn-outline-danger" title="Delete"><i class="fa fa-trash"></i></button>
+              <button class="btn btn-sm btn-outline-primary me-1" title="Details"
+                (click)="gotpropertyDetails(property.id)"><i class="fa fa-eye"></i></button>
+              <button class="btn btn-sm btn-outline-warning me-1" title="Edit" (click)="goEditProperty(property.id)"><i class="fa fa-pencil"></i></button>
+              <button class="btn btn-sm btn-outline-danger" title="Delete" (click)="deleteProperty(property.id,i)"><i class="fa fa-trash"></i></button>
             </td>
           </tr>
+          }
+
           <!-- More rows can be added here -->
         </tbody>
       </table>

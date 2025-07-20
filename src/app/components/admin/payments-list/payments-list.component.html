@@ -1,0 +1,51 @@
+<!-- Payments List Page - Responsive, Modern, Bootstrap Only -->
+<div class="payments-list-bg min-vh-100 py-4">
+  <div class="container-fluid">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+      <h2 class="fw-bold mb-0" style="font-family: 'Lora', serif; color: var(--primary-color);">Payments Management</h2>
+    </div>
+    <div class="table-responsive rounded-4 shadow-sm bg-white p-3">
+      <table class="table align-middle mb-0 payments-table">
+        <thead class="table-light">
+          <tr>
+            <th>Payment ID</th>
+            <th>Property ID</th>
+            <th>Property</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+            <th>Payer Email</th>
+            <th>Payer Name</th>
+            <th>Payment Method</th>
+            <th>Payment Status</th>
+            <!-- <th>User</th> -->
+            <th>Created</th>
+            <th>Updated</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Example Row -->
+          <tr *ngFor="let payment of payments">
+            <td>{{payment.payment_id}}</td>
+            <td>{{payment.property_id}}</td>
+            <td>{{payment.property | slice:0:10}}..</td>
+            <td>{{payment.quantity}}</td>
+            <td>{{payment.amount}}</td>
+            <td>{{payment.payer_email}}</td>
+            <td>{{payment.payer_name}}</td>
+            <td>{{payment.payment_method}}</td>
+            <td class="text-success">{{payment.payment_status}}</td>
+            <td>{{payment.date | date:'medium'}}</td>
+            <td>{{payment.updated_at | date:'medium'}}</td>
+            <!-- <td>{{payment.payment_id}}</td> -->
+            <td class="text-center">
+              <button class="btn btn-sm btn-outline-primary" title="Details" (click)="goViewPayment(payment.id)">
+                <i class="fa fa-eye"></i></button>
+            </td>
+          </tr>
+          <!-- More rows can be added here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
