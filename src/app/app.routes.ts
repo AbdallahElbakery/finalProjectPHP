@@ -101,11 +101,11 @@ export const routes: Routes = [
                 { path: 'payments', component: PaymentsListComponent, title: 'Admin payments' },
                 { path: 'details/payments/:id', component: PaymentDetailsComponent, title: 'Admin payment details' },
                 { path: 'categories', component: CategoriesListComponent, title: 'Admin categories' },
-                { path: 'details/categories', component: CategoryDetailsComponent, title: 'Admin category details' },
+                { path: 'details/categories/:id', component: CategoryDetailsComponent, title: 'Admin category details' },
                 { path: 'add/categories', component: CategoryAddComponent, title: 'Admin add category' },
-                { path: 'edit/categories', component: CategoryEditComponent, title: 'Admin edit category' },
+                { path: 'edit/categories/:id', component: CategoryEditComponent, title: 'Admin edit category' },
                 { path: 'delete/categories', component: CategoryDeleteComponent, title: 'Admin delete category' },
-            
+
             ]
     },
 

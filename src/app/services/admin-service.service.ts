@@ -6,6 +6,7 @@ import { Property, PropertyRot } from '../types/property';
 import { PropertyRoot } from './../types/property';
 import { Root as sellerRoot } from '../types/seller';
 import { PaymentRoot } from '../types/payment';
+import { CategoryRoot } from '../types/category';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +19,8 @@ export class AdminServiceService {
   private properties=`${this.Base}/api/admin/properties`;
 
   private payments =`${this.Base}/api/admin/payments`;
+
+  private categories = `${this.Base}/api/admin/categories`;
   constructor(private http: HttpClient) { }
 
 
@@ -71,5 +74,23 @@ export class AdminServiceService {
   }
   getPayment(id:number):Observable<PaymentRoot>{
     return this.http.get<PaymentRoot>(`${this.payments}/${id}`);
+  }
+
+
+  //categories
+  getCategories():Observable<CategoryRoot>{
+    return this.http.get<CategoryRoot>(this.categories);
+  }
+  getSingleCategory(id:number):Observable<CategoryRoot>{
+    return this.http.get<CategoryRoot>(`${this.categories}/${id}`);
+  }
+  addCategory(data:any):Observable<any>{
+    return this.http.post<any>(this.categories,data,{headers:{'content-type':'application/json'}})
+  }
+  deleteCategory(id:number):Observable<any>{
+    return this.http.delete(`${this.categories}/${id}`)
+  }
+  editCategory(id:number,data:any):Observable<any>{
+    return this.http.put(`${this.categories}/${id}`,data,{headers:{'content-type':'application/json'}})
   }
 }

@@ -1,5 +1,8 @@
 export type Root = Category[]
-
+export interface CategoryRoot {
+  categories: Category[]
+  category: Category
+}
 export interface Category {
   id: number
   category_name: string
