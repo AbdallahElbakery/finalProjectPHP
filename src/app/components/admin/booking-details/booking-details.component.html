@@ -4,36 +4,50 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
       <h2 class="fw-bold mb-0" style="font-family: 'Lora', serif; color: var(--primary-color);">Booking Details</h2>
       <div class="d-flex gap-2">
-        <button class="btn btn-outline-secondary" type="button" routerLink="/admin/bookings"><i class="bi bi-arrow-left me-1"></i>Back</button>
-        <button class="btn btn-warning text-white" type="button" routerLink="/admin/edit/bookings"><i class="bi bi-pencil me-1"></i>Edit Status</button>
-        <button class="btn btn-danger text-white" type="button" routerLink="/admin/delete/bookings"><i class="bi bi-trash me-1"></i>Delete</button>
+        <button class="btn btn-outline-secondary" type="button" routerLink="/admin/bookings"><i
+            class="fa fa-arrow-left me-1"></i>Back</button>
+        <!-- <button class="btn btn-warning text-white" type="button" routerLink="/admin/edit/bookings"><i
+            class="fa fa-pencil me-1"></i>Edit Status</button>
+        <button class="btn btn-danger text-white" type="button" routerLink="/admin/delete/bookings"><i
+            class="fa fa-trash me-1"></i>Delete</button> -->
       </div>
     </div>
     <div class="booking-details-card shadow-sm rounded-4 bg-white p-4 mx-auto" style="max-width: 540px;">
       <div class="row g-3 mb-2">
         <div class="col-12 col-md-6">
           <div class="detail-label">User</div>
-          <div class="detail-value">Sarah Smith</div>
+          <div class="detail-value">{{booking.user}}</div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="detail-label">Seller id</div>
+          <div class="detail-value">{{booking.seller}}</div>
         </div>
         <div class="col-12 col-md-6">
           <div class="detail-label">Property</div>
-          <div class="detail-value">Villa 21</div>
+          <div class="detail-value">{{booking.property}}</div>
         </div>
         <div class="col-12 col-md-6">
           <div class="detail-label">Suggested Price</div>
-          <div class="detail-value">$1,150,000</div>
+          <div class="detail-value">{{booking.suggested_price}}</div>
         </div>
         <div class="col-12 col-md-6">
           <div class="detail-label">Status</div>
-          <div class="detail-value"><span class="badge bg-info">Pending</span></div>
+          <div class="detail-value"><span class="badge" [ngClass]="{
+                    'bg-warning': booking.status == 'pending',
+                    'bg-success': booking.status == 'confirmed',
+                    'bg-danger': booking.status == 'cancelled',
+                    'bg-primary': booking.status == 'paid'
+                  }">
+              {{ booking.status }}
+            </span></div>
         </div>
         <div class="col-12 col-md-6">
           <div class="detail-label">Created At</div>
-          <div class="detail-value">2024-05-01</div>
+          <div class="detail-value">{{booking.created |date:'medium'}}</div>
         </div>
         <div class="col-12 col-md-6">
           <div class="detail-label">Updated At</div>
-          <div class="detail-value">2024-05-10</div>
+          <div class="detail-value">{{booking.updated |date:'medium'}}</div>
         </div>
       </div>
     </div>

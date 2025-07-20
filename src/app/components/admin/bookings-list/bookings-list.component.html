@@ -19,17 +19,28 @@
         </thead>
         <tbody>
           <!-- Example Row -->
-          <tr>
-            <td>Sarah Smith</td>
-            <td>Villa 21</td>
-            <td>$1,150,000</td>
-            <td><span class="badge bg-info">Pending</span></td>
-            <td>2024-05-01</td>
-            <td>2024-05-10</td>
+          <tr *ngFor="let booking of bookings let i=index">
+            <td>{{booking.user}}</td>
+            <td>{{booking.property}}</td>
+            <td>{{booking.suggested_price}}</td>
+            <td><span class="badge" [ngClass]="{
+                    'bg-warning': booking.status == 'pending',
+                    'bg-success': booking.status == 'confirmed',
+                    'bg-danger': booking.status == 'cancelled',
+                    'bg-primary': booking.status == 'paid'
+                  }">
+                {{ booking.status }}
+              </span>
+            </td>
+            <td>{{booking.created |date:'medium'}}</td>
+            <td>{{booking.updated |date:'medium'}}</td>
             <td class="text-center">
-              <button class="btn btn-sm btn-outline-primary me-1" title="Details" routerLink="/admin/details/bookings"><i class="fa fa-eye"></i></button>
-              <button class="btn btn-sm btn-outline-warning me-1" title="Edit Status" routerLink="/admin/edit/bookings"><i class="fa fa-pencil"></i></button>
-              <button class="btn btn-sm btn-outline-danger" title="Delete" routerLink="/admin/delete/bookings"><i class="fa fa-trash"></i></button>
+              <button class="btn btn-sm btn-outline-primary me-1" title="Details" (click)="goViewBooking(booking.id)"><i
+                  class="fa fa-eye"></i></button>
+              <button class="btn btn-sm btn-outline-warning me-1" title="Edit Status" (click)="gotEdit(booking.id)"><i
+                  class="fa fa-pencil"></i></button>
+              <button class="btn btn-sm btn-outline-danger" title="Delete" (click)="deleteBooking(booking.id,i)"><i
+                  class="fa fa-trash"></i></button>
             </td>
           </tr>
           <!-- More rows can be added here -->
