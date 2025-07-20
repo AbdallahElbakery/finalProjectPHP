@@ -52,9 +52,9 @@
 
 .logout-btn:hover,
 .logout-btn:focus {
-  background: var(--primary-color);
+  background: #e01f1f;
   color: #fff;
-  border: 1.5px solid var(--primary-color);
+  border: 1.5px solid #e01f1f;
 }
 
 @media (max-width: 600px) {

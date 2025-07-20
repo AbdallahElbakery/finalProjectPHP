@@ -83,6 +83,7 @@
   color: #fff;
 }
 .nav-link {
+  cursor: pointer;
   color: var(--primary-color);
   font-weight: 500;
   border-radius: 0.6rem;
