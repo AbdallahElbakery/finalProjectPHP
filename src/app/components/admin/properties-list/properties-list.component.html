@@ -58,7 +58,7 @@
             <td class="text-center">
               <button class="btn btn-sm btn-outline-primary me-1" title="Details"
                 (click)="gotpropertyDetails(property.id)"><i class="fa fa-eye"></i></button>
-              <button class="btn btn-sm btn-outline-warning me-1" title="Edit"><i class="fa fa-pencil"></i></button>
+              <button class="btn btn-sm btn-outline-warning me-1" title="Edit" (click)="goEditProperty(property.id)"><i class="fa fa-pencil"></i></button>
               <button class="btn btn-sm btn-outline-danger" title="Delete" (click)="deleteProperty(property.id,i)"><i class="fa fa-trash"></i></button>
             </td>
           </tr>

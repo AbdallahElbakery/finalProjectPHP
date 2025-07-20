@@ -5,6 +5,9 @@ export interface PropertyRoot {
   properties: Property[]
   Property: Property []
 }
+export interface PropertyRot {
+  Property: Property
+}
 
 export interface Property {
   id: number

@@ -12,7 +12,13 @@
   --shadow-hover: 0 8px 32px rgba(30, 64, 175, 0.15);
   --danger-color: #ef4444;
 }
-
+.invalid {
+    border-color: #e74c3c !important;
+}
+.error-msg {
+    color: #e74c3c;
+    font-size: 0.85rem;
+}
 .property-add-bg {
   background: linear-gradient(120deg, var(--bg-light) 60%, var(--bg-lighter) 100%);
   min-height: 100vh;

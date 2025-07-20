@@ -23,7 +23,7 @@ export class PropertyDetailsComponent {
   ngOnInit() {
     this.getId = this.activateRoute.snapshot.paramMap.get('id');
     this.adminService.getSingleProperty(this.getId).subscribe((res) => {
-      console.log(res);
+      console.log(res.Property);
       this.Property = res.Property;
     })
   }

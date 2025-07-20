@@ -42,4 +42,7 @@ export class PropertiesListComponent {
   goAddProperty() {
     return this.router.navigate(['admin/add/properties']);
   }
+  goEditProperty(id:number) {
+    return this.router.navigate(['/admin/edit/properties', id]);
+  }
 }
