@@ -92,7 +92,7 @@ export const routes: Routes = [
                 { path: 'details/properties', component: PropertyAddComponent, title: 'Admin details properties' },
                 { path: 'details/properties/:id', component: PropertyAdminDetails, title: 'Admin details properties' },
                 { path: 'reviews', component: ReviewsListComponent, title: 'Admin reviews' },
-                { path: 'details/reviews', component: ReviewDetailsComponent, title: 'Admin review details' },
+                { path: 'details/reviews/:id', component: ReviewDetailsComponent, title: 'Admin review details' },
                 { path: 'delete/reviews', component: ReviewDeleteComponent, title: 'Admin review delete' },
                 { path: 'bookings', component: BookingsListComponent, title: 'Admin bookings' },
                 { path: 'details/bookings', component: BookingDetailsComponent, title: 'Admin booking details' },

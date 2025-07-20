@@ -7,6 +7,7 @@ import { PropertyRoot } from './../types/property';
 import { Root as sellerRoot } from '../types/seller';
 import { PaymentRoot } from '../types/payment';
 import { CategoryRoot } from '../types/category';
+import { ReviewRoot } from '../types/review';
 @Injectable({
   providedIn: 'root'
 })
@@ -21,6 +22,8 @@ export class AdminServiceService {
   private payments =`${this.Base}/api/admin/payments`;
 
   private categories = `${this.Base}/api/admin/categories`;
+
+  private reviews =`${this.Base}/api/admin/reviews`;
   constructor(private http: HttpClient) { }
 
 
@@ -93,4 +96,14 @@ export class AdminServiceService {
   editCategory(id:number,data:any):Observable<any>{
     return this.http.put(`${this.categories}/${id}`,data,{headers:{'content-type':'application/json'}})
   }
+
+
+  //reviews
+  getReviews():Observable<ReviewRoot>{
+    return this.http.get<ReviewRoot>(this.reviews)
+  }
+  getReview(id:number):Observable<ReviewRoot>{
+    return this.http.get<ReviewRoot>(`${this.reviews}/${id}`)
+  }
+
 }

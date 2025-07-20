@@ -18,19 +18,19 @@
         </thead>
         <tbody>
           <!-- Example Row -->
-          <tr>
-            <td>Sarah Smith</td>
-            <td>John Seller</td>
+          <tr *ngFor="let review of reviews let i=index">
+            <td>{{review.user |slice:0:10}}</td>
+            <td>{{review.seller}}</td>
             <td>
               <span class="text-warning">
-                <i class="bi bi-star-fill"></i> 4.5
+                <i class="fa fa-star-fill"></i>{{review.rating}}
               </span>
             </td>
-            <td>Great service and fast response!</td>
-            <td>2024-05-01</td>
+            <td>{{review.comment |slice:0:50}}..</td>
+            <td>{{review.date |date:'medium'}}</td>
             <td class="text-center">
-              <button class="btn btn-sm btn-outline-primary me-1" title="Details" routerLink="/admin/details/reviews"><i class="fa fa-eye"></i></button>
-              <button class="btn btn-sm btn-outline-danger" title="Delete" routerLink="/admin/delete/reviews"><i class="fa fa-trash"></i></button>
+              <button class="btn btn-sm btn-outline-primary me-1" title="Details" (click)="goViewDetails(review.id)"><i class="fa fa-eye"></i></button>
+              <button class="btn btn-sm btn-outline-danger" title="Delete" (click)="deleteReview(review.id,i)"><i class="fa fa-trash"></i></button>
             </td>
           </tr>
           <!-- More rows can be added here -->
