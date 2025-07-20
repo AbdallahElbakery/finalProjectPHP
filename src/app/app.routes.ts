@@ -99,7 +99,7 @@ export const routes: Routes = [
                 { path: 'edit/bookings', component: BookingEditComponent, title: 'Admin booking edit status' },
                 { path: 'delete/bookings', component: BookingDeleteComponent, title: 'Admin booking delete' },
                 { path: 'payments', component: PaymentsListComponent, title: 'Admin payments' },
-                { path: 'details/payments', component: PaymentDetailsComponent, title: 'Admin payment details' },
+                { path: 'details/payments/:id', component: PaymentDetailsComponent, title: 'Admin payment details' },
                 { path: 'categories', component: CategoriesListComponent, title: 'Admin categories' },
                 { path: 'details/categories', component: CategoryDetailsComponent, title: 'Admin category details' },
                 { path: 'add/categories', component: CategoryAddComponent, title: 'Admin add category' },

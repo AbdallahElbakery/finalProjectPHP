@@ -9,29 +9,38 @@
         <thead class="table-light">
           <tr>
             <th>Payment ID</th>
+            <th>Property ID</th>
             <th>Property</th>
             <th>Quantity</th>
             <th>Amount</th>
             <th>Payer Email</th>
+            <th>Payer Name</th>
             <th>Payment Method</th>
-            <th>User</th>
+            <th>Payment Status</th>
+            <!-- <th>User</th> -->
             <th>Created</th>
+            <th>Updated</th>
             <th class="text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
           <!-- Example Row -->
-          <tr>
-            <td>PMT-00123</td>
-            <td>Villa 21</td>
-            <td>1</td>
-            <td>$1,200,000</td>
-            <td>sarahexample.com</td>
-            <td>Credit Card</td>
-            <td>Sarah Smith</td>
-            <td>2024-05-01</td>
+          <tr *ngFor="let payment of payments">
+            <td>{{payment.payment_id}}</td>
+            <td>{{payment.property_id}}</td>
+            <td>{{payment.property | slice:0:10}}..</td>
+            <td>{{payment.quantity}}</td>
+            <td>{{payment.amount}}</td>
+            <td>{{payment.payer_email}}</td>
+            <td>{{payment.payer_name}}</td>
+            <td>{{payment.payment_method}}</td>
+            <td class="text-success">{{payment.payment_status}}</td>
+            <td>{{payment.date | date:'medium'}}</td>
+            <td>{{payment.updated_at | date:'medium'}}</td>
+            <!-- <td>{{payment.payment_id}}</td> -->
             <td class="text-center">
-              <button class="btn btn-sm btn-outline-primary" title="Details" routerLink="/admin/details/payments"><i class="fa fa-eye"></i></button>
+              <button class="btn btn-sm btn-outline-primary" title="Details" (click)="goViewPayment(payment.id)">
+                <i class="fa fa-eye"></i></button>
             </td>
           </tr>
           <!-- More rows can be added here -->

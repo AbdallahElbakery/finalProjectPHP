@@ -5,6 +5,7 @@ import { AllUser, Root } from '../types/admin-users';
 import { Property, PropertyRot } from '../types/property';
 import { PropertyRoot } from './../types/property';
 import { Root as sellerRoot } from '../types/seller';
+import { PaymentRoot } from '../types/payment';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +16,8 @@ export class AdminServiceService {
   private users = `${this.Base}/api/admin/users`;
   private user = `${this.Base}/api/admin/users`;
   private properties=`${this.Base}/api/admin/properties`;
+
+  private payments =`${this.Base}/api/admin/payments`;
   constructor(private http: HttpClient) { }
 
 
@@ -48,7 +51,6 @@ export class AdminServiceService {
   deleteProperty(id:number):Observable<any>{
     return this.http.delete(`${this.properties}/${id}`, { headers: { 'content-type': 'application/json' } })
   }
-
   addProperty(data:any):Observable<any>{
     return this.http.post<any>(this.properties,data,{headers:{'content-type':'application/json'}})
   }
@@ -60,5 +62,14 @@ export class AdminServiceService {
   }
   getSellers(): Observable<sellerRoot> {
     return this.http.get<sellerRoot>(this.sellers);
+  }
+
+
+  //payments
+  getPayments():Observable<PaymentRoot>{
+    return this.http.get<PaymentRoot>(this.payments);
+  }
+  getPayment(id:number):Observable<PaymentRoot>{
+    return this.http.get<PaymentRoot>(`${this.payments}/${id}`);
   }
 }

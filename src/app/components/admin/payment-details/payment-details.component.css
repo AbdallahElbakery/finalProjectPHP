@@ -13,18 +13,27 @@
   background: linear-gradient(120deg, var(--bg-light) 60%, var(--bg-lighter) 100%);
   min-height: 100vh;
 }
+
 .payment-details-card {
   background: #fff;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   font-family: 'Poppins', sans-serif;
+  max-width: 1000px !important;
+  height: 500px !important;
+  /* background-color: #1e40af !important; */
+
 }
+
 .detail-label {
   color: var(--primary-color);
   font-weight: 600;
   font-size: 1.01rem;
   margin-bottom: 0.2rem;
+  width: 200px !important;
+
 }
+
 .detail-value {
   color: var(--text-color);
   font-size: 1.04rem;
@@ -33,12 +42,15 @@
   border-radius: 0.5rem;
   padding: 0.4rem 0.7rem;
 }
+
 @media (max-width: 600px) {
   .payment-details-card {
     padding: 1.1rem 0.5rem !important;
     max-width: 99vw !important;
   }
-  .detail-label, .detail-value {
+
+  .detail-label,
+  .detail-value {
     font-size: 0.97rem;
   }
 }
