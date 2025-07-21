@@ -33,15 +33,15 @@ export class EditAdminProfileComponent {
       return this.addresses = cities;
     })
 
-    this.adminService.getSingleUser(this.getId).subscribe((res) => {
-      console.log("res", res)
+    this.adminService.getProfile().subscribe((res) => {
       this.editForm.patchValue({
-        name: res.user.name,
-        email: res.user['email'],
-        phone: res.user.phone,
-        role: res.user.role,
-        address_id: res.user.address_id,
-        photo: res.user.photo
+        name: res.profile.name,
+        email: res.profile.email,
+        phone: res.profile.phone,
+        country: res.profile.address.country,
+        city: res.profile.address.city,
+        role: res.profile.role,
+        photo: res.profile.photo
       })
     })
   }
@@ -54,11 +54,18 @@ export class EditAdminProfileComponent {
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%&*]).+$/)]],
-      phone: [''],
+      phone: ['',Validators.required, Validators.minLength(11)],
       role: ['', Validators.required],
-      address_id: ['', Validators.required],
-      photo:[''],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      photo:'',
     });
+  }
+  onFileChange(event:any){
+    const file = event.target.files[0];
+    if(file){
+      this.editForm.patchValue({photo:file})
+    }
   }
     getErrorMessage(field: string): string {
     const control = this.editForm.get(field);
@@ -86,15 +93,22 @@ export class EditAdminProfileComponent {
   onSubmit() {
 
     const data={...this.editForm.value}
-    // const formData=new FormData();
+    const formData=new FormData();
 
-    // Object.keys(data).forEach((key) => {
-    //   formData.append(key, data[key]);
-    // });
-    // formData.append('_method','PUT')
-    this.adminService.editUser(data, this.getId).subscribe((res) => {
+    Object.keys(data).forEach((key) => {
+      if (key == 'photo' || data[key] instanceof File) {
+        formData.append('photo', data[key])
+      }
+      else {
+        formData.append(key, data[key])
+      }
+    })
+    console.log(formData.get('photo')); // لازم يطبع File {...}
+
+    formData.append('_method','PUT')
+    this.adminService.editAProfile(formData).subscribe((res) => {
       console.log("res", res);
-      alert('User updated successfully');
+      alert('ur account has been updated successfully');
     })
    }
 }
