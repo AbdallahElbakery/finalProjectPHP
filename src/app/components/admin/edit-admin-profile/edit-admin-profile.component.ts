@@ -8,21 +8,21 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-admin-profile',
-  imports: [ReactiveFormsModule,CommonModule,RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './edit-admin-profile.component.html',
   styleUrl: './edit-admin-profile.component.css'
 })
 export class EditAdminProfileComponent {
- getId: any;
+  getId: any;
   editForm!: FormGroup
   addresses: Address[] = []
   submitted = false;
-  
+
   constructor(
     private propertyService: PropertyServiceService,
     private adminService: AdminServiceService,
     private ActivatedRoute: ActivatedRoute,
-    private fb :FormBuilder,
+    private fb: FormBuilder,
   ) {
   }
 
@@ -34,6 +34,7 @@ export class EditAdminProfileComponent {
     })
 
     this.adminService.getProfile().subscribe((res) => {
+      console.log(res.profile.address.city)
       this.editForm.patchValue({
         name: res.profile.name,
         email: res.profile.email,
@@ -45,7 +46,7 @@ export class EditAdminProfileComponent {
       })
     })
   }
-   isFieldInvalid(field: string): boolean {
+  isFieldInvalid(field: string): boolean {
     const control = this.editForm.get(field);
     return !!control && control.invalid && (control.touched || this.submitted);
   }
@@ -54,20 +55,20 @@ export class EditAdminProfileComponent {
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%&*]).+$/)]],
-      phone: ['',Validators.required, Validators.minLength(11)],
+      phone: ['', Validators.required, Validators.minLength(11)],
       role: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
-      photo:'',
+      photo: '',
     });
   }
-  onFileChange(event:any){
+  onFileChange(event: any) {
     const file = event.target.files[0];
-    if(file){
-      this.editForm.patchValue({photo:file})
+    if (file) {
+      this.editForm.patchValue({ photo: file })
     }
   }
-    getErrorMessage(field: string): string {
+  getErrorMessage(field: string): string {
     const control = this.editForm.get(field);
 
     if (!control || !control.errors) return '';
@@ -92,8 +93,8 @@ export class EditAdminProfileComponent {
   }
   onSubmit() {
 
-    const data={...this.editForm.value}
-    const formData=new FormData();
+    const data = { ...this.editForm.value }
+    const formData = new FormData();
 
     Object.keys(data).forEach((key) => {
       if (key == 'photo' || data[key] instanceof File) {
@@ -105,10 +106,10 @@ export class EditAdminProfileComponent {
     })
     console.log(formData.get('photo')); // لازم يطبع File {...}
 
-    formData.append('_method','PUT')
+    formData.append('_method', 'PUT')
     this.adminService.editAProfile(formData).subscribe((res) => {
       console.log("res", res);
       alert('ur account has been updated successfully');
     })
-   }
+  }
 }

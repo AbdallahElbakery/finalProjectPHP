@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup, ReactiveFormsModule,Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component, inject } from '@angular/core';
 import { AdminServiceService } from '../../../services/admin-service.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -35,18 +35,19 @@ export class UserEditComponent {
     })
 
     this.adminService.getSingleUser(this.getId).subscribe((res) => {
-      console.log("res", res)
+      console.log("res", res.user.address.city)
       this.editForm.patchValue({
         name: res.user.name,
         email: res.user['email'],
         phone: res.user.phone,
         role: res.user.role,
-        address_id: res.user.address_id,
-        photo: res.user.photo
+        photo: res.user.photo,
+        city: res.user.address.city,
+        country: res.user.address.country
       })
     })
   }
-   isFieldInvalid(field: string): boolean {
+  isFieldInvalid(field: string): boolean {
     const control = this.editForm.get(field);
     return !!control && control.invalid && (control.touched || this.submitted);
   }
@@ -55,13 +56,14 @@ export class UserEditComponent {
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%&*]).+$/)]],
-      phone: [''],
+      phone: ['', [Validators.required, Validators.minLength(6)]],
+      city: ['', [Validators.required]],
+      country: ['', [Validators.required]],
       role: ['', Validators.required],
-      address_id: ['', Validators.required],
-      photo:[''],
+      photo: [''],
     });
   }
-    getErrorMessage(field: string): string {
+  getErrorMessage(field: string): string {
     const control = this.editForm.get(field);
 
     if (!control || !control.errors) return '';
@@ -86,7 +88,7 @@ export class UserEditComponent {
   }
   onSubmit() {
 
-    const data={...this.editForm.value}
+    const data = { ...this.editForm.value }
     // const formData=new FormData();
 
     // Object.keys(data).forEach((key) => {
@@ -97,5 +99,5 @@ export class UserEditComponent {
       console.log("res", res);
       alert('User updated successfully');
     })
-   }
+  }
 }
