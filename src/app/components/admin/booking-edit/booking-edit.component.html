@@ -3,20 +3,24 @@
   <div class="container-fluid">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
       <h2 class="fw-bold mb-0" style="font-family: 'Lora', serif; color: var(--primary-color);">Edit Booking Status</h2>
-      <button class="btn btn-outline-secondary" type="button" routerLink="/admin/bookings"><i class="bi bi-arrow-left me-1"></i>Back</button>
+      <button class="btn btn-outline-secondary" type="button" routerLink="/admin/bookings"><i
+          class="fa fa-arrow-left me-1"></i>Back</button>
     </div>
     <div class="booking-edit-card shadow-sm rounded-4 bg-white p-4 mx-auto" style="max-width: 420px;">
-      <form autocomplete="off" novalidate>
+      <form autocomplete="off" novalidate [formGroup]="editForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
           <label for="status" class="form-label fw-semibold">Status</label>
-          <select class="form-select form-select-lg is-invalid" id="status" required>
-            <option value="">Select status</option>
+          <select class="form-select form-select-lg" id="status" required formControlName="status">
+            <option disabled value="">Select status</option>
             <option value="pending">Pending</option>
             <option value="confirmed">Confirmed</option>
             <option value="cancelled">Cancelled</option>
-            <option value="completed">Completed</option>
+            <option value="paid">Paid</option>
           </select>
-          <div class="invalid-feedback">Status is required.</div>
+          @if(isFieldInvalid('status')){
+          <div class="error-msg">{{getErrorMessage('status')}}</div>
+          }
+
         </div>
         <div class="mt-4 d-flex gap-2 justify-content-end">
           <button type="button" class="btn btn-secondary" routerLink="/admin/bookings">Cancel</button>

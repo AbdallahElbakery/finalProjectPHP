@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { AdminServiceService } from '../../../services/admin-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,5 +10,20 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
+  properties:any
+  users:any
+constructor(
+  private adminService:AdminServiceService
+){}
 
+ngOnInit(){
+  this.properties=this.adminService.getProperties().subscribe((res)=>{
+    return this.properties=res.properties
+  })
+
+  this.users=this.adminService.getUsers().subscribe((res)=>{
+    return this.users=res.allUsers
+  })
+
+}
 }
