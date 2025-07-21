@@ -46,6 +46,7 @@ import { CategoryDetailsComponent } from './components/admin/category-details/ca
 import { CategoryAddComponent } from './components/admin/category-add/category-add.component';
 import { CategoryEditComponent } from './components/admin/category-edit/category-edit.component';
 import { CategoryDeleteComponent } from './components/admin/category-delete/category-delete.component';
+import { EditAdminProfileComponent } from './components/admin/edit-admin-profile/edit-admin-profile.component';
 
 
 export const routes: Routes = [
@@ -105,6 +106,7 @@ export const routes: Routes = [
                 { path: 'add/categories', component: CategoryAddComponent, title: 'Admin add category' },
                 { path: 'edit/categories/:id', component: CategoryEditComponent, title: 'Admin edit category' },
                 { path: 'delete/categories', component: CategoryDeleteComponent, title: 'Admin delete category' },
+                { path: 'edit-profile', component: EditAdminProfileComponent, title: 'Admin delete category' },
 
             ]
     },

@@ -5,7 +5,7 @@ import { AdminServiceService } from '../../../services/admin-service.service';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [SidebarComponent],
+  imports: [],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
