@@ -4,8 +4,15 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
       <h2 class="fw-bold mb-0" style="font-family: 'Lora', serif; color: var(--primary-color);">Properties Management
       </h2>
-      <button class="btn btn-primary btn-lg add-property-btn" (click)="goAddProperty()"><i class="bi bi-building-add me-2"></i>Add
-        Property</button>
+      <div class="d-flex flex-row gap-2">
+
+        <button class="btn btn-primary btn-lg add-property-btn" (click)="goAddProperty()"><i
+            class="fa fa-circle-plus me-2"></i>Add
+          Property</button>
+        <button class="btn btn-lg text-light add-property-btn" (click)="exportProperties()"><i
+            class="fa-solid fa-download me-2"></i>
+          Export Properties </button>
+      </div>
     </div>
     <div class="table-responsive rounded-4 shadow-sm bg-white p-3">
       <table class="table align-middle mb-0 properties-table">
@@ -37,8 +44,8 @@
             <td><img style="width: 60px; border-radius: 4px !important;"
                 [src]="'http://127.0.0.1:8000/storage/'+property.image" alt="Property" class="property-photo-lg mb-2"
                 (error)="onImageEror($event)"></td>
-            <td>{{property.name | slice:0:100}}</td>
-            <td>{{property.description | slice:0:100}}...</td>
+            <td>{{property.name | slice:0:10}}</td>
+            <td>{{property.description | slice:0:10}}...</td>
             <td>{{property.price | currency}}</td>
             <td><span class="badge"
                 [ngClass]="property.purpose=='sale'? 'bg-primary':'bg-info'">{{property.purpose}}</span></td>
@@ -58,8 +65,10 @@
             <td class="text-center">
               <button class="btn btn-sm btn-outline-primary me-1" title="Details"
                 (click)="gotpropertyDetails(property.id)"><i class="fa fa-eye"></i></button>
-              <button class="btn btn-sm btn-outline-warning me-1" title="Edit" (click)="goEditProperty(property.id)"><i class="fa fa-pencil"></i></button>
-              <button class="btn btn-sm btn-outline-danger" title="Delete" (click)="deleteProperty(property.id,i)"><i class="fa fa-trash"></i></button>
+              <button class="btn btn-sm btn-outline-warning me-1" title="Edit" (click)="goEditProperty(property.id)"><i
+                  class="fa fa-pencil"></i></button>
+              <button class="btn btn-sm btn-outline-danger" title="Delete" (click)="deleteProperty(property.id,i)"><i
+                  class="fa fa-trash"></i></button>
             </td>
           </tr>
           }

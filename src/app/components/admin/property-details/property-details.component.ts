@@ -31,4 +31,7 @@ export class PropertyDetailsComponent {
     const srcElement=event.target as HTMLImageElement
     srcElement.src='https://ui-avatars.com/api/?name=Property&background=1e40af&color=fff&rounded=false&size=80'
   }
+    goEditProperty(id: number) {
+    return this.router.navigate(['/admin/edit/properties', id]);
+  }
 }
