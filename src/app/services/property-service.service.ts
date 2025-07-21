@@ -4,6 +4,7 @@ import { Property } from '../types/property';
 import { Observable } from 'rxjs';
 import { Address } from '../types/address';
 import { Root, Seller, Seller2, SellerData } from '../types/seller';
+import { UserProfileResponse } from '../types/user';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class PropertyServiceService {
   private profile = "http://127.0.0.1:8000/api/seller/update-personal-details";
   private getOwnProp = "http://127.0.0.1:8000/api/seller-get-prop";
   private getpay = "http://127.0.0.1:8000/api/payment";
+  private me = "http://127.0.0.1:8000/api/me";
   // private deleteSellerProperty = "http://127.0.0.1:8000/api/sellers/1/14";
   constructor(private http: HttpClient) { }
   sellerData: SellerData[] = [];
@@ -81,6 +83,18 @@ export class PropertyServiceService {
 
   getPayment(id: number): Observable<any> {
     return this.http.post(`${this.getpay}`, { id: id }, { headers: { 'content-type': 'application/json' } })
+  }
+
+  getCurrentUserProfile(): Observable<UserProfileResponse> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+    return this.http.get<UserProfileResponse>(this.me, { headers });
+  }
+  updateUserProfile(data: FormData): Observable<any> {
+    data.append('_method', 'PATCH');
+    return this.http.post('http://127.0.0.1:8000/api/user/update-personal-details', data);
   }
   // }
   // deleteSellerProp(): Observable<Root> {
