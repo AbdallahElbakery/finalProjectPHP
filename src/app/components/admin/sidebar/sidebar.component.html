@@ -1,7 +1,7 @@
 <!-- Admin Sidebar - Responsive, Collapsible, Modern, Bootstrap Only -->
 <nav class="admin-sidebar d-flex flex-column p-3 h-100 shadow-sm" [class.collapsed]="collapsed">
   <div class="sidebar-header d-flex align-items-center justify-content-between mb-4">
-    <a href="#" class="sidebar-logo text-decoration-none d-flex align-items-center gap-2">
+    <a routerLink="/admin" class="sidebar-logo text-decoration-none d-flex align-items-center gap-2">
       <span class="sidebar-logo-icon">A</span>
       <span class="fw-bold fs-5 sidebar-title" *ngIf="!collapsed">Admin</span>
     </a>
@@ -12,7 +12,7 @@
   </div>
   <ul class="nav nav-pills flex-column mb-auto gap-2">
     <li class="nav-item">
-      <a routerLink="/admin/dashboard" routerLinkActive="active" class="nav-link"><i class="fa fa-home me-2"></i><span
+      <a routerLink="/admin" routerLinkActive="active" class="nav-link"><i class="fa fa-home me-2"></i><span
           *ngIf="!collapsed">Dashboard</span></a>
     </li>
     <li>
@@ -40,8 +40,8 @@
           class="fa fa-credit-card me-2"></i><span *ngIf="!collapsed">Payments</span></a>
     </li>
     <li>
-      <a routerLink="/admin/settings" routerLinkActive="active" class="nav-link"><i class="fa fa-gear me-2"></i><span
-          *ngIf="!collapsed">Settings</span></a>
+      <a routerLink="/admin/edit-profile" routerLinkActive="active" class="nav-link"><i
+          class="fa fa-gear me-2"></i><span *ngIf="!collapsed">Edit Profile</span></a>
     </li>
   </ul>
 </nav>

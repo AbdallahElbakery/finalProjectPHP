@@ -9,6 +9,7 @@ import { PaymentRoot } from '../types/payment';
 import { CategoryRoot } from '../types/category';
 import { ReviewRoot } from '../types/review';
 import { RootBooking } from '../booking';
+import { ProfileRoot } from '../types/adminprofile';
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +27,10 @@ export class AdminServiceService {
 
   private reviews = `${this.Base}/api/admin/reviews`;
 
-  private bookings = `${this.Base}/api/admin/bookings`
+  private bookings = `${this.Base}/api/admin/bookings`;
+
+  private editProfile = `${this.Base}/api/admin/edit-profile`;
+  private profile = `${this.Base}/api/admin/profile`
   constructor(private http: HttpClient) { }
 
 
@@ -112,13 +116,24 @@ export class AdminServiceService {
 
   //bookings
 
-  getBookings():Observable<RootBooking>{
+  getBookings(): Observable<RootBooking> {
     return this.http.get<RootBooking>(this.bookings)
   }
-  getBooking(id:number):Observable<RootBooking>{
+  getBooking(id: number): Observable<RootBooking> {
     return this.http.get<RootBooking>(`${this.bookings}/${id}`)
   }
-  editBooking(id:number,data:any):Observable<any>{
-    return this.http.put<any>(`${this.bookings}/${id}`,data, { headers: { 'content-type': 'application/json' } })
+  editBooking(id: number, data: any): Observable<any> {
+    return this.http.put<any>(`${this.bookings}/${id}`, data, { headers: { 'content-type': 'application/json' } })
   }
+
+
+  //profile
+  getProfile(): Observable<ProfileRoot> {
+    return this.http.get<ProfileRoot>(this.profile)
+  }
+  editAProfile(data: FormData) {
+    data.append('_method', 'PUT')
+    return this.http.post(`${this.editProfile}`, data);
+  }
+
 }

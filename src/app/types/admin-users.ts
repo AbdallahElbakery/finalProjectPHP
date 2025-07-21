@@ -14,6 +14,8 @@ export interface User {
   date: string
   updated: string
   address: Address
+  city:string
+  country:string
   address_id?: number
 }
 export interface AllUser {
@@ -26,6 +28,8 @@ export interface AllUser {
   date: string
   updated: string
   address: Address
+  city:string
+  country:string
 }
 
 export interface Address {

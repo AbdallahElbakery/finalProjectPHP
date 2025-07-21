@@ -1,29 +1,28 @@
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Component, inject } from '@angular/core';
-import { AdminServiceService } from '../../../services/admin-service.service';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { PropertyServiceService } from '../../../services/property-service.service';
 import { Address } from '../../../types/address';
+import { PropertyServiceService } from '../../../services/property-service.service';
+import { AdminServiceService } from '../../../services/admin-service.service';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-user-edit',
-  imports: [RouterLink, ReactiveFormsModule],
-  templateUrl: './user-edit.component.html',
-  styleUrl: './user-edit.component.css'
+  selector: 'app-edit-admin-profile',
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
+  templateUrl: './edit-admin-profile.component.html',
+  styleUrl: './edit-admin-profile.component.css'
 })
-export class UserEditComponent {
+export class EditAdminProfileComponent {
   getId: any;
   editForm!: FormGroup
   addresses: Address[] = []
   submitted = false;
-  private fb = inject(FormBuilder)
-  private route = inject(ActivatedRoute)
 
   constructor(
     private propertyService: PropertyServiceService,
     private adminService: AdminServiceService,
     private ActivatedRoute: ActivatedRoute,
-    private FormBuilder: FormBuilder
+    private fb: FormBuilder,
   ) {
   }
 
@@ -34,16 +33,16 @@ export class UserEditComponent {
       return this.addresses = cities;
     })
 
-    this.adminService.getSingleUser(this.getId).subscribe((res) => {
-      console.log("res", res.user.address.city)
+    this.adminService.getProfile().subscribe((res) => {
+      console.log(res.profile)
       this.editForm.patchValue({
-        name: res.user.name,
-        email: res.user['email'],
-        phone: res.user.phone,
-        role: res.user.role,
-        photo: res.user.photo,
-        city: res.user.address.city,
-        country: res.user.address.country
+        name: res.profile.name,
+        email: res.profile.email,
+        phone: res.profile.phone,
+        country: res.profile.address.country,
+        city: res.profile.address.city,
+        role: res.profile.role,
+        photo: res.profile.photo
       })
     })
   }
@@ -56,12 +55,18 @@ export class UserEditComponent {
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%&*]).+$/)]],
-      phone: ['', [Validators.required, Validators.minLength(6)]],
-      city: ['', [Validators.required]],
-      country: ['', [Validators.required]],
+      phone: ['', Validators.required, Validators.minLength(11)],
       role: ['', Validators.required],
-      photo: [''],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      photo: '',
     });
+  }
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.editForm.patchValue({ photo: file })
+    }
   }
   getErrorMessage(field: string): string {
     const control = this.editForm.get(field);
@@ -89,15 +94,22 @@ export class UserEditComponent {
   onSubmit() {
 
     const data = { ...this.editForm.value }
-    // const formData=new FormData();
+    const formData = new FormData();
 
-    // Object.keys(data).forEach((key) => {
-    //   formData.append(key, data[key]);
-    // });
-    // formData.append('_method','PUT')
-    this.adminService.editUser(data, this.getId).subscribe((res) => {
+    Object.keys(data).forEach((key) => {
+      if (key == 'photo' || data[key] instanceof File) {
+        formData.append('photo', data[key])
+      }
+      else {
+        formData.append(key, data[key])
+      }
+    })
+    console.log(formData.get('photo')); // لازم يطبع File {...}
+
+    formData.append('_method', 'PUT')
+    this.adminService.editAProfile(formData).subscribe((res) => {
       console.log("res", res);
-      alert('User updated successfully');
+      alert('ur account has been updated successfully');
     })
   }
 }

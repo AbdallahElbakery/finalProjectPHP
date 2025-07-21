@@ -1,6 +1,6 @@
-<app-navbar></app-navbar>
+<app-navbar *ngIf="showNavbar"></app-navbar>
 <main class="d-flex">
-  <app-sidebar></app-sidebar>
+  <app-sidebar *ngIf="showSidebar"></app-sidebar>
   <div class="flex-grow-1">
     <router-outlet></router-outlet>
   </div>
