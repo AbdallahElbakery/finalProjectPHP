@@ -92,6 +92,10 @@ export class PropertyServiceService {
     });
     return this.http.get<UserProfileResponse>(this.me, { headers });
   }
+  updateUserProfile(data: FormData): Observable<any> {
+    data.append('_method', 'PATCH');
+    return this.http.post('http://127.0.0.1:8000/api/user/update-personal-details', data);
+  }
   // }
   // deleteSellerProp(): Observable<Root> {
   //   return this.http.delete<Root>(this.deleteSellerProperty)

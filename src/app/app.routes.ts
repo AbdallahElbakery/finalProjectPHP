@@ -17,13 +17,14 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { ChatComponent } from './components/chat/chat.component';
 import { MessageComponent } from './components/message/message.component';
 import { ReviewListComponent } from './components/review-list/review-list.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { EditPropertyComponent } from './components/edit-property/edit-property.component';
-import { GuestGuard } from './guest.guard';
+import { GuestGuard } from './guards/guest.guard';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { userRoleGuard } from './user-role.guard';
-import { sellerRoleGuard } from './seller-role.guard';
+import { userRoleGuard} from './guards/user-role.guard';
+import { sellerRoleGuard } from './guards/seller-role.guard';
+import { adminRoleGuard } from './guards/admin-role.guard';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { HomeAdminComponent } from './components/admin/home/home.component';
@@ -84,37 +85,37 @@ export const routes: Routes = [
 
     //admin panel routes
     {
-        path: 'admin', component: AdminLayoutComponent, title: 'Admin', children:
-            [
-                { path: '', component: DashboardComponent, title: 'Admin' },
-                { path: 'login', component: LoginComponent, title: 'Admin login' },
-                { path: 'home', component: HomeAdminComponent, title: 'login admin' },
-                { path: 'users', component: UsersListComponent, title: 'Admin users' },
-                { path: 'user', component: UserDetailsComponent, title: 'User' },
-                { path: 'add/users', component: UserAddComponent, title: 'Admin add users' },
-                { path: 'edit/users/:id', component: UserEditComponent, title: 'Admin edit users' },
-                { path: 'details/users/:id', component: UserDetailsComponent, title: 'Admin details users' },
-                { path: 'properties', component: PropertiesListComponent, title: 'Admin properties' },
-                { path: 'add/properties', component: PropertyAddComponent, title: 'Admin properties' },
-                { path: 'edit/properties/:id', component: PropertyEditComponent, title: 'Admin edit properties' },
-                { path: 'details/properties', component: PropertyAddComponent, title: 'Admin details properties' },
-                { path: 'details/properties/:id', component: PropertyAdminDetails, title: 'Admin details properties' },
-                { path: 'reviews', component: ReviewsListComponent, title: 'Admin reviews' },
-                { path: 'details/reviews/:id', component: ReviewDetailsComponent, title: 'Admin review details' },
-                { path: 'delete/reviews', component: ReviewDeleteComponent, title: 'Admin review delete' },
-                { path: 'bookings', component: BookingsListComponent, title: 'Admin bookings' },
-                { path: 'details/bookings/:id', component: BookingDetailsComponent, title: 'Admin booking details' },
-                { path: 'edit/bookings/:id', component: BookingEditComponent, title: 'Admin booking edit status' },
-                { path: 'delete/bookings', component: BookingDeleteComponent, title: 'Admin booking delete' },
-                { path: 'payments', component: PaymentsListComponent, title: 'Admin payments' },
-                { path: 'details/payments/:id', component: PaymentDetailsComponent, title: 'Admin payment details' },
-                { path: 'categories', component: CategoriesListComponent, title: 'Admin categories' },
-                { path: 'details/categories/:id', component: CategoryDetailsComponent, title: 'Admin category details' },
-                { path: 'add/categories', component: CategoryAddComponent, title: 'Admin add category' },
-                { path: 'edit/categories/:id', component: CategoryEditComponent, title: 'Admin edit category' },
-                { path: 'delete/categories', component: CategoryDeleteComponent, title: 'Admin delete category' },
-                { path: 'edit-profile', component: EditAdminProfileComponent, title: 'Admin delete category' },
+      path: 'admin', component: AdminLayoutComponent, title: 'Admin', children:
+      [
+        { path: '', component: DashboardComponent, title: 'Admin', canActivate: [adminRoleGuard] },
+        { path: 'login', component: LoginComponent, title: 'Admin login' , canActivate: [GuestGuard]},
+        { path: 'home', component: HomeAdminComponent, title: 'login admin', canActivate: [adminRoleGuard] },
+        { path: 'users', component: UsersListComponent, title: 'Admin users', canActivate: [adminRoleGuard] },
+        { path: 'user', component: UserDetailsComponent, title: 'User', canActivate: [adminRoleGuard] },
+        { path: 'add/users', component: UserAddComponent, title: 'Admin add users', canActivate: [adminRoleGuard] },
+        { path: 'edit/users/:id', component: UserEditComponent, title: 'Admin edit users', canActivate: [adminRoleGuard] },
+        { path: 'details/users/:id', component: UserDetailsComponent, title: 'Admin details users', canActivate: [adminRoleGuard] },
+        { path: 'properties', component: PropertiesListComponent, title: 'Admin properties', canActivate: [adminRoleGuard] },
+        { path: 'add/properties', component: PropertyAddComponent, title: 'Admin properties', canActivate: [adminRoleGuard] },
+        { path: 'edit/properties/:id', component: PropertyEditComponent, title: 'Admin edit properties', canActivate: [adminRoleGuard] },
+        { path: 'details/properties', component: PropertyAddComponent, title: 'Admin details properties', canActivate: [adminRoleGuard] },
+        { path: 'details/properties/:id', component: PropertyAdminDetails, title: 'Admin details properties', canActivate: [adminRoleGuard] },
+        { path: 'reviews', component: ReviewsListComponent, title: 'Admin reviews', canActivate: [adminRoleGuard] },
+        { path: 'details/reviews/:id', component: ReviewDetailsComponent, title: 'Admin review details', canActivate: [adminRoleGuard] },
+        { path: 'delete/reviews', component: ReviewDeleteComponent, title: 'Admin review delete', canActivate: [adminRoleGuard] },
+        { path: 'bookings', component: BookingsListComponent, title: 'Admin bookings', canActivate: [adminRoleGuard] },
+        { path: 'details/bookings/:id', component: BookingDetailsComponent, title: 'Admin booking details', canActivate: [adminRoleGuard] },
+        { path: 'edit/bookings/:id', component: BookingEditComponent, title: 'Admin booking edit status', canActivate: [adminRoleGuard] },
+        { path: 'delete/bookings', component: BookingDeleteComponent, title: 'Admin booking delete', canActivate: [adminRoleGuard] },
+        { path: 'payments', component: PaymentsListComponent, title: 'Admin payments', canActivate: [adminRoleGuard] },
+        { path: 'details/payments/:id', component: PaymentDetailsComponent, title: 'Admin payment details', canActivate: [adminRoleGuard] },
+        { path: 'categories', component: CategoriesListComponent, title: 'Admin categories', canActivate: [adminRoleGuard] },
+        { path: 'details/categories/:id', component: CategoryDetailsComponent, title: 'Admin category details', canActivate: [adminRoleGuard] },
+        { path: 'add/categories', component: CategoryAddComponent, title: 'Admin add category', canActivate: [adminRoleGuard] },
+        { path: 'edit/categories/:id', component: CategoryEditComponent, title: 'Admin edit category', canActivate: [adminRoleGuard] },
+        { path: 'delete/categories', component: CategoryDeleteComponent, title: 'Admin delete category', canActivate: [adminRoleGuard] },
+        { path: 'edit-profile', component: EditAdminProfileComponent, title: 'Admin delete category', canActivate: [adminRoleGuard]},
 
-            ]
+      ]
     },
 ];
