@@ -41,8 +41,9 @@ export class UserEditComponent {
         email: res.user['email'],
         phone: res.user.phone,
         role: res.user.role,
-        address_id: res.user.address_id,
-        photo: res.user.photo
+        photo: res.user.photo,
+        city:res.user.address.city,
+        country:res.user.address.country
       })
     })
   }
@@ -55,9 +56,10 @@ export class UserEditComponent {
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%&*]).+$/)]],
-      phone: [''],
+      phone: ['',[Validators.required, Validators.minLength(6)]],
+      city: ['',[Validators.required, Validators.minLength(6)]],
+      country: ['',[Validators.required, Validators.minLength(6)]],
       role: ['', Validators.required],
-      address_id: ['', Validators.required],
       photo:[''],
     });
   }

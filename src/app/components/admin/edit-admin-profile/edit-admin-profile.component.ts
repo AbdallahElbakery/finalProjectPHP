@@ -34,6 +34,7 @@ export class EditAdminProfileComponent {
     })
 
     this.adminService.getProfile().subscribe((res) => {
+      console.log(res.profile)
       this.editForm.patchValue({
         name: res.profile.name,
         email: res.profile.email,
