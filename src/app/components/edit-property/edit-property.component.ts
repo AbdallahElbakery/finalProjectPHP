@@ -49,11 +49,13 @@ export class EditPropertyComponent implements OnInit {
         citynum: res.Property['citynum'],
         price: res.Property['price'],
         area: res.Property['area'],
+        city: res.Property['city'],
+        country: res.Property['country'],
         bedrooms: res.Property['bedrooms'],
         bathrooms: res.Property['bathrooms'],
         purpose: res.Property['purpose'],
         category_id: res.Property['category_id'],
-        address_id: res.Property['address_id'],
+        // address_id: res.Property['address_id'],
         image: res.Property.image
       })
     });
@@ -66,9 +68,11 @@ export class EditPropertyComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
       citynum: [null, [Validators.required, Validators.min(1), Validators.max(20)]],
       price: [null, [Validators.required, Validators.min(100000), Validators.max(100000000)]],
-      address_id: ['', Validators.required],
+      // address_id: ['', Validators.required],
       category_id: ['', Validators.required],
       purpose: ['', Validators.required],
+      city: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      country: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       area: [null, [Validators.required, Validators.min(20), Validators.max(5000)]],
       bedrooms: [null, [Validators.required, Validators.min(1), Validators.max(20)]],
       bathrooms: [null, [Validators.required, Validators.min(1), Validators.max(20)]],
