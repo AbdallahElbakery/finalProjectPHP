@@ -13,6 +13,8 @@ export class PropertyServiceService {
   private apiUrl = "http://127.0.0.1:8000/api/properties";
   private address = "http://127.0.0.1:8000/api/addresses";
   private seller = "http://127.0.0.1:8000/api/seller";
+  private singleseller = "http://127.0.0.1:8000/api/single-seller";
+  private sellerProperties="http://127.0.0.1:8000/api/get-seller-properties"
   private cateogries = "http://127.0.0.1:8000/api/categories";
   private addOwnProperty = "http://127.0.0.1:8000/api/seller-add-prop";
   private updateProp = "http://127.0.0.1:8000/api/seller-update-prop";
@@ -36,10 +38,17 @@ export class PropertyServiceService {
   getSingleSeller(): Observable<Root> {
     return this.http.get<Root>(this.seller)
   }
-
   getSellerProfile(): Observable<Root> {
     return this.http.get<Root>(this.seller)
   }
+  
+  viewSellerbyUser(id:number):Observable<Root>{
+    return this.http.get<Root>(`${this.singleseller}/${id}`)
+  }
+  getSellerProperties(id:number):Observable<Root> {
+    return this.http.get<Root>(`${this.sellerProperties}/${id}`)
+  }
+
   getCategories(): Observable<any> {
     return this.http.get<any>(this.cateogries);
   }

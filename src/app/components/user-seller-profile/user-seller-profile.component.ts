@@ -2,9 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PropertyCardComponent } from "../property-card/property-card.component";
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { ReviewService } from '../../services/review.service';
 import { AuthService } from '../../services/auth.service';
+import { OwnProperty, SellerData } from '../../types/seller';
+import { PropertyServiceService } from '../../services/property-service.service';
 
 @Component({
   selector: 'app-user-seller-profile',
@@ -18,18 +20,34 @@ export class UserSellerProfileComponent implements OnInit {
   showSuccessMessage: boolean = false;
   showReviewForm: boolean = false;
   reviews: any[] = [];
-  sellerId: number = 1; // يمكن تغييرها حسب البائع المعروض
+  sellerId: number = 20; // يمكن تغييرها حسب البائع المعروض
+  sellerData: SellerData[] = [];
+  sellerproperties: any;
+  getId: any
 
   constructor(
     private fb: FormBuilder,
     private reviewService: ReviewService,
-    private authService: AuthService
+    private authService: AuthService,
+    private propertyService: PropertyServiceService,
+    private activatedRoute: ActivatedRoute
   ) {
     this.createForm();
   }
 
   ngOnInit() {
     this.loadReviews();
+    this.getId = this.activatedRoute.snapshot.paramMap.get('id')
+
+    this.propertyService.viewSellerbyUser(this.getId).subscribe((seller) => {
+      this.sellerData = seller.Seller.seller_data;
+    });
+
+
+    this.propertyService.getSellerProperties(this.getId).subscribe((sellerprops) => {
+      console.log(sellerprops)
+      this.sellerproperties = sellerprops.Property;
+    })
   }
 
   loadReviews() {
@@ -172,7 +190,7 @@ export class UserSellerProfileComponent implements OnInit {
       this.reviewService.addReview(reviewData).subscribe({
         next: (response) => {
           console.log('Review added successfully:', response);
-          
+
           // إضافة المراجعة الجديدة للقائمة المحلية
           const newReview = {
             username: currentUser?.name || 'Anonymous',
