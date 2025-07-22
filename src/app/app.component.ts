@@ -18,15 +18,15 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'realestate-pro';
-  constructor (private Router:Router){
+  constructor(private Router: Router) {
   }
 
 
-  get showNavbar():boolean{
+  get showNavbar(): boolean {
     return !this.Router.url.startsWith('/admin')
   }
 
-  get showFooter():boolean{
+  get showFooter(): boolean {
     return !this.Router.url.startsWith('/admin')
   }
 }
