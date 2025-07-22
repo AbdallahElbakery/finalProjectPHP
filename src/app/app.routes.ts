@@ -70,7 +70,7 @@ export const routes: Routes = [
     { path: 'property/:id', component: PropertyDetailsComponent, title: 'Property Details', canActivate: [AuthGuard] },
     { path: 'seller-profile', component: SellerProfileComponent, canActivate: [sellerRoleGuard] },
     { path: 'edit-profile', component: EditProfileComponent, canActivate: [sellerRoleGuard] },
-    { path: 'user-seller-profile', component: UserSellerProfileComponent, canActivate: [userRoleGuard] },
+    { path: 'user-seller-profile/:id', component: UserSellerProfileComponent, canActivate: [userRoleGuard] },
     { path: 'create-property', component: CreatePropertyComponent, canActivate: [sellerRoleGuard] },
     { path: 'edit-property', component: EditPropertyComponent, canActivate: [sellerRoleGuard] },
     { path: 'my-properties', component: MyPropertiesComponent, canActivate: [sellerRoleGuard] },

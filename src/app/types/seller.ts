@@ -2,6 +2,8 @@ export interface Root {
   Message: string
   Seller: Seller
   allsellers: SellerData[]
+  Property:OwnProperty
+
 }
 
 export interface Seller {

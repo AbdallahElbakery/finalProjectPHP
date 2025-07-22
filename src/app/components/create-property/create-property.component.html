@@ -63,19 +63,21 @@
         </div>
 
         <div class="input-group">
-          <label>Address(select)</label>
-          <select formControlName="address_id" [class.invalid]="isFieldInvalid('address_id')">
-            <option disabled value="">Select address</option>
-            @for(address of addresses; track address.id){
-            <option [ngValue]="address.id">
-              {{address.country}},{{address.city}},{{address.street}},{{address.postal_code}}</option>
+            <label>City</label>
+            <input type="text" formControlName="city" placeholder="Enter property city..."
+                [class.invalid]="isFieldInvalid('city')">
+            @if (isFieldInvalid('city')) {
+            <div class="error-msg">{{ getErrorMessage('city') }}</div>
             }
-            <option>Other</option>
-          </select>
-          @if (isFieldInvalid('address_id')) {
-          <div class="error-msg">{{ getErrorMessage('address_id') }}</div>
-          }
         </div>
+          <div class="input-group">
+              <label>Country</label>
+              <input type="text" formControlName="country" placeholder="Enter property country..."
+                  [class.invalid]="isFieldInvalid('country')">
+              @if (isFieldInvalid('country')) {
+              <div class="error-msg">{{ getErrorMessage('country') }}</div>
+              }
+          </div>
 
 
         <!-- Purpose -->

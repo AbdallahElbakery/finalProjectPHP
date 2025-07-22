@@ -25,9 +25,9 @@
                     <label>Property Name</label>
                     <input type="text" formControlName="name" placeholder="Enter property name..."
                         [class.invalid]="isFieldInvalid('name')">
-                        @if (isFieldInvalid('name')) {
-                        <div class="error-msg">{{ getErrorMessage('name') }}</div>
-                        }
+                    @if (isFieldInvalid('name')) {
+                    <div class="error-msg">{{ getErrorMessage('name') }}</div>
+                    }
                 </div>
 
                 <!-- Description -->
@@ -64,7 +64,7 @@
                 </div>
 
                 <!-- address id -->
-                <div class="input-group">
+                <!-- <div class="input-group">
                     <label>Address(select)</label>
                     <select formControlName="address_id" [class.invalid]="isFieldInvalid('address_id')">
                         <option value="" disabled>Select Address</option>
@@ -77,7 +77,7 @@
                     @if (isFieldInvalid('address_id')) {
                     <div class="error-msg">{{ getErrorMessage('address_id') }}</div>
                     }
-                </div>
+                </div> -->
 
                 <!-- Purpose -->
                 <div class="input-group">
@@ -106,7 +106,22 @@
                     <div class="error-msg">{{ getErrorMessage('category') }}</div>
                     }
                 </div>
-
+                <div class="input-group">
+                    <label>City</label>
+                    <input type="text" formControlName="city" placeholder="Enter property city..."
+                        [class.invalid]="isFieldInvalid('city')">
+                    @if (isFieldInvalid('city')) {
+                    <div class="error-msg">{{ getErrorMessage('city') }}</div>
+                    }
+                </div>
+                <div class="input-group">
+                    <label>Country</label>
+                    <input type="text" formControlName="country" placeholder="Enter property country..."
+                        [class.invalid]="isFieldInvalid('country')">
+                    @if (isFieldInvalid('country')) {
+                    <div class="error-msg">{{ getErrorMessage('country') }}</div>
+                    }
+                </div>
                 <!-- Area -->
                 <div class="input-group">
                     <label>Area (m²)</label>
