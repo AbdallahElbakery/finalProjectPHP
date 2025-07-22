@@ -91,7 +91,7 @@ export class PropertyComponent implements OnInit {
 
   ngOnInit(): void {
     this.propertyService.getProperties().subscribe((data: any) => {
-      this.properties = data.data.slice(3, 8);
+      this.properties = data.data.slice(1, 4);
       console.log(data);
     });
 
