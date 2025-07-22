@@ -84,7 +84,6 @@ export const routes: Routes = [
     { path: 'message/:id', component: MessageComponent, canActivate: [userRoleGuard] },
     { path: 'reviews', component: ReviewListComponent, canActivate: [userRoleGuard] },
     { path: 'ai-chat', component: AiChatComponent, title: 'AI Chat' },
-
     //admin panel routes
     {
       path: 'admin', component: AdminLayoutComponent, title: 'Admin', children:
@@ -118,6 +117,7 @@ export const routes: Routes = [
         { path: 'delete/categories', component: CategoryDeleteComponent, title: 'Admin delete category', canActivate: [adminRoleGuard] },
         { path: 'edit-profile', component: EditAdminProfileComponent, title: 'Admin delete category', canActivate: [adminRoleGuard]},
         { path: 'ai-chat', component: AiChatComponent, title: 'AI Chat' },
+        
       ]
     },
 ];

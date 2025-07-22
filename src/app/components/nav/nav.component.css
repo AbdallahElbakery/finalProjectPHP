@@ -17,7 +17,7 @@
 
 /* Main Navbar - Fixed and Visible */
 .navbar-custom {
-  background: var(--bg-glass);
+  background: white;
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(37, 99, 235, 0.1);
   box-shadow: var(--shadow);
