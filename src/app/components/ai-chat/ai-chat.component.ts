@@ -90,7 +90,7 @@ export class AiChatComponent implements OnInit {
   }
 
   formatTime(date: Date): string {
-    return date.toLocaleTimeString('ar-EG', { 
+    return date.toLocaleTimeString('en-EG', { 
       hour: '2-digit', 
       minute: '2-digit',
       hour12: true 
