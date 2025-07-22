@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-admin-profile',
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, CommonModule],
   templateUrl: './edit-admin-profile.component.html',
   styleUrl: './edit-admin-profile.component.css'
 })
@@ -17,7 +17,7 @@ export class EditAdminProfileComponent {
   editForm!: FormGroup
   addresses: Address[] = []
   submitted = false;
-
+  profile: any
   constructor(
     private propertyService: PropertyServiceService,
     private adminService: AdminServiceService,
@@ -34,7 +34,7 @@ export class EditAdminProfileComponent {
     })
 
     this.adminService.getProfile().subscribe((res) => {
-      console.log(res.profile.address.city)
+      this.profile = res.profile
       this.editForm.patchValue({
         name: res.profile.name,
         email: res.profile.email,

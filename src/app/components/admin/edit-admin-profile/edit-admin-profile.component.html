@@ -4,7 +4,7 @@
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
             <h2 class="fw-bold mb-0 ms-5" style="font-family: 'Lora', serif; color: var(--primary-color);">Edit Profile
             </h2>
-            <a><button class="btn btn-outline-secondary" type="button"><i
+            <a><button class="btn btn-outline-secondary" type="button"><i routerLink="/admin"
                         class="fa fa-arrow-left me-1"></i>Back</button></a>
         </div>
         <div class="user-edit-card shadow-sm rounded-4 bg-white p-4 mx-auto" style="max-width: 540px;">
@@ -15,8 +15,8 @@
                             alt="Profile picture">
                     </div>
                     <div class="avatar-edit">
-                        <input type="file" id="imageUpload" (change)="onFileChange($event)" accept=".png, .jpg, .jpeg" required
-                            formControlName="photo">
+                        <input type="file" id="imageUpload" (change)="onFileChange($event)" accept=".png, .jpg, .jpeg"
+                            required formControlName="photo">
                         <label for="imageUpload" class="upload-btn">
                             <i class="fas fa-camera"></i> Upload Picture
                         </label>
@@ -78,24 +78,24 @@
                     <div class="error-msg">{{ getErrorMessage('country') }}</div>
                     }
                 </div>
-                    <div class="mb-3">
-                        <label for="role" class="form-label fw-semibold">Role</label>
-                        <select class="form-select form-select-lg" id="role" required formControlName="role"
-                            [class.invalid]="isFieldInvalid('role')">
-                            <option disabled selected>Select role</option>
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                            <option value="seller">Seller</option>
-                        </select>
-                        @if (isFieldInvalid('role')) {
-                        <div class="error-msg">{{ getErrorMessage('role') }}</div>
-                        }
+                <div class="mb-3">
+                    <label for="role" class="form-label fw-semibold">Role</label>
+                    <select class="form-select form-select-lg" id="role" required formControlName="role"
+                        [class.invalid]="isFieldInvalid('role')">
+                        <option disabled selected>Select role</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                        <option value="seller">Seller</option>
+                    </select>
+                    @if (isFieldInvalid('role')) {
+                    <div class="error-msg">{{ getErrorMessage('role') }}</div>
+                    }
 
-                        </div>
+                </div>
 
 
                 <div class="mt-4 d-flex gap-2 justify-content-end">
-                    <a routerLink="/"><button type="button" class="btn btn-secondary">Cancel</button></a>
+                    <a routerLink="/admin"><button type="button" class="btn btn-secondary">Cancel</button></a>
                     <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
                 </div>
             </form>

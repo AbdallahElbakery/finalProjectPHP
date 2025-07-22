@@ -1,0 +1,59 @@
+<div class="ai-chat-container">
+  <div class="chat-header">
+    <div class="bot-info">
+      <div class="bot-avatar">
+        <i class="fas fa-robot"></i>
+      </div>
+      <div class="bot-details">
+        <h3>Smart Assistant</h3>
+        <span class="status">Online</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="messages-container">
+    <div *ngFor="let message of messages" class="message" [ngClass]="message.sender">
+      <div class="message-avatar">
+        <i class="fas" [ngClass]="message.sender === 'bot' ? 'fa-robot' : 'fa-user'"></i>
+      </div>
+      <div class="message-content">
+        <div class="message-bubble">
+          <div class="message-text">{{ message.text }}</div>
+          <div class="message-time">{{ formatTime(message.timestamp) }}</div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isLoading" class="message bot">
+      <div class="message-avatar">
+        <i class="fas fa-robot"></i>
+      </div>
+      <div class="message-content">
+        <div class="message-bubble">
+          <div class="typing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-input-container">
+    <div class="input-wrapper">
+      <textarea
+        [(ngModel)]="userInput"
+        (keydown)="onEnterPress($event)"
+        placeholder="Type your question here..."
+        rows="1"
+        class="chat-input">
+      </textarea>
+      <button
+        (click)="sendMessage()"
+        [disabled]="!userInput.trim() || isLoading"
+        class="send-button">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+</div>

@@ -8,10 +8,10 @@
       <!-- صورة البروفايل -->
       <div class="avatar-upload">
         <div class="avatar-preview">
-         <img [src]="'http://127.0.0.1:8000/uploads/'+registerForm.value.photo || 'assets/images/default-avatar.jpg'" alt="Profile picture">
+         <img [src]="profilePhoto ? profilePhoto : 'assets/images/default-avatar.jpg'" alt="Profile picture">
         </div>
         <div class="avatar-edit">
-          <input type="file" id="imageUpload" (change)="onFileChange($event)" accept=".png, .jpg, .jpeg" formControlName="photo">
+          <input type="file" id="imageUpload" (change)="onFileChange($event)" accept=".png, .jpg, .jpeg">
           <label for="imageUpload" class="upload-btn">
             <i class="fas fa-camera"></i> Upload Picture
           </label>
@@ -64,16 +64,29 @@
             </div>
           </div>
 
-          <!-- Address -->
-          <div class="col-12">
+          <!-- City -->
+          <div class="col-md-6">
             <div class="form-floating">
-              <textarea class="form-control custom-textarea" 
-                        id="address" placeholder="Address" style="height: 100px" formControlName="address"
-                        [class.is-invalid]="registerForm.get('address')?.invalid && registerForm.get('address')?.touched"></textarea>
-              <label for="address">Address *</label>
+              <input type="text" class="form-control custom-input" 
+                     id="city" placeholder="City" formControlName="city"
+                     [class.is-invalid]="registerForm.get('city')?.invalid && registerForm.get('city')?.touched">
+              <label for="city">City *</label>
             </div>
-            <div class="invalid-feedback" *ngIf="registerForm.get('address')?.invalid && registerForm.get('address')?.touched">
-              Address is required
+            <div class="invalid-feedback" *ngIf="registerForm.get('city')?.invalid && registerForm.get('city')?.touched">
+              City is required
+            </div>
+          </div>
+
+          <!-- Country -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="text" class="form-control custom-input" 
+                     id="country" placeholder="Country" formControlName="country"
+                     [class.is-invalid]="registerForm.get('country')?.invalid && registerForm.get('country')?.touched">
+              <label for="country">Country *</label>
+            </div>
+            <div class="invalid-feedback" *ngIf="registerForm.get('country')?.invalid && registerForm.get('country')?.touched">
+              Country is required
             </div>
           </div>
 
