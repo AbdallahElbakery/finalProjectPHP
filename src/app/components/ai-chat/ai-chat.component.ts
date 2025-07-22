@@ -11,7 +11,7 @@ import { AiChatService } from '../../services/ai-chat.service';
   styleUrl: './ai-chat.component.css'
 })
 export class AiChatComponent implements OnInit {
-  
+
   messages: { text: string, sender: 'user' | 'bot', timestamp: Date }[] = [];
   userInput = '';
   isLoading = false;
@@ -53,7 +53,7 @@ export class AiChatComponent implements OnInit {
       error: (error) => {
         console.error('Chat error:', error);
         let errorMessage = 'Sorry, there was a connection error. Please try again.';
-        
+
         if (error.status === 0) {
           errorMessage = 'Cannot connect to the server. Make sure Laravel is running on port 8000.';
         } else if (error.status === 404) {
@@ -61,7 +61,7 @@ export class AiChatComponent implements OnInit {
         } else if (error.status === 500) {
           errorMessage = 'Server error. Please try again later.';
         }
-        
+
         this.messages.push({
           text: errorMessage,
           sender: 'bot',
@@ -90,10 +90,10 @@ export class AiChatComponent implements OnInit {
   }
 
   formatTime(date: Date): string {
-    return date.toLocaleTimeString('ar-EG', { 
-      hour: '2-digit', 
+    return date.toLocaleTimeString('en-EG', {
+      hour: '2-digit',
       minute: '2-digit',
-      hour12: true 
+      hour12: true
     });
   }
 }

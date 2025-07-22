@@ -5,6 +5,7 @@ import { SellerProfileComponent } from './components/seller-profile/seller-profi
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { UserSellerProfileComponent } from './components/user-seller-profile/user-seller-profile.component';
 import { LoginComponent } from './components/login/login.component';
+import { LoginComponent as LoginAdminComponent } from './components/admin/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { CreatePropertyComponent } from './components/create-property/create-property.component';
@@ -88,7 +89,7 @@ export const routes: Routes = [
       path: 'admin', component: AdminLayoutComponent, title: 'Admin', children:
       [
         { path: '', component: DashboardComponent, title: 'Admin', canActivate: [adminRoleGuard] },
-        { path: 'login', component: LoginComponent, title: 'Admin login' , canActivate: [GuestGuard]},
+        { path: 'login', component: LoginAdminComponent, title: 'Admin login' , canActivate: [GuestGuard]},
         { path: 'home', component: HomeAdminComponent, title: 'login admin', canActivate: [adminRoleGuard] },
         { path: 'users', component: UsersListComponent, title: 'Admin users', canActivate: [adminRoleGuard] },
         { path: 'user', component: UserDetailsComponent, title: 'User', canActivate: [adminRoleGuard] },
@@ -115,7 +116,8 @@ export const routes: Routes = [
         { path: 'edit/categories/:id', component: CategoryEditComponent, title: 'Admin edit category', canActivate: [adminRoleGuard] },
         { path: 'delete/categories', component: CategoryDeleteComponent, title: 'Admin delete category', canActivate: [adminRoleGuard] },
         { path: 'edit-profile', component: EditAdminProfileComponent, title: 'Admin delete category', canActivate: [adminRoleGuard]},
-       
+        { path: 'ai-chat', component: AiChatComponent, title: 'AI Chat' },
+        
       ]
     },
 ];
