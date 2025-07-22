@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { PropertyServiceService } from '../../services/property-service.service';
 import { Category } from '../../types/category';
 import { Address } from '../../types/address';
+import { NotificationComponent } from '../notification';
 
 @Component({
   selector: 'app-create-property',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, NotificationComponent],
   templateUrl: './create-property.component.html',
   styleUrls: ['./create-property.component.css']
 })
@@ -21,6 +22,9 @@ export class CreatePropertyComponent implements OnInit {
   submitted = false;
   categories: Category[] = [];
   addresses: Address[] = []
+  showToast = false;
+  toastMessage = '';
+  toastType: 'success' | 'danger' | 'info' | 'warning' = 'success';
   constructor(
     private propertyService: PropertyServiceService,
     public formBuilder: FormBuilder,
@@ -104,27 +108,28 @@ export class CreatePropertyComponent implements OnInit {
       if (data.image === null || data.image === '') {
         delete data.image;
       }
-    Object.keys(data).forEach(key => {
-      if (key === 'image' && data[key] instanceof File) {
-        formData.append('image', data[key]);
-      } else {
-        formData.append(key, data[key]);
-      }
-    });
-
+      Object.keys(data).forEach(key => {
+        if (key === 'image' && data[key] instanceof File) {
+          formData.append('image', data[key]);
+        } else {
+          formData.append(key, data[key]);
+        }
+      });
 
       this.propertyService.addProperty(formData).subscribe(()=>{
         console.log('New Property:', this.propertyForm.value),
-        alert('The property has been added successfully');
+        // alert('The property has been added successfully');
+        this.toastMessage = 'The property has been added successfully';
+        this.toastType = 'success';
+        this.showToast = true;
         this.propertyForm.reset();
         this.submitted = false;
       })  
-      }else {
+    }else {
       Object.values(this.propertyForm.controls).forEach(control => {
         control.markAsTouched();
       });
     }
-
   }
 
   //check field validity

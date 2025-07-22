@@ -1,3 +1,24 @@
+<app-notification [message]="toastMessage" [type]="toastType" [show]="showToast" (click)="showToast=false"></app-notification>
+
+<!-- Modal Bootstrap لتأكيد الحذف -->
+<div class="modal fade show" tabindex="-1" [ngStyle]="{'display': showDeleteModal ? 'block' : 'none', 'background': showDeleteModal ? 'rgba(0,0,0,0.5)' : 'none'}" *ngIf="showDeleteModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="cancelDelete()"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this property?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cancelDelete()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <main class="my-properties-page align-middle">
   <h2 class="section-title mb-5">My Properties</h2>
   <div class="properties-grid">
@@ -17,7 +38,7 @@
           <button class="edit-btn" (click)="goToEditProperty(property.id)">
             <i class="fas fa-edit"></i> Edit
           </button>
-          <button class="delete-btn" (click)="deleteProp(property.id,i)">
+          <button class="delete-btn" (click)="openDeleteModal(property.id,i)">
             <i class="fas fa-trash"></i> Delete
           </button>
         </div>

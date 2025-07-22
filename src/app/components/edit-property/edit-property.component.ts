@@ -6,10 +6,11 @@ import { Address } from '../../types/address';
 import { PropertyServiceService } from '../../services/property-service.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Property } from '../../types/property';
+import { NotificationComponent } from '../notification';
 
 @Component({
   selector: 'app-edit-property',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NotificationComponent],
   templateUrl: './edit-property.component.html',
   styleUrl: './edit-property.component.css'
 })
@@ -22,6 +23,9 @@ export class EditPropertyComponent implements OnInit {
   getId: any;
   categories: Category[] = [];
   addresses: Address[] = []
+  showToast = false;
+  toastMessage = '';
+  toastType: 'success' | 'danger' | 'info' | 'warning' = 'success';
   constructor(
     private propertyService: PropertyServiceService,
     public formBuilder: FormBuilder,
@@ -123,10 +127,16 @@ export class EditPropertyComponent implements OnInit {
           if (data.image === null || data.image === '') {
             delete data.image;
           }
-          alert('✅ The property has been updated successfully');
+          // alert('✅ The property has been updated successfully');
+          this.toastMessage = 'The property has been updated successfully';
+          this.toastType = 'success';
+          this.showToast = true;
         },
         error: (error) => {
           console.log(error);
+          this.toastMessage = 'Failed to update property. Please try again.';
+          this.toastType = 'danger';
+          this.showToast = true;
         }
       })
       this.submitted = false;

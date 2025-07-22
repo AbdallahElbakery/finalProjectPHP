@@ -5,11 +5,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Seller } from '../../types/property';
 import { PropertyServiceService } from '../../services/property-service.service';
 import { OwnProperty, Root } from '../../types/seller';
+import { NotificationComponent } from '../notification';
 
 @Component({
   selector: 'app-my-properties',
   templateUrl: './my-properties.component.html',
-  imports: [CommonModule, NgxPaginationModule],
+  imports: [CommonModule, NgxPaginationModule, NotificationComponent],
   styleUrls: ['./my-properties.component.css']
 })
 export class MyPropertiesComponent implements OnInit {
@@ -39,6 +40,11 @@ export class MyPropertiesComponent implements OnInit {
   //   }
   // ];
   sellerproperties: OwnProperty[] = [];
+  showToast = false;
+  toastMessage = '';
+  toastType: 'success' | 'danger' | 'info' | 'warning' = 'success';
+  showDeleteModal = false;
+  propertyToDelete: { id: number, index: number } | null = null;
   constructor(private router: Router, public propertyService: PropertyServiceService) { }
 
   ngOnInit(): void {
@@ -49,16 +55,38 @@ export class MyPropertiesComponent implements OnInit {
 
   }
 
-  deleteProp(id: number, i: number) {
-    if (confirm('are u sure u wanna delete this property')) {
-      return this.propertyService.delteProperty(id).subscribe(() => {
-        alert('Property deleted successfully');
-        this.sellerproperties.splice(i, 1);
-      })
-    }
-    else return false;
-
+  openDeleteModal(id: number, i: number) {
+    this.propertyToDelete = { id, index: i };
+    this.showDeleteModal = true;
   }
+
+  confirmDelete() {
+    if (!this.propertyToDelete) return;
+    const { id, index } = this.propertyToDelete;
+    this.propertyService.delteProperty(id).subscribe({
+      next: () => {
+        this.toastMessage = 'Property deleted successfully';
+        this.toastType = 'success';
+        this.showToast = true;
+        this.sellerproperties.splice(index, 1);
+        this.showDeleteModal = false;
+        this.propertyToDelete = null;
+      },
+      error: () => {
+        this.toastMessage = 'Failed to delete property. Please try again.';
+        this.toastType = 'danger';
+        this.showToast = true;
+        this.showDeleteModal = false;
+        this.propertyToDelete = null;
+      }
+    });
+  }
+
+  cancelDelete() {
+    this.showDeleteModal = false;
+    this.propertyToDelete = null;
+  }
+
   goToEditProperty(id: number) {
     this.router.navigate(['/edit-property'], { queryParams: { id } });
   }
